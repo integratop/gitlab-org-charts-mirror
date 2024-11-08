@@ -157,14 +157,31 @@ if [ -n "$env" ]; then
     db_key_base=$(fetch_rails_value secrets.yml "${env}.db_key_base")
     openid_connect_signing_key=$(fetch_rails_value secrets.yml "${env}.openid_connect_signing_key")
     encrypted_settings_key_base=$(fetch_rails_value secrets.yml "${env}.encrypted_settings_key_base")
+
+    active_record_encryption_primary_keys=$(fetch_rails_value secrets.yml "${env}.active_record_encryption_primary_key")
+    active_record_encryption_deterministic_keys=$(fetch_rails_value secrets.yml "${env}.active_record_encryption_deterministic_key")
+    active_record_encryption_key_derivation_salt=$(fetch_rails_value secrets.yml "${env}.active_record_encryption_key_derivation_salt")
   fi;
 
   # Generate defaults for any unset secrets
-  secret_key_base="${secret_key_base:-$(gen_random 'a-f0-9' 128)}" # equavilent to secureRandom.hex(64)
-  otp_key_base="${otp_key_base:-$(gen_random 'a-f0-9' 128)}" # equavilent to secureRandom.hex(64)
-  db_key_base="${db_key_base:-$(gen_random 'a-f0-9' 128)}" # equavilent to secureRandom.hex(64)
+  secret_key_base="${secret_key_base:-$(gen_random 'a-f0-9' 128)}" # equivalent to secureRandom.hex(64)
+  otp_key_base="${otp_key_base:-$(gen_random 'a-f0-9' 128)}" # equivalent to secureRandom.hex(64)
+  db_key_base="${db_key_base:-$(gen_random 'a-f0-9' 128)}" # equivalent to secureRandom.hex(64)
   openid_connect_signing_key="${openid_connect_signing_key:-$(openssl genrsa 2048)}"
-  encrypted_settings_key_base="${encrypted_settings_key_base:-$(gen_random 'a-f0-9' 128)}" # equavilent to secureRandom.hex(64)
+  encrypted_settings_key_base="${encrypted_settings_key_base:-$(gen_random 'a-f0-9' 128)}" # equivalent to secureRandom.hex(64)
+
+  # 1. We set the following two keys as an array to support keys rotation.
+  #    The last key in the array is always used to encrypt data:
+  #    https://github.com/rails/rails/blob/v7.0.8.4/activerecord/lib/active_record/encryption/key_provider.rb#L21
+  #    while all the keys are used (in the order they're defined) to decrypt data:
+  #    https://github.com/rails/rails/blob/v7.0.8.4/activerecord/lib/active_record/encryption/cipher.rb#L26.
+  #    This allows to rotate keys by adding a new key as the last key, and start a re-encryption process that
+  #    runs in the background: https://gitlab.com/gitlab-org/gitlab/-/issues/494976
+  # 2. We use the same method and length as Rails' defaults:
+  #    https://github.com/rails/rails/blob/v7.0.8.4/activerecord/lib/active_record/railties/databases.rake#L537-L540
+  active_record_encryption_primary_keys=${active_record_encryption_primary_keys:-"- $(gen_random 'a-zA-Z0-9' 32)"}
+  active_record_encryption_deterministic_keys=${active_record_encryption_deterministic_keys:-"- $(gen_random 'a-zA-Z0-9' 32)"}
+  active_record_encryption_key_derivation_salt=${active_record_encryption_key_derivation_salt:-$(gen_random 'a-zA-Z0-9' 32)}
 
   # Update the existing secret
   cat << EOF > rails-secrets.yml
@@ -182,6 +199,11 @@ stringData:
       encrypted_settings_key_base: $encrypted_settings_key_base
       openid_connect_signing_key: |
 $(echo "${openid_connect_signing_key}" | awk '{print "        " $0}')
+      active_record_encryption_primary_key:
+      $active_record_encryption_primary_keys
+      active_record_encryption_deterministic_key:
+      $active_record_encryption_deterministic_keys
+      active_record_encryption_key_derivation_salt: $active_record_encryption_key_derivation_salt
 EOF
   kubectl --validate=false --namespace=$namespace apply -f rails-secrets.yml
   label_secret $rails_secret
