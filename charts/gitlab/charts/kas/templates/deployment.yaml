@@ -124,6 +124,11 @@ spec:
                 items:
                   - key: {{ template "gitlab.kas.privateApi.key" . }}
                     path: .gitlab_kas_private_api_secret
+            - secret:
+                name: {{ template "gitlab.kas.websocketToken.secret" . }}
+                items:
+                  - key: {{ template "gitlab.kas.websocketToken.key" . }}
+                    path: .gitlab_kas_websocket_token_secret
             {{- if $.Values.global.kas.tls.enabled }}
             - secret:
                 name: {{ .Values.global.kas.tls.secretName | quote }}

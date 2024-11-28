@@ -134,6 +134,10 @@ workhorse: {}
 # merged with the default kas config
 customConfig: {}
 
+websocketToken: {}
+  # secret:
+  # key:
+
 privateApi: {}
   # secret:
   # key:

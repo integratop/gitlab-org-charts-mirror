@@ -11,6 +11,12 @@ function gen_random(){
   head -c 4096 /dev/urandom | LC_CTYPE=C tr -cd $1 | head -c $2
 }
 
+# Args: length
+function gen_random_base64(){
+  local len="$1"
+  head -c "$len" /dev/urandom | base64 -w0
+}
+
 # Args: yaml file, search path
 function fetch_rails_value(){
   local value=$(yq ".${2}" $1)
@@ -125,6 +131,9 @@ generate_secret_if_needed {{ template "gitlab.kas.secret" . }} --from-literal={{
 
 # Gitlab-kas private API secret
 generate_secret_if_needed {{ template "gitlab.kas.privateApi.secret" . }} --from-literal={{ template "gitlab.kas.privateApi.key" . }}=$(gen_random 'a-zA-Z0-9' 32 | base64)
+
+# Gitlab-kas WebSocket Token secret
+generate_secret_if_needed {{ template "gitlab.kas.websocketToken.secret" . }} --from-literal={{ template "gitlab.kas.websocketToken.key" . }}=$(gen_random_base64 72)
 {{ end }}
 
 # Gitlab-suggested-reviewers secret

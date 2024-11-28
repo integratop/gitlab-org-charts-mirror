@@ -291,6 +291,16 @@ kubectl create secret generic <name>-kas-private-api --from-literal=kas_private_
 
 This secret is referenced by the `gitlab.kas.privateApi.secret` setting.
 
+### GitLab KAS WebSocket Token secret
+
+You can leave it to the chart to auto-generate the secret, or you can create this secret manually (replace `<name>` with the name of the release):
+
+```shell
+kubectl create secret generic <name>-kas-websocket-token --from-literal=kas_websocket_token_secret=$(head -c 72 /dev/urandom | base64 -w0)
+```
+
+This secret is referenced by the `gitlab.kas.websocketToken.secret` setting.
+
 ### GitLab Suggested Reviewers secret
 
 NOTE:
