@@ -111,7 +111,7 @@ include:
   - local: /.gitlab/ci/specs-common.yml
   - local: /.gitlab/ci/review-docs.yml
 
-  - component: ${CI_SERVER_FQDN}/gitlab-org/components/danger-review/danger-review@1.4.1
+  - component: ${CI_SERVER_FQDN}/gitlab-org/components/danger-review/danger-review@1.4.2
     rules:
       - if: '$CI_SERVER_HOST == "gitlab.com"'
   - component: "gitlab.com/gitlab-org/quality/pipeline-common/allure-report@8.16.0"
