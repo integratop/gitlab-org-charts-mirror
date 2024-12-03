@@ -2,6 +2,7 @@ require 'active_support'
 require 'open-uri'
 require 'base64'
 require 'fugit'
+require 'api_helper'
 
 module Gitlab
   def self.included(klass)
@@ -158,6 +159,21 @@ module Gitlab
 
       stdout, status = Open3.capture2e("kubectl rollout status #{type} -l'#{filters}' --timeout=#{kube_timeout_parse('KUBE_ROLLOUT_TIMEOUT')}")
       raise stdout unless status.success?
+    end
+
+    def wait_for_runner_contact(retries: 5, interval: 30)
+      uri = "runners/all?status=online"
+      retries.times do
+        response = ApiHelper.invoke_get_request(uri)
+
+        if response.empty?
+          sleep(interval)
+          next
+        end
+
+        return
+      end
+      raise 'No Runner online'
     end
 
     def restore_from_backup(skip: [])
