@@ -54,6 +54,7 @@ describe "Restoring a backup" do
     # Have the gitlab-runner re-register after the restore
     restart_gitlab_runner
     wait_for_runner_rollout
+    wait_for_runner_contact
   end
 
   describe 'Restored gitlab instance' do
@@ -81,7 +82,6 @@ describe "Restoring a backup" do
       uri = "runners/all"
       response = ApiHelper.invoke_get_request(uri)
       expect(response.collect { |item| item["status"] }).to have_content('online', minimum: 1)
-      expect(response.collect { |item| item["online"] }).to have_content('true', minimum: 1)
     end
 
     it 'Issue contains attachment in the description' do
