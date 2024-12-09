@@ -1657,7 +1657,7 @@ omniauth:
   blockAutoCreatedUsers: true
   autoLinkLdapUser: false
   autoLinkSamlUser: false
-  autoLinkUser: ['saml']
+  autoLinkUser: ['openid_connect']
   externalProviders: []
   allowBypassTwoFactor: []
   providers: []
