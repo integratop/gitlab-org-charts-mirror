@@ -2,6 +2,10 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 8.6.2 (2024-12-10)
+
+No changes.
+
 ## 8.6.1 (2024-11-26)
 
 No changes.
@@ -26,6 +30,10 @@ No changes.
 - [Update Helm release gitlab-runner to v0.70.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/b82f0a50ae6ec26a79fe9cc307c862c816f3ac78) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3958))
 - [Update Helm release gitlab-runner to v0.70.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/ea3833fd35e5d201c96e9da5b4892b610df19781) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3955))
 - [Bump nginx-controller from 1.3.1 to 1.11.2](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/c8f6090ec807dde86d4f6fd92803ada8b125868e) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3901))
+
+## 8.5.4 (2024-12-10)
+
+No changes.
 
 ## 8.5.3 (2024-11-26)
 
@@ -69,6 +77,10 @@ No changes.
 ### Removed (1 change)
 
 - [Remove 'ci_jwt_signing_key' secret migrated to ApplicationSetting](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/b23acb2484f63ebb7e0f461033f5a3542519b3c9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3910))
+
+## 8.4.6 (2024-12-10)
+
+No changes.
 
 ## 8.4.5 (2024-11-26)
 
