@@ -50,7 +50,7 @@ variables:
   DEBIAN_VERSION: bookworm
   RUBY_VERSION: "3.1.5"
   CI_TOOLS_VERSION: "4.22.0"
-  GITLAB_QA_VERSION: "14.20.0"
+  GITLAB_QA_VERSION: "15.0.0"
   # STRICT_VERSIONS is used in RSpecs to ensure exact version match for tools like "helm" and "kubectl"
   STRICT_VERSIONS: "true"
   KUBE_CRD_SCHEMA_URL: "https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/v3/apis__apiextensions.k8s.io__v1_openapi.json"
