@@ -31,7 +31,7 @@ To enable the Zoekt chart, set the following values:
 ```shell
 --set gitlab-zoekt.install=true \
 --set gitlab-zoekt.replicas=2 \         # Number of Zoekt pods. If you want to use only one pod, you can skip this setting.
---set gitlab-zoekt.indexStorage=128Gi   # Zoekt node disk size. Zoekt uses about three times the repository storage.
+--set gitlab-zoekt.indexStorage=128Gi   # Disk size for the Zoekt node. Zoekt requires up to three times the repository's default branch's storage size, depending on the number of large and binary files.
 ```
 
 ## Set CPU and memory usage
