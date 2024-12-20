@@ -281,8 +281,10 @@ trigger_review_secondary:
     include:
       - local: .gitlab-ci.yml
     strategy: depend
+    forward:
+      pipeline_variables: true
   inherit:
-    variables: 
+    variables:
       - PIPELINE_TYPE
       - REVIEW_REF_PREFIX
       - LIMIT_TO
