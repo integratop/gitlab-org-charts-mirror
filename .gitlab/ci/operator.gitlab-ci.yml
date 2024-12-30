@@ -12,6 +12,4 @@ trigger_operator_test:
   rules:
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
       when: never
-    - if: '$CI_SERVER_HOST == "gitlab.com" && $CI_PIPELINE_SOURCE == "merge_request_event"'
-      when: manual
-
+    - when: manual
