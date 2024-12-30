@@ -256,7 +256,7 @@ with the `-fips` extension to the image tag.
 --set global.image.tagSuffix="-fips"
 ```
 
-## Custom timezone for all containers 
+## Custom timezone for all containers
 
 If you wish to set a custom timezone for all the GitLab containers, you can use the `global.time_zone` key. Refer to `TZ identifier` on the [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the available values. Default is `UTC`.
 
@@ -1678,7 +1678,7 @@ omniauth:
 |:------------------------- |:-------:|:----------- |
 | `allowBypassTwoFactor`    | Boolean or Array |   `false` |
 | `allowSingleSignOn`       | Boolean or Array   | `['saml']`  |
-| `autoLinkLdapUser`        | Boolean | `false`     | 
+| `autoLinkLdapUser`        | Boolean | `false`     |
 | `autoLinkSamlUser`        | Boolean | `false`     |
 | `autoLinkUser`            | Boolean or Array | `false` |
 | `autoSignInWithProvider`  |         | `nil`       |
