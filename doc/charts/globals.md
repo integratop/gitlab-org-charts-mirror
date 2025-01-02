@@ -1362,10 +1362,10 @@ This property has two sub-keys: `secret` and `key`.
 - `key` is the name of the key in the secret which houses the YAML block. Defaults to `connection`.
 
 Valid configuration keys can be found in the [GitLab Job Artifacts Administration](https://docs.gitlab.com/ee/administration/job_artifacts.html#s3-compatible-connection-settings)
-documentation. This matches to [Fog](https://github.com/fog), and is different between
+documentation. This matches to [Fog](https://github.com/fog/fog.github.com), and is different between
 provider modules.
 
-Examples for [AWS](https://fog.io/storage/#using-amazon-s3-and-fog) and [Google](https://fog.io/storage/#google-cloud-storage)
+Examples for [AWS](https://fog.github.io/storage/#using-amazon-s3-and-fog) and [Google](https://fog.github.io/storage/#google-cloud-storage)
 providers can be found in [`examples/objectstorage`](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/examples/objectstorage).
 
 - [`rails.s3.yaml`](https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/examples/objectstorage/rails.s3.yaml)
