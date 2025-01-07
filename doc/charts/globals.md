@@ -460,6 +460,7 @@ global:
   redis:
     host: redis.example.com
     serviceName: redis
+    database: 7
     port: 6379
     auth:
       enabled: true
@@ -476,6 +477,7 @@ global:
 | `host`             | String  |         | The hostname of the Redis server with the database to use. This can be omitted in lieu of `serviceName`. |
 | `serviceName`      | String  | `redis` | The name of the `service` which is operating the Redis database. If this is present, and `host` is not, the chart will template the hostname of the service (and current `.Release.Name`) in place of the `host` value. This is convenient when using Redis as a part of the overall GitLab chart. |
 | `port`             | Integer | `6379`  | The port on which to connect to the Redis server. |
+| `database`         | Integer | `0`     | The database to connect to on the Redis server. |
 | `user`             | String  |         | The user used to authenticate against Redis (Redis 6.0+). |
 | `auth.enabled`     | Boolean    | true    | The `auth.enabled` provides a toggle for using a password with the Redis instance. |
 | `auth.key`         | String  |         | The `auth.key` attribute for Redis defines the name of the key in the secret (below) that contains the password. |

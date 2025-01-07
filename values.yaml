@@ -172,6 +172,7 @@ global:
     # writeTimeout: 1
     # host: redis.hostedsomewhere.else
     # port: 6379
+    # database: 0
     # user: webservice
     # sentinels:
     #   - host:
