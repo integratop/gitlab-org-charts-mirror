@@ -2,6 +2,10 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 8.7.3 (2025-01-08)
+
+No changes.
+
 ## 8.7.2 (2024-12-27)
 
 ### Fixed (1 change)
@@ -25,6 +29,10 @@ entry.
 - [Update dependency danger-review to v1.4.2](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/53cbb8148f90ed0d860a36fd81b2822ad36cbc4b) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4021))
 - [Update dependency container-registry to v4.14.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/dcc8ce8e48d88f5ff1aee9f0aa67bf4b505de585) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4017))
 - [Update Helm release gitlab-runner to v0.71.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/45c82f324306ca23d68384a65103ec889c1b6cee) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4011))
+
+## 8.6.3 (2025-01-08)
+
+No changes.
 
 ## 8.6.2 (2024-12-10)
 
@@ -54,6 +62,10 @@ No changes.
 - [Update Helm release gitlab-runner to v0.70.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/b82f0a50ae6ec26a79fe9cc307c862c816f3ac78) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3958))
 - [Update Helm release gitlab-runner to v0.70.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/ea3833fd35e5d201c96e9da5b4892b610df19781) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3955))
 - [Bump nginx-controller from 1.3.1 to 1.11.2](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/c8f6090ec807dde86d4f6fd92803ada8b125868e) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3901))
+
+## 8.5.5 (2025-01-08)
+
+No changes.
 
 ## 8.5.4 (2024-12-10)
 
