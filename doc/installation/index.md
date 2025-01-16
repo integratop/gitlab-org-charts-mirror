@@ -38,7 +38,7 @@ for simpler alternatives.
 ## Configure the Helm chart to use external stateful data
 
 You can configure the GitLab Helm chart to point to external stateful storage
-for items like PostgreSQL, Redis, all non-Git repository storage, as well as Git repository storage (Gitaly).
+for items like PostgreSQL, Redis, all non-Git repository storage, and Git repository storage (Gitaly).
 
 The following Infrastructure as Code (IaC) options use this approach.
 
