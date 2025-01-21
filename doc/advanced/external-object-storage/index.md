@@ -175,7 +175,7 @@ See the [charts/globals documentation on appConfig](../../charts/globals.md#conf
 
 Create the secret(s) per the [connection details documentation](../../charts/globals.md#connection), and then configure the chart to use the provided secrets. Note, the same secret can be used for all of them.
 
-Examples for [AWS](https://fog.io/storage/#using-amazon-s3-and-fog) (any S3 compatible like [Azure using MinIO](azure-minio-gateway.md)) and [Google](https://fog.io/storage/#google-cloud-storage) providers can be found in
+Examples for [AWS](https://fog.github.io/storage/#using-amazon-s3-and-fog) (any S3 compatible like [Azure using MinIO](azure-minio-gateway.md)) and [Google](https://fog.github.io/storage/#google-cloud-storage) providers can be found in
 [`examples/objectstorage`](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/examples/objectstorage).
 
 - [`rails.s3.yaml`](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/examples/objectstorage/rails.s3.yaml)
