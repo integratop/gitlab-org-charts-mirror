@@ -147,11 +147,13 @@ data:
       monitoring:
         ip_whitelist:
           {{- if kindIs "slice" .Values.monitoring.ipWhitelist }}
-          {{ toYaml .Values.monitoring.ipWhitelist | nindent 10 | trim }}
+          {{- range $ip := .Values.monitoring.ipWhitelist }}
+          - {{ $ip | trim | quote }}
+          {{- end }}
           {{- end }}
         web_exporter:
           enabled: {{ or .Values.monitoring.exporter.enabled (and .Values.metrics.enabled (eq .Values.metrics.port .Values.monitoring.exporter.port)) }}
-          address: 0.0.0.0
+          address: {{ .Values.monitoring.exporter.listenAddr }}
           port: {{ .Values.monitoring.exporter.port }}
           {{- if eq (include "webservice-metrics.tls.enabled" $) "true" }}
           tls_enabled: true

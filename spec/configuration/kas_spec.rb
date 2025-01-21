@@ -856,7 +856,7 @@ describe 'kas configuration' do
 
         it 'sets OWN_PRIVATE_API_URL to use grpc' do
           expect(env).to include(
-            { "name" => "OWN_PRIVATE_API_URL", "value" => "grpc://$(POD_IP):8155" }
+            { "name" => "OWN_PRIVATE_API_URL", "value" => "grpc://[$(POD_IP)]:8155" }
           )
         end
 
@@ -1020,7 +1020,7 @@ describe 'kas configuration' do
 
           it 'sets OWN_PRIVATE_API_URL to use grpcs' do
             expect(deployment['spec']['template']['spec']['containers'].first['env']).to include(
-              { "name" => "OWN_PRIVATE_API_URL", "value" => "grpcs://$(POD_IP):8155" }
+              { "name" => "OWN_PRIVATE_API_URL", "value" => "grpcs://[$(POD_IP)]:8155" }
             )
           end
 

@@ -18,3 +18,4 @@ title: Advanced configuration
 - Enabling [internal TLS between services](internal-tls/_index.md)
 - After install, [managing Persistent Volumes](persistent-volumes/_index.md)
 - Using [Red Hat UBI-based images](ubi/_index.md)
+- Deploying to [IPv6 clusters](ipv6/_index.md)

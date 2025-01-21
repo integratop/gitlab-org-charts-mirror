@@ -1,0 +1,25 @@
+gitlab:
+  # Configure Puma for IPv6.
+  webservice:
+    extraEnv:
+      # Configure Puma to listen on IPv6.
+      BIND_IP6: "true"
+    monitoring:
+      # ipWhitelist: []
+      expoter:
+        # Configure webservice metrics listener for IPv6. 
+        listenAddr: "::"
+  sidekiq:
+    # Configure sidekiq healthcheck and metrics listeners for IPv6. 
+    metrics:
+      listenAddr: "::"
+    health_checks:
+      listenAddr: "::"
+  gitlab-exporter:
+    listenAddr: "::"
+
+nginx-ingress:
+  controller:
+    service:
+      ipFamilyPolicy: "SingleStack" 
+      ipFamilies: [ IPv6 ]

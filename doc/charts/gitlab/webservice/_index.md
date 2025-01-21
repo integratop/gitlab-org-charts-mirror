@@ -110,7 +110,8 @@ to the `helm install` command using the `--set` flags.
 | `minio.bucket`                                                | `git-lfs`                                                       | Name of storage bucket, when using MinIO |
 | `minio.port`                                                  | `9000`                                                          | Port for MinIO service |
 | `minio.serviceName`                                           | `minio-svc`                                                     | Name of MinIO service |
-| `monitoring.ipWhitelist`                                      | `[0.0.0.0/0]`                                                   | List of IPs to whitelist for the monitoring endpoints |
+| `monitoring.ipWhitelist`                                      | `[0.0.0.0/0, ::/0]`                                             | List of IPs to whitelist for the monitoring endpoints |
+| `monitoring.exporter.listenAddr`                              | `0.0.0.0`                                                       | Metrics listen address. Change to `::` for IPv6 deployments. |
 | `monitoring.exporter.enabled`                                 | `false`                                                         | Enable webserver to expose Prometheus metrics, this is overridden by `metrics.enabled` if the metrics port is set to the monitoring exporter port |
 | `monitoring.exporter.port`                                    | `8083`                                                          | Port number to use for the metrics exporter |
 | `psql.password.key`                                           | `psql-password`                                                 | Key to psql password in psql secret |
