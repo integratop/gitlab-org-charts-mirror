@@ -50,7 +50,14 @@ describe 'certmanager_issuer configuration' do
           "activeDeadlineSeconds" => 300,
           "ttlSecondsAfterFinished" => 1800,
           "template" => include(
-            "metadata" => { "labels" => { "app" => "certmanager-issuer", "release" => "test" } },
+            "metadata" => include(
+              "labels" => include(
+                "app" => "certmanager-issuer",
+                "chart" => "certmanager-issuer-0.2.0",
+                "release" => "test",
+                "heritage" => "Helm"
+              )
+            ),
             "spec" => include(
               "securityContext" => { "runAsUser" => 65534, "fsGroup" => 65534, "seccompProfile" => { "type" => "RuntimeDefault" } },
               "serviceAccountName" => "test-certmanager-issuer",
