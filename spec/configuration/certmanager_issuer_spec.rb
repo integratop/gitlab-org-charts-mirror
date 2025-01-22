@@ -41,7 +41,7 @@ describe 'certmanager_issuer configuration' do
           "namespace" => "default",
           "labels" => {
             "app" => "certmanager-issuer",
-            "chart" => "certmanager-issuer-0.2.0",
+            "chart" => "certmanager-issuer-0.2.1",
             "release" => "test",
             "heritage" => "Helm"
           }
@@ -53,7 +53,7 @@ describe 'certmanager_issuer configuration' do
             "metadata" => include(
               "labels" => include(
                 "app" => "certmanager-issuer",
-                "chart" => "certmanager-issuer-0.2.0",
+                "chart" => "certmanager-issuer-0.2.1",
                 "release" => "test",
                 "heritage" => "Helm"
               )
