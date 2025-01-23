@@ -8,7 +8,7 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 
 DETAILS:
 **Tier:** Free, Premium, Ultimate
-**Offering:** Self-managed
+**Offering:** GitLab Self-Managed
 
 The `kas` sub-chart provides a configurable deployment of the
 [GitLab agent server (KAS)](https://docs.gitlab.com/ee/administration/clusters/kas.html).

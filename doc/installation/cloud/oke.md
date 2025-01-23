@@ -8,7 +8,7 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 
 DETAILS:
 **Tier:** Free, Premium, Ultimate
-**Offering:** Self-managed
+**Offering:** GitLab Self-Managed
 
 For a fully functional GitLab instance, you need a few resources before
 deploying the GitLab chart to [Oracle Container Engine for Kubernetes (OKE)](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm). Check how to [prepare](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengprerequisites.htm) your Oracle Cloud Infrastructure tenancy before creating the OKE cluster.

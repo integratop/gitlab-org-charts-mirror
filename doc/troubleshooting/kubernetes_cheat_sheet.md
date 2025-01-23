@@ -9,7 +9,7 @@ ignore_in_report: true
 
 DETAILS:
 **Tier:** Free, Premium, Ultimate
-**Offering:** Self-managed
+**Offering:** GitLab Self-Managed
 
 This is a list of useful information regarding Kubernetes that the GitLab Support
 Team sometimes uses while troubleshooting. GitLab is making this public, so that anyone
