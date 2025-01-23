@@ -8,7 +8,7 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 
 DETAILS:
 **Tier:** Free, Premium, Ultimate
-**Offering:** Self-managed
+**Offering:** GitLab Self-Managed
 
 Until Kubernetes 1.7, there were no permissions within a cluster. With the launch of 1.7, there is now a role based access control system ([RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)) which determines what services can perform actions within a cluster.
 

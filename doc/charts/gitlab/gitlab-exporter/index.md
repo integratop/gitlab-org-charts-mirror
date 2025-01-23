@@ -8,7 +8,7 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 
 DETAILS:
 **Tier:** Free, Premium, Ultimate
-**Offering:** Self-managed
+**Offering:** GitLab Self-Managed
 
 The `gitlab-exporter` sub-chart provides Prometheus metrics for GitLab
 application-specific data. It talks to PostgreSQL directly to perform

@@ -8,7 +8,7 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 
 DETAILS:
 **Tier:** Free, Premium, Ultimate
-**Offering:** Self-managed
+**Offering:** GitLab Self-Managed
 
 This chart is a helper for [Jetstack's CertManager Helm chart](https://cert-manager.io/docs/installation/helm/).
 It automatically provisions an Issuer object, used by CertManager when requesting TLS certificates for
