@@ -726,7 +726,7 @@ describe 'Gitaly configuration' do
 
         expect(gitaly_startup_probe).to include(
           'initialDelaySeconds' => 5,
-          'exec' => { "command" => ["/scripts/healthcheck"] },
+          'grpc' => { "port" => 8075 },
           'failureThreshold' => 60,
           'periodSeconds' => 1,
           'timeoutSeconds' => 2,
