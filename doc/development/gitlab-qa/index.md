@@ -42,7 +42,7 @@ Ensure this by visiting the deployment from any browser, or via cURL.
 
 ## Running GitLab QA in pipeline
 
-To run GitLab QA tests against the deployed instance you can use [GitLab QA Executor](https://gitlab.com/gitlab-org/quality/gitlab-qa-executor). This project contains CI configuration to run GitLab QA against self-managed GitLab environments with parallelization that automates the following manual steps for running GitLab QA from a local machine.
+To run GitLab QA tests against the deployed instance you can use [GitLab QA Executor](https://gitlab.com/gitlab-org/quality/gitlab-qa-executor). This project contains CI configuration to run GitLab QA against GitLab Self-Managed environments with parallelization that automates the following manual steps for running GitLab QA from a local machine.
 
 ## Running GitLab QA from local machine
 
