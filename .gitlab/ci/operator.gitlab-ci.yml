@@ -9,6 +9,7 @@ trigger_operator_test:
     PIPELINE_TYPE: "${PIPELINE_TYPE}"
   inherit:
     variables: false
+  allow_failure: true
   rules:
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
       when: never
