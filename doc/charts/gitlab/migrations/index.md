@@ -74,7 +74,7 @@ Table below contains all the possible charts configurations that can be supplied
 | `serviceAccount.enabled`    | Indicates whether or not to use a ServiceAccount                                | `false`           |
 | `serviceAccount.name`       | Name of the ServiceAccount. If not set, the full chart name is used  |                   |
 | `extraInitContainers`       | List of extra init containers to include |                   |
-| `extraContainers`           | List of extra containers to include      |                   |
+| `extraContainers`           | Multiline literal style string containing a list of containers to include      |                   |
 | `extraVolumes`              | List of extra volumes to create          |                   |
 | `extraVolumeMounts`         | List of extra volumes mounts to do       |                   |
 | `extraEnv`                  | List of extra environment variables to expose |              |
