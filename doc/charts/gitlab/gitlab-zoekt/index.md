@@ -80,6 +80,20 @@ To configure Zoekt for a top-level group in GitLab:
 1. [Enable exact code search](https://docs.gitlab.com/ee/integration/exact_code_search/zoekt.html#enable-exact-code-search).
 1. Set up indexing:
 
+   ::Tabs
+
+   :::TabTitle GitLab 17.7 and later
+
+   ```shell
+   node = ::Search::Zoekt::Node.online.last
+   namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
+   enabled_namespace = Search::Zoekt::EnabledNamespace.find_or_create_by(namespace: namespace)
+   replica = enabled_namespace.replicas.find_or_create_by(namespace_id: enabled_namespace.root_namespace_id)
+   node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id)
+   ```
+
+   :::TabTitle GitLab 17.6 and earlier
+  
    ```shell
    node = ::Search::Zoekt::Node.online.last
    namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
@@ -89,4 +103,6 @@ To configure Zoekt for a top-level group in GitLab:
    node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id, state: :ready)
    ```
 
-Zoekt can now index projects in that group after any project is updated or created.
+   ::EndTabs
+
+Zoekt can now index projects in that group after any project is updated or created. For the initial indexing, wait at least a few minutes for Zoekt to start indexing the namespace.
