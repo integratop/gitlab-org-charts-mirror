@@ -24,7 +24,7 @@
 # Note: Auto CI does not work with multiple buildpacks yet
 
 default:
-  image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-${DEBIAN_VERSION}-slim-ruby-${RUBY_VERSION}:kubectl-1.30-helm-3.10-helm_kubeconform-0.1.17-vcluster-0.19-awscli-1.32.93
+  image: registry.gitlab.com/gitlab-org/gitlab-build-images/debian-${DEBIAN_VERSION}-slim-ruby-${RUBY_VERSION}:kubectl-1.31-helm-3.16-helm_kubeconform-0.1.17-vcluster-0.19-awscli-1.37.9
 
 variables:
   AUTO_DEPLOY_TAG_REGEX: '^[0-9]+\.[0-9]+\.[0-9]+\+[a-z0-9]{7,}$'
@@ -48,7 +48,7 @@ variables:
   QA_SANITY_SUITE_OPTIONS: '--tag smoke --tag ~skip_live_env --tag ~orchestrated'
   GITLAB_QA_ADMIN_ACCESS_TOKEN: $GITLAB_ADMIN_TOKEN
   DEBIAN_VERSION: bookworm
-  RUBY_VERSION: "3.1.5"
+  RUBY_VERSION: "3.3.7"
   CI_TOOLS_VERSION: "4.22.0"
   GITLAB_QA_VERSION: "15.1.0"
   # STRICT_VERSIONS is used in RSpecs to ensure exact version match for tools like "helm" and "kubectl"
