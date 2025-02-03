@@ -166,7 +166,7 @@ describe 'Workhorse configuration' do
                 secret: global-secret
           redis:
             install: false
-        )).deep_merge(default_values)
+        )).deep_merge!(default_values)
       end
 
       it 'renders the global redis config' do
@@ -198,7 +198,7 @@ describe 'Workhorse configuration' do
                 secret: global-secret
           redis:
             install: false
-        )).deep_merge(default_values)
+        )).deep_merge!(default_values)
       end
 
       it 'renders the global redis config' do
@@ -234,7 +234,7 @@ describe 'Workhorse configuration' do
                   secret: workhorse
           redis:
             install: false
-        )).merge(default_values)
+        )).deep_merge!(default_values)
       end
 
       it 'overrides global redis config' do
@@ -281,7 +281,7 @@ describe 'Workhorse configuration' do
               user: redis-user
           redis:
             install: false
-        )).merge(default_values)
+        )).deep_merge!(default_values)
 
         it "adds the username to the URL" do
           toml = render_toml(raw_toml)
@@ -318,7 +318,7 @@ describe 'Workhorse configuration' do
                 user: workhorse-redis-user
           redis:
             install: false
-        )).merge(default_values)
+        )).deep_merge!(default_values)
       end
 
       it "overrides global redis config" do
@@ -358,7 +358,7 @@ describe 'Workhorse configuration' do
                   secret: workhorse
           redis:
             install: false
-        )).merge(default_values)
+        )).deep_merge!(default_values)
       end
 
       let(:webservice_config) { template.dig('ConfigMap/test-webservice', 'data') }
@@ -428,7 +428,7 @@ describe 'Workhorse configuration' do
                     key: password
             redis:
               install: false
-          )).merge(default_values)
+          )).deep_merge!(default_values)
         end
 
         it 'uses global redis config' do
