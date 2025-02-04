@@ -82,9 +82,15 @@ workflow:
   if: '$KUBECONFIG == null'
   when: never
 
-# Sister rule to ".rule:skip_if_no_cluster" as only jobs with `environment` set get KUBECONFIG set
+# Skip for all repos that are not canonical.
 .rule:skip_if_fork:
     - if: '$CI_SERVER_HOST != "gitlab.com" || $CI_PROJECT_PATH != $CANONICAL_PROJECT_PATH'
+      when: never
+
+# Skip for all repos that are not canonical or the security fork.
+# Sister rule to ".rule:skip_if_no_cluster" as only jobs with `environment` set get KUBECONFIG set
+.rule:skip_if_not_canonical_or_security:
+    - if: '$CI_SERVER_HOST != "gitlab.com" || ($CI_PROJECT_PATH != $CANONICAL_PROJECT_PATH && $CI_PROJECT_PATH != $SECURITY_PROJECT_PATH)'
       when: never
 
 .rule:skip_docs_pipeline:

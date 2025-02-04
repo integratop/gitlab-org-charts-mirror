@@ -237,7 +237,7 @@ trigger_review_current:
       optional: true
     - job: pin_image_versions
   rules:
-    - !reference [.rule:skip_if_fork]
+    - !reference [.rule:skip_if_not_canonical_or_security]
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
       when: never
     - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_PIPELINE_SOURCE != "parent_pipeline" && $PIPELINE_TYPE =~ /DEFAULT_BRANCH_PIPELINE$/ '
@@ -249,7 +249,7 @@ trigger_review_current:
 
 .trigger_review_current:
   rules:
-    - !reference [.rule:skip_if_fork]
+    - !reference [.rule:skip_if_not_canonical_or_security]
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
       when: never
     - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_PIPELINE_SOURCE != "parent_pipeline"'
@@ -269,7 +269,7 @@ trigger_review_secondary:
   rules:
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
       when: never
-    - !reference [.rule:skip_if_fork]
+    - !reference [.rule:skip_if_not_canonical_or_security]
     - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_PIPELINE_SOURCE != "parent_pipeline"'
       when: manual
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -279,7 +279,7 @@ trigger_review_secondary:
   rules:
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
       when: never
-    - !reference [.rule:skip_if_fork]
+    - !reference [.rule:skip_if_not_canonical_or_security]
     - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_PIPELINE_SOURCE != "parent_pipeline"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
