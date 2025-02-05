@@ -38,8 +38,8 @@ the `helm install` command using the `--set` flag:
 | `priorityClassName`        |                     | [Priority class](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/) assigned to pods |
 | `rbac.create`              | `true`              | Create RBAC roles and bindings                                                                                      |
 | `resources`                |                     | resource requests, limits                                                                                           |
-| `securitContext.fsGroup`   | `65534`             | User ID to mount filesystems as                                                                                     |
-| `securitContext.runAsUser` | `65534`             | User ID to run the container as                                                                                     |
+| `securityContext.fsGroup`   | `65534`             | User ID to mount filesystems as                                                                                     |
+| `securityContext.runAsUser` | `65534`             | User ID to run the container as                                                                                     |
 | `selfsign.caSubject`       | `GitLab Helm Chart` | selfsign CA Subject                                                                                                 |
 | `selfsign.image.repository` | `registry.gitlab.com/gitlab-org/build/cnf/cfssl-self-sign` | selfsign image repository                                                                                           |
 | `selfsign.image.pullSecrets` |                   | Secrets for the image repository                                                                                    |
