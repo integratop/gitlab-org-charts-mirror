@@ -537,19 +537,21 @@ webservice:
 | `ingress.configureCertmanager`    | Boolean |                           | Toggles Ingress annotation `cert-manager.io/issuer` and `acme.cert-manager.io/http01-edit-in-place`. For more information see the [TLS requirement for GitLab Pages](../../../installation/tls.md).                             |
 | `ingress.enabled`                 | Boolean | `false`                   | Setting that controls whether to create Ingress objects for services that support them. When `false`, the `global.ingress.enabled` setting value is used.                                                                       |
 | `ingress.proxyBodySize`           | String  | `512m`                    | [See Below](#proxybodysize).                                                                                                                                                                                                    |
+| `ingress.serviceUpstream`         | Boolean | `true`                    | [See Below](#serviceupstream).                                                                                                                                                                                                  |
 | `ingress.tls.enabled`             | Boolean | `true`                    | When set to `false`, you disable TLS for GitLab Webservice. This is mainly useful for cases in which you cannot use TLS termination at Ingress-level, like when you have a TLS-terminating proxy before the Ingress Controller. |
 | `ingress.tls.secretName`          | String  | (empty)                   | The name of the Kubernetes TLS Secret that contains a valid certificate and key for the GitLab URL. When not set, the `global.ingress.tls.secretName` value is used instead.                                                    |
 | `ingress.tls.smardcardSecretName` | String  | (empty)                   | The name of the Kubernetes TLS SEcret that contains a valid certificate and key for the GitLab smartcard URL if enabled. When not set, the `global.ingress.tls.secretName` value is used instead.                               |
-| `ingress.tls.useGeoClass`         | Boolean | false                     | Override the IngressClass with the Geo Ingress class (`global.geo.ingressClass`). Required for primary Geo sites.                                                                                                              |
+| `ingress.tls.useGeoClass`         | Boolean | false                     | Override the IngressClass with the Geo Ingress class (`global.geo.ingressClass`). Required for primary Geo sites.                                                                                                               |
 
 ### annotations
 
 `annotations` is used to set annotations on the Webservice Ingress.
 
-We set one annotation by default: `nginx.ingress.kubernetes.io/service-upstream: "true"`.
+### serviceUpstream 
+
 This helps balance traffic to the Webservice pods more evenly by telling NGINX to directly
 contact the Service itself as the upstream. For more information, see the
-[NGINX docs](https://github.com/kubernetes/ingress-nginx/blob/nginx-0.21.0/docs/user-guide/nginx-configuration/annotations.md#service-upstream).
+[NGINX docs](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#service-upstream).
 
 To override this, set:
 
@@ -557,8 +559,7 @@ To override this, set:
 gitlab:
   webservice:
     ingress:
-      annotations:
-        nginx.ingress.kubernetes.io/service-upstream: "false"
+      serviceUpstream: "false"
 ```
 
 ### proxyBodySize

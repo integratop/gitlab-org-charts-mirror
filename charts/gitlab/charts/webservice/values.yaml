@@ -115,8 +115,8 @@ ingress:
     # secretName:
     # smartcardSecretName:
     # enabled: true
-  annotations:
-    nginx.ingress.kubernetes.io/service-upstream: "true"
+  serviceUpstream: true
+  annotations: {}
   configureCertmanager:
   # Use this in combination of .deployments below
   requireBasePath: true
@@ -133,8 +133,8 @@ extraIngress:
     # secretName:
     # smartcardSecretName:
     # enabled: true
-  annotations:
-    nginx.ingress.kubernetes.io/service-upstream: "true"
+  serviceUpstream: true
+  annotations: {}
   configureCertmanager:
   # Use this in combination of .deployments below
   requireBasePath: true
