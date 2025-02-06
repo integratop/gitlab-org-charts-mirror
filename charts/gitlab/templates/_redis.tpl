@@ -164,8 +164,8 @@ Return Sentinel list in format for Workhorse
 {{- $sentinelList := list }}
 {{- $scheme := default "redis" .redisMergedConfig.scheme }}
 {{- range $i, $entry := .redisMergedConfig.sentinels }}
-  {{- $sentinelList = append $sentinelList (quote (print $scheme "://" (trim $entry.host) ":" ( default 26379 $entry.port 
-| int ) ) ) }}
+  {{- $sentinel := printf "%s://%s:%d" $scheme (trim $entry.host) ($entry.port | default 26379 | int) }}
+  {{- $sentinelList = append $sentinelList ($sentinel | quote) }}
 {{- end }}
 {{- $sentinelList | join "," }}
 {{- end -}}
