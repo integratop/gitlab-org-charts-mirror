@@ -118,10 +118,10 @@ describe 'Workhorse configuration' do
     end
 
     context 'with AzureRM configured' do
-      let(:s3_config) { File.read('examples/objectstorage/rails.azurerm.yaml') }
+      let(:azure_config) { File.read('examples/objectstorage/rails.azurerm.yaml') }
 
       it 'renders a TOML configuration file' do
-        toml = render_toml(raw_toml, s3_config)
+        toml = render_toml(raw_toml, azure_config)
 
         expect(toml.keys).to match_array(%w[shutdown_timeout listeners object_storage image_resizer redis])
 
@@ -130,6 +130,27 @@ describe 'Workhorse configuration' do
         expect(object_storage['azurerm'].keys).to match_array(%w[azure_storage_account_name azure_storage_access_key])
         expect(object_storage['azurerm']['azure_storage_account_name']).to eq('YOUR_AZURE_STORAGE_ACCOUNT_NAME')
         expect(object_storage['azurerm']['azure_storage_access_key']).to eq('YOUR_AZURE_STORAGE_ACCOUNT_KEY')
+      end
+
+      context 'with a blank access key' do
+        let(:azure_config) do
+          <<CFG
+provider: AzureRM
+azure_storage_account_name: YOUR_AZURE_STORAGE_ACCOUNT_NAME
+CFG
+        end
+
+        it 'renders a TOML configuration file' do
+          toml = render_toml(raw_toml, azure_config)
+
+          expect(toml.keys).to match_array(%w[shutdown_timeout listeners object_storage image_resizer redis])
+
+          object_storage = toml['object_storage']
+          expect(object_storage.keys).to match_array(%w[provider azurerm])
+          expect(object_storage['azurerm'].keys).to match_array(%w[azure_storage_account_name azure_storage_access_key])
+          expect(object_storage['azurerm']['azure_storage_account_name']).to eq('YOUR_AZURE_STORAGE_ACCOUNT_NAME')
+          expect(object_storage['azurerm']['azure_storage_access_key']).to be_empty
+        end
       end
     end
 
