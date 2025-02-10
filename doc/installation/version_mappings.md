@@ -22,6 +22,7 @@ helm search repo -l gitlab/gitlab
 
 ## Release notes for each supported version
 
+- [9.0](../releases/9_0.md)
 - [8.0](../releases/8_0.md)
 - [7.0](../releases/7_0.md)
 - [6.0](../releases/6_0.md)
