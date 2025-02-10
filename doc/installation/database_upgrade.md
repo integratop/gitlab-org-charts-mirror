@@ -136,7 +136,7 @@ NOTE:
 This is only for `7.0.0` upgrade, and only when you want enforce the use password files inside of the
 PostgreSQL service containers.
 
-The new version of [PostgreSQL chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) uses different
+The new version of [PostgreSQL chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) uses different
 keys to reference passwords in a Secrets. Instead of `postgresql-password` and `postgresql-postgres-password` it now
 uses `password` and `postgres-password`. These keys must be changed in `RELEASE-postgresql-password` Secret _WITHOUT_
 changing their values.
