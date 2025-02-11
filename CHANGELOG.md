@@ -70,6 +70,10 @@ No changes.
 - [Update dependency container-registry to v4.14.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/dcc8ce8e48d88f5ff1aee9f0aa67bf4b505de585) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4017))
 - [Update Helm release gitlab-runner to v0.71.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/45c82f324306ca23d68384a65103ec889c1b6cee) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4011))
 
+## 8.6.5 (2025-02-11)
+
+No changes.
+
 ## 8.6.4 (2025-01-22)
 
 No changes.
