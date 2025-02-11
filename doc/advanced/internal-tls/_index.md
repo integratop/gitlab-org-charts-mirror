@@ -196,7 +196,7 @@ the GitLab component. When configured as shown here, it will also _verify_
 the certificates served by the GitLab components against the CA.
 
 This can be verified by connecting to the Toolbox pod, and querying the
-various compontent Services. One such example, connecting to the Webservice
+various component Services. One such example, connecting to the Webservice
 Pod's primary service port that NGINX Ingress uses:
 
 ```plaintext
