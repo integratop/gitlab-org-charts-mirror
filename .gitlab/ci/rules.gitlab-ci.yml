@@ -84,7 +84,7 @@ workflow:
 
 # Sister rule to ".rule:skip_if_no_cluster" as only jobs with `environment` set get KUBECONFIG set
 .rule:skip_if_fork:
-    - if: '$CI_SERVER_HOST != "gitlab.com" && $CI_PROJECT_PATH != $CANONICAL_PROJECT_PATH'
+    - if: '$CI_SERVER_HOST != "gitlab.com" || $CI_PROJECT_PATH != $CANONICAL_PROJECT_PATH'
       when: never
 
 .rule:skip_docs_pipeline:
