@@ -293,6 +293,9 @@ trigger_review_secondary:
       pipeline_variables: true
   inherit:
     variables:
+      - CI_PROJECT_PATH
+      - CANONICAL_PROJECT_PATH
+      - SECURITY_PROJECT_PATH
       - PIPELINE_TYPE
       - REVIEW_REF_PREFIX
       - LIMIT_TO
