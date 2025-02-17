@@ -19,7 +19,7 @@ GitLab Pages using the Helm chart.
 
 ## Known limitations
 
-1. [GitLab Pages Access Control](https://docs.gitlab.com/ee/user/project/pages/pages_access_control.html)
+1. [GitLab Pages Access Control](https://docs.gitlab.com/user/project/pages/pages_access_control/)
    is not supported out of the box.
 
 ## Configure external GitLab Pages instance

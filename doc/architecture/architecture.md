@@ -97,7 +97,7 @@ component services are documented under the [GitLab](../charts/gitlab/_index.md)
 ### Components list
 
 A list of which components are deployed when using the chart, and configuration instructions if needed,
-is available on the [architecture components list](https://docs.gitlab.com/ee/development/architecture.html#component-list) page.
+is available on the [architecture components list](https://docs.gitlab.com/development/architecture/#component-list) page.
 
 ## Design Decisions
 

@@ -25,7 +25,7 @@ Create a minimal `gitlab.rb` file to be placed at `/etc/gitlab/gitlab.rb`. Be _v
 
 {{< alert type="note" >}}
 
-This example is not intended to provide [Redis for scaling](https://docs.gitlab.com/ee/administration/redis/index.html).
+This example is not intended to provide [Redis for scaling](https://docs.gitlab.com/administration/redis/).
 
 {{< /alert >}}
 

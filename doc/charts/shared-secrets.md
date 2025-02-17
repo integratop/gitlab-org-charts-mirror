@@ -21,7 +21,7 @@ used across the installation, unless otherwise manually specified. This includes
 1. MinIO, Registry, GitLab Shell, and Gitaly secrets
 1. Redis and PostgreSQL passwords
 1. SSH host keys
-1. GitLab Rails secret for [encrypted credentials](https://docs.gitlab.com/ee/administration/encrypted_configuration.html)
+1. GitLab Rails secret for [encrypted credentials](https://docs.gitlab.com/administration/encrypted_configuration/)
 
 ## Installation command line options
 

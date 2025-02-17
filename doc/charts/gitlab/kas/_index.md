@@ -13,7 +13,7 @@ title: Using the GitLab `kas` chart
 {{< /details >}}
 
 The `kas` sub-chart provides a configurable deployment of the
-[GitLab agent server (KAS)](https://docs.gitlab.com/ee/administration/clusters/kas.html).
+[GitLab agent server (KAS)](https://docs.gitlab.com/administration/clusters/kas/).
 The agent server is a component you install together with GitLab. It is required to
 manage the [GitLab agent for Kubernetes](https://gitlab.com/gitlab-org/cluster-integration/gitlab-agent).
 
@@ -24,7 +24,7 @@ To consume minimal resources, the `kas` container uses a distroless image.
 The deployed services are exposed by an Ingress, which uses
 [WebSocket proxying](https://nginx.org/en/docs/http/websocket.html) for communication.
 This proxy allows long-lived connections with the external component,
-[`agentk`](https://docs.gitlab.com/ee/user/clusters/agent/install/index.html).
+[`agentk`](https://docs.gitlab.com/user/clusters/agent/install/).
 `agentk` is the Kubernetes cluster-side agent counterpart.
 
 The route to access the service depends on your [Ingress configuration](#specify-an-ingress).
@@ -184,7 +184,7 @@ To install the chart:
    ```
 
 1. Use the GDK to run the process to configure and use the
-   [GitLab agent for Kubernetes](https://docs.gitlab.com/ee/user/clusters/agent/):
+   [GitLab agent for Kubernetes](https://docs.gitlab.com/user/clusters/agent/):
    (You can also follow the steps to configure and use the agent manually.)
 
    1. From your GDK GitLab repository, move into the QA folder: `cd qa`.

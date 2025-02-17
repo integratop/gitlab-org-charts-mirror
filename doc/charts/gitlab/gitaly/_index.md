@@ -45,7 +45,7 @@ the `helm install` command using the `--set` flags.
 | Parameter                                                | Default                                           | Description                                                                                                                                                                                                                                                                                                                                              |
 |----------------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `annotations`                                            |                                                   | Pod annotations                                                                                                                                                                                                                                                                                                                                          |
-| `backup.goCloudUrl`                                      |                                                   | Object storage URL for [server side Gitaly backups](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#configure-server-side-backups).                                                                                                                                                                                               |
+| `backup.goCloudUrl`                                      |                                                   | Object storage URL for [server side Gitaly backups](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#configure-server-side-backups).                                                                                                                                                                                               |
 | `common.labels`                                          | `{}`                                              | Supplemental labels that are applied to all objects created by this chart.                                                                                                                                                                                                                                                                               |
 | `podLabels`                                              |                                                   | Supplemental Pod labels. Will not be used for selectors.                                                                                                                                                                                                                                                                                                 |
 | `external[].hostname`                                    | `- ""`                                            | hostname of external node                                                                                                                                                                                                                                                                                                                                |
@@ -58,7 +58,7 @@ the `helm install` command using the `--set` flags.
 | `extraEnv`                                               |                                                   | List of extra environment variables to expose                                                                                                                                                                                                                                                                                                            |
 | `extraEnvFrom`                                           |                                                   | List of extra environment variables from other data sources to expose                                                                                                                                                                                                                                                                                    |
 | `gitaly.serviceName`                                     |                                                   | The name of the generated Gitaly service. Overrides `global.gitaly.serviceName`, and defaults to `<RELEASE-NAME>-gitaly`                                                                                                                                                                                                                                 |
-| `gpgSigning.enabled`                                     | `false`                                           | If [Gitaly GPG signing](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#configure-commit-signing-for-gitlab-ui-commits) should be used.                                                                                                                                                                                           |
+| `gpgSigning.enabled`                                     | `false`                                           | If [Gitaly GPG signing](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#configure-commit-signing-for-gitlab-ui-commits) should be used.                                                                                                                                                                                           |
 | `gpgSigning.secret`                                      |                                                   | The name of the secret used for Gitaly GPG signing.                                                                                                                                                                                                                                                                                                      |
 | `gpgSigning.key`                                         |                                                   | The key in the GPG secret containing Gitaly's GPG signing key.                                                                                                                                                                                                                                                                                           |
 | `image.pullPolicy`                                       | `Always`                                          | Gitaly image pull policy                                                                                                                                                                                                                                                                                                                                 |
@@ -158,8 +158,8 @@ the `helm install` command using the `--set` flags.
 | `cgroups.repositories.cpuQuotaUs`              |                                                   | The cpuQuotaUs that is imposed on all Git processes contained in a repository cgroup. A Git process can’t use more then the given quota. We set cpuQuotaUs to 100ms so 1 core is 100000. 0 implies no limit.                                                                                                                                             |
 | `cgroups.repositories.maxCgroupsPerRepo`       |  1                                     | The number of repository cgroups that Git processes targeting a specific repository can be distributed across. This enables more conservative CPU and memory limits to be configured for repository cgroups while still allowing for bursty workloads. For instance, with a `maxCgroupsPerRepo` of `2` and a `memoryBytes` limit of 10GB, independent Git operations against a specific repository can consume up to 20GB of memory. |
 | `gracefulRestartTimeout`                        | `25`                                | Gitaly shutdown grace period, how long to wait for in-flight requests to complete (seconds). Pod `terminationGracePeriodSeconds` is set to this value + 5 seconds.                                                                          |
-| `timeout.uploadPackNegotiation`                |                                      | See [Configure the negotiation timeouts](https://docs.gitlab.com/ee/administration/settings/gitaly_timeouts.html#configure-the-negotiation-timeouts). |
-| `timeout.uploadArchiveNegotiation`             |                                      | See [Configure the negotiation timeouts](https://docs.gitlab.com/ee/administration/settings/gitaly_timeouts.html#configure-the-negotiation-timeouts). |
+| `timeout.uploadPackNegotiation`                |                                      | See [Configure the negotiation timeouts](https://docs.gitlab.com/administration/settings/gitaly_timeouts/#configure-the-negotiation-timeouts). |
+| `timeout.uploadArchiveNegotiation`             |                                      | See [Configure the negotiation timeouts](https://docs.gitlab.com/administration/settings/gitaly_timeouts/#configure-the-negotiation-timeouts). |
 
 ## Chart configuration examples
 
@@ -310,7 +310,7 @@ Please note that the `initContainer` that runs before Gitaly starts requires to 
 **executed as root**. This container will configure the permissions so that Gitaly can manage cgroups.
 Hence, it will mount a volume on the filesystem to have write access to `/sys/fs/cgroup`.
 
-[Example of Oversubscription](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#configuring-oversubscription)
+[Example of Oversubscription](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#configuring-oversubscription)
 
 ```yaml
 cgroups:
@@ -451,7 +451,7 @@ SAN attributes.
 
 ### Global server hooks
 
-The Gitaly StatefulSet has support for [Global server hooks](https://docs.gitlab.com/ee/administration/server_hooks.html#create-a-global-server-hook-for-all-repositories). The hook scripts run on the Gitaly pod, and are therefore limited to the tools available in the [Gitaly container](https://gitlab.com/gitlab-org/build/CNG/-/blob/master/gitaly/Dockerfile).
+The Gitaly StatefulSet has support for [Global server hooks](https://docs.gitlab.com/administration/server_hooks/#create-a-global-server-hook-for-all-repositories). The hook scripts run on the Gitaly pod, and are therefore limited to the tools available in the [Gitaly container](https://gitlab.com/gitlab-org/build/CNG/-/blob/master/gitaly/Dockerfile).
 
 The hooks are populated using [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/), and can be used by setting the following values as appropriate:
 
@@ -467,7 +467,7 @@ kubectl create configmap MAP_NAME --from-file /PATH/TO/SCRIPT/DIR
 
 ### GPG signing commits created by GitLab
 
-Gitaly has the ability to [GPG sign all commits](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#configure-commit-signing-for-gitlab-ui-commits) created via the GitLab UI, e.g. the WebIDE,
+Gitaly has the ability to [GPG sign all commits](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#configure-commit-signing-for-gitlab-ui-commits) created via the GitLab UI, e.g. the WebIDE,
 as well as commits created by GitLab, such as merge commits and squashes.
 
 1. Create a k8s secret using your GPG private key.
@@ -489,7 +489,7 @@ as well as commits created by GitLab, such as merge commits and squashes.
 
 ### Server-side backups
 
-The chart supports [Gitaly server-side backups](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#configure-server-side-backups).
+The chart supports [Gitaly server-side backups](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#configure-server-side-backups).
 To use them:
 
 1. Create a bucket to store the backups.
@@ -514,6 +514,6 @@ To use them:
    ```
 
    For the expected environment variables and storage URL format for your object storage backend, see
-   the [Gitaly documentation](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#configure-server-side-backups).
+   the [Gitaly documentation](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#configure-server-side-backups).
 
 1. [Enable server-side backups with `backup-utility`](../../../backup-restore/backup.md#server-side-repository-backups).

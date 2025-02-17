@@ -18,7 +18,7 @@ corresponding to the specific release you want to upgrade to and look for any
 [release notes](version_mappings.md#release-notes-for-each-supported-version) that might pertain to the new GitLab chart
 version.
 
-Upgrades have to follow a supported [upgrade path](https://docs.gitlab.com/ee/update/#upgrade-paths).
+Upgrades have to follow a supported [upgrade path](https://docs.gitlab.com/update/#upgrade-paths).
 Because the GitLab chart versions don't follow the same numbering as GitLab versions,
 see the [version mappings](version_mappings.md) between them.
 

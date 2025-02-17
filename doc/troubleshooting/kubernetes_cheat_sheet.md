@@ -321,7 +321,7 @@ To patch the source code in the `toolbox` pod:
 
 1. Fetch the desired `.patch` file to be applied:
 
-   - Either download the diff of a merge request directly as a [patch file](https://docs.gitlab.com/ee/user/project/merge_requests/reviews/#download-merge-request-changes-as-a-patch-file).
+   - Either download the diff of a merge request directly as a [patch file](https://docs.gitlab.com/user/project/merge_requests/reviews/#download-merge-request-changes-as-a-patch-file).
    - Or, fetch the diff directly using `curl`. Replace `<mr_iid>` below with the IID of the merge request, or change the URL to point to a raw snippet:
 
      ```shell

@@ -422,7 +422,7 @@ gitaly:
 ## Metrics
 
 By default, a Prometheus metrics exporter is enabled per pod. Metrics are only available
-when [GitLab Prometheus metrics](https://docs.gitlab.com/ee/administration/monitoring/prometheus/gitlab_metrics.html)
+when [GitLab Prometheus metrics](https://docs.gitlab.com/administration/monitoring/prometheus/gitlab_metrics/)
 are enabled in the Admin area. The exporter exposes a `/metrics` endpoint on port
 `3807`. When metrics are enabled, annotations are added to each pod allowing a Prometheus
 server to discover and scrape the exposed metrics.
@@ -446,7 +446,7 @@ on a per-pod basis.
 
 {{< alert type="note" >}}
 
-[Detailed documentation of the Sidekiq memory killer is available](https://docs.gitlab.com/ee/administration/sidekiq/sidekiq_memory_killer.html)
+[Detailed documentation of the Sidekiq memory killer is available](https://docs.gitlab.com/administration/sidekiq/sidekiq_memory_killer/)
 in the Linux package documentation.
 
 {{< /alert >}}

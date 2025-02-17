@@ -110,7 +110,7 @@ helm inspect values gitlab/gitlab
 
 ### Common settings
 
-See [incoming email configuration examples documentation](https://docs.gitlab.com/ee/administration/incoming_email.html#configuration-examples)
+See [incoming email configuration examples documentation](https://docs.gitlab.com/administration/incoming_email/#configuration-examples)
 for more information.
 
 | Parameter                                         | Description                                                                                            | Default                                                    |
@@ -157,7 +157,7 @@ See the [instructions for creating secrets](secrets.md).
 
 As a requirement for Service Desk, the Incoming Mail must be [configured](#incoming-email-configuration).
 Note that the email address for both Incoming Mail and Service Desk must use
-[email sub-addressing](https://docs.gitlab.com/ee/administration/incoming_email.html#email-sub-addressing).
+[email sub-addressing](https://docs.gitlab.com/administration/incoming_email/#email-sub-addressing).
 When setting the email addresses in each section the tag added to the username
 must be `+%{key}`.
 

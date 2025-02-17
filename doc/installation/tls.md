@@ -148,7 +148,7 @@ also use directly for GitLab Runner via `gitlab-runner.certsSecretName=RELEASE-w
 
 ## TLS requirement for GitLab Pages
 
-For [GitLab Pages with TLS support](https://docs.gitlab.com/ee/administration/pages/#wildcard-domains-with-tls-support),
+For [GitLab Pages with TLS support](https://docs.gitlab.com/administration/pages/#wildcard-domains-with-tls-support),
 a wildcard certificate applicable for `*.<pages domain>` (default value of
 `<pages domain>` is `pages.<base domain>`) is required.
 

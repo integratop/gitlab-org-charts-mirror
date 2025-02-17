@@ -47,7 +47,7 @@ For LFS, artifacts, uploads, and packages an IAM role can be specified via the a
 
 For the [`object-storage.yaml`](../../charts/globals.md#connection) secret, omit
 the access and secret key. Because the GitLab Rails codebase uses Fog for S3
-storage, the [`use_iam_profile`](https://docs.gitlab.com/ee/administration/cicd/secure_files.html#s3-compatible-connection-settings)
+storage, the [`use_iam_profile`](https://docs.gitlab.com/administration/cicd/secure_files/#s3-compatible-connection-settings)
 key should be added for Fog to use the role:
 
 ```yaml

@@ -21,7 +21,7 @@ To scale GitLab, you can configure GitLab to use multiple application databases.
 
 {{< alert type="warning" >}}
 
-Because of [known issues](https://docs.gitlab.com/ee/administration/postgresql/multiple_databases.html#known-issues), this feature may not be ready for production use.
+Because of [known issues](https://docs.gitlab.com/administration/postgresql/multiple_databases/#known-issues), this feature may not be ready for production use.
 
 {{< /alert >}}
 
@@ -137,7 +137,7 @@ Before migrating an existing installation to multiple databases:
    You can replace this command with a suitable `psql` command from any host that has a direct access to the database server.
 
 1. Make sure you have enough disk space, plan for the downtime, and create the new `gitlabhq_production_ci` database using SQL commands outlined in the
-   [multiple databases](https://docs.gitlab.com/ee/administration/postgresql/multiple_databases.html#preparation) documentation. Because you've already accessed the
+   [multiple databases](https://docs.gitlab.com/administration/postgresql/multiple_databases/#preparation) documentation. Because you've already accessed the
    database console, you can omit the `sudo gitlab-psql` command.
 1. Exit the database console:
 

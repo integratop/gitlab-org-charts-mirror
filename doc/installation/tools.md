@@ -60,7 +60,7 @@ not enabled by default. Such functionality has not been load tested by GitLab.
 ### Gitaly
 
 By default, the GitLab chart includes an in-cluster Gitaly deployment. For production, running Gitaly in Kubernetes is not supported.
-[Gitaly is only supported on conventional virtual machines](https://docs.gitlab.com/ee/administration/reference_architectures/index.html#stateful-components-in-kubernetes).
+[Gitaly is only supported on conventional virtual machines](https://docs.gitlab.com/administration/reference_architectures/#stateful-components-in-kubernetes).
 
 You should set up an
 [external, production-ready Gitaly instance](../advanced/external-gitaly/_index.md).
@@ -305,7 +305,7 @@ Prometheus `tls_config.server_name`.
 | [GitLab Exporter](../charts/gitlab/gitlab-exporter/_index.md) | 9168  | YES | Enabled using `gitlab.gitlab-exporter.tls.enabled=true` <br>Default Secret: `RELEASE-gitlab-exporter-tls` |
 | [GitLab Pages](../charts/gitlab/gitlab-pages/_index.md)       | 9235  | YES | Enabled using `gitlab.gitlab-pages.metrics.tls.enabled=true` <br>Default Secret: `RELEASE-pages-metrics-tls` <br>[Docs: General settings](../charts/gitlab/gitlab-pages/_index.md#general-settings) |
 | [GitLab Runner](../charts/gitlab/gitlab-runner/_index.md)     | 9252  | NO  | [Issue - Add TLS Support for Metrics Endpoint](https://gitlab.com/gitlab-org/gitlab-runner/-/issues/29176) |
-| [GitLab Shell](../charts/gitlab/gitlab-shell/_index.md)       | 9122  | NO  | The GitLab Shell metrics exporter is only enabled when using [`gitlab-sshd`](https://docs.gitlab.com/ee/administration/operations/gitlab_sshd.html). OpenSSH is recommended for environments that require TLS |
+| [GitLab Shell](../charts/gitlab/gitlab-shell/_index.md)       | 9122  | NO  | The GitLab Shell metrics exporter is only enabled when using [`gitlab-sshd`](https://docs.gitlab.com/administration/operations/gitlab_sshd/). OpenSSH is recommended for environments that require TLS |
 | [KAS](../charts/gitlab/kas/_index.md)                         | 8151  | YES | Can be configured using `global.kas.customConfig.observability.listen.certificate_file` and `global.kas.customConfig.observability.listen.key_file` options |
 | [Praefect](../charts/gitlab/praefect/_index.md)               | 9236  | YES | Enabled using `global.praefect.tls.enabled=true` <br>Default Secret: `RELEASE-praefect-tls` <br>[Docs: Running Praefect over TLS](../charts/gitlab/praefect/_index.md#running-praefect-over-tls) |
 | [Registry](../charts/registry/_index.md)                      | 5100  | YES | Enabled using `registry.debug.tls.enabled=true` <br>[Docs: Registry - Configuring TLS for the debug port](../charts/registry/_index.md#configuring-tls-for-the-debug-port) |
