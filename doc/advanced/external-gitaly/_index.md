@@ -13,7 +13,7 @@ consider using our [Linux package](external-omnibus-gitaly.md).
 {{< alert type="note" >}}
 
 External Gitaly _services_ can be provided by Gitaly nodes, or
-[Praefect](https://docs.gitlab.com/ee/administration/gitaly/praefect.html) clusters.
+[Praefect](https://docs.gitlab.com/administration/gitaly/praefect/) clusters.
 
 {{< /alert >}}
 
@@ -81,7 +81,7 @@ with the `-f / --values` flag.
 
 ### Connecting to external Gitaly over TLS
 
-If your external [Gitaly server listens over TLS port](https://docs.gitlab.com/ee/administration/gitaly/#enable-tls-support),
+If your external [Gitaly server listens over TLS port](https://docs.gitlab.com/administration/gitaly/#enable-tls-support),
 you can make your GitLab instance communicate with it over TLS. To do this, you
 have to
 
@@ -164,7 +164,7 @@ repositories to an external Gitaly service, this can be done with one of the fol
 
 This method:
 
-- Uses the [repository storage moves API](https://docs.gitlab.com/ee/api/project_repository_storage_moves.html)
+- Uses the [repository storage moves API](https://docs.gitlab.com/api/project_repository_storage_moves/)
   to migrate repositories from the Gitaly chart to the external Gitaly service.
 - Can be performed with zero downtime.
 - Requires that the external Gitaly service resides within the same VPC/zone as the Gitaly pods.
@@ -172,8 +172,8 @@ This method:
 
 #### Step 1: Set up external Gitaly Service or Gitaly Cluster
 
-Set up an [external Gitaly](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html)
-or [external Gitaly Cluster](https://docs.gitlab.com/ee/administration/gitaly/praefect.html). You must
+Set up an [external Gitaly](https://docs.gitlab.com/administration/gitaly/configure_gitaly/)
+or [external Gitaly Cluster](https://docs.gitlab.com/administration/gitaly/praefect/). You must
 provide the Gitaly token and GitLab Shell secret from your Chart installation as part of those steps:
 
 ```shell
@@ -329,11 +329,11 @@ After connectivity is confirmed, we can proceed to scheduling the repository sto
 
 #### Step 4: Schedule the repository storage move
 
-Schedule the move by following the steps indicated in [moving repositories](https://docs.gitlab.com/ee/administration/operations/moving_repositories.html#moving-repositories).
+Schedule the move by following the steps indicated in [moving repositories](https://docs.gitlab.com/administration/operations/moving_repositories/#moving-repositories).
 
 #### Step 5: Final configuration and validation
 
-1. If you have multiple Gitaly storages, [configure where new repositories are stored](https://docs.gitlab.com/ee/administration/repository_storage_paths.html#configure-where-new-repositories-are-stored).
+1. If you have multiple Gitaly storages, [configure where new repositories are stored](https://docs.gitlab.com/administration/repository_storage_paths/#configure-where-new-repositories-are-stored).
 
 1. Consider generating a consolidated `gitlab.yml` for the future that includes the external Gitaly configuration:
 
@@ -341,7 +341,7 @@ Schedule the move by following the steps indicated in [moving repositories](http
    helm get values <RELEASE_NAME> -o yaml > gitlab.yml
    ```
 
-1. Disable the internal Gitaly subchart in the `gitlab.yml` file, and point the new `default` repository storage to the external Gitaly service. [GitLab requires a default repository storage](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#gitlab-requires-a-default-repository-storage):
+1. Disable the internal Gitaly subchart in the `gitlab.yml` file, and point the new `default` repository storage to the external Gitaly service. [GitLab requires a default repository storage](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#gitlab-requires-a-default-repository-storage):
 
    {{< tabs >}}
 
@@ -423,8 +423,8 @@ helm history <release> --max=1
 
 #### Step 2: Setup external Gitaly Service or Gitaly Cluster
 
-Set up an [external Gitaly](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html)
-or [external Gitaly Cluster](https://docs.gitlab.com/ee/administration/gitaly/praefect.html). You must
+Set up an [external Gitaly](https://docs.gitlab.com/administration/gitaly/configure_gitaly/)
+or [external Gitaly Cluster](https://docs.gitlab.com/administration/gitaly/praefect/). You must
 provide the Gitaly token and GitLab Shell secret from your Chart installation as part of those steps:
 
 ```shell
@@ -460,7 +460,7 @@ repositories in the following steps:
 
 **1. Enable Maintenance Mode**
 
-If you are using GitLab Enterprise Edition, enable [maintenance mode](https://docs.gitlab.com/ee/administration/maintenance_mode/#enable-maintenance-mode) either through the UI, API or the Rails console:
+If you are using GitLab Enterprise Edition, enable [maintenance mode](https://docs.gitlab.com/administration/maintenance_mode/#enable-maintenance-mode) either through the UI, API or the Rails console:
 
 ```shell
 kubectl exec <toolbox pod name> -it -- gitlab-rails runner 'Gitlab::CurrentSettings.update!(maintenance_mode: true)'
@@ -471,7 +471,7 @@ kubectl exec <toolbox pod name> -it -- gitlab-rails runner 'Gitlab::CurrentSetti
 If you are using GitLab Community Edition, you must scale down any GitLab Runner pods that are running in the cluster. This prevents
 the Runners from connecting to GitLab to process CI/CD jobs.
 
-If you are using GitLab Enterprise Edition, this step is optional because [maintenance mode](https://docs.gitlab.com/ee/administration/maintenance_mode/#enable-maintenance-mode)
+If you are using GitLab Enterprise Edition, this step is optional because [maintenance mode](https://docs.gitlab.com/administration/maintenance_mode/#enable-maintenance-mode)
 prevents Runners in the cluster from connecting to GitLab.
 
 ```shell
@@ -498,7 +498,7 @@ kubectl exec <toolbox pod name> -it -- gitlab-rails runner 'Sidekiq::Cron::Job.a
 
 We need to wait for any enqueued or in progress jobs to complete before proceeding to the next step.
 
-1. In the Admin Area, go to [**Monitoring**](https://docs.gitlab.com/ee/administration/admin_area.html#background-jobs) and select **Background Jobs**.
+1. In the Admin Area, go to [**Monitoring**](https://docs.gitlab.com/administration/admin_area/#background-jobs) and select **Background Jobs**.
 1. Under the Sidekiq dashboard, select **Queues** and then **Live Poll**.
 1. Wait for **Busy** and **Enqueued** to drop to 0.
 
@@ -554,7 +554,7 @@ IP address for the external Gitaly service to the `nginx-ingress` configuration 
 
 **8. Create list of repository checksums**
 
-Prior to running the backup, [check all GitLab repositories](https://docs.gitlab.com/ee/administration/raketasks/check.html#check-all-gitlab-repositories)
+Prior to running the backup, [check all GitLab repositories](https://docs.gitlab.com/administration/raketasks/check/#check-all-gitlab-repositories)
 and create a list of repository checksums. Pipe the output to a file so we can `diff` the checksums after the migration:
 
 ```shell
@@ -679,7 +679,7 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
 1. [Restore the backup file](../../backup-restore/restore.md#restoring-the-backup-file) created previously.
    As a result, the repositories are copied to the configured external Gitaly or Gitaly Cluster.
 
-1. [Check all GitLab repositories](https://docs.gitlab.com/ee/administration/raketasks/check.html#check-all-gitlab-repositories)
+1. [Check all GitLab repositories](https://docs.gitlab.com/administration/raketasks/check/#check-all-gitlab-repositories)
    and create a list of repository checksums. Pipe the output to a file so we can `diff` the checksums in the next step:
 
    ```shell
@@ -713,13 +713,13 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
     helm get values <release> gitlab/gitlab -o yaml > gitlab.yml
     ```
 
-1. If you are using GitLab Enterprise Edition, disable [maintenance mode](https://docs.gitlab.com/ee/administration/maintenance_mode/#enable-maintenance-mode) either through the UI, API or the Rails console:
+1. If you are using GitLab Enterprise Edition, disable [maintenance mode](https://docs.gitlab.com/administration/maintenance_mode/#enable-maintenance-mode) either through the UI, API or the Rails console:
 
    ```shell
    kubectl exec <toolbox pod name> -it -- gitlab-rails runner 'Gitlab::CurrentSettings.update!(maintenance_mode: false)'
    ```
 
-1. If you have multiple Gitaly storages, [configure where new repositories are stored](https://docs.gitlab.com/ee/administration/repository_storage_paths.html#configure-where-new-repositories-are-stored).
+1. If you have multiple Gitaly storages, [configure where new repositories are stored](https://docs.gitlab.com/administration/repository_storage_paths/#configure-where-new-repositories-are-stored).
 
 1. Enable Sidekiq cron jobs:
 
@@ -779,9 +779,9 @@ in [Step 1: Get the current release revision of the GitLab Chart](#step-1-get-th
    kubectl scale deploy -lapp=gitlab-gitlab-runner,release=<release> --replicas=<value>
    ```
 
-1. If you are using GitLab Enterprise Edition, disable [maintenance mode](https://docs.gitlab.com/ee/administration/maintenance_mode/#disable-maintenance-mode)
+1. If you are using GitLab Enterprise Edition, disable [maintenance mode](https://docs.gitlab.com/administration/maintenance_mode/#disable-maintenance-mode)
    if it is enabled.
 
 ### Related documentation
 
-- [Migrate to Gitaly Cluster](https://docs.gitlab.com/ee/administration/gitaly/index.html#migrate-to-gitaly-cluster)
+- [Migrate to Gitaly Cluster](https://docs.gitlab.com/administration/gitaly/#migrate-to-gitaly-cluster)

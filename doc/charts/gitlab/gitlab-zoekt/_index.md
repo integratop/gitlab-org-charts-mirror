@@ -15,7 +15,7 @@ title: Zoekt chart
 
 {{< history >}}
 
-- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/105049) as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) in GitLab 15.9 [with flags](https://docs.gitlab.com/ee/administration/feature_flags.html) named `index_code_with_zoekt` and `search_code_with_zoekt`. Disabled by default.
+- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/105049) as a [beta](https://docs.gitlab.com/policy/development_stages_support/#beta) in GitLab 15.9 [with flags](https://docs.gitlab.com/administration/feature_flags/) named `index_code_with_zoekt` and `search_code_with_zoekt`. Disabled by default.
 - [Enabled on GitLab.com](https://gitlab.com/gitlab-org/gitlab/-/issues/388519) in GitLab 16.6.
 - Feature flags `index_code_with_zoekt` and `search_code_with_zoekt` [removed](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/148378) in GitLab 17.1.
 
@@ -23,13 +23,13 @@ title: Zoekt chart
 
 {{< alert type="warning" >}}
 
-This feature is in [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) and subject to change without notice.
+This feature is in [beta](https://docs.gitlab.com/policy/development_stages_support/#beta) and subject to change without notice.
 For more information, see [epic 9404](https://gitlab.com/groups/gitlab-org/-/epics/9404).
 
 {{< /alert >}}
 
 The Zoekt chart provides support for
-[exact code search](https://docs.gitlab.com/ee/user/search/exact_code_search.html).
+[exact code search](https://docs.gitlab.com/user/search/exact_code_search/).
 You can install the chart by setting `gitlab-zoekt.install` to `true`.
 For more information, see [`gitlab-zoekt`](https://gitlab.com/gitlab-org/cloud-native/charts/gitlab-zoekt).
 
@@ -90,7 +90,7 @@ To configure Zoekt for a top-level group in GitLab:
    kubectl exec <toolbox pod name> -it -c toolbox -- gitlab-rails console -e production
    ```
 
-1. [Enable exact code search](https://docs.gitlab.com/ee/integration/exact_code_search/zoekt.html#enable-exact-code-search).
+1. [Enable exact code search](https://docs.gitlab.com/integration/exact_code_search/zoekt/#enable-exact-code-search).
 1. Set up indexing:
 
    {{< tabs >}}

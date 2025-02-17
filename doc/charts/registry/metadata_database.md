@@ -14,7 +14,7 @@ title: Manage the container registry metadata database
 
 {{< history >}}
 
-- [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) feature.
+- [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/policy/development_stages_support/#beta) feature.
 - [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/423459) in GitLab 17.3.
 
 {{< /history >}}
@@ -29,7 +29,7 @@ You can migrate existing registries to the metadata database, and use online gar
 
 Some database-enabled features are only enabled for GitLab.com and automatic database provisioning for
 the registry database is not available. Review the feature support section in the
-[administration documentation](https://docs.gitlab.com/ee/administration/packages/container_registry_metadata_database.html#metadata-database-feature-support)
+[administration documentation](https://docs.gitlab.com/administration/packages/container_registry_metadata_database/#metadata-database-feature-support)
 for the status of features related to the container registry database.
 
 ## Create the database
@@ -116,7 +116,7 @@ For a list of import times for various test and user registries, see [this table
 
 ### Before you start
 
-Read the [before you start](https://docs.gitlab.com/ee/administration/packages/container_registry_metadata_database.html#before-you-start)
+Read the [before you start](https://docs.gitlab.com/administration/packages/container_registry_metadata_database/#before-you-start)
 section of the Registry administration guide.
 
 ### New installations

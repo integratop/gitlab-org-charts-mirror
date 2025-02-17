@@ -34,7 +34,7 @@ Follow these steps for backing up a GitLab Helm chart based installation.
    kubectl exec <Toolbox pod name> -it -- backup-utility
    ```
 
-1. Visit the `gitlab-backups` bucket in the object storage service and ensure a tarball has been added. It will be named in `<timestamp>_gitlab_backup.tar` format. Read what the [backup timestamp](https://docs.gitlab.com/ee/administration/backup_restore/backup_gitlab.html#backup-timestamp) is about.
+1. Visit the `gitlab-backups` bucket in the object storage service and ensure a tarball has been added. It will be named in `<timestamp>_gitlab_backup.tar` format. Read what the [backup timestamp](https://docs.gitlab.com/administration/backup_restore/backup_gitlab/#backup-timestamp) is about.
 
 1. This tarball is required for restoration.
 
@@ -65,7 +65,7 @@ The backup utility can take some extra arguments.
 
 ### Skipping components
 
-Skip components by using the `--skip` argument. Valid components names can be found at [Excluding specific data from the backup](https://docs.gitlab.com/ee/administration/backup_restore/backup_gitlab.html#excluding-specific-data-from-the-backup).
+Skip components by using the `--skip` argument. Valid components names can be found at [Excluding specific data from the backup](https://docs.gitlab.com/administration/backup_restore/backup_gitlab/#excluding-specific-data-from-the-backup).
 
 Each component must have its own `--skip` argument. For example:
 
@@ -145,7 +145,7 @@ backups can be configured so that the Gitaly node that hosts each repository is
 responsible for creating the backup and streaming it to object storage. This
 helps reduce the network resources required to create and restore a backup.
 
-See [Create server-side repository backups](https://docs.gitlab.com/ee/administration/backup_restore/backup_gitlab.html#create-server-side-repository-backups).
+See [Create server-side repository backups](https://docs.gitlab.com/administration/backup_restore/backup_gitlab/#create-server-side-repository-backups).
 
 ### Other arguments
 

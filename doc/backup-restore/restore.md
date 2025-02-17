@@ -14,7 +14,7 @@ title: Restoring a GitLab installation
 
 To obtain a backup tarball of an existing GitLab instance that used other installation methods like the Linux
 package or GitLab Helm chart, follow the instructions
-[given in documentation](https://docs.gitlab.com/ee/administration/backup_restore/backup_gitlab.html).
+[given in documentation](https://docs.gitlab.com/administration/backup_restore/backup_gitlab/).
 
 If you are restoring a backup taken from another instance, you must migrate your existing instance to using object storage
 before taking the backup. See [issue 646](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/646).
@@ -105,7 +105,7 @@ The steps for restoring a GitLab installation are
    kubectl get pods -lrelease=RELEASE_NAME,app=toolbox
    ```
 
-1. Get the tarball ready in any of the above locations. Make sure it is named in the `<timestamp>_gitlab_backup.tar` format. Read what the [backup timestamp](https://docs.gitlab.com/ee/administration/backup_restore/backup_gitlab.html#backup-timestamp) is about.
+1. Get the tarball ready in any of the above locations. Make sure it is named in the `<timestamp>_gitlab_backup.tar` format. Read what the [backup timestamp](https://docs.gitlab.com/administration/backup_restore/backup_gitlab/#backup-timestamp) is about.
 
 1. Note the current number of replicas for database clients for subsequent restart:
 
@@ -164,7 +164,7 @@ Follow these [troubleshooting steps](../troubleshooting/_index.md#included-gitla
 ## Enable Kubernetes related settings
 
 If the restored backup was not from an existing installation of the chart, you will also need to enable some Kubernetes specific features after the restore. Such as
-[incremental CI job logging](https://docs.gitlab.com/ee/administration/job_logs.html#new-incremental-logging-architecture).
+[incremental CI job logging](https://docs.gitlab.com/administration/job_logs/#new-incremental-logging-architecture).
 
 1. Find your Toolbox pod by executing the following command
 

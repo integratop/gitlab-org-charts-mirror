@@ -259,7 +259,7 @@ kubectl create secret generic <name>-rails-secret --from-file=secrets.yml
 This secret is referenced by the `global.railsSecrets.secret` setting.
 
 It is **not recommended**  to rotate this secret as it contains the database encryption keys. If the secret is
-rotated, the result will be the same behavior exhibited [when the secrets file is lost](https://docs.gitlab.com/ee/administration/backup_restore/backup_gitlab.html#when-the-secrets-file-is-lost).
+rotated, the result will be the same behavior exhibited [when the secrets file is lost](https://docs.gitlab.com/administration/backup_restore/backup_gitlab/#when-the-secrets-file-is-lost).
 
 ### GitLab Workhorse secret
 
@@ -443,7 +443,7 @@ Some charts have further secrets to enable functionality that can not be automat
 
 ### OmniAuth
 
-In order to enable the use of [OmniAuth Providers](https://docs.gitlab.com/ee/integration/omniauth.html) with the deployed GitLab, please follow the [instructions in the Globals chart](../charts/globals.md#omniauth)
+In order to enable the use of [OmniAuth Providers](https://docs.gitlab.com/integration/omniauth/) with the deployed GitLab, please follow the [instructions in the Globals chart](../charts/globals.md#omniauth)
 
 ### LDAP Password
 
@@ -484,7 +484,7 @@ Use the `Secret` name, not the _actual password_ when configuring the Helm prope
 GitLab uses authentication strings such as app passwords, tokens, or IMAP
 passwords to access incoming emails.
 
-[Find your email provider in the GitLab incoming email documentation](https://docs.gitlab.com/ee/administration/incoming_email.html)
+[Find your email provider in the GitLab incoming email documentation](https://docs.gitlab.com/administration/incoming_email/)
 and set its required authentication string as a Kubernetes secret.
 
 ```shell
@@ -504,9 +504,9 @@ Use the `Secret` name, not the _actual password_ when configuring the Helm prope
 
 GitLab uses authentication strings such as app passwords, tokens, or IMAP
 passwords to access
-[Service Desk emails](https://docs.gitlab.com/ee/user/project/service_desk/configure.html#custom-email-address).
+[Service Desk emails](https://docs.gitlab.com/user/project/service_desk/configure/#custom-email-address).
 
-[Find your email provider in the GitLab incoming email documentation](https://docs.gitlab.com/ee/administration/incoming_email.html)
+[Find your email provider in the GitLab incoming email documentation](https://docs.gitlab.com/administration/incoming_email/)
 and set its required authentication string as a Kubernetes secret.
 
 ```shell
@@ -561,7 +561,7 @@ This secret is referenced by the `gitlab.zoekt.gateway.basicAuth.secretName` set
 
 ### Microsoft Graph client secret for incoming emails
 
-To let GitLab have access to [incoming emails](https://docs.gitlab.com/ee/administration/incoming_email.html)
+To let GitLab have access to [incoming emails](https://docs.gitlab.com/administration/incoming_email/)
 store the password of the IMAP account in a Kubernetes secret:
 
 ```shell
@@ -579,7 +579,7 @@ Use the `Secret` name, not the _actual password_ when configuring the Helm prope
 
 ### Microsoft Graph client secret for Service Desk emails
 
-To let GitLab have access to [service_desk emails](https://docs.gitlab.com/ee/user/project/service_desk/configure.html#custom-email-address)
+To let GitLab have access to [service_desk emails](https://docs.gitlab.com/user/project/service_desk/configure/#custom-email-address)
 store the password of the IMAP account in a Kubernetes secret:
 
 ```shell
@@ -633,7 +633,7 @@ secret that contains the S/MIME certificate.
 
 ### Smartcard Authentication
 
-[Smartcard authentication](https://docs.gitlab.com/ee/administration/auth/smartcard.html)
+[Smartcard authentication](https://docs.gitlab.com/administration/auth/smartcard/)
 uses a custom Certificate Authority (CA) to sign client certificates. The
 certificate of this custom CA needs to be injected to the Webservice pod for it
 to verify whether a client certificate is valid or not. This is provided as a

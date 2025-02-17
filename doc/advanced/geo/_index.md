@@ -13,13 +13,13 @@ the use of the [Linux package](https://docs.gitlab.com/omnibus/) for PostgreSQL 
 most platform agnostic guide, and make use of the automation included in `gitlab-ctl`.
 
 In this guide, both clusters have the same external URL. This feature is supported by the chart
-since version 7.3. See [Set up a Unified URL for Geo sites](https://docs.gitlab.com/ee/administration/geo/secondary_proxy/index.html#set-up-a-unified-url-for-geo-sites). You can optionally [configure a separate URL for the secondary site](#configure-a-separate-url-for-the-secondary-site-optional).
+since version 7.3. See [Set up a Unified URL for Geo sites](https://docs.gitlab.com/administration/geo/secondary_proxy/#set-up-a-unified-url-for-geo-sites). You can optionally [configure a separate URL for the secondary site](#configure-a-separate-url-for-the-secondary-site-optional).
 
-For known issues, see the [Geo documentation](https://docs.gitlab.com/ee/administration/geo/#known-issues).
+For known issues, see the [Geo documentation](https://docs.gitlab.com/administration/geo/#known-issues).
 
 {{< alert type="note" >}}
 
-See the [defined terms](https://docs.gitlab.com/ee/administration/geo/glossary.html)
+See the [defined terms](https://docs.gitlab.com/administration/geo/glossary/)
 to describe all aspects of Geo (mainly the distinction between `site` and `node`).
 
 {{< /alert >}}
@@ -39,7 +39,7 @@ To use GitLab Geo with the GitLab Helm chart, the following requirements must be
   - Support SSL between primary and secondary database nodes.
 - The primary site must be reachable via HTTP(S) by all secondary sites.
   Secondary sites must be accessible to the primary site via HTTP(S).
-- See [requirements for running Geo](https://docs.gitlab.com/ee/administration/geo/#requirements-for-running-geo) for the full list of requirements.
+- See [requirements for running Geo](https://docs.gitlab.com/administration/geo/#requirements-for-running-geo) for the full list of requirements.
 
 ## Overview
 
@@ -48,7 +48,7 @@ configuring only the PostgreSQL services needed, and 2 deployments of the
 GitLab Helm chart. It is intended to be the _minimal_ required configuration.
 This documentation does not include SSL from application to database, support
 for other database providers, or
-[promoting a secondary site to primary](https://docs.gitlab.com/ee/administration/geo/disaster_recovery/).
+[promoting a secondary site to primary](https://docs.gitlab.com/administration/geo/disaster_recovery/).
 
 The outline below should be followed in order:
 
@@ -80,7 +80,7 @@ Bear in mind that communication is required:
   - The primary needs to expose TCP port `5432`.
   - The secondary needs to expose TCP ports `5432` & `5431`.
 
-Install an [operating system supported by the Linux package](https://docs.gitlab.com/ee/install/requirements.html#operating-systems), and then
+Install an [operating system supported by the Linux package](https://docs.gitlab.com/install/requirements/#operating-systems), and then
 [install the Linux package](https://about.gitlab.com/install/) onto it. Do not provide the
 `EXTERNAL_URL` environment variable when installing, as we'll provide a minimal
 configuration file before reconfiguring the package.
@@ -192,7 +192,7 @@ We must replace several items:
 - `external_url` must be updated to reflect the host name of our Primary site.
 - `gitlab_rails['geo_node_name']` must be replaced with a unique name for your
   site. See the Name field in
-  [Common settings](https://docs.gitlab.com/ee/administration/geo_sites.html#common-settings).
+  [Common settings](https://docs.gitlab.com/administration/geo_sites/#common-settings).
 - `gitlab_user_password_hash` must be replaced with the hashed form of the
   `gitlab` password.
 - `postgresql['md5_auth_cidr_addresses']` can be update to be a list of
@@ -282,7 +282,7 @@ To deploy this chart as a Geo Primary, start [from this example configuration](h
    - [`global.hosts.domain`](../../charts/globals.md#configure-host-settings)
    - [`global.psql.host`](../../charts/globals.md#configure-postgresql-settings)
    - `global.geo.nodeName` must match
-     [the Name field of a Geo site in the Admin Area](https://docs.gitlab.com/ee/administration/geo_sites.html#common-settings)
+     [the Name field of a Geo site in the Admin Area](https://docs.gitlab.com/administration/geo_sites/#common-settings)
    - Set [`nginx-ingress-geo.enabled`](../../charts/nginx/_index.md#gitlab-geo) to enable an Ingress controller
      for Geo traffic forwarded from secondaries.
    - Configure the primary Geo site's [`gitlab.webservice`](../../charts/gitlab/webservice/_index.md#ingress-settings) Ingresses for Geo traffic.
@@ -308,7 +308,7 @@ This assumes you are using the `gitlab` namespace. If you want to use a differen
 1. Wait for the deployment to complete, and the application to come online. When
    the application is reachable, log in.
 
-1. Sign in to GitLab, and [activate your GitLab subscription](https://docs.gitlab.com/ee/administration/license.html).
+1. Sign in to GitLab, and [activate your GitLab subscription](https://docs.gitlab.com/administration/license/).
 
    {{< alert type="note" >}}
 
@@ -429,7 +429,7 @@ gitlab_rails['db_password']='gitlab_user_password'
 We must replace several items:
 
 - `gitlab_rails['geo_node_name']` must be replaced with a unique name for your site. See the Name field in
-  [Common settings](https://docs.gitlab.com/ee/administration/geo_sites.html#common-settings).
+  [Common settings](https://docs.gitlab.com/administration/geo_sites/#common-settings).
 - `gitlab_user_password_hash` must be replaced with the hashed form of the
   `gitlab` password.
 - `postgresql['md5_auth_cidr_addresses']` should be updated to be a list of
@@ -625,7 +625,7 @@ To deploy this chart as a Geo Secondary site, start [from this example configura
    - [`global.psql.host`](../../charts/globals.md#configure-postgresql-settings)
    - [`global.geo.psql.host`](../../charts/globals.md#configure-postgresql-settings)
    - `global.geo.nodeName` must match
-     [the Name field of a Geo site in the Admin Area](https://docs.gitlab.com/ee/administration/geo_sites.html#common-settings)
+     [the Name field of a Geo site in the Admin Area](https://docs.gitlab.com/administration/geo_sites/#common-settings)
    - Optionally set `nginx-ingress-geo.enabled` to enable an ingress controller pre-configured for internal Geo traffic.
      [This makes it easier to promote the site to a primary.](../../charts/nginx/_index.md#gitlab-geo).
    - Configure an extra Ingress for [gitlab.webservice](../../charts/gitlab/webservice/_index.md#ingress-settings) to handle
@@ -770,7 +770,7 @@ In some cases, you may want to give users control over which site they visit. Fo
 ## Registry
 
 To sync the secondary registry with the primary registry you can configure
-[registry replication](https://docs.gitlab.com/ee/administration/geo/replication/container_registry.html#configure-container-registry-replication)
+[registry replication](https://docs.gitlab.com/administration/geo/replication/container_registry/#configure-container-registry-replication)
 using a  [notification secret](../../charts/registry/_index.md#notification-secret).
 
 ## Cert-manager and unified URL

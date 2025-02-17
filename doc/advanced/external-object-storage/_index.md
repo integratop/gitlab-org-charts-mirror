@@ -24,7 +24,7 @@ This documentation specifies usage of access and secret keys for AWS. It is also
 ## S3 encryption
 
 GitLab supports [Amazon KMS](https://aws.amazon.com/kms/)
-to [encrypt data stored in S3 buckets](https://docs.gitlab.com/ee/administration/object_storage.html#encrypted-s3-buckets).
+to [encrypt data stored in S3 buckets](https://docs.gitlab.com/administration/object_storage/#encrypted-s3-buckets).
 You can enable this in two ways:
 
 - In AWS, [configure the S3 bucket to use default encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html).
@@ -33,13 +33,13 @@ You can enable this in two ways:
 These two options are not mutually exclusive. You can set a default encryption
 policy, but also enable server-side encryption headers to override those defaults.
 
-See the [GitLab documentation on encrypted S3 buckets](https://docs.gitlab.com/ee/administration/object_storage.html#encrypted-s3-buckets)
+See the [GitLab documentation on encrypted S3 buckets](https://docs.gitlab.com/administration/object_storage/#encrypted-s3-buckets)
 for more details.
 
 ## Azure Blob Storage
 
 Direct support for Azure Blob storage is available for
-[uploaded attachments, CI job artifacts, LFS, and other object types supported via the consolidated settings](https://docs.gitlab.com/ee/administration/object_storage.html#storage-specific-configuration). In previous GitLab versions, an [Azure MinIO gateway](azure-minio-gateway.md) was needed.
+[uploaded attachments, CI job artifacts, LFS, and other object types supported via the consolidated settings](https://docs.gitlab.com/administration/object_storage/#storage-specific-configuration). In previous GitLab versions, an [Azure MinIO gateway](azure-minio-gateway.md) was needed.
 
 {{< alert type="note" >}}
 
@@ -362,5 +362,5 @@ To use Cloud CDN:
 ### Azure Blob: URL \[FILTERED] is blocked: Requests to the local network are not allowed
 
 This happens when the Azure Blob hostname is resolved to a [RFC1918 (local / private) IP address](https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints#dns-changes-for-private-endpoints). As a workaround,
-allow [Outbound requests](https://docs.gitlab.com/ee/security/webhooks.html#allowlist-for-local-requests)
+allow [Outbound requests](https://docs.gitlab.com/security/webhooks/#allowlist-for-local-requests)
 for your Azure Blob hostname (`yourinstance.blob.core.windows.net`).

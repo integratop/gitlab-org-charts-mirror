@@ -276,7 +276,7 @@ GitLab is using two database connections: one for `main` database and one for
 `ci`. By default, they point to the same PostgreSQL database.
 
 The values under `global.psql` are defaults and are applied to both database
-configurations. If you want to use [two databases](https://docs.gitlab.com/ee/administration/postgresql/multiple_databases.html),
+configurations. If you want to use [two databases](https://docs.gitlab.com/administration/postgresql/multiple_databases/),
 you can specifiy the connection details in `global.psql.main` and `global.psql.ci`.
 
 ```yaml
@@ -391,7 +391,7 @@ This feature requires the use of an
 deploy PostgreSQL in an HA fashion.
 
 The Rails components in GitLab have the ability to
-[make use of PostgreSQL clusters to load balance read-only queries](https://docs.gitlab.com/ee/administration/postgresql/database_load_balancing.html).
+[make use of PostgreSQL clusters to load balance read-only queries](https://docs.gitlab.com/administration/postgresql/database_load_balancing/).
 
 This feature can be configured in two fashions:
 
@@ -412,8 +412,8 @@ global:
 
 Configuration of service discovery can be more complex. For a complete
 details of this configuration, the parameters and their associated
-behaviors, see [Service Discovery](https://docs.gitlab.com/ee/administration/postgresql/database_load_balancing.html#service-discovery)
-in the [GitLab Administration documentation](https://docs.gitlab.com/ee/administration/index.html).
+behaviors, see [Service Discovery](https://docs.gitlab.com/administration/postgresql/database_load_balancing/#service-discovery)
+in the [GitLab Administration documentation](https://docs.gitlab.com/administration/).
 
 ```yaml
 global:
@@ -432,7 +432,7 @@ global:
 ```
 
 Further tuning is also available, in regards to the
-[handling of stale reads](https://docs.gitlab.com/ee/administration/postgresql/database_load_balancing.html#handling-stale-reads).
+[handling of stale reads](https://docs.gitlab.com/administration/postgresql/database_load_balancing/#handling-stale-reads).
 The GitLab Administration documentation covers these items in detail,
 and those properties can be added directly under `load_balancing`.
 
@@ -868,7 +868,7 @@ Administrators can chose to use Gitaly nodes in the following ways:
 - [External to the chart](#external), as external pets.
 - [Mixed environment](#mixed) using both internal and external nodes.
 
-See [Repository Storage Paths](https://docs.gitlab.com/ee/administration/repository_storage_paths.html)
+See [Repository Storage Paths](https://docs.gitlab.com/administration/repository_storage_paths/)
 documentation for details on managing which nodes will be used for new projects.
 
 If `gitaly.host` is provided, `gitaly.internal` and `gitaly.external` properties will *be ignored*.
@@ -881,14 +881,14 @@ See [issue #1992](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/1992) for
 #### Internal
 
 The `internal` key currently consists of only one key, `names`, which is a list of
-[storage names](https://docs.gitlab.com/ee/administration/repository_storage_paths.html)
+[storage names](https://docs.gitlab.com/administration/repository_storage_paths/)
 to be managed by the chart. For each listed name, *in logical order*, one pod will
 be spawned, named `${releaseName}-gitaly-${ordinal}`, where `ordinal` is the index
 within the `names` list. If dynamic provisioning is enabled, the `PersistentVolumeClaim`
 will match.
 
 This list defaults to `['default']`, which provides for 1 pod related to one
-[storage path](https://docs.gitlab.com/ee/administration/repository_storage_paths.html).
+[storage path](https://docs.gitlab.com/administration/repository_storage_paths/).
 
 Manual scaling of this item is required, by adding or removing entries in
 `gitaly.internal.names`. When scaling down, any repository that has not been moved
@@ -905,8 +905,8 @@ can be found in the examples folder.
 The `external` key provides a configuration for Gitaly nodes external to the cluster.
 Each item of this list has 3 keys:
 
-- `name`: The name of the [storage](https://docs.gitlab.com/ee/administration/repository_storage_paths.html).
-  An entry with [`name: default` is required](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#gitlab-requires-a-default-repository-storage).
+- `name`: The name of the [storage](https://docs.gitlab.com/administration/repository_storage_paths/).
+  An entry with [`name: default` is required](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#gitlab-requires-a-default-repository-storage).
 - `hostname`: The host of Gitaly services.
 - `port`: (optional) The port number to reach the host on. Defaults to `8075`.
 - `tlsEnabled`: (optional) Override `global.gitaly.tls.enabled` for this particular entry.
@@ -916,7 +916,7 @@ We provide an [advanced configuration](../advanced/_index.md) guide for
 find sample [configuration of multiple external services](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/examples/gitaly/values-multiple-external.yaml)
 in the examples folder.
 
-You may use an external [Praefect](https://docs.gitlab.com/ee/administration/gitaly/praefect.html)
+You may use an external [Praefect](https://docs.gitlab.com/administration/gitaly/praefect/)
 to provide highly available Gitaly services. Configuration of the two is
 interchangeable, as from the viewpoint of the clients, there is no difference.
 
@@ -924,7 +924,7 @@ interchangeable, as from the viewpoint of the clients, there is no difference.
 
 It is possible to use both internal and external Gitaly nodes, but be aware that:
 
-- There [must always be a node named `default`](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#gitlab-requires-a-default-repository-storage), which Internal provides by default.
+- There [must always be a node named `default`](https://docs.gitlab.com/administration/gitaly/configure_gitaly/#gitlab-requires-a-default-repository-storage), which Internal provides by default.
 - External nodes will be populated first, then Internal.
 
 A sample [configuration of mixed internal and external nodes](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/examples/gitaly/values-multiple-mixed.yaml)
@@ -961,7 +961,7 @@ Praefect is disabled by default. When enabled with no extra settings, 3 Gitaly r
 
 To enable Praefect with default settings, set `global.praefect.enabled=true`.
 
-See the [Praefect documentation](https://docs.gitlab.com/ee/administration/gitaly/praefect.html) for details on how to operate a Gitaly cluster using Praefect.
+See the [Praefect documentation](https://docs.gitlab.com/administration/gitaly/praefect/) for details on how to operate a Gitaly cluster using Praefect.
 
 ### Global settings for Praefect
 
@@ -980,7 +980,7 @@ global:
 | Name            | Type    | Default     | Description                                                        |
 | ----            | ----    | -------     | -----------                                                        |
 | enabled         | Boolean    | false       | Whether or not to enable Praefect                                  |
-| virtualStorages | List    | See [multiple virtual storages](https://docs.gitlab.com/ee/administration/gitaly/praefect.html#multiple-virtual-storages) above.  | The list of desired virtual storages (each backed by a Gitaly StatefulSet) |
+| virtualStorages | List    | See [multiple virtual storages](https://docs.gitlab.com/administration/gitaly/praefect/#multiple-virtual-storages) above.  | The list of desired virtual storages (each backed by a Gitaly StatefulSet) |
 | dbSecret.secret | String  |             | The name of the secret to use for authenticating with the database |
 | dbSecret.key    | String  |             | The name of the key in `dbSecret.secret` to use                    |
 | psql.host       | String  |             | The hostname of the database server to use (when using an external database) |
@@ -1163,18 +1163,18 @@ application are described below:
 |:----------------------------------- |:-------:|:------- |:----------- |
 | `cdnHost`                           | String  | (empty) | Sets a base URL for a CDN to serve static assets (for example, `https://mycdnsubdomain.fictional-cdn.com`). |
 | `contentSecurityPolicy`             | Struct  |         | [See below](#content-security-policy). |
-| `enableUsagePing`                   | Boolean | `true`  | A flag to disable the [usage ping support](https://docs.gitlab.com/ee/administration/settings/usage_statistics.html). |
-| `enableSeatLink`                    | Boolean | `true`  | A flag to disable the [seat link support](https://docs.gitlab.com/ee/subscriptions/#seat-link). |
-| `enableImpersonation`               |         | `nil`   | A flag to disable [user impersonation by Administrators](https://docs.gitlab.com/ee/api/index.html#disable-impersonation). |
-| `applicationSettingsCacheSeconds`   | Integer | 60      | An interval value (in seconds) to invalidate the [application settings cache](https://docs.gitlab.com/ee/administration/application_settings_cache.html). |
+| `enableUsagePing`                   | Boolean | `true`  | A flag to disable the [usage ping support](https://docs.gitlab.com/administration/settings/usage_statistics/). |
+| `enableSeatLink`                    | Boolean | `true`  | A flag to disable the [seat link support](https://docs.gitlab.com/subscriptions/#seat-link). |
+| `enableImpersonation`               |         | `nil`   | A flag to disable [user impersonation by Administrators](https://docs.gitlab.com/api/#disable-impersonation). |
+| `applicationSettingsCacheSeconds`   | Integer | 60      | An interval value (in seconds) to invalidate the [application settings cache](https://docs.gitlab.com/administration/application_settings_cache/). |
 | `usernameChangingEnabled`           | Boolean | `true`  | A flag to decide if users are allowed to change their username. |
-| `issueClosingPattern`               | String  | (empty) | [Pattern to close issues automatically](https://docs.gitlab.com/ee/administration/issue_closing_pattern.html). |
+| `issueClosingPattern`               | String  | (empty) | [Pattern to close issues automatically](https://docs.gitlab.com/administration/issue_closing_pattern/). |
 | `defaultTheme`                      | Integer |         | [Numeric ID of the default theme for the GitLab instance](https://gitlab.com/gitlab-org/gitlab-foss/blob/master/lib/gitlab/themes.rb#L17-27). It takes a number, denoting the ID of the theme. |
 | `defaultColorMode`                  | Integer |         | [Default color mode for the GitLab instance](https://gitlab.com/gitlab-org/gitlab/-/blob/66788a1de8c3dd3c5566d0f30fe1c2a1bae64bf9/lib/gitlab/color_modes.rb#L17-19). It takes a number, denoting the ID of the color mode. |
 | `defaultSyntaxHighlightingTheme`    | Integer |         | [Default syntax highlighting theme for the GitLab instance](https://gitlab.com/gitlab-org/gitlab/-/blob/66788a1de8c3dd3c5566d0f30fe1c2a1bae64bf9/lib/gitlab/color_schemes.rb#L12-17). It takes a number, denoting the ID of the syntax highlighting theme. |
 | `defaultProjectsFeatures.*feature*` | Boolean | `true`  | [See below](#defaultprojectsfeatures). |
-| `webhookTimeout`                    | Integer | (empty) | Waiting time in seconds before a [hook is deemed to have failed](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#webhook-fails-or-multiple-webhook-requests-are-triggered). |
-| `graphQlTimeout`                    | Integer | (empty) | Time in seconds the Rails has to [complete a GraphQL request](https://docs.gitlab.com/ee/api/graphql/#limits). |
+| `webhookTimeout`                    | Integer | (empty) | Waiting time in seconds before a [hook is deemed to have failed](https://docs.gitlab.com/user/project/integrations/webhooks/#webhook-fails-or-multiple-webhook-requests-are-triggered). |
+| `graphQlTimeout`                    | Integer | (empty) | Time in seconds the Rails has to [complete a GraphQL request](https://docs.gitlab.com/api/graphql/#limits). |
 
 #### Content Security Policy
 
@@ -1234,8 +1234,8 @@ However, a custom Libravatar service can also be used if needed:
 
 | Name                | Type   | Default | Description |
 |:------------------- |:------:|:------- |:----------- |
-| `gravatar.plainURL` | String | (empty) | [HTTP URL to Libravatar instance (instead of using gravatar.com)](https://docs.gitlab.com/ee/administration/libravatar.html). |
-| `gravatar.sslUrl`   | String | (empty) | [HTTPS URL to Libravatar instance (instead of using gravatar.com)](https://docs.gitlab.com/ee/administration/libravatar.html). |
+| `gravatar.plainURL` | String | (empty) | [HTTP URL to Libravatar instance (instead of using gravatar.com)](https://docs.gitlab.com/administration/libravatar/). |
+| `gravatar.sslUrl`   | String | (empty) | [HTTPS URL to Libravatar instance (instead of using gravatar.com)](https://docs.gitlab.com/administration/libravatar/). |
 
 ### Hooking Analytics services to the GitLab instance
 
@@ -1321,7 +1321,7 @@ You can use these defaults or configure the bucket names:
 #### storage_options
 
 The `storage_options` are used to configure
-[S3 Server Side Encryption](https://docs.gitlab.com/ee/administration/object_storage.html#server-side-encryption-headers).
+[S3 Server Side Encryption](https://docs.gitlab.com/administration/object_storage/#server-side-encryption-headers).
 
 Setting a default encryption on an S3 bucket is the easiest way to
 enable encryption, but you may want to
@@ -1379,7 +1379,7 @@ This property has two sub-keys: `secret` and `key`.
 - `secret` is the name of a Kubernetes Secret. This value is required to use external object storage.
 - `key` is the name of the key in the secret which houses the YAML block. Defaults to `connection`.
 
-Valid configuration keys can be found in the [GitLab Job Artifacts Administration](https://docs.gitlab.com/ee/administration/cicd/secure_files.html#s3-compatible-connection-settings)
+Valid configuration keys can be found in the [GitLab Job Artifacts Administration](https://docs.gitlab.com/administration/cicd/secure_files/#s3-compatible-connection-settings)
 documentation. This matches to [Fog](https://github.com/fog/fog.github.com), and is different between
 provider modules.
 
@@ -1401,7 +1401,7 @@ kubectl create secret generic gitlab-rails-storage \
 #### when (only for External MR Diffs)
 
 `externalDiffs` setting has an additional key `when` to
-[conditionally store specific diffs on object storage](https://docs.gitlab.com/ee/administration/merge_request_diffs.html#alternative-in-database-storage).
+[conditionally store specific diffs on object storage](https://docs.gitlab.com/administration/merge_request_diffs/#alternative-in-database-storage).
 This setting is left empty by default in the charts, for a default value to be
 assigned by the Rails code.
 
@@ -1549,7 +1549,7 @@ If you'd like to customize the secret value, refer to the [secrets documentation
 
 ### LDAP
 
-The `ldap.servers` setting allows for the configuration of [LDAP](https://docs.gitlab.com/ee/administration/auth/ldap/)
+The `ldap.servers` setting allows for the configuration of [LDAP](https://docs.gitlab.com/administration/auth/ldap/)
 user authentication. It is presented as a map, which will be translated into the appropriate
 LDAP servers configuration in `gitlab.yml`, as with an installation from source.
 
@@ -1600,7 +1600,7 @@ within Helm `--set` items. Be sure to escape commas in values such as `bind_dn`:
 
 It can be useful to prevent using LDAP credentials through the web UI when an alternative such as SAML is preferred. This allows LDAP to be used for group sync, while also allowing your SAML identity provider to handle additional checks like custom 2FA.
 
-When LDAP web sign in is disabled, users will not see a LDAP tab on the sign in page. This does not disable [using LDAP credentials for Git access.](https://docs.gitlab.com/ee/administration/auth/ldap/#git-password-authentication)
+When LDAP web sign in is disabled, users will not see a LDAP tab on the sign in page. This does not disable [using LDAP credentials for Git access.](https://docs.gitlab.com/administration/auth/ldap/#git-password-authentication)
 
 To disable the use of LDAP for web sign-in, set `global.appConfig.ldap.preventSignin: true`.
 
@@ -1645,7 +1645,7 @@ See [Custom Certificate Authorities](#custom-certificate-authorities) for more i
 
 ### DuoAuth
 
-Use these settings to enable [two-factor authentication (2FA) with GitLab Duo](https://docs.gitlab.com/ee/user/profile/account/two_factor_authentication.html#enable-one-time-password).
+Use these settings to enable [two-factor authentication (2FA) with GitLab Duo](https://docs.gitlab.com/user/profile/account/two_factor_authentication/#enable-one-time-password).
 
 ```yaml
 global:
@@ -1679,7 +1679,7 @@ kubectl create secret generic <secret_object_name> --from-literal=secretKey=<duo
 ### OmniAuth
 
 GitLab can leverage OmniAuth to allow users to sign in using GitHub, Google,
-and other popular services. Expanded documentation can be found in the [OmniAuth documentation](https://docs.gitlab.com/ee/integration/omniauth.html#configure-common-settings)
+and other popular services. Expanded documentation can be found in the [OmniAuth documentation](https://docs.gitlab.com/integration/omniauth/#configure-common-settings)
 for GitLab.
 
 ```yaml
@@ -1720,7 +1720,7 @@ omniauth:
 
 `providers` is presented as an array of maps that are used to populate `gitlab.yml`
 as when installed from source. See GitLab documentation for the available selection
-of [Supported Providers](https://docs.gitlab.com/ee/integration/omniauth.html#supported-providers).
+of [Supported Providers](https://docs.gitlab.com/integration/omniauth/#supported-providers).
 Defaults to `[]`.
 
 This property has two sub-keys: `secret` and `key`:
@@ -1733,11 +1733,11 @@ Alternatively, if the provider has no other configuration than its name, you may
 use a second form with only a 'name' attribute, and optionally a `label` or
 `icon` attribute. The eligible providers are:
 
-- [`group_saml`](https://docs.gitlab.com/ee/integration/saml.html#configure-group-saml-sso-on-a-self-managed-instance)
-- [`kerberos`](https://docs.gitlab.com/ee/integration/saml.html#configure-group-saml-sso-on-a-self-managed-instance)
+- [`group_saml`](https://docs.gitlab.com/integration/saml/#configure-group-saml-sso-on-a-self-managed-instance)
+- [`kerberos`](https://docs.gitlab.com/integration/saml/#configure-group-saml-sso-on-a-self-managed-instance)
 
 The `Secret` for these entries contains YAML or JSON formatted blocks, as described
-in [OmniAuth Providers](https://docs.gitlab.com/ee/integration/omniauth.html). To
+in [OmniAuth Providers](https://docs.gitlab.com/integration/omniauth/). To
 create this secret, follow the appropriate instructions for retrieval of these items,
 and create a YAML or JSON file.
 
@@ -1795,7 +1795,7 @@ omniauth:
     - secret: gitlab-cas3
 ```
 
-[Group SAML](https://docs.gitlab.com/ee/integration/saml.html#configuring-group-saml-on-a-self-managed-gitlab-instance) configuration example:
+[Group SAML](https://docs.gitlab.com/integration/saml/#configuring-group-saml-on-a-self-managed-gitlab-instance) configuration example:
 
 ```yaml
 omniauth:
@@ -1909,7 +1909,7 @@ The routing rules list is an ordered array of tuples of query and
 corresponding queue:
 
 - The query is following the
-  [worker matching query](https://docs.gitlab.com/ee/administration/sidekiq/processing_specific_job_classes.html#worker-matching-query) syntax.
+  [worker matching query](https://docs.gitlab.com/administration/sidekiq/processing_specific_job_classes/#worker-matching-query) syntax.
 - The `<queue_name>` must match a valid Sidekiq queue name `sidekiq.pods[].queues` defined under [`sidekiq.pods`](gitlab/sidekiq/_index.md#per-pod-settings). If the queue name
   is `nil`, or an empty string, the worker is routed to the queue generated
   by the name of the worker instead. See [Full example of Sidekiq configuration](gitlab/sidekiq/_index.md#full-example-of-sidekiq-configuration) as a reference.
@@ -2362,7 +2362,7 @@ global:
     urlTemplate: 'http://jaeger-ui.example.com/search?service={{ service }}&tags=%7B"correlation_id"%3A"{{ correlation_id }}"%7D'
 ```
 
-- `global.tracing.connection.string` is used to configure where tracing spans would be sent. You can read more about that in [GitLab tracing documentation](https://docs.gitlab.com/ee/development/distributed_tracing.html)
+- `global.tracing.connection.string` is used to configure where tracing spans would be sent. You can read more about that in [GitLab tracing documentation](https://docs.gitlab.com/development/distributed_tracing/)
 - `global.tracing.urlTemplate` is used as a template for tracing info URL rendering in GitLab performance bar.
 
 ## extraEnv
@@ -2455,7 +2455,7 @@ You can create a secret using the following snippet (assuming that you are insta
 kubectl create secret generic gitlab-kerberos-keytab --namespace=gitlab --from-file=keytab=./gitlab.keytab
 ```
 
-Kerberos integration for Git is enabled by setting `global.appConfig.kerberos.enabled=true`. This will also add the `kerberos` provider to the list of enabled [OmniAuth](https://docs.gitlab.com/ee/integration/omniauth.html) providers for ticket-based authentication in the browser.
+Kerberos integration for Git is enabled by setting `global.appConfig.kerberos.enabled=true`. This will also add the `kerberos` provider to the list of enabled [OmniAuth](https://docs.gitlab.com/integration/omniauth/) providers for ticket-based authentication in the browser.
 
 If left as `false` the Helm chart will still mount the `keytab` in the toolbox, Sidekiq, and webservice Pods, which can be used with manually configured [OmniAuth settings](#omniauth) for Kerberos.
 
@@ -2481,11 +2481,11 @@ global:
         - example.com
 ```
 
-Check the [Kerberos documentation](https://docs.gitlab.com/ee/integration/kerberos.html) for more details.
+Check the [Kerberos documentation](https://docs.gitlab.com/integration/kerberos/) for more details.
 
 ### Dedicated port for Kerberos
 
-GitLab supports the use of a [dedicated port for Kerberos negotiation](https://docs.gitlab.com/ee/integration/kerberos.html#http-git-access-with-kerberos-token-passwordless-authentication) when using the HTTP protocol for Git operations to workaround a limitation in Git falling back to Basic Authentication when presented with the `negotiate` headers in the authentication exchange.
+GitLab supports the use of a [dedicated port for Kerberos negotiation](https://docs.gitlab.com/integration/kerberos/#http-git-access-with-kerberos-token-passwordless-authentication) when using the HTTP protocol for Git operations to workaround a limitation in Git falling back to Basic Authentication when presented with the `negotiate` headers in the authentication exchange.
 
 Use of the dedicated port is currently required when using GitLab CI/CD - as the GitLab Runner helper relies on in-URL credentials to clone from GitLab.
 
@@ -2512,7 +2512,7 @@ Due to a current limitation with [our fork of the `nginx-ingress` Helm chart](ng
 
 ### LDAP custom allowed realms
 
-The `global.appConfig.kerberos.simpleLdapLinkingAllowedRealms` can be used to specify a set of domains used to link LDAP and Kerberos identities together when a user's LDAP DN does not match the user's Kerberos realm. See the [Custom allowed realms section in the Kerberos integration documentation](https://docs.gitlab.com/ee/integration/kerberos.html#custom-allowed-realms) for additional details.
+The `global.appConfig.kerberos.simpleLdapLinkingAllowedRealms` can be used to specify a set of domains used to link LDAP and Kerberos identities together when a user's LDAP DN does not match the user's Kerberos realm. See the [Custom allowed realms section in the Kerberos integration documentation](https://docs.gitlab.com/integration/kerberos/#custom-allowed-realms) for additional details.
 
 ## Outgoing email
 

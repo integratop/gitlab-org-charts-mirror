@@ -10,7 +10,7 @@ This document intends to provide documentation on how to configure this Helm cha
 If you don't have Redis configured, for on-premise or deployment to VM,
 consider using our [Linux package](external-omnibus-redis.md).
 
-For details about currently supported Redis versions, see [Installation system requirements](https://docs.gitlab.com/ee/install/requirements.html#redis).
+For details about currently supported Redis versions, see [Installation system requirements](https://docs.gitlab.com/install/requirements/#redis).
 
 ## Configure the chart
 
@@ -140,7 +140,7 @@ The flip side of the flexibility of `redisYmlOverride` is that it is less user f
 ### `ERR Error running script (call to f_5962bd591b624c0e0afce6631ff54e7e4402ebd8): @user_script:7: ERR syntax error`
 
 You might see this error in the logs of `webservice` and `sidekiq` pods if you use external Redis 5 with Helm chart 7.2 or later. Redis 5
-[is not supported](https://docs.gitlab.com/ee/install/requirements.html#redis).
+[is not supported](https://docs.gitlab.com/install/requirements/#redis).
 
 To fix it, upgrade your external Redis instance to 6.x or later.
 

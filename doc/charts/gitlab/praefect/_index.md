@@ -20,7 +20,7 @@ See our [Praefect GA release Epic](https://gitlab.com/groups/gitlab-org/charts/-
 
 {{< /alert >}}
 
-The Praefect chart is used to manage a [Gitaly cluster](https://docs.gitlab.com/ee/administration/gitaly/praefect.html) inside a GitLab installment deployed with the Helm charts.
+The Praefect chart is used to manage a [Gitaly cluster](https://docs.gitlab.com/administration/gitaly/praefect/) inside a GitLab installment deployed with the Helm charts.
 
 ## Known limitations and issues
 
@@ -56,7 +56,7 @@ global:
 
 ### Multiple virtual storages
 
-Multiple virtual storages can be configured (see [Gitaly Cluster](https://docs.gitlab.com/ee/administration/gitaly/praefect.html) documentation). For example:
+Multiple virtual storages can be configured (see [Gitaly Cluster](https://docs.gitlab.com/administration/gitaly/praefect/) documentation). For example:
 
 ```yaml
 global:
@@ -73,7 +73,7 @@ global:
 
 This will create two sets of resources for Gitaly. This includes two Gitaly StatefulSets (one per virtual storage).
 
-Administrators can then [configure where new repositories are stored](https://docs.gitlab.com/ee/administration/repository_storage_paths.html#configure-where-new-repositories-are-stored).
+Administrators can then [configure where new repositories are stored](https://docs.gitlab.com/administration/repository_storage_paths/#configure-where-new-repositories-are-stored).
 
 ### Persistence
 
@@ -104,7 +104,7 @@ global:
 
 ## defaultReplicationFactor
 
-`defaultReplicationFactor` can be configured on each virtual storages. (see [configure replication-factor](https://docs.gitlab.com/ee/administration/gitaly/praefect.html#configure-replication-factor) documentation).
+`defaultReplicationFactor` can be configured on each virtual storages. (see [configure replication-factor](https://docs.gitlab.com/administration/gitaly/praefect/#configure-replication-factor) documentation).
 
 ```yaml
 global:
@@ -125,7 +125,7 @@ global:
 
 {{< alert type="note" >}}
 
-Group wikis [cannot be moved by using the API](https://docs.gitlab.com/ee/api/project_repository_storage_moves.html).
+Group wikis [cannot be moved by using the API](https://docs.gitlab.com/api/project_repository_storage_moves/).
 
 {{< /alert >}}
 
@@ -151,7 +151,7 @@ therefore the name is already taken by the non-Praefect configuration.
 
 {{< /alert >}}
 
-The instructions to [migrate to Gitaly Cluster](https://docs.gitlab.com/ee/administration/gitaly/index.html#migrating-to-gitaly-cluster)
+The instructions to [migrate to Gitaly Cluster](https://docs.gitlab.com/administration/gitaly/#migrating-to-gitaly-cluster)
 can then be followed to move data from the `default` storage to `virtualStorage2`. If additional storages
 were defined under `global.gitaly.internal.names`, be sure to migrate repositories from those storages as well.
 
@@ -172,10 +172,10 @@ global:
       maxUnavailable: 2
 ```
 
-The instructions to [migrate to Gitaly Cluster](https://docs.gitlab.com/ee/administration/gitaly/index.html#migrating-to-gitaly-cluster)
+The instructions to [migrate to Gitaly Cluster](https://docs.gitlab.com/administration/gitaly/#migrating-to-gitaly-cluster)
 can be followed again to move data from `virtualStorage2` to the newly-added `default` storage if desired.
 
-Finally, see the [repository storage paths documentation](https://docs.gitlab.com/ee/administration/repository_storage_paths.html#choose-where-new-repositories-are-stored)
+Finally, see the [repository storage paths documentation](https://docs.gitlab.com/administration/repository_storage_paths/#choose-where-new-repositories-are-stored)
 to configure where new repositories are stored.
 
 ### Creating the database

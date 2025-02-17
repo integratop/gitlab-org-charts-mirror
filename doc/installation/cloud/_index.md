@@ -41,7 +41,7 @@ We welcome reports made to our [issue tracker](https://gitlab.com/gitlab-org/cha
 
 Some GitLab features might not work on deprecated releases or releases older than the releases listed above.
 
-For some components, like the [agent for Kubernetes](https://docs.gitlab.com/ee/user/clusters/agent/) and [GitLab Operator](https://docs.gitlab.com/operator/installation.html), GitLab might support different cluster releases.
+For some components, like the [agent for Kubernetes](https://docs.gitlab.com/user/clusters/agent/) and [GitLab Operator](https://docs.gitlab.com/operator/installation/), GitLab might support different cluster releases.
 
 {{< alert type="warning" >}}
 
@@ -52,7 +52,7 @@ See [issue 2899](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2899) for 
 {{< /alert >}}
 
 - For cluster topology recommendations for an environment, see the
-  [reference architectures](https://docs.gitlab.com/ee/administration/reference_architectures/#available-reference-architectures).
+  [reference architectures](https://docs.gitlab.com/administration/reference_architectures/#available-reference-architectures).
 - For an example of tuning the resources to fit in a 3 vCPU 12 GB cluster, see the
   [minimal GKE example values file](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/examples/values-gke-minimum.yaml).
 

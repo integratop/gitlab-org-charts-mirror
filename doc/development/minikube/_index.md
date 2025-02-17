@@ -62,8 +62,8 @@ change according to the pieces being tested, and the requirements as listed:
   The absolute same minimum is `6144` (6 GB). Recommendation is `10240` (10 GB).
 - `--disk-size string`: Disk size allocated to the minikube VM (format: `<number>[<unit>]`,
   where unit = `b`, `k`, `m` or `g`) (default `20g`). See the GitLab
-  [storage](https://docs.gitlab.com/ee/install/requirements.html#storage) and
-  [database](https://docs.gitlab.com/ee/install/requirements.html#database)
+  [storage](https://docs.gitlab.com/install/requirements/#storage) and
+  [database](https://docs.gitlab.com/install/requirements/#database)
   requirements.
 
   {{< alert type="note" >}}

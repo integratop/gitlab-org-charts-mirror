@@ -15,9 +15,9 @@ Prerequisites:
   consider [the Linux package](external-omnibus-psql.md).
 - An empty database named `gitlabhq_production` by default.
 - A user with full database access. See the
-  [external database documentation](https://docs.gitlab.com/ee/administration/postgresql/external.html) for details.
+  [external database documentation](https://docs.gitlab.com/administration/postgresql/external/) for details.
 - A [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the password for the database user.
-- The [`pg_trgm` and `btree_gist` extensions](https://docs.gitlab.com/ee/install/postgresql_extensions.html). If you don't provide an account with
+- The [`pg_trgm` and `btree_gist` extensions](https://docs.gitlab.com/install/postgresql_extensions/). If you don't provide an account with
   the Superuser flag to GitLab, ensure these extensions are loaded prior to
   proceeding with the database installation.
 

@@ -37,7 +37,7 @@ In a production deployment:
 - You should use Cloud PaaS for PostgreSQL, Redis, and object storage for all non-Git repository storage.
 
 If Kubernetes is not required for your GitLab instance, see the
-[reference architectures](https://docs.gitlab.com/ee/administration/reference_architectures/)
+[reference architectures](https://docs.gitlab.com/administration/reference_architectures/)
 for simpler alternatives.
 
 ## Configure the Helm chart to use external stateful data
@@ -49,21 +49,21 @@ The following Infrastructure as Code (IaC) options use this approach.
 
 For production-grade implementation, the appropriate chart parameters should be used to
 point to prebuilt, externalized state stores that align with the chosen
-[reference architecture](https://docs.gitlab.com/ee/administration/reference_architectures/).
+[reference architecture](https://docs.gitlab.com/administration/reference_architectures/).
 
 ### Use the reference architectures
 
-The reference architecture for deploying GitLab instances to Kubernetes is called [Cloud Native Hybrid](https://docs.gitlab.com/ee/administration/reference_architectures/#cloud-native-hybrid) specifically because not all GitLab services can run in the cluster for production-grade implementations. All stateful GitLab components must be deployed outside the Kubernetes cluster.
+The reference architecture for deploying GitLab instances to Kubernetes is called [Cloud Native Hybrid](https://docs.gitlab.com/administration/reference_architectures/#cloud-native-hybrid) specifically because not all GitLab services can run in the cluster for production-grade implementations. All stateful GitLab components must be deployed outside the Kubernetes cluster.
 
 Available Cloud Native Hybrid reference architectures sizes
-are listed at [Reference architectures](https://docs.gitlab.com/ee/administration/reference_architectures/#cloud-native-hybrid) page.
-For example, here is the [Cloud Native Hybrid reference architecture](https://docs.gitlab.com/ee/administration/reference_architectures/3k_users.html#cloud-native-hybrid-reference-architecture-with-helm-charts-alternative) for the 3,000 user count.
+are listed at [Reference architectures](https://docs.gitlab.com/administration/reference_architectures/#cloud-native-hybrid) page.
+For example, here is the [Cloud Native Hybrid reference architecture](https://docs.gitlab.com/administration/reference_architectures/3k_users/#cloud-native-hybrid-reference-architecture-with-helm-charts-alternative) for the 3,000 user count.
 
 ### Use Infrastructure as Code (IaC) and builder resources
 
 GitLab develops Infrastructure as Code that is capable of configuring the combination of Helm charts and supplemental cloud infrastructure:
 
 - [GitLab Environment Toolkit IaC](https://gitlab.com/gitlab-org/gitlab-environment-toolkit).
-- [Implementation pattern: Provision GitLab cloud native hybrid on AWS EKS](https://docs.gitlab.com/ee/solutions/cloud/aws/gitlab_instance_on_aws.html):
+- [Implementation pattern: Provision GitLab cloud native hybrid on AWS EKS](https://docs.gitlab.com/solutions/cloud/aws/gitlab_instance_on_aws/):
   This resource provides a Bill of Materials tested with the GitLab Performance Toolkit,
   and uses the AWS Cost Calculator for budgeting.

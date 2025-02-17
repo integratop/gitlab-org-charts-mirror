@@ -45,7 +45,7 @@ This chart makes use of two required secrets and one optional:
 
 - `global.registry.certificate.secret`: A global secret that will contain the public
   certificate bundle to verify the authentication tokens provided by the associated
-  GitLab instance(s). See [documentation](https://docs.gitlab.com/ee/administration/packages/container_registry.html#use-an-external-container-registry-with-gitlab-as-an-auth-endpoint)
+  GitLab instance(s). See [documentation](https://docs.gitlab.com/administration/packages/container_registry/#use-an-external-container-registry-with-gitlab-as-an-auth-endpoint)
   on using GitLab as an auth endpoint.
 - `global.registry.httpSecret.secret`: A global secret that will contain the
   [shared secret](https://distribution.github.io/distribution/about/configuration/#http) between registry pods.
@@ -853,7 +853,7 @@ found in [`examples/objectstorage`](https://gitlab.com/gitlab-org/charts/gitlab/
 
 For S3, make sure you give the correct
 [permissions for registry storage](https://distribution.github.io/distribution/storage-drivers/s3/#s3-permission-scopes). For more information about storage configuration, see
-[Container Registry storage driver](https://docs.gitlab.com/ee/administration/packages/container_registry.html#container-registry-storage-driver) in the administration documentation.
+[Container Registry storage driver](https://docs.gitlab.com/administration/packages/container_registry/#container-registry-storage-driver) in the administration documentation.
 
 Place the _contents_ of the `storage` block into the secret, and provide the following
 as items to the `storage` map:
@@ -876,7 +876,7 @@ kubectl create secret generic registry-storage \
     --from-file=gcs.json=example-project-382839-gcs-bucket.json
 ```
 
-You can [disable the redirect for the storage driver](https://docs.gitlab.com/ee/administration/packages/container_registry.html#disable-redirect-for-storage-driver),
+You can [disable the redirect for the storage driver](https://docs.gitlab.com/administration/packages/container_registry/#disable-redirect-for-storage-driver),
 ensuring that all traffic flows through the Registry service instead of redirecting to another backend:
 
 ```yaml
@@ -1008,14 +1008,14 @@ profiling:
 
 {{< history >}}
 
-- [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) feature.
+- [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/policy/development_stages_support/#beta) feature.
 - [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/423459) in GitLab 17.3.
 
 {{< /history >}}
 
 The `database` property is optional and enables the [metadata database](https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md#database).
 
-See the [administration documentation](https://docs.gitlab.com/ee/administration/packages/container_registry_metadata_database.html)
+See the [administration documentation](https://docs.gitlab.com/administration/packages/container_registry_metadata_database/)
 before enabling this feature.
 
 {{< alert type="note" >}}

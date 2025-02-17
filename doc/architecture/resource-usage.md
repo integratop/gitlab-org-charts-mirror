@@ -93,13 +93,13 @@ for details on what might happen if `gitlab.gitlab-shell.resources.limits.memory
 ### Webservice
 
 Webservice resources were analyzed during testing with the
-[10k reference architecture](https://docs.gitlab.com/ee/administration/reference_architectures/10k_users.html).
+[10k reference architecture](https://docs.gitlab.com/administration/reference_architectures/10k_users/).
 Notes can be found in the [Webservice resources documentation](../charts/gitlab/webservice/_index.md#resources).
 
 ### Sidekiq
 
 Sidekiq resources were analyzed during testing with the
-[10k reference architecture](https://docs.gitlab.com/ee/administration/reference_architectures/10k_users.html).
+[10k reference architecture](https://docs.gitlab.com/administration/reference_architectures/10k_users/).
 Notes can be found in the [Sidekiq resources documentation](../charts/gitlab/sidekiq/_index.md#resources).
 
 ### KAS

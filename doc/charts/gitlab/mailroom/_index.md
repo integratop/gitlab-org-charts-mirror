@@ -12,7 +12,7 @@ title: Using the Mailroom chart
 
 {{< /details >}}
 
-The Mailroom Chart handles [incoming email](https://docs.gitlab.com/ee/administration/incoming_email.html).
+The Mailroom Chart handles [incoming email](https://docs.gitlab.com/administration/incoming_email/).
 
 ## Configuration
 
@@ -192,7 +192,7 @@ To enable incoming e-mail for IMAP, provide details of your IMAP server
 and access credentials using the `global.appConfig.incomingEmail`
 settings.
 
-In addition, the [requirements for the IMAP email account](https://docs.gitlab.com/ee/administration/incoming_email.html)
+In addition, the [requirements for the IMAP email account](https://docs.gitlab.com/administration/incoming_email/)
 should be reviewed to ensure that the targeted IMAP account can be used
 by GitLab for receiving email. Several common email services are also
 documented on the same page to aid in setting up incoming email.
@@ -202,7 +202,7 @@ described in the [secrets guide](../../../installation/secrets.md#imap-password-
 
 ### Microsoft Graph
 
-See the [GitLab documentation on creating an Azure Active Directory application](https://docs.gitlab.com/ee/administration/incoming_email.html#microsoft-graph).
+See the [GitLab documentation on creating an Azure Active Directory application](https://docs.gitlab.com/administration/incoming_email/#microsoft-graph).
 
 Provide the tenant ID, client ID, and client secret. You can find details for these settings in the [command line options](../../../installation/command-line-options.md#incoming-email-configuration).
 
@@ -239,7 +239,7 @@ Create a Kubernetes secret containing IMAP password as described in the [secrets
 
 #### Microsoft Graph
 
-See the [GitLab documentation on creating an Azure Active Directory application](https://docs.gitlab.com/ee/administration/incoming_email.html#microsoft-graph).
+See the [GitLab documentation on creating an Azure Active Directory application](https://docs.gitlab.com/administration/incoming_email/#microsoft-graph).
 
 Provide the tenant ID, client ID, and client secret using the
 `global.appConfig.serviceDeskEmail` settings. You can find details for

@@ -57,7 +57,7 @@ To grab it from the Sidekiq pod:
    ```
 
 1. Use this information to
-   [configure the object storage](https://docs.gitlab.com/ee/administration/uploads.html#s3-compatible-connection-settings)
+   [configure the object storage](https://docs.gitlab.com/administration/uploads/#s3-compatible-connection-settings)
    in the `/etc/gitlab/gitlab.rb` file of the package-based deployment.
 
    {{< alert type="note" >}}

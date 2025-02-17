@@ -80,7 +80,7 @@ The configuration for these CI pipelines is managed in:
 
 ### Review apps
 
-We use [Review apps](https://docs.gitlab.com/ee/ci/review_apps/) in CI to
+We use [Review apps](https://docs.gitlab.com/ci/review_apps/) in CI to
 deploy running instances of the Helm Charts and test against them.
 
 We deploy these Review apps to our EKS and GKE clusters, confirm that the Helm

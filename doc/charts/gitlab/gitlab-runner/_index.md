@@ -19,7 +19,7 @@ The GitLab Runner subchart provides a GitLab Runner for running CI jobs. It is e
 The default configuration of the included GitLab Runner chart is **not intended for production**.
 It is provided as a proof of concept (PoC) implementation where all GitLab services are deployed
 in the cluster. For production deployments, install GitLab Runner on a separate machine for
-[security and performance reasons](https://docs.gitlab.com/ee/install/requirements.html#gitlab-runner).
+[security and performance reasons](https://docs.gitlab.com/install/requirements/#gitlab-runner).
 For more information, see the
 [reference architecture documentation](../../../installation/_index.md#use-the-reference-architectures).
 
@@ -33,7 +33,7 @@ in GitLab 17.0. It will be removed in GitLab 18.0.
 
 To use the recommended workflow:
 
-- [Generate an authentication token.](https://docs.gitlab.com/ee/ci/runners/new_creation_workflow.html#prevent-your-runner-registration-workflow-from-breaking)
+- [Generate an authentication token.](https://docs.gitlab.com/ci/runners/new_creation_workflow/#prevent-your-runner-registration-workflow-from-breaking)
 - Update the runner secret (`<release>-gitlab-runner-secret`) manually, as the configuration
   is not handled by the [`shared-secrets`](../../shared-secrets.md) job.
 - Set `gitlab-runner.runners.locked` to `null`:
@@ -46,7 +46,7 @@ To use the recommended workflow:
 
 If you want to use the legacy workflow (not recommended):
 
-- You must [re-enable the legacy workflow](https://docs.gitlab.com/ee/administration/settings/continuous_integration.html#enable-runner-registrations-tokens).
+- You must [re-enable the legacy workflow](https://docs.gitlab.com/administration/settings/continuous_integration/#enable-runner-registrations-tokens).
 - The registration token is populated by the [`shared-secrets`](../../shared-secrets.md) Job.
 - You must migrate to the new workflow before GitLab 18.0, which will remove support for the legacy workflow.
 

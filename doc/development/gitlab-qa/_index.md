@@ -90,9 +90,9 @@ Retrieve the above items, and export them as environment variables.
 ### Select test suite
 
 GitLab QA has multiple test suites to run against the standalone environment. Suite consists of subset of tests
-when end-to-end tests are grouped by various [RSpec metadata](https://docs.gitlab.com/ee/development/testing_guide/end_to_end/rspec_metadata_tests.html):
+when end-to-end tests are grouped by various [RSpec metadata](https://docs.gitlab.com/development/testing_guide/end_to_end/rspec_metadata_tests/):
 
-- _Smoke suite_: small [subset of fast end-to-end functional tests](https://docs.gitlab.com/ee/development/testing_guide/smoke.html)
+- _Smoke suite_: small [subset of fast end-to-end functional tests](https://docs.gitlab.com/development/testing_guide/smoke/)
 to quickly ensure that basic functionality is working
   - Enable this suite via `export QA_OPTIONS="--tag smoke"`
 - _Full suite_: running all tests against the environment. Test run will take more than an hour.
