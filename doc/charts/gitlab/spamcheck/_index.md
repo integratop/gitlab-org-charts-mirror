@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the GitLab-Spamcheck chart
 ---
 
-DETAILS:
-**Tier:** Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The `spamcheck` sub-chart provides a deployment of [Spamcheck](https://gitlab.com/gitlab-org/spamcheck) which is an anti-spam engine developed by GitLab originally to combat the rising amount of spam in GitLab.com, and later made public to be used in GitLab Self-Managed.
 

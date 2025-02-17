@@ -2,20 +2,25 @@
 stage: Systems
 group: Distribution
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments
-ignore_in_report: true
 title: Kubernetes cheat sheet
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 This is a list of useful information regarding Kubernetes that the GitLab Support
 Team sometimes uses while troubleshooting. GitLab is making this public, so that anyone
 can make use of the Support team's collected knowledge
 
-WARNING:
+{{< alert type="warning" >}}
+
 These commands **can alter or break** your Kubernetes components so use these at your own risk.
+
+{{< /alert >}}
 
 If you are on a [paid tier](https://about.gitlab.com/pricing/) and are not sure how
 to use these commands, it is best to [contact Support](https://about.gitlab.com/support/)
@@ -297,14 +302,20 @@ but commented out to help encourage others to add to it in the future. -->
 
 ## Patching the Rails code in the `toolbox` pod
 
-WARNING:
+{{< alert type="warning" >}}
+
 This task is not something that should be regularly performed. Use it at your own risk.
+
+{{< /alert >}}
 
 Patching operational GitLab service pods requires building new images, with the modified source code inside. These can _not_ be directly patched.
 The [`toolbox` / `task-runner` pod](../charts/gitlab/toolbox/_index.md) has everything needed to operate as a Rails-based pod, without interfering with other normal service operations. You can use it to run independent tasks, and to modify the source code temporarily to perform some tasks.
 
-NOTE:
+{{< alert type="note" >}}
+
 If you make any changes using the `toolbox` pod, those will not be persisted if the pod is restarted. They're only present for the life of the container's operation.
+
+{{< /alert >}}
 
 To patch the source code in the `toolbox` pod:
 

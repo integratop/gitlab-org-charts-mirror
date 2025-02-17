@@ -5,18 +5,28 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Zoekt chart
 ---
 
-DETAILS:
-**Tier:** Premium, Ultimate
-**Offering:** GitLab.com, GitLab Self-Managed
-**Status:** Beta
+{{< details >}}
 
-> - [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/105049) as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) in GitLab 15.9 [with flags](https://docs.gitlab.com/ee/administration/feature_flags.html) named `index_code_with_zoekt` and `search_code_with_zoekt`. Disabled by default.
-> - [Enabled on GitLab.com](https://gitlab.com/gitlab-org/gitlab/-/issues/388519) in GitLab 16.6.
-> - Feature flags `index_code_with_zoekt` and `search_code_with_zoekt` [removed](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/148378) in GitLab 17.1.
+- Tier: Premium, Ultimate
+- Offering: GitLab.com, GitLab Self-Managed
+- Status: Beta
 
-WARNING:
+{{< /details >}}
+
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/105049) as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) in GitLab 15.9 [with flags](https://docs.gitlab.com/ee/administration/feature_flags.html) named `index_code_with_zoekt` and `search_code_with_zoekt`. Disabled by default.
+- [Enabled on GitLab.com](https://gitlab.com/gitlab-org/gitlab/-/issues/388519) in GitLab 16.6.
+- Feature flags `index_code_with_zoekt` and `search_code_with_zoekt` [removed](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/148378) in GitLab 17.1.
+
+{{< /history >}}
+
+{{< alert type="warning" >}}
+
 This feature is in [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) and subject to change without notice.
 For more information, see [epic 9404](https://gitlab.com/groups/gitlab-org/-/epics/9404).
+
+{{< /alert >}}
 
 The Zoekt chart provides support for
 [exact code search](https://docs.gitlab.com/ee/user/search/exact_code_search.html).
@@ -66,7 +76,11 @@ You can define requests and limits for the Zoekt chart by modifying the followin
 
 ## Configure Zoekt in GitLab
 
-> - Shards [renamed](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/134717) to nodes in GitLab 16.6.
+{{< history >}}
+
+- Shards [renamed](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/134717) to nodes in GitLab 16.6.
+
+{{< /history >}}
 
 To configure Zoekt for a top-level group in GitLab:
 
@@ -79,9 +93,9 @@ To configure Zoekt for a top-level group in GitLab:
 1. [Enable exact code search](https://docs.gitlab.com/ee/integration/exact_code_search/zoekt.html#enable-exact-code-search).
 1. Set up indexing:
 
-   ::Tabs
+   {{< tabs >}}
 
-   :::TabTitle GitLab 17.7 and later
+   {{< tab title="GitLab 17.7 and later" >}}
 
    ```shell
    node = ::Search::Zoekt::Node.online.last
@@ -91,8 +105,10 @@ To configure Zoekt for a top-level group in GitLab:
    node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id)
    ```
 
-   :::TabTitle GitLab 17.6 and earlier
-  
+   {{< /tab >}}
+
+   {{< tab title="GitLab 17.6 and earlier" >}}
+
    ```shell
    node = ::Search::Zoekt::Node.online.last
    namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
@@ -102,6 +118,8 @@ To configure Zoekt for a top-level group in GitLab:
    node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id, state: :ready)
    ```
 
-   ::EndTabs
+      {{< /tab >}}
+
+   {{< /tabs >}}
 
 Zoekt can now index projects in that group after any project is updated or created. For the initial indexing, wait at least a few minutes for Zoekt to start indexing the namespace.

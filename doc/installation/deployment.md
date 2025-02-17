@@ -5,20 +5,26 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Deploy the GitLab Helm chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 Before running `helm install`, you need to make some decisions about how you will run GitLab.
 Options can be specified using Helm's `--set option.name=value` command-line option.
 This guide will cover required values and common options.
 For a complete list of options, read [Installation command line options](command-line-options.md).
 
-WARNING:
+{{< alert type="warning" >}}
+
 The default Helm chart configuration is **not intended for production**.
 The default chart creates a proof of concept (PoC) implementation where all GitLab
 services are deployed in the cluster. For production deployments, you must follow the
 [Cloud Native Hybrid reference architecture](_index.md#use-the-reference-architectures).
+
+{{< /alert >}}
 
 For a production deployment, you should have strong working knowledge of Kubernetes.
 This method of deployment has different management, observability, and concepts than traditional deployments.

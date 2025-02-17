@@ -180,10 +180,13 @@ Developers may encounter unique issues while working on new chart features.
 [Refer to the troubleshooting guide](troubleshooting.md) for
 information if your **_development_** cluster seems to have strange issues.
 
-NOTE:
+{{< alert type="note" >}}
+
 The troubleshooting steps outlined in the link above are for development
 clusters only. Do not use these procedures in a production environment or
 data will be lost.
+
+{{< /alert >}}
 
 ## Additional Helm information
 

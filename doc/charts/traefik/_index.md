@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using Traefik
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The [Traefik Helm chart](https://artifacthub.io/packages/helm/traefik/traefik) can replace the
 [bundled NGINX Helm chart](../nginx/_index.md) as the Ingress controller.

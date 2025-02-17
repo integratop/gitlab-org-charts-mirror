@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using HAProxy
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The [HAProxy Helm Chart](https://github.com/haproxytech/helm-charts/tree/main/kubernetes-ingress) can replace the
 [bundled NGINX Helm chart](../nginx/_index.md) as the Ingress controller, and is documented in Kubernetes'

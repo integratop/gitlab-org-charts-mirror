@@ -16,8 +16,11 @@ refer to the [Mattermost Helm configuration guide](https://github.com/mattermost
 - A running Kubernetes cluster.
 - [Helm v3](https://helm.sh/docs/intro/install/)
 
-NOTE:
+{{< alert type="note" >}}
+
 For the Team Edition you can have just one replica running.
+
+{{< /alert >}}
 
 ## Deploy the Mattermost Team Edition Helm chart
 
@@ -62,10 +65,13 @@ Once you've deployed the GitLab instance, follow the instructions for the [initi
 The next part of the process is setting up the GitLab SSO integration.
 To do so, you need to [create the OAuth application](https://docs.mattermost.com/deployment/sso-gitlab.html) to allow Mattermost to use GitLab as the authentication provider.
 
-NOTE:
+{{< alert type="note" >}}
+
 Only the default GitLab SSO is officially supported. “Double SSO”, where GitLab SSO is chained to other SSO solutions, is not supported. It may be possible to connect
 GitLab SSO with AD, LDAP, SAML, or MFA add-ons in some cases, but because of the special logic required they’re not officially
 supported and are known not to work on some experiences.
+
+{{< /alert >}}
 
 ## Troubleshooting
 

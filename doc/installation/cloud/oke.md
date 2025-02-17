@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Preparing OKE resources for the GitLab chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 For a fully functional GitLab instance, you need a few resources before
 deploying the GitLab chart to [Oracle Container Engine for Kubernetes (OKE)](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm). Check how to [prepare](https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengprerequisites.htm) your Oracle Cloud Infrastructure tenancy before creating the OKE cluster.

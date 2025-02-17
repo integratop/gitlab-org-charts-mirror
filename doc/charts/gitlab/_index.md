@@ -51,13 +51,20 @@ Use these charts as optional additions:
 
 ### affinity
 
-> - [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3770) in GitLab 17.3 (Charts 8.3) for all GitLab Helm subcharts except `webservice` and `sidekiq`.
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3770) in GitLab 17.3 (Charts 8.3) for all GitLab Helm subcharts except `webservice` and `sidekiq`.
+
+{{< /history >}}
 
 `affinity` is an optional parameter in all GitLab Helm subcharts. When you set it, it takes precedence over the [global `affinity`](../globals.md#affinity) value.
 For more information about `affinity`, see [the relevant Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity).
 
-NOTE:
+{{< alert type="note" >}}
+
 The `webservice` and `sidekiq` Helm charts can only use the [global `affinity`](../globals.md#affinity) value. Follow [issue 25403](https://gitlab.com/gitlab-com/gl-infra/production-engineering/-/issues/25403) to learn when the local `affinity` is implemented for `webservice` and `sidekiq`.
+
+{{< /alert >}}
 
 With `affinity`, you can set either or both:
 

@@ -5,19 +5,25 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the GitLab Runner chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The GitLab Runner subchart provides a GitLab Runner for running CI jobs. It is enabled by default and should work out of the box with support for caching using s3 compatible object storage.
 
-WARNING:
+{{< alert type="warning" >}}
+
 The default configuration of the included GitLab Runner chart is **not intended for production**.
 It is provided as a proof of concept (PoC) implementation where all GitLab services are deployed
 in the cluster. For production deployments, install GitLab Runner on a separate machine for
 [security and performance reasons](https://docs.gitlab.com/ee/install/requirements.html#gitlab-runner).
 For more information, see the
 [reference architecture documentation](../../../installation/_index.md#use-the-reference-architectures).
+
+{{< /alert >}}
 
 ## Requirements
 

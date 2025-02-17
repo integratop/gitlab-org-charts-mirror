@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: GitLab chart prerequisites
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 Before you deploy GitLab in a Kubernetes cluster, install the following
 prerequisites and decide on the options to use when you install.
@@ -106,11 +109,14 @@ you don't need any additional DNS configuration for GitLab. However, you must de
 [has a comprehensive guide](https://github.com/kubernetes-sigs/external-dns#deploying-to-a-cluster)
 for each supported provider.
 
-NOTE:
+{{< alert type="note" >}}
+
 If you enable custom domain support for GitLab Pages, `external-dns` no
 longer works for the Pages domain (`pages.<global.hosts.domain>` by default).
 You must manually configure the DNS entry to point the domain to the
 external IP address dedicated to Pages.
+
+{{< /alert >}}
 
 If you provision a [GKE cluster](cloud/gke.md) by using the provided script,
 `external-dns` is automatically installed in your cluster.
@@ -146,9 +152,12 @@ dynamic provisioner creates the underlying persistent volumes. If you would like
 to customize the `storageClass` or manually create and assign volumes, review
 the [storage documentation](storage.md).
 
-NOTE:
+{{< alert type="note" >}}
+
 After the initial deployment, making changes to your storage settings requires manually editing Kubernetes
 objects. Therefore, it's best to plan ahead before deploying your production instance to avoid extra storage migration work.
+
+{{< /alert >}}
 
 ### TLS certificates
 

@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Configure storage for the GitLab chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The following applications within the GitLab chart require persistent storage to maintain state.
 
@@ -100,10 +103,13 @@ kubectl create -f *PV_YAML_FILE*
 
 ### Using Amazon EKS
 
-NOTE:
+{{< alert type="note" >}}
+
 If you need to deploy in multiple zones, you should review
 [Amazon's own documentation on storage classes](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
 when defining your storage solution.
+
+{{< /alert >}}
 
 1. [Create a persistent disk in the cluster.](https://kubernetes.io/docs/concepts/storage/volumes/#creating-an-ebs-volume)
 

@@ -174,8 +174,11 @@ This can happen when you have TLS termination before the NGINX Ingress, and the 
 
 1. Apply the change.
 
-NOTE:
+{{< alert type="note" >}}
+
 When using an external service for SSL termination, that service is responsible for redirecting to https (if so desired).
+
+{{< /alert >}}
 
 ## Upgrades fail with Immutable Field Error
 
@@ -203,10 +206,13 @@ This can be solved by simply removing all of the affected services.
 1. Perform an upgrade via Helm.
 1. Future upgrades will not face this error.
 
-NOTE:
+{{< alert type="note" >}}
+
 This will change any dynamic value for the `LoadBalancer` for NGINX Ingress from this chart, if in use.
 See [global Ingress settings documentation](../charts/globals.md#configure-ingress-settings) for more
 details regarding `externalIP`. You may be required to update DNS records!
+
+{{< /alert >}}
 
 ### spec.selector
 
@@ -668,10 +674,13 @@ gitlab:
       runAsUser: ""
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 The example syntax eliminates the `securityContext` setting entirely.
 Setting `securityContext: {}` or `securityContext:` does not work due
 to the way Helm merges default values with user provided configuration.
+
+{{< /alert >}}
 
 ### Intermittent 502 errors
 

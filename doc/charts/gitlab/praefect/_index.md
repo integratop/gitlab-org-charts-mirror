@@ -5,14 +5,20 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the Praefect chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
-**Status:** Experiment
+{{< details >}}
 
-WARNING:
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+- Status: Experiment
+
+{{< /details >}}
+
+{{< alert type="warning" >}}
+
 The Praefect chart is still under development. This experimental version is not yet suitable for production use. Upgrades may require significant manual intervention.
 See our [Praefect GA release Epic](https://gitlab.com/groups/gitlab-org/charts/-/epics/33) for more information.
+
+{{< /alert >}}
 
 The Praefect chart is used to manage a [Gitaly cluster](https://docs.gitlab.com/ee/administration/gitaly/praefect.html) inside a GitLab installment deployed with the Helm charts.
 
@@ -117,8 +123,11 @@ global:
 
 ### Migrating to Praefect
 
-NOTE:
+{{< alert type="note" >}}
+
 Group wikis [cannot be moved by using the API](https://docs.gitlab.com/ee/api/project_repository_storage_moves.html).
+
+{{< /alert >}}
 
 When migrating from standalone Gitaly instances to a Praefect setup, `global.praefect.replaceInternalGitaly` can be set to `false`.
 This ensures that the existing Gitaly instances are preserved while the new Praefect-managed Gitaly instances are created.
@@ -134,10 +143,13 @@ global:
       maxUnavailable: 2
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 When migrating to Praefect, none of Praefect's virtual storages can be named `default`.
 This is because there must be at least one storage named `default` at all times,
 therefore the name is already taken by the non-Praefect configuration.
+
+{{< /alert >}}
 
 The instructions to [migrate to Gitaly Cluster](https://docs.gitlab.com/ee/administration/gitaly/index.html#migrating-to-gitaly-cluster)
 can then be followed to move data from the `default` storage to `virtualStorage2`. If additional storages
@@ -170,9 +182,12 @@ to configure where new repositories are stored.
 
 Praefect uses its own database to track its state. This has to be manually created in order for Praefect to be functional.
 
-NOTE:
+{{< alert type="note" >}}
+
 These instructions assume you are using the bundled PostgreSQL server. If you are using your own server,
 there will be some variation in how you connect.
+
+{{< /alert >}}
 
 1. Log into your database instance:
 
@@ -231,10 +246,13 @@ To run Praefect over TLS follow these steps:
    kubectl exec -it <Toolbox Pod> -- grep gitaly_address /srv/gitlab/config/gitlab.yml
    ```
 
-NOTE:
+{{< alert type="note" >}}
+
 A basic script for generating custom signed certificates for internal Praefect Pods
 [can be found in this repository](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/scripts/generate_certificates.sh).
 Users can use or refer that script to generate certificates with proper SAN attributes.
+
+{{< /alert >}}
 
 1. Create a TLS Secret using the certificate created.
 

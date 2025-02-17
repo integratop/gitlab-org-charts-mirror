@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the Shared-Secrets Job
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The `shared-secrets` job is responsible for provisioning a variety of secrets
 used across the installation, unless otherwise manually specified. This includes:
@@ -84,7 +87,10 @@ shared-secrets:
   enabled: false
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 If you disable this job, you **must** manually create all secrets,
 and provide all necessary secret content. See [installation/secrets](../installation/secrets.md#manual-secret-creation-optional)
 for further details.
+
+{{< /alert >}}

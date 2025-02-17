@@ -5,12 +5,19 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Manage the container registry metadata database
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
 
-> - [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) feature.
-> - [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/423459) in GitLab 17.3.
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
+
+{{< history >}}
+
+- [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) feature.
+- [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/423459) in GitLab 17.3.
+
+{{< /history >}}
 
 The metadata database enables many new registry features, including
 online garbage collection, and increases the efficiency of many registry operations.
@@ -29,9 +36,12 @@ for the status of features related to the container registry database.
 
 Follow the steps below to manually create the database and role.
 
-NOTE:
+{{< alert type="note" >}}
+
 These instructions assume you are using the bundled PostgreSQL server. If you are using your own server,
 there will be some variation in how you connect.
+
+{{< /alert >}}
 
 1. Create the secret with the database password:
 
@@ -98,8 +108,11 @@ Follow the instructions that match your situation:
   - [One-step migration](#one-step-migration). Only recommended for relatively small registries or no requirement to avoid downtime.
   - [Three-step migration](#three-step-migration). Recommended for larger container registries.
 
-NOTE:
+{{< alert type="note" >}}
+
 For a list of import times for various test and user registries, see [this table in issue 423459](https://gitlab.com/gitlab-org/gitlab/-/issues/423459#completed-tests-and-user-reports). Your registry deployment is unique, and your import times might be longer than those reported in the issue.
+
+{{< /alert >}}
 
 ### Before you start
 
@@ -170,8 +183,11 @@ A few factors affect the duration of the migration:
 - The number of registry pods running in your cluster.
 - Network latency between the registry, PostgresSQL and your configured Object Storage.
 
-NOTE:
+{{< alert type="note" >}}
+
 Work to automate the migration process is being tracked in [issue 5293](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/5293).
+
+{{< /alert >}}
 
 #### Requirements
 
@@ -291,19 +307,25 @@ To migrate in three steps, you must:
 1. Import all repository data
 1. Import common blobs
 
-NOTE:
+{{< alert type="note" >}}
+
 Users have reported step one import completed at [rates of 2 to 4 TB per hour](https://gitlab.com/gitlab-org/gitlab/-/issues/423459).
 At the slower speed, registries with over 100TB of data could take longer than 48 hours.
+
+{{< /alert >}}
 
 ##### Step 1. Pre-import repositories
 
 For larger instances, this process can take hours or even days to complete, depending
 on the size of your registry. You can still use the registry during this process.
 
-WARNING:
+{{< alert type="warning" >}}
+
 It is [not yet possible](https://gitlab.com/gitlab-org/container-registry/-/issues/1162)
 to restart the migration, so it's important to let the migration run to completion.
 If you must halt the operation, you have to restart this step.
+
+{{< /alert >}}
 
 1. Follow the steps described in the [requirements section](#requirements).
 1. Find the `registry:` section in the `values.yml` file and add the `database` section.
@@ -354,11 +376,14 @@ If you must halt the operation, you have to restart this step.
 
 The first step is complete when the `registry import complete` displays.
 
-NOTE:
+{{< alert type="note" >}}
+
 You should try to schedule the following step as soon as possible
 to reduce the amount of downtime required. Ideally, less than one week
 after step one completes. Any new data written to the registry before the next step
 causes that step to take more time.
+
+{{< /alert >}}
 
 ##### Step 2. Import all repository data
 

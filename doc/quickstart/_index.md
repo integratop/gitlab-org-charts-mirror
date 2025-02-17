@@ -38,10 +38,13 @@ A cluster with a total of at least eight virtual CPUs and 30 GB of RAM is recomm
 You can either refer to your cloud providers' instructions on how to create a Kubernetes cluster,
 or use the GitLab-provided scripts to [automate the cluster creation](../installation/cloud/_index.md).
 
-WARNING:
+{{< alert type="warning" >}}
+
 Kubernetes nodes must use the x86-64 architecture.
 Support for multiple architectures, including AArch64/ARM64, is under active development.
 See [issue 2899](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2899) for more information.
+
+{{< /alert >}}
 
 ### Install kubectl
 
