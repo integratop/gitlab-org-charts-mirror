@@ -10,9 +10,12 @@ This document intends to provide documentation on how to configure this Helm cha
 If you don't have Gitaly configured, for on-premise or deployment to VM,
 consider using our [Linux package](external-omnibus-gitaly.md).
 
-NOTE:
+{{< alert type="note" >}}
+
 External Gitaly _services_ can be provided by Gitaly nodes, or
 [Praefect](https://docs.gitlab.com/ee/administration/gitaly/praefect.html) clusters.
+
+{{< /alert >}}
 
 ## Configure the chart
 
@@ -126,11 +129,14 @@ have to
            tlsEnabled: true
    ```
 
-NOTE:
+{{< alert type="note" >}}
+
 You can choose any valid secret name and key for this, but make
 sure the key is unique across all the secrets specified in `customCAs` to avoid
 collision since all keys within the secrets will be mounted. You **do not**
 need to provide the key for the certificate, as this is the _client side_.
+
+{{< /alert >}}
 
 ## Test that GitLab can connect to Gitaly
 
@@ -178,19 +184,23 @@ kubectl get secret <release>-gitlab-shell-secret -ojsonpath='{.data.secret}' | b
 kubectl get secret <release>-gitaly-secret -ojsonpath='{.data.token}' | base64 -d
 ```
 
-::Tabs
+{{< tabs >}}
 
-:::TabTitle Gitaly
+{{< tab title="Gitaly" >}}
 
 - The Gitaly token extracted here should be used for the `AUTH_TOKEN` value.
 - The GitLab Shell secret extracted here should be used for the `shellsecret` value.
 
-:::TabTitle Gitaly Cluster
+{{< /tab >}}
+
+{{< tab title="Gitaly Cluster" >}}
 
 - The Gitaly token extracted here should be used for the `PRAEFECT_EXTERNAL_TOKEN`.
 - The GitLab Shell secret extracted here should be used for the `GITLAB_SHELL_SECRET_TOKEN`.
 
-::EndTabs
+{{< /tab >}}
+
+{{< /tabs >}}
 
 Lastly, ensure that the firewall for the external Gitaly service allows traffic on the configured
 Gitaly port for your Kubernetes pod IP range.
@@ -209,9 +219,9 @@ Gitaly port for your Kubernetes pod IP range.
    [connecting to external Gitaly over TLS](#connecting-to-external-gitaly-over-tls) section if you
    are configuring TLS:
 
-   ::Tabs
+   {{< tabs >}}
 
-   :::TabTitle Gitaly
+   {{< tab title="Gitaly" >}}
 
    ```yaml
    global:
@@ -226,7 +236,9 @@ Gitaly port for your Kubernetes pod IP range.
            tlsEnabled: false               # optional, overrides gitaly.tls.enabled
    ```
 
-   :::TabTitle Gitaly Cluster
+   {{< /tab >}}
+
+   {{< tab title="Gitaly Cluster" >}}
 
    ```yaml
    global:
@@ -241,7 +253,9 @@ Gitaly port for your Kubernetes pod IP range.
            tlsEnabled: false               # optional, overrides gitaly.tls.enabled
    ```
 
-   ::EndTabs
+      {{< /tab >}}
+
+   {{< /tabs >}}
 
 1. Apply the new configuration using the `gitlab.yml` and `mixed-gitaly.yml` files:
 
@@ -259,9 +273,9 @@ Gitaly port for your Kubernetes pod IP range.
 
 1. Ensure that the external Gitaly can connect back to your Chart install:
 
-   ::Tabs
+   {{< tabs >}}
 
-   :::TabTitle Gitaly
+   {{< tab title="Gitaly" >}}
 
    Ensure that the Gitaly service can perform callbacks to the GitLab API successfully:
 
@@ -269,7 +283,9 @@ Gitaly port for your Kubernetes pod IP range.
    sudo /opt/gitlab/embedded/bin/gitaly check /var/opt/gitlab/gitaly/config.toml
    ```
 
-   :::TabTitle Gitaly Cluster
+   {{< /tab >}}
+
+   {{< tab title="Gitaly Cluster" >}}
 
    On all Praefect nodes, ensure that the Praefect service can connect to the Gitaly nodes:
 
@@ -286,7 +302,9 @@ Gitaly port for your Kubernetes pod IP range.
    sudo /opt/gitlab/embedded/bin/gitaly check /var/opt/gitlab/gitaly/config.toml
    ```
 
-   ::EndTabs
+      {{< /tab >}}
+
+   {{< /tabs >}}
 
 #### Step 3: Get the Gitaly pod IP and hostnames
 
@@ -325,9 +343,9 @@ Schedule the move by following the steps indicated in [moving repositories](http
 
 1. Disable the internal Gitaly subchart in the `gitlab.yml` file, and point the new `default` repository storage to the external Gitaly service. [GitLab requires a default repository storage](https://docs.gitlab.com/ee/administration/gitaly/configure_gitaly.html#gitlab-requires-a-default-repository-storage):
 
-   ::Tabs
+   {{< tabs >}}
 
-   :::TabTitle Gitaly
+   {{< tab title="Gitaly" >}}
 
    ```yaml
    global:
@@ -344,7 +362,9 @@ Schedule the move by following the steps indicated in [moving repositories](http
            tlsEnabled: false
    ```
 
-   :::TabTitle Gitaly Cluster
+   {{< /tab >}}
+
+   {{< tab title="Gitaly Cluster" >}}
 
    ```yaml
    global:
@@ -361,7 +381,9 @@ Schedule the move by following the steps indicated in [moving repositories](http
            tlsEnabled: false
    ```
 
-   ::EndTabs
+      {{< /tab >}}
+
+   {{< /tabs >}}
 
 1. Apply the new configuration:
 
@@ -413,19 +435,23 @@ kubectl get secret <release>-gitlab-shell-secret -ojsonpath='{.data.secret}' | b
 kubectl get secret <release>-gitaly-secret -ojsonpath='{.data.token}' | base64 -d
 ```
 
-::Tabs
+{{< tabs >}}
 
-:::TabTitle Gitaly
+{{< tab title="Gitaly" >}}
 
 - The Gitaly token extracted here should be used for the `AUTH_TOKEN` value.
 - The GitLab Shell secret extracted here should be used for the `shellsecret` value.
 
-:::TabTitle Gitaly Cluster
+{{< /tab >}}
+
+{{< tab title="Gitaly Cluster" >}}
 
 - The Gitaly token extracted here should be used for the `PRAEFECT_EXTERNAL_TOKEN`.
 - The GitLab Shell secret extracted here should be used for the `GITLAB_SHELL_SECRET_TOKEN`.
 
-::EndTabs
+{{< /tab >}}
+
+{{< /tabs >}}
 
 #### Step 3: Verify no Git changes can be made during migration
 
@@ -557,9 +583,9 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
    [connecting to external Gitaly over TLS](#connecting-to-external-gitaly-over-tls) section if you
    are configuring TLS:
 
-   ::Tabs
+   {{< tabs >}}
 
-   :::TabTitle Gitaly
+   {{< tab title="Gitaly" >}}
 
    ```yaml
    global:
@@ -572,7 +598,9 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
            tlsEnabled: false               # optional, overrides gitaly.tls.enabled
    ```
 
-   :::TabTitle Gitaly Cluster
+   {{< /tab >}}
+
+   {{< tab title="Gitaly Cluster" >}}
 
    ```yaml
    global:
@@ -585,7 +613,9 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
            tlsEnabled: false               # optional, overrides gitaly.tls.enabled
    ```
 
-   ::EndTabs
+      {{< /tab >}}
+
+   {{< /tabs >}}
 
 1. Apply the new configuration using the `gitlab.yml`, `ingress-only-allow-ext-gitaly.yml`, and `external-gitaly.yml` files:
 
@@ -611,9 +641,9 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
 
 1. Ensure that the external Gitaly can connect back to your Chart install:
 
-   ::Tabs
+   {{< tabs >}}
 
-   :::TabTitle Gitaly
+   {{< tab title="Gitaly" >}}
 
    Ensure that the Gitaly service can perform callbacks to the GitLab API successfully:
 
@@ -621,7 +651,9 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
    sudo /opt/gitlab/embedded/bin/gitaly check /var/opt/gitlab/gitaly/config.toml
    ```
 
-   :::TabTitle Gitaly Cluster
+   {{< /tab >}}
+
+   {{< tab title="Gitaly Cluster" >}}
 
    On all Praefect nodes, ensure that the Praefect service can connect to the Gitaly nodes:
 
@@ -638,7 +670,9 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
    sudo /opt/gitlab/embedded/bin/gitaly check /var/opt/gitlab/gitaly/config.toml
    ```
 
-   ::EndTabs
+      {{< /tab >}}
+
+   {{< /tabs >}}
 
 #### Step 6: Restore and validate repository backup
 

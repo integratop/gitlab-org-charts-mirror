@@ -17,9 +17,12 @@ since version 7.3. See [Set up a Unified URL for Geo sites](https://docs.gitlab.
 
 For known issues, see the [Geo documentation](https://docs.gitlab.com/ee/administration/geo/#known-issues).
 
-NOTE:
+{{< alert type="note" >}}
+
 See the [defined terms](https://docs.gitlab.com/ee/administration/geo/glossary.html)
 to describe all aspects of Geo (mainly the distinction between `site` and `node`).
+
+{{< /alert >}}
 
 ## Requirements
 
@@ -295,17 +298,23 @@ To deploy this chart as a Geo Primary, start [from this example configuration](h
    helm upgrade --install gitlab-geo gitlab/gitlab --namespace gitlab -f primary.yaml
    ```
 
-   NOTE:
-   This assumes you are using the `gitlab` namespace. If you want to use a different namespace,
+   {{< alert type="note" >}}
+
+This assumes you are using the `gitlab` namespace. If you want to use a different namespace,
    you should also replace it in `--namespace gitlab` throughout the rest of this document.
+
+   {{< /alert >}}
 
 1. Wait for the deployment to complete, and the application to come online. When
    the application is reachable, log in.
 
 1. Sign in to GitLab, and [activate your GitLab subscription](https://docs.gitlab.com/ee/administration/license.html).
 
-   NOTE:
-   **This step is required for Geo to function.**
+   {{< alert type="note" >}}
+
+**This step is required for Geo to function.**
+
+   {{< /alert >}}
 
 ## Set the Geo Primary site
 
@@ -454,12 +463,15 @@ After configuration above is prepared:
    write:errno=0
    ```
 
-   NOTE:
-   If this step fails, you may be using the wrong IP address, or a firewall may
+   {{< alert type="note" >}}
+
+If this step fails, you may be using the wrong IP address, or a firewall may
    be preventing access to the server. Check the IP address, paying close
    attention to the difference between public and private addresses and ensure
    that, if a firewall is present, the **secondary** PostgreSQL node is
    permitted to connect to the **primary** PostgreSQL node on TCP port 5432.
+
+   {{< /alert >}}
 
 1. Place the content into `/etc/gitlab/gitlab.rb`
 1. Run `gitlab-ctl reconfigure`. If you experience any issues in regards to the

@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Cloud provider setup for the GitLab chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 Before you deploy the GitLab chart, you must configure resources for
 the cloud provider you choose.
@@ -40,10 +43,13 @@ Some GitLab features might not work on deprecated releases or releases older tha
 
 For some components, like the [agent for Kubernetes](https://docs.gitlab.com/ee/user/clusters/agent/) and [GitLab Operator](https://docs.gitlab.com/operator/installation.html), GitLab might support different cluster releases.
 
-WARNING:
+{{< alert type="warning" >}}
+
 Kubernetes nodes must use the x86-64 architecture.
 Support for multiple architectures, including AArch64/ARM64, is under active development.
 See [issue 2899](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2899) for more information.
+
+{{< /alert >}}
 
 - For cluster topology recommendations for an environment, see the
   [reference architectures](https://docs.gitlab.com/ee/administration/reference_architectures/#available-reference-architectures).

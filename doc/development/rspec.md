@@ -51,9 +51,12 @@ obj.dig('ConfigMap/test-gitaly', 'data', 'config.toml.tpl')
 This will return the contents of the `config.toml.tpl` file contained in the
 `test-gitaly` ConfigMap.
 
-NOTE:
+{{< alert type="note" >}}
+
 Using the `HelmTemplate` class will always use the release name of "test"
 when executing the `helm template` command.
+
+{{< /alert >}}
 
 ## Chart inputs
 

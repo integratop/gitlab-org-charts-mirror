@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using certmanager-issuer for CertManager Issuer creation
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 This chart is a helper for [Jetstack's CertManager Helm chart](https://cert-manager.io/docs/installation/helm/).
 It automatically provisions an Issuer object, used by CertManager when requesting TLS certificates for
@@ -59,4 +62,4 @@ to the `helm install` command using the `--set` flags:
 | `containerSecurityContext.allowPrivilegeEscalation` | `false`                                          | Controls whether a process can gain more privileges than its parent process                                                                                                        |
 | `containerSecurityContext.runAsNonRoot`             | `true`                                           | Controls whether the container runs with a non-root user                                                                                                                           |
 | `containerSecurityContext.capabilities.drop`        | `[ "ALL" ]`                                      | Removes [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) for the container                                                                          |
-| `ttlSecondsAfterFinished`                           | `1800`                                           | Controls when a finished job becomes eligible for cascading removal.                                                                                                               | 
+| `ttlSecondsAfterFinished`                           | `1800`                                           | Controls when a finished job becomes eligible for cascading removal.                                                                                                               |

@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: GitLab Helm chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 To install a cloud-native version of GitLab, use the GitLab Helm chart.
 This chart contains all the required components to get started and can scale to large deployments.
@@ -16,11 +19,14 @@ For OpenShift-based installations, use [GitLab Operator](https://docs.gitlab.com
 otherwise you must update the [security context constraints](https://docs.gitlab.com/operator/security_context_constraints.html)
 yourself.
 
-WARNING:
+{{< alert type="warning" >}}
+
 The default Helm chart configuration is **not intended for production**.
 The default values create an implementation where _all_ GitLab services are
 deployed in the cluster, which is **not suitable for production workloads**.
 For production deployments, you **must** follow the [Cloud Native Hybrid reference architectures](installation/_index.md#use-the-reference-architectures).
+
+{{< /alert >}}
 
 For a production deployment, you should have strong working knowledge of Kubernetes.
 This method of deployment has different management, observability, and concepts than traditional deployments.

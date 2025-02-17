@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Use the built-in MinIO service for object storage
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 This migration guide is for when you migrate from a
 [package-based installation](package_to_helm.md) to the Helm chart and you want
@@ -57,9 +60,12 @@ To grab it from the Sidekiq pod:
    [configure the object storage](https://docs.gitlab.com/ee/administration/uploads.html#s3-compatible-connection-settings)
    in the `/etc/gitlab/gitlab.rb` file of the package-based deployment.
 
-   NOTE:
-   For connecting to the MinIO service from outside the cluster, the
+   {{< alert type="note" >}}
+
+For connecting to the MinIO service from outside the cluster, the
    MinIO host URL alone is enough. Helm charts based installations are
    configured to redirect requests coming to that URL automatically to the
    corresponding endpoint. So, you don't need to set the `endpoint` value
    in the connection settings in `/etc/gitlab/gitlab.rb`.
+
+{{< /alert >}}

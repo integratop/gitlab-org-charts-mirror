@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the GitLab Pages chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The `gitlab-pages` subchart provides a daemon for serving static websites from
 GitLab projects.
@@ -297,11 +300,18 @@ To have TLS access to the GitLab Pages feature you must:
 
 ### Pages domain without wildcard DNS
 
-> - [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/5570) as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) in GitLab 17.2.
-> - [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/483365) in GitLab 17.4.
+{{< history >}}
 
-WARNING:
+- [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/5570) as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) in GitLab 17.2.
+- [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/483365) in GitLab 17.4.
+
+{{< /history >}}
+
+{{< alert type="warning" >}}
+
 GitLab Pages supports only one URL scheme at a time: Either with wildcard DNS, or without wildcard DNS. If you enable `namespaceInPath`, existing GitLab Pages websites are accessible only on domains without wildcard DNS.
+
+{{< /alert >}}
 
 1. Enable `namespaceInPath` in the global Pages settings.
 
@@ -346,8 +356,11 @@ GitLab Pages supports only one URL scheme at a time: Either with wildcard DNS, o
    [System OAuth application](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-an-instance-wide-application)
    to use the HTTPS protocol.
 
-WARNING:
+{{< alert type="warning" >}}
+
 GitLab Pages does not update the OAuth application, and the default `authRedirectUri` is updated to `https://pages.<yourdomaindomain>/projects/auth`. While accessing a private Pages site, if you encounter an error 'The redirect URI included is not valid', update the redirect URI in the GitLab Pages [System OAuth application](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-an-instance-wide-application) to `https://pages.<yourdomaindomain>/projects/auth`.
+
+{{< /alert >}}
 
 ### Rate limits
 

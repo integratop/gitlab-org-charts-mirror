@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Configure charts using globals
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 To reduce configuration duplication when installing our wrapper Helm chart, several
 configuration settings are available to be set in the `global` section of `values.yaml`.
@@ -229,10 +232,13 @@ on enabling this, see [release notes](../releases/7_0.md#bundled-certmanager).
 
 ## GitLab Version
 
-NOTE:
+{{< alert type="note" >}}
+
 This value should only used for development purposes, or by explicit request of GitLab support. Please avoid using this value
 on production environments and set the version as described
 in [Deploy using Helm](../installation/deployment.md#deploy-using-helm)
+
+{{< /alert >}}
 
 The GitLab version used in the default image tag for the charts can be changed using
 the `global.gitlabVersion` key:
@@ -339,10 +345,13 @@ from the global, by design.
 
 ### PostgreSQL SSL
 
-NOTE:
+{{< alert type="note" >}}
+
 SSL support is mutual TLS only.
 See [issue #2034](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2034)
 and [issue #1817](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/1817).
+
+{{< /alert >}}
 
 If you want to connect GitLab with a PostgreSQL database over mutual TLS, create a secret
 containing the client key, client certificate and server certificate authority as different
@@ -438,7 +447,11 @@ global:
 
 ### Configure multiple database connections
 
-> - The `gitlab:db:decomposition:connection_status` Rake task was [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/111927) in GitLab 15.11.
+{{< history >}}
+
+- The `gitlab:db:decomposition:connection_status` Rake task was [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/111927) in GitLab 15.11.
+
+{{< /history >}}
 
 In GitLab 16.0, GitLab defaults to using two database connections
 that point to the same PostgreSQL database.
@@ -547,7 +560,11 @@ continue to apply with the Sentinel support unless re-specified in the table abo
 
 #### Redis Sentinel password support
 
-> - [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3792) in GitLab 17.1.
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3792) in GitLab 17.1.
+
+{{< /history >}}
 
 ```yaml
 redis:
@@ -1503,9 +1520,12 @@ global:
 
 ### Suggested Reviewers settings
 
-NOTE:
+{{< alert type="note" >}}
+
 The Suggested Reviewers secret is created automatically and only used on GitLab.com.
 This secret is not needed on GitLab Self-Managed instances.
+
+{{< /alert >}}
 
 One can optionally customize the Suggested Reviewers `secret` name as well as
 `key`, either by using Helm's `--set variable` option:
@@ -1568,10 +1588,13 @@ Example `--set` configuration items, when using the global chart:
 --set global.appConfig.ldap.servers.main.password.key='the-key-containing-the-password'
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 Commas are considered [special characters](https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set)
 within Helm `--set` items. Be sure to escape commas in values such as `bind_dn`:
 `--set global.appConfig.ldap.servers.main.bind_dn='cn=administrator\,cn=Users\,dc=domain\,dc=net'`.
+
+{{< /alert >}}
 
 #### Disable LDAP web sign in
 
@@ -1610,10 +1633,13 @@ If the LDAP server uses a custom CA or self-signed certificate, you must:
 
 This ensures that the CA certificate is mounted in the relevant pods at `/etc/ssl/certs/unique_name.pem` and specifies its use in the LDAP configuration.
 
-NOTE:
+{{< alert type="note" >}}
+
 In GitLab 15.9 and later, the certificate in `/etc/ssl/certs/` is not prefixed with `ca-cert-` anymore.
 This was the old behavior due to the use of Alpine for the container that prepared the certificate secrets
 for deployed pods. The `gitlab-base` container is now used for this operation, which is based on Debian.
+
+{{< /alert >}}
 
 See [Custom Certificate Authorities](#custom-certificate-authorities) for more info.
 
@@ -2092,8 +2118,11 @@ gitlab:
 
 ## Custom Certificate Authorities
 
-NOTE:
+{{< alert type="note" >}}
+
 These settings do not affect charts from outside of this repository, via `requirements.yaml`.
+
+{{< /alert >}}
 
 Some users may need to add custom certificate authorities, such as when using internally
 issued SSL certificates for TLS services. To provide this functionality, we provide
@@ -2126,7 +2155,8 @@ global:
           - unique_name_2.crt
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 The `.crt` extension in the Secret's key name is important for the
 [Debian update-ca-certificates package](https://manpages.debian.org/bullseye/ca-certificates/update-ca-certificates.8.en.html).
 This step ensures that the custom CA file is mounted with that extension and is processed
@@ -2135,6 +2165,8 @@ Previously, when the certificates helper image was Alpine-based, the file extens
 even though the [documentation](https://gitlab.alpinelinux.org/alpine/ca-certificates/-/blob/master/update-ca-certificates.8)
 says that it is.
 The UBI-based `update-ca-trust` utility does not seem to have the same requirement.
+
+{{< /alert >}}
 
 You can provide any number of Secrets or ConfigMaps, each containing any number of keys that hold
 PEM-encoded CA certificates. These are configured as entries under `global.certificates.customCAs`.
@@ -2202,10 +2234,13 @@ global:
 - Setting `global.serviceAccount.name` controls the ServiceAccount object name and the name referenced by each component.
 - Setting `global.serviceAccount.automountServiceAccountToken` controls if the default ServiceAccount access token should be mounted in pods. You should not enable this unless it is required by certain sidecars to work properly (for example, Istio).
 
-NOTE:
+{{< alert type="note" >}}
+
 Do not use `global.serviceAccount.create=true` with `global.serviceAccount.name`, as it instructs the charts
 to create multiple ServiceAccount objects with the same name. Instead, use `global.serviceAccount.create=false` if specifying
 a global name.
+
+{{< /alert >}}
 
 ## Annotations
 
@@ -2237,10 +2272,13 @@ global:
     disktype: ssd
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 Charts that are maintained externally do not respect the `global.nodeSelector`
 at this time and may need to be configured separately based on available chart values.
 This includes Prometheus, cert-manager, Redis, etc.
+
+{{< /alert >}}
 
 ## Labels
 
@@ -2373,8 +2411,11 @@ gitlab:
           # optional: boolean
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 The implementation does not support re-using a value name with different content types. You can override the same name with similar content, but no not mix sources like `secretKeyRef`, `configMapKeyRef`, etc.
+
+{{< /alert >}}
 
 ## Configure OAuth settings
 
@@ -2463,8 +2504,11 @@ global:
 
 This enables an additional clone URL in the GitLab UI that is dedicated for Kerberos negotiation. The `https: true` setting is for URL generation only, and doesn't expose any additional TLS configuration. TLS is terminated and configured in the Ingress for GitLab.
 
-NOTE:
+{{< alert type="note" >}}
+
 Due to a current limitation with [our fork of the `nginx-ingress` Helm chart](nginx/fork.md) - specifying a `dedicatedPort` will not currently expose the port for use in the chart's `nginx-ingress` controller. Cluster operators will need to expose this port themselves. Follow [this charts issue](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/3531) for more details and potential workarounds.
+
+{{< /alert >}}
 
 ### LDAP custom allowed realms
 
@@ -2557,7 +2601,11 @@ global:
 
 ## Log rotation
 
-> - [Introduced](https://gitlab.com/gitlab-org/cloud-native/gitlab-logger/-/merge_requests/10) in GitLab 15.6.
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/cloud-native/gitlab-logger/-/merge_requests/10) in GitLab 15.6.
+
+{{< /history >}}
 
 By default, the GitLab Helm chart does not rotate logs. This can cause ephemeral storage issues for containers that run for a long time.
 

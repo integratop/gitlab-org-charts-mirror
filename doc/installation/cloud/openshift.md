@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Preparing OpenShift resources for the GitLab chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 This document walks you through using the automation scripts in this project to create an OpenShift cluster in Google Cloud.
 
@@ -81,8 +84,11 @@ All options have defaults, so no options are required.
 |`LOG_LEVEL`|Verbosity of `openshift-install` output|`info`|
 |`INSTALL_DIR`|Directory for install assets, useful for launching multiple clusters|`install-$CLUSTER_NAME`|
 
-NOTE:
+{{< alert type="note" >}}
+
 The variables `CLUSTER_NAME` and `BASE_DOMAIN` are combined to build the domain name for the cluster.
+
+{{< /alert >}}
 
 ## Destroy your OpenShift cluster
 

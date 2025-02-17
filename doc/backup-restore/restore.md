@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Restoring a GitLab installation
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 To obtain a backup tarball of an existing GitLab instance that used other installation methods like the Linux
 package or GitLab Helm chart, follow the instructions
@@ -145,10 +148,13 @@ The steps for restoring a GitLab installation are
    kubectl scale deploy -lapp=prometheus,release=<helm release name> -n <namespace> --replicas=<value>
    ```
 
-NOTE:
+{{< alert type="note" >}}
+
 During restoration, the backup tarball needs to be extracted to disk.
 This means the Toolbox pod should have disk of necessary size available.
 For more details and configuration please see the [Toolbox documentation](../charts/gitlab/toolbox/_index.md#persistence-configuration).
+
+{{< /alert >}}
 
 ### Restore the runner registration token
 

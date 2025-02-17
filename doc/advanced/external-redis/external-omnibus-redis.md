@@ -23,8 +23,11 @@ Follow the installation instructions for the [Linux package](https://about.gitla
 
 Create a minimal `gitlab.rb` file to be placed at `/etc/gitlab/gitlab.rb`. Be _very_ explicit about what is enabled on this node, use the contents below.
 
-NOTE:
+{{< alert type="note" >}}
+
 This example is not intended to provide [Redis for scaling](https://docs.gitlab.com/ee/administration/redis/index.html).
+
+{{< /alert >}}
 
 - `REDIS_PASSWORD` should be replaced with the value in the [`gitlab-redis` secret](../../installation/secrets.md#redis-password).
 

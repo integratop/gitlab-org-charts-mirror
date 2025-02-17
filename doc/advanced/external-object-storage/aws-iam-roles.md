@@ -56,11 +56,14 @@ use_iam_profile: true
 region: us-east-1
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 Do NOT include `endpoint` in this configuration.
 IRSA makes use of [STS tokens, which use specialized endpoints](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html).
 When `endpoint` is provided, the AWS client will attempt
 [to send an `AssumeRoleWithWebIdentity` message to this endpoint and will fail](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/3148#note_889357676).
+
+{{< /alert >}}
 
 ### Backups
 

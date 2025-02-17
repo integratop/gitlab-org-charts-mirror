@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the GitLab `kas` chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The `kas` sub-chart provides a configurable deployment of the
 [GitLab agent server (KAS)](https://docs.gitlab.com/ee/administration/clusters/kas.html).

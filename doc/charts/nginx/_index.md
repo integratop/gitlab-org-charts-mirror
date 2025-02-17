@@ -5,21 +5,29 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using NGINX
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 We provide a complete NGINX deployment to be used as an Ingress Controller. Not all
 Kubernetes providers natively support the NGINX [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls),
 to ensure compatibility.
 
-NOTE:
+{{< alert type="note" >}}
+
 Our [fork](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/charts/nginx-ingress) of the NGINX chart was pulled from
 [GitHub](https://github.com/kubernetes/ingress-nginx). See [Our NGINX fork](fork.md) for details on what was modified in our fork.
 
-NOTE:
+{{< /alert >}}
+
+{{< alert type="note" >}}
+
 Only one `global.hosts.domain` value is possible.
 Support for multiple domains is being tracked in [issue 3147](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/3147).
+{{< /alert >}}
 
 ## Configuring NGINX
 
@@ -64,7 +72,11 @@ IngressClass (`useGeoClass=true`).
 
 ## Annotation value word blocklist
 
-> - Introduced in [GitLab Helm chart 6.6](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/2713).
+{{< history >}}
+
+- Introduced in [GitLab Helm chart 6.6](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/2713).
+
+{{< /history >}}
 
 In situations where cluster operators need greater control over the generated
 NGINX configuration, the NGINX Ingress allows for [configuration snippets](https://kubernetes.github.io/ingress-nginx/examples/customization/configuration-snippets/)

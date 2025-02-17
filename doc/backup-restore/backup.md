@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Backing up a GitLab installation
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 GitLab backups are taken by running the `backup-utility` command in the Toolbox pod provided in the chart. Backups can also be automated by enabling the [Cron based backup](#cron-based-backup) functionality of this chart.
 
@@ -37,13 +40,16 @@ Follow these steps for backing up a GitLab Helm chart based installation.
 
 ## Cron based backup
 
-NOTE:
+{{< alert type="note" >}}
+
 The Kubernetes CronJob created by the Helm chart
 sets the `cluster-autoscaler.kubernetes.io/safe-to-evict: "false"`
 annotation on the jobTemplate. Some Kubernetes environments, such as
 GKE Autopilot, don't allow this annotation to be set and will not create
 Job Pods for the backup.
 This annotation can be changed by setting the `gitlab.toolbox.backups.cron.safeToEvict` parameter to `true`, which will allow the Jobs to be created but at the risk of being evicted and corrupting the backup.
+
+{{< /alert >}}
 
 Cron based backups can be enabled in this chart to happen at regular intervals as defined by the [Kubernetes schedule](https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#schedule).
 
@@ -118,14 +124,21 @@ gitlab:
         extraArgs: "--s3tool awscli --aws-s3-endpoint-url <MINIO-INGRESS-URL>"
 ```
 
-NOTE:
+{{< alert type="note" >}}
+
 The S3 CLI tool `s5cmd` support is under investigation.
 See [issue 523](https://gitlab.com/gitlab-org/build/CNG/-/issues/523) to track
 the progress.
 
+{{< /alert >}}
+
 ### Server-side repository backups
 
-> - [Introduced](https://gitlab.com/gitlab-org/gitlab/-/issues/438393) in GitLab 17.0.
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/gitlab/-/issues/438393) in GitLab 17.0.
+
+{{< /history >}}
 
 Instead of storing large repository backups in the backup archive, repository
 backups can be configured so that the Gitaly node that hosts each repository is

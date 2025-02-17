@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the GitLab Webservice chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The `webservice` sub-chart provides the GitLab Rails webserver with two Webservice workers
 per pod, which is the minimum necessary for a single pod to be able to serve any web request in GitLab.

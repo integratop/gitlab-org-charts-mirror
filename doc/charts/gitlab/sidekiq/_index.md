@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the GitLab-Sidekiq chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The `sidekiq` sub-chart provides configurable deployment of Sidekiq workers, explicitly
 designed to provide separation of queues across multiple `Deployment`s with individual
@@ -355,12 +358,15 @@ redis:
 | `sentinels.[].host` | String  |         | The hostname of Redis Sentinel server for a Redis HA setup.                                                                                                                                                                                                                                        |
 | `sentinels.[].port` | Integer | `26379` | The port on which to connect to the Redis Sentinel server.                                                                                                                                                                                                                                         |
 
-NOTE:
+{{< alert type="note" >}}
+
 The current Redis Sentinel support only supports Sentinels that have
 been deployed separately from the GitLab chart. As a result, the Redis
 deployment through the GitLab chart should be disabled with `redis.install=false`.
 The Secret containing the Redis password needs to be manually created
 before deploying the GitLab chart.
+
+{{< /alert >}}
 
 ### PostgreSQL
 
@@ -438,9 +444,12 @@ on a per-pod basis.
 | `maxReplicas`                | Integer | `10`      | Maximum number of replicas                                                                                                            |
 | `maxUnavailable`             | Integer | `1`       | Limit of maximum number of Pods to be unavailable                                                                                     |
 
-NOTE:
+{{< alert type="note" >}}
+
 [Detailed documentation of the Sidekiq memory killer is available](https://docs.gitlab.com/ee/administration/sidekiq/sidekiq_memory_killer.html)
 in the Linux package documentation.
+
+{{< /alert >}}
 
 ## Per-pod Settings
 
@@ -448,10 +457,13 @@ The `pods` declaration provides for the declaration of all attributes for a work
 pod. These will be templated to `Deployment`s, with individual `ConfigMap`s for their
 Sidekiq instances.
 
-NOTE:
+{{< alert type="note" >}}
+
 The settings default to including a single pod that is set up to monitor
 all queues. Making changes to the pods section will *overwrite the default pod* with
 a different pod configuration. It will not add a new pod in addition to the default.
+
+{{< /alert >}}
 
 | Name                                  | Type    | Default                                                             | Description                                                                                                                                                                                                                                                             |
 | :-----------------------------------  | :-----: | :------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

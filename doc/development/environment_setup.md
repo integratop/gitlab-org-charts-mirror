@@ -63,12 +63,15 @@ A cloud or local Kubernetes cluster may be used for development.
 For simple issues, a local cluster is often enough to test deployments.
 When dealing with networking, storage, or other complex issues, a cloud Kubernetes cluster allows you to more accurately recreate a production environment.
 
-WARNING:
+{{< alert type="warning" >}}
+
 Official GitLab images are built with the x86-64 architecture.
 For local development, Apple silicon users can use an [alternate Docker setup](kind/_index.md#apple-silicon-m1m2)
 to emulate a compatible architecture.
 Support for multiple architectures, including AArch64/ARM64, is under active development.
 See [issue 2899](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2899) for more information.
+
+{{< /alert >}}
 
 ### Local cluster
 

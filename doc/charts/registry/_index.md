@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Using the Container Registry
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 The `registry` sub-chart provides the Registry component to a complete cloud-native
 GitLab deployment on Kubernetes. This sub-chart is based on the
@@ -893,11 +896,14 @@ If you chose to use the `filesystem` driver:
 For the sake of resiliency and simplicity, it is recommended to make use of an
 external service, such as `s3`, `gcs`, `azure` or other compatible Object Storage.
 
-NOTE:
+{{< alert type="note" >}}
+
 The chart will populate `delete.enabled: true` into this configuration
 by default if not specified by the user. This keeps expected behavior in line with
 the default use of MinIO, as well as the Linux package. Any user provided value
 will supersede this default.
+
+{{< /alert >}}
 
 ### middleware.storage
 
@@ -938,8 +944,11 @@ Various vendors use different field names for the same construct:
 | Google CDN |  `keyname`  |
 | CloudFront | `keypairid` |
 
-NOTE:
+{{< alert type="note" >}}
+
 Only configuration of `middleware.storage` section is supported at this time.
+
+{{< /alert >}}
 
 ### debug
 
@@ -997,16 +1006,23 @@ profiling:
 
 ### database
 
-> - [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) feature.
-> - [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/423459) in GitLab 17.3.
+{{< history >}}
+
+- [Introduced](https://gitlab.com/groups/gitlab-org/-/epics/5521) in GitLab 16.4 as a [beta](https://docs.gitlab.com/ee/policy/development_stages_support.html#beta) feature.
+- [Generally available](https://gitlab.com/gitlab-org/gitlab/-/issues/423459) in GitLab 17.3.
+
+{{< /history >}}
 
 The `database` property is optional and enables the [metadata database](https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md#database).
 
 See the [administration documentation](https://docs.gitlab.com/ee/administration/packages/container_registry_metadata_database.html)
 before enabling this feature.
 
-NOTE:
+{{< alert type="note" >}}
+
 This feature requires PostgreSQL 13 or newer.
+
+{{< /alert >}}
 
 ```yaml
 database:
@@ -1045,8 +1061,11 @@ database:
 
 #### Load balancing
 
-WARNING:
+{{< alert type="warning" >}}
+
 This is an experimental feature under active development and must not be used in production.
+
+{{< /alert >}}
 
 The `loadBalancing` section allows configuring [database load balancing](https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md#loadbalancing). The [Redis cache](#redis-cache) must be enabled for this feature to work.
 
@@ -1081,10 +1100,13 @@ gc:
 
 ### Redis cache
 
-NOTE:
+{{< alert type="note" >}}
+
 The Redis cache is a beta feature from version 16.4 and later. Please
 review the [feedback issue](https://gitlab.com/gitlab-org/gitlab/-/issues/423459)
 and associated documentation before enabling this feature.
+
+{{< /alert >}}
 
 The `redis.cache` property is optional and provides options related to the
 [Redis cache](https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md#cache-1).
@@ -1150,7 +1172,11 @@ redis:
 
 #### Sentinel password support
 
-> - [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3805) in GitLab 17.2.
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/3805) in GitLab 17.2.
+
+{{< /history >}}
 
 The `redis.cache` can also use the [`global.redis.sentinelAuth` configuration](../globals.md#redis-sentinel-password-support)
 to use an authentication password for Redis Sentinel. Local values can
@@ -1174,9 +1200,12 @@ redis:
 
 ### Redis rate-limiter
 
-WARNING:
+{{< alert type="warning" >}}
+
 The Redis rate-limiting is [under development](https://gitlab.com/groups/gitlab-org/-/epics/13237).
 More functionality details will be added to this section as they become available.
+
+{{< /alert >}}
 
 The `redis.rateLimiting` property is optional and provides options related to the
 [Redis rate-limiter](https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md#ratelimiter).
@@ -1213,10 +1242,13 @@ The Docker Registry will build up extraneous data over time which can be freed u
 As of [now](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/1586) there is no
 fully automated or scheduled way to run the garbage collection with this Chart.
 
-WARNING:
+{{< alert type="warning" >}}
+
 You must use [online garbage collection](https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md#gc) with the
 [metadata database](#database). Using manual garbage collection with the metadata database will lead to data loss.
 Online garbage collection fully replaces the need to manually run garbage collection.
+
+{{< /alert >}}
 
 ### Manual Garbage Collection
 

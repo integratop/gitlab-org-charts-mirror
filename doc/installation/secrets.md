@@ -5,9 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Configure secrets for the GitLab chart
 ---
 
-DETAILS:
-**Tier:** Free, Premium, Ultimate
-**Offering:** GitLab Self-Managed
+{{< details >}}
+
+- Tier: Free, Premium, Ultimate
+- Offering: GitLab Self-Managed
+
+{{< /details >}}
 
 GitLab requires a variety of secrets to operate:
 
@@ -147,8 +150,11 @@ If this secret is rotated, all SSH clients will see `hostname mismatch` errors.
 
 ### Initial Enterprise license
 
-WARNING:
+{{< alert type="warning" >}}
+
 This method will only add a license at the time of installation. Use the Admin Area in the web user interface to renew or upgrade licenses.
+
+{{< /alert >}}
 
 Create a Kubernetes secret for storing the Enterprise license for the GitLab instance.
 Replace `<name>` with the name of the release.
@@ -223,7 +229,11 @@ This secret is referenced by the `global.praefect.authToken.secret` setting.
 
 ### GitLab Rails secret
 
-> - The `active_record_encryption_*` keys were added in [GitLab 17.8](../releases/8_0.md#upgrade-to-880).
+{{< history >}}
+
+- The `active_record_encryption_*` keys were added in [GitLab 17.8](../releases/8_0.md#upgrade-to-880).
+
+{{< /history >}}
 
 Replace `<name>` with the name of the release.
 
@@ -306,9 +316,12 @@ This secret is referenced by the `gitlab.kas.websocketToken.secret` setting.
 
 ### GitLab Suggested Reviewers secret
 
-NOTE:
+{{< alert type="note" >}}
+
 The Suggested Reviewers secret is created automatically and only used on GitLab.com.
 This secret is not needed on GitLab Self-Managed.
+
+{{< /alert >}}
 
 GitLab Rails requires that a secret for Suggested Reviewers is present. You can
 leave it to the chart to auto-generate the secret, or you can create this secret
@@ -346,9 +359,12 @@ This secret is referenced by the `global.psql.password.secret` setting.
 
 #### Changing the PostgreSQL password for the bundled PostgreSQL subchart
 
-WARNING:
+{{< alert type="warning" >}}
+
 The default Helm chart configuration is **not intended for production**, which includes the bundled PostgreSQL
 subchart.
+
+{{< /alert >}}
 
 The bundled PostgreSQL subchart only configures the database with the passwords from the secret when the database is initially created.
 Additional steps need to be taken to change the passwords in an existing database.
@@ -440,8 +456,11 @@ kubectl create secret generic ldap-main-password --from-literal=password=yourpas
 Then use `--set global.appConfig.ldap.servers.main.password.secret=ldap-main-password` to
 inject the password into your configuration.
 
-NOTE:
+{{< alert type="note" >}}
+
 Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+
+{{< /alert >}}
 
 ### SMTP password
 
@@ -454,8 +473,11 @@ kubectl create secret generic smtp-password --from-literal=password=yourpassword
 
 Then use `--set global.smtp.password.secret=smtp-password` in your Helm command.
 
-NOTE:
+{{< alert type="note" >}}
+
 Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+
+{{< /alert >}}
 
 ### IMAP password for incoming emails
 
@@ -472,8 +494,11 @@ kubectl create secret generic incoming-email-password --from-literal="password=a
 Then use `--set global.appConfig.incomingEmail.password.secret=incoming-email-password`
 in your Helm command along with other required settings as specified [in the docs](command-line-options.md#incoming-email-configuration).
 
-NOTE:
+{{< alert type="note" >}}
+
 Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+
+{{< /alert >}}
 
 ### IMAP password for Service Desk emails
 
@@ -491,8 +516,11 @@ kubectl create secret generic service-desk-email-password --from-literal="passwo
 Then use `--set global.appConfig.serviceDeskEmail.password.secret=service-desk-email-password`
 in your Helm command along with other required settings as specified [in the docs](command-line-options.md#service-desk-email-configuration).
 
-NOTE:
+{{< alert type="note" >}}
+
 Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+
+{{< /alert >}}
 
 ### GitLab incoming email auth token
 
@@ -543,8 +571,11 @@ kubectl create secret generic incoming-email-client-secret --from-literal=secret
 Then, use `--set global.appConfig.incomingEmail.clientSecret.secret=incoming-email-client-secret`
 in your Helm command along with other required settings as specified [in the docs](command-line-options.md#incoming-email-configuration).
 
-NOTE:
+{{< alert type="note" >}}
+
 Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+
+{{< /alert >}}
 
 ### Microsoft Graph client secret for Service Desk emails
 
@@ -558,8 +589,11 @@ kubectl create secret generic service-desk-email-client-secret --from-literal=se
 Then, use `--set global.appConfig.serviceDeskEmail.clientSecret.secret=service-desk-email-client-secret`
 in your Helm command along with other required settings as specified [in the docs](command-line-options.md#service-desk-email-configuration).
 
-NOTE:
+{{< alert type="note" >}}
+
 Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+
+{{< /alert >}}
 
 ### Microsoft Graph client secret for outgoing emails
 
@@ -572,8 +606,11 @@ kubectl create secret generic microsoft-graph-mailer-client-secret --from-litera
 Then, use `--set global.appConfig.microsoft_graph_mailer.client_secret.secret=microsoft-graph-mailer-client-secret`
 in your Helm command.
 
-NOTE:
+{{< alert type="note" >}}
+
 Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+
+{{< /alert >}}
 
 ### S/MIME Certificate
 
