@@ -420,15 +420,25 @@ Pods to specific endpoints.
 ### Example Network Policy
 
 The `gitlab-shell` service requires Ingress connections for port 22 and Egress
-connections to various to default workhorse port 8181. This examples adds the
+connections to various to default workhorse port 8181. This example adds the
 following network policy:
 
-- All Ingress requests from the network on TCP `0.0.0.0/0` port 2222 are allowed
-- All Egress requests to the network on UDP `10.0.0.0/8` port 53 are allowed for DNS
-- All Egress requests to the network on TCP `10.0.0.0/8` port 8181 are allowed for Workhorse
-- All Egress requests to the network on TCP `10.0.0.0/8` port 8075 are allowed for Gitaly
+- Allows Ingress requests:
+  - From the `nginx-ingress` pod to port `2222`
+  - From the `prometheus` pod to port `9122`
+
+    NOTE:
+    Access from `prometheus` to port `9122` is only necessary when the SSH daemon is set to `gitlab-sshd`
+
+- Allows Egress requests:
+  - To the `webservice` pod to port `8181`
+  - To the `gitaly` pod to port `8075`
 
 _Note the example provided is only an example and may not be complete_
+
+The example is based on the assumption that `kube-dns` was deployed 
+to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+`monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml
 networkpolicy:
@@ -437,22 +447,49 @@ networkpolicy:
     enabled: true
     rules:
       - from:
-        - ipBlock:
-            cidr: 0.0.0.0/0
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: nginx-ingress
+            podSelector:
+              matchLabels:
+                app: nginx-ingress
+                component: controller
         ports:
           - port: 2222
-            protocol: TCP
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: monitoring
+            podSelector:
+              matchLabels:
+                app: prometheus
+                component: server
+                release: gitlab
+        ports:
+          - port: 9122
   egress:
     enabled: true
     rules:
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - podSelector:
+              matchLabels:
+                app: gitaly
+        ports:
+          - port: 8075
+      - to:
+          - podSelector:
+              matchLabels:
+                app: webservice
         ports:
           - port: 8181
-            protocol: TCP
-          - port: 8075
-            protocol: TCP
+      - to:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: kube-system
+            podSelector:
+              matchLabels:
+                k8s-app: kube-dns
+        ports:
           - port: 53
             protocol: UDP
 ```

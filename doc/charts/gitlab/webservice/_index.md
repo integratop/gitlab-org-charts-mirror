@@ -746,24 +746,32 @@ Pods to specific endpoints.
 
 ### Example Network Policy
 
-The webservice service requires Ingress connections for only the Prometheus
-exporter if enabled and traffic coming from the NGINX Ingress, and typically
-requires Egress connections to various places. This examples adds the following
-network policy:
+The webservice service requires Ingress connections for the Prometheus
+exporter if enabled, traffic coming from the NGINX Ingress and several GitLab pods.
+Typically it requires Egress connections to various places.
+This examples adds the following network policy:
 
-- All Ingress requests from the network on TCP `10.0.0.0/8` port 8080 are allowed for metrics exporting and NGINX Ingress
-- All Ingress requests to port 8181 are allowed for general service operation
-- All Egress requests to the network on UDP `10.0.0.0/8` port 53 are allowed for DNS
-- All Egress requests to the network on TCP `10.0.0.0/8` port 5432 are allowed for PostgreSQL
-- All Egress requests to the network on TCP `10.0.0.0/8` port 6379 are allowed for Redis
-- All Egress requests to the network on TCP `10.0.0.0/8` port 8075 are allowed for Gitaly
-- Other Egress requests to the local network on `10.0.0.0/8` are restricted
-- Egress requests outside of the `10.0.0.0/8` are allowed
+- Allows Ingress requests:
+  - From the pods `gitaly`, `gitlab-pages`, `gitlab-shell`, `kas` , `mailroom` and `nginx-ingress` to port `8181`
+  - From the `Prometheus` pod to port `8080`, `8083` and `9229`
+- Allows Egress requests:
+  - To the `gitaly` pod to port `8075`
+  - To the `kas` pod to port `8153`
+  - To `kube-dns` to port `53`
+  - To the `registry` pod to port `5000`
+  - To external database `172.16.0.10/32` to port `5432`
+  - To external Redis `172.16.0.11/32` to port `6379`
+  - To the internet `0.0.0.0/0` to port `443`
+  - To endpoints like AWS VPC endpoint for S3 or STS `172.16.1.0/24` to port `443`
 
 _Note the example provided is only an example and may not be complete_
 
-_Note the Webservice requires outbound connectivity to the public internet
-for images on [external object storage](../../../advanced/external-object-storage)_
+_Note the Webservice requires outbound connectivity to the public internet 
+for images on [external object storage](../../../advanced/external-object-storage)_  
+
+The example is based on the assumption that `kube-dns` was deployed 
+to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+`monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml
 networkpolicy:
@@ -772,45 +780,100 @@ networkpolicy:
     enabled: true
     rules:
       - from:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - podSelector:
+              matchLabels:
+                app: gitaly
         ports:
-        - port: 8080
+          - port: 8181
       - from:
+          - podSelector:
+              matchLabels:
+                app: gitlab-pages
         ports:
-        - port: 8181
+          - port: 8181
+      - from:
+          - podSelector:
+              matchLabels:
+                app: gitlab-shell
+        ports:
+          - port: 8181
+      - from:
+          - podSelector:
+              matchLabels:
+                app: kas
+        ports:
+          - port: 8181
+      - from:
+          - podSelector:
+              matchLabels:
+                app: mailroom
+        ports:
+          - port: 8181
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: nginx-ingress
+            podSelector:
+              matchLabels:
+                app: nginx-ingress
+                component: controller
+        ports:
+          - port: 8181
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: monitoring
+            podSelector:
+              matchLabels:
+                app: prometheus
+                component: server
+                release: gitlab
+        ports:
+          - port: 9229
+          - port: 8080
+          - port: 8083
   egress:
     enabled: true
     rules:
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - podSelector:
+              matchLabels:
+                app: gitaly
         ports:
-        - port: 53
-          protocol: UDP
+          - port: 8075
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - podSelector:
+              matchLabels:
+                app: kas
         ports:
-        - port: 5432
-          protocol: TCP
+          - port: 8153
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - ipBlock:
+              cidr: 0.0.0.0/0
+              except:
+                - 10.0.0.0/8
         ports:
-        - port: 6379
-          protocol: TCP
+          - port: 443
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - ipBlock:
+              cidr: 172.16.0.10/32
         ports:
-        - port: 8075
-          protocol: TCP
+          - port: 5432
       - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-            - 10.0.0.0/8
+          - ipBlock:
+              cidr: 172.16.0.11/32
+        ports:
+          - port: 6379
+      - to:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: kube-system
+            podSelector:
+              matchLabels:
+                k8s-app: kube-dns
+        ports:
+          - port: 53
+            protocol: UDP
 ```
 
 ### LoadBalancer Service
