@@ -603,17 +603,29 @@ The Sidekiq service requires Ingress connections for only the Prometheus
 exporter if enabled, and normally requires Egress connections to various
 places. This examples adds the following network policy:
 
-- All Ingress requests from the network on TCP `10.0.0.0/8` port 3807 are allowed for metrics exporting
-- All Egress requests to the network on UDP `10.0.0.0/8` port 53 are allowed for DNS
-- All Egress requests to the network on TCP `10.0.0.0/8` port 5432 are allowed for PostgreSQL
-- All Egress requests to the network on TCP `10.0.0.0/8` port 6379 are allowed for Redis
-- Other Egress requests to the local network on `10.0.0.0/8` are restricted
-- Egress requests outside of the `10.0.0.0/8` are allowed
+- Allows Ingress requests:
+  - From the `Prometheus` pod to port `3807`
+- Allows Egress requests:
+  - To `kube-dns` to port `53`
+  - To the `gitaly` pod to port `8075`
+  - To the `registry` pod to port `5000`
+  - To the `kas` pod to port `8153`
+  - To external database `172.16.0.10/32` to port `5432`
+  - To external Redis `172.16.0.11/32` to port `6379`
+  - To external Elasticsearch `172.16.0.12/32` to port `443`
+  - To mail gateway `172.16.0.13/32` to port `587`
+  - To endpoints like AWS VPC endpoint for S3 or STS `172.16.1.0/24` to port `443`
+  - To internal subnets `172.16.2.0/24` to port `443` to send webhooks
 
 *Note the example provided is only an example and may not be complete*
+ 
+NOTE:
+The Sidekiq service requires outbound connectivity to the public
+internet for images on [external object storage](../../../advanced/external-object-storage) if no local endpoint is available.  
 
-_Note that the Sidekiq service requires outbound connectivity to the public
-internet for images on [external object storage](../../../advanced/external-object-storage)_
+The example is based on the assumption that `kube-dns` was deployed 
+to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+`monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml
 networkpolicy:
@@ -622,36 +634,71 @@ networkpolicy:
     enabled: true
     rules:
       - from:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: monitoring
+            podSelector:
+              matchLabels:
+                app: prometheus
+                component: server
+                release: gitlab
         ports:
-        - port: 3807
+          - port: 3807
   egress:
     enabled: true
     rules:
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - podSelector:
+              matchLabels:
+                app: gitaly
         ports:
-        - port: 53
-          protocol: UDP
+          - port: 8075
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - podSelector:
+              matchLabels:
+                app: kas
         ports:
-        - port: 5432
-          protocol: TCP
+          - port: 8153
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: kube-system
+            podSelector:
+              matchLabels:
+                k8s-app: kube-dns
         ports:
-        - port: 6379
-          protocol: TCP
+          - port: 53
+            protocol: UDP
       - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-            - 10.0.0.0/8
+          - ipBlock:
+              cidr: 172.16.0.10/32
+        ports:
+          - port: 5432
+      - to:
+          - ipBlock:
+              cidr: 172.16.0.11/32
+        ports:
+          - port: 6379
+      - to:
+          - ipBlock:
+              cidr: 172.16.0.12/32
+        ports:
+          - port: 25
+      - to:
+          - ipBlock:
+              cidr: 172.16.0.13/32
+        ports:
+          - port: 443
+      - to:
+          - ipBlock:
+              cidr: 172.16.1.0/24
+        ports:
+          - port: 443
+      - to:
+          - ipBlock:
+              cidr: 172.16.2.0/24
+        ports:
+          - port: 443
 ```
 
 ## Configuring KEDA

@@ -556,28 +556,78 @@ The Registry service normally requires egress connections to object storage,
 Ingress connections from Docker clients, and kube-dns for DNS lookups. This
 adds the following network restrictions to the Registry service:
 
-- All egress requests to the local network on `10.0.0.0/8` port 53 are allowed (for kubeDNS)
-- Other egress requests to the local network on `10.0.0.0/8` are restricted
-- Egress requests outside of the `10.0.0.0/8` are allowed
+- Allows Ingress requests:
+  - From the pods `sidekiq` , `webservice` and `nginx-ingress` to port `5000`
+  - From the `Prometheus` pod to port `9235`
+- Allows Egress requests:
+  - To `kube-dns` to port `53`
+  - To endpoints like AWS VPC endpoint for S3 or STS `172.16.1.0/24` to port `443`
+  - To the internet `0.0.0.0/0` to port `443`
 
 _Note that the registry service requires outbound connectivity to the public
-internet for images on [external object storage](../../advanced/external-object-storage)_
+internet for images on [external object storage](../../advanced/external-object-storage) if no endpoint is used_  
+
+The example is based on the assumption that `kube-dns` was deployed 
+to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+`monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml
 networkpolicy:
   enabled: true
+  ingress:
+    enabled: true
+    rules:
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: nginx-ingress
+            podSelector:
+              matchLabels:
+                app: nginx-ingress
+                component: controller
+        ports:
+          - port: 5000
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: monitoring
+            podSelector:
+              matchLabels:
+                app: prometheus
+                component: server
+                release: gitlab
+        ports:
+          - port: 9235
+      - from:
+          - podSelector:
+              matchLabels:
+                app: sidekiq
+        ports:
+          - port: 5000
+      - from:
+          - podSelector:
+              matchLabels:
+                app: webservice
+        ports:
+          - port: 5000
   egress:
     enabled: true
-    # The following rules enable traffic to all external
-    # endpoints, except the local
-    # network (except DNS requests)
     rules:
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: kube-system
+            podSelector:
+              matchLabels:
+                k8s-app: kube-dns
         ports:
-        - port: 53
-          protocol: UDP
+          - port: 53
+            protocol: UDP
+      - to:
+          - ipBlock:
+              cidr: 172.16.1.0/24
+        ports:
+          - port: 443
       - to:
         - ipBlock:
             cidr: 0.0.0.0/0

@@ -236,14 +236,22 @@ Pods to specific endpoints.
 ### Example Network Policy
 
 The `gitlab-pages` service requires Ingress connections for port 80 and 443 and
-Egress connections to various to default workhorse port 8181. This examples adds
+Egress connections to various to default workhorse port 8181. This example adds
 the following network policy:
 
-- All Ingress requests from the network on TCP `0.0.0.0/0` port 80 and 443 are allowed
-- All Egress requests to the network on UDP `10.0.0.0/8` port 53 are allowed for DNS
-- All Egress requests to the network on TCP `10.0.0.0/8` port 8181 are allowed for Workhorse
+- Allows Ingress requests: 
+  - From the `nginx-ingress` pod to port `8090`
+  - From the `prometheus` pod to port `9235`
+- Allows Egress requests:
+  - To `kube-dns` on port `53`
+  - To the `webservice` pod to port `8181`
+  - To endpoints like AWS VPC endpoint for S3 `172.16.1.0/24` on port `443`
 
-_Note the example provided is only an example and may not be complete_
+_Note the example provided is only an example and may not be complete_  
+
+The example is based on the assumption that `kube-dns` was deployed 
+to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+`monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml
 networkpolicy:
@@ -251,25 +259,51 @@ networkpolicy:
   ingress:
     enabled: true
     rules:
-      - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: monitoring
+            podSelector:
+              matchLabels:
+                app: prometheus
+                component: server
+                release: gitlab
         ports:
-          - port: 80
-            protocol: TCP
-          - port: 443
-            protocol: TCP
+          - port: 9235
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: nginx-ingress
+            podSelector:
+              matchLabels:
+                app: nginx-ingress
+                component: controller
+        ports:
+          - port: 8090
   egress:
     enabled: true
     rules:
       - to:
-        - ipBlock:
-            cidr: 10.0.0.0/8
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: kube-system
+            podSelector:
+              matchLabels:
+                k8s-app: kube-dns
         ports:
-          - port: 8181
-            protocol: TCP
           - port: 53
             protocol: UDP
+      - to:
+          - ipBlock:
+              cidr: 172.16.1.0/24
+        ports:
+          - port: 443
+      - to:
+          - podSelector:
+              matchLabels:
+                app: webservice
+        ports:
+          - port: 8181
 ```
 
 ### TLS access to GitLab Pages
