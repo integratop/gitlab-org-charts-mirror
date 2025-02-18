@@ -66,7 +66,7 @@ This storage class name is passed through as-is to the storage class argument of
 
 #### GitLab backup bucket
 
-The default name of the bucket that will be used to store backups is `gitlab-backups`. This is configurable
+The default name of the bucket used to store backups is `gitlab-backups`. This is configurable
 using the `BACKUP_BUCKET_NAME` environment variable.
 
 #### Backing up to Google Cloud Storage
