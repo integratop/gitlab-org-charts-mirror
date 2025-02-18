@@ -11,5 +11,5 @@ trigger_operator_test:
   allow_failure: true
   rules:
     - !reference [.rule:skip_docs_pipeline]
-    - !reference [.rule:skip_if_fork]
+    - !reference [.rule:skip_if_not_canonical_or_security]
     - when: manual
