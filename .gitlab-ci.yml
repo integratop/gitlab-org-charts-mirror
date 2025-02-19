@@ -101,15 +101,15 @@ include:
   - local: '/.gitlab/ci/environments/gke130.gitlab-ci.yml'
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == "gke130"'
-  - local: '/.gitlab/ci/environments/gke130-arm.gitlab-ci.yml'
+  - local: '/.gitlab/ci/environments/gke131.gitlab-ci.yml'
     rules:
-      - if: '$LIMIT_TO == "" || $LIMIT_TO == "gke130a"'
-  - local: '/.gitlab/ci/environments/eks.gitlab-ci.yml'
+      - if: '$LIMIT_TO == "" || $LIMIT_TO == "gke131"'
+  - local: '/.gitlab/ci/environments/gke131-arm.gitlab-ci.yml'
     rules:
-      - if: '$LIMIT_TO == "eks"'
-  - local: '/.gitlab/ci/environments/eks130.gitlab-ci.yml'
+      - if: '$LIMIT_TO == "" || $LIMIT_TO == "gke131a"'
+  - local: '/.gitlab/ci/environments/eks131.gitlab-ci.yml'
     rules:
-      - if: '$LIMIT_TO == "eks130"'
+      - if: '$LIMIT_TO == "eks131"'
   - local: /.gitlab/ci/scanners.yml
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == null'
@@ -318,18 +318,27 @@ trigger-gke129:
 trigger-gke130:
   extends: .trigger_review_job
   needs:
-    - trigger_review_current
+    - trigger_review_secondary
   variables:
     LIMIT_TO: gke130
   rules:
-    - !reference [.trigger_review_current, rules]
+    - !reference [.trigger_review_secondary, rules]
 
-trigger-gke130a:
+trigger-gke131:
   extends: .trigger_review_job
   needs:
     - trigger_review_current
   variables:
-    LIMIT_TO: gke130a
+    LIMIT_TO: gke131
+  rules:
+    - !reference [.trigger_review_current, rules]
+
+trigger-gke131a:
+  extends: .trigger_review_job
+  needs:
+    - trigger_review_current
+  variables:
+    LIMIT_TO: gke131a
   rules:
     - !reference [.trigger_review_current, rules]
 
@@ -342,24 +351,14 @@ trigger-vcluster:
   rules:
     - !reference [.trigger_review_secondary, rules]
 
-trigger-eks:
+trigger-eks131:
   extends: .trigger_review_job
   needs:
     - trigger_review_secondary
   variables:
-    LIMIT_TO: eks
+    LIMIT_TO: eks131
   rules:
     - !reference [.trigger_review_secondary, rules]
-
-trigger-eks130:
-  extends: .trigger_review_job
-  needs:
-    - trigger_review_secondary
-  variables:
-    LIMIT_TO: eks130
-  rules:
-    - !reference [.trigger_review_secondary, rules]
-
 
 # Jobs using auto_stop_in that exit with a failure will not execute the on_stop
 # action. We get frequent failures during review_* jobs. Their accompanying
