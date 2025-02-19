@@ -51,6 +51,7 @@ variables:
   DEBIAN_VERSION: bookworm
   RUBY_VERSION: "3.3.7"
   CI_TOOLS_VERSION: "4.22.0"
+  CI_TOOLS_NAMESPACE: "gitlab-org"
   GITLAB_QA_VERSION: "15.1.0"
   # STRICT_VERSIONS is used in RSpecs to ensure exact version match for tools like "helm" and "kubectl"
   STRICT_VERSIONS: "true"
@@ -430,7 +431,7 @@ trigger-eks131:
     - if: '$PIPELINE_TYPE == "QA_KNAPSACK_UPDATE_PIPELINE"'
 
 .qa:
-  image: registry.gitlab.com/gitlab-org/gitlab-omnibus-builder/distribution_ci_tools:${CI_TOOLS_VERSION}
+  image: "${CI_REGISTRY}/${CI_TOOLS_NAMESPACE}/gitlab-omnibus-builder/distribution_ci_tools:${CI_TOOLS_VERSION}"
   stage: qa
   services:
   - docker:${DOCKER_VERSION}-dind
@@ -470,7 +471,7 @@ trigger-eks131:
 wait_for_dev_images:
   # Remove after https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2370 is complete
   timeout: 2h
-  image: registry.gitlab.com/gitlab-org/gitlab-omnibus-builder/distribution_ci_tools:${CI_TOOLS_VERSION}
+  image: "${CI_REGISTRY}/${CI_TOOLS_NAMESPACE}/gitlab-omnibus-builder/distribution_ci_tools:${CI_TOOLS_VERSION}"
   stage: prepare
   services:
   - docker:${DOCKER_VERSION}-dind
@@ -525,7 +526,7 @@ publish_devel_package:
 release_package:
   stage: release-package
   timeout: 2h
-  image: registry.gitlab.com/gitlab-org/gitlab-omnibus-builder/distribution_ci_tools:${CI_TOOLS_VERSION}
+  image: "${CI_REGISTRY}/${CI_TOOLS_NAMESPACE}/gitlab-omnibus-builder/distribution_ci_tools:${CI_TOOLS_VERSION}"
   script:
     - |
       if [[ $CI_COMMIT_REF_NAME =~ $AUTO_DEPLOY_TAG_REGEX ]]; then
