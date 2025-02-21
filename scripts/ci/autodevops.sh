@@ -325,7 +325,7 @@ function delete() {
 }
 
 function cleanup() {
-  kubectl -n "$NAMESPACE" delete \
+  kubectl -n "$NAMESPACE" delete --ignore-not-found=true \
     $(get_resources "ingress,svc,pdb,hpa,deploy,statefulset,replicaset,job,pod,secret,configmap,clusterrole,clusterrolebinding,role,rolebinding,sa") \
     || true
 
