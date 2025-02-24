@@ -1146,6 +1146,8 @@ global:
     gitlab_docs:
       enabled: false
       host: ""
+    oidcProvider:
+      openidIdTokenExpireInSeconds: 120
     smartcard:
       enabled: false
       CASecret:
@@ -1875,6 +1877,21 @@ global:
 |:----------- |:-------:|:------- |:----------- |
 | `enabled`         | Boolean | `false`  | Enable or Disable the `gitlab_docs` |
 | `host`            | String  |  ""        | docs host                       |
+
+### OpenID Connect token expiration
+
+Configure OpenID Connect (OIDC) provider token expiration.
+
+```yaml
+global:
+  appConfig:
+    oidcProvider:
+      openidIdTokenExpireInSeconds: 120
+```
+
+| Name                            | Type    | Default | Description                                         |
+|---------------------------------|---------|---------|-----------------------------------------------------|
+| `openidIdTokenExpireInSeconds`  | Integer | 120     | Duration (in seconds) before ID tokens expire.      |
 
 ### Smartcard Authentication settings
 
