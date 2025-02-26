@@ -2,6 +2,10 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 8.9.1 (2025-02-26)
+
+No changes.
+
 ## 8.9.0 (2025-02-19)
 
 ### Added (5 changes)
@@ -28,6 +32,16 @@ entry.
 ### Deprecated (1 change)
 
 - [Document Kubernetes 1.28 as deprecated](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/2d8580c1ed16fa762f1fcdaaf8418989f7a104cf) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4115))
+
+## 8.8.4 (2025-02-26)
+
+### Fixed (1 change)
+
+- [Mount certificates to geo-logcursor init containers](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/f402369fc566993f684c5074659f963581d99bb2)
+
+### Changed (1 change)
+
+- [Update dependency gitlab-exporter to v15.2.0](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/c580fcf40e0a157d42c1cec623afbe1959463fb9)
 
 ## 8.8.3 (2025-02-21)
 
@@ -60,6 +74,12 @@ No changes.
 - [Update dependency container-registry to v4.15.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/7d9b71c4adc0078424aa1e9ebfb65efd49ae20a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4059))
 - [Update Helm release gitlab-runner to v0.72.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/13515980ce6275fff3d8241b73725a48f443d2fb) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4038))
 - [Update dependency gitlab-qa to v15](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/a1b4854886a67007690053b6f7606636d9703f53) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4032))
+
+## 8.7.8 (2025-02-26)
+
+### Fixed (1 change)
+
+- [Mount certificates to geo-logcursor init containers](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/2add0a1028fa452230d85d2641b88c5ac4cacbaa)
 
 ## 8.7.7 (2025-02-21)
 
