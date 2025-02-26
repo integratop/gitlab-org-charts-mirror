@@ -67,7 +67,6 @@
     # Delete vcluster from host
     - vcluster_delete
   when: manual
-  allow_failure: true
   rules:
     - !reference [.review_template, rules]
 

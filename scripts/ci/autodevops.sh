@@ -54,6 +54,11 @@ function previousDeployFailed() {
 }
 
 function deploy() {
+  if [ -z "${NAMESPACE}" ]; then
+    echo "Error: NAMESPACE is not set"
+    return 1
+  fi
+
   echo "DEPLOY_MULTIARCH: $DEPLOY_MULTIARCH"
   # Cleanup and previous installs, as FAILED and PENDING_UPGRADE will cause errors with `upgrade`
   if [ "$RELEASE_NAME" != "production" ] && previousDeployFailed ; then
