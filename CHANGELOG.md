@@ -75,6 +75,12 @@ No changes.
 - [Update Helm release gitlab-runner to v0.72.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/13515980ce6275fff3d8241b73725a48f443d2fb) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4038))
 - [Update dependency gitlab-qa to v15](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/a1b4854886a67007690053b6f7606636d9703f53) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4032))
 
+## 8.7.8 (2025-02-26)
+
+### Fixed (1 change)
+
+- [Mount certificates to geo-logcursor init containers](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/2add0a1028fa452230d85d2641b88c5ac4cacbaa)
+
 ## 8.7.7 (2025-02-21)
 
 No changes.
