@@ -618,10 +618,13 @@ places. This examples adds the following network policy:
   - To internal subnets `172.16.2.0/24` to port `443` to send webhooks
 
 *Note the example provided is only an example and may not be complete*
- 
-NOTE:
+
+{{< alert type="note" >}}
+
 The Sidekiq service requires outbound connectivity to the public
 internet for images on [external object storage](../../../advanced/external-object-storage) if no local endpoint is available.  
+
+{{< /alert >}}
 
 The example is based on the assumption that `kube-dns` was deployed 
 to the namespace `kube-system`, `prometheus` was deployed to the namespace 
