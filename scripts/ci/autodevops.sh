@@ -56,7 +56,7 @@ function previousDeployFailed() {
 function deploy() {
   if [ -z "${NAMESPACE}" ]; then
     echo "Error: NAMESPACE is not set"
-    return 1
+    exit 1
   fi
 
   echo "DEPLOY_MULTIARCH: $DEPLOY_MULTIARCH"
