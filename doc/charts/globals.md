@@ -261,9 +261,9 @@ with the `-fips` extension to the image tag.
 --set global.image.tagSuffix="-fips"
 ```
 
-## Custom timezone for all containers
+## Custom time zone for all containers
 
-If you wish to set a custom timezone for all the GitLab containers, you can use the `global.time_zone` key. Refer to `TZ identifier` on the [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the available values. Default is `UTC`.
+If you wish to set a custom time zone for all the GitLab containers, you can use the `global.time_zone` key. Refer to `TZ identifier` on the [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for the available values. Default is `UTC`.
 
 ```shell
 --set global.time_zone="America/Chicago"
@@ -277,7 +277,7 @@ GitLab is using two database connections: one for `main` database and one for
 
 The values under `global.psql` are defaults and are applied to both database
 configurations. If you want to use [two databases](https://docs.gitlab.com/administration/postgresql/multiple_databases/),
-you can specifiy the connection details in `global.psql.main` and `global.psql.ci`.
+you can specify the connection details in `global.psql.main` and `global.psql.ci`.
 
 ```yaml
 global:
