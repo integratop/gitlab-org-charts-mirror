@@ -1445,6 +1445,7 @@ using Helm's `--set variable` option:
 ```shell
 --set global.appConfig.gitlab_kas.externalUrl="wss://custom-kas-url.example.com" \
 --set global.appConfig.gitlab_kas.internalUrl="grpc://custom-internal-url" \
+--set global.appConfig.gitlab_kas.clientTimeoutSeconds=10 # Optional, default is 5 seconds
 ```
 
 or by configuring your `values.yaml`:
@@ -1455,6 +1456,7 @@ global:
     gitlab_kas:
       externalUrl: "wss://custom-kas-url.example.com"
       internalUrl: "grpc://custom-internal-url"
+      clientTimeoutSeconds: 10 # Optional, default is 5 seconds
 ```
 
 #### External KAS
@@ -1467,6 +1469,7 @@ URLs. You can do so using Helm's `--set variable` option:
 --set global.appConfig.gitlab_kas.enabled=true \
 --set global.appConfig.gitlab_kas.externalUrl="wss://custom-kas-url.example.com" \
 --set global.appConfig.gitlab_kas.internalUrl="grpc://custom-internal-url" \
+--set global.appConfig.gitlab_kas.clientTimeoutSeconds=10 # Optional, default is 5 seconds
 ```
 
 or by configuring your `values.yaml`:
@@ -1478,6 +1481,7 @@ global:
       enabled: true
       externalUrl: "wss://custom-kas-url.example.com"
       internalUrl: "grpc://custom-internal-url"
+      clientTimeoutSeconds: 10 # Optional, default is 5 seconds
 ```
 
 #### TLS settings
