@@ -498,6 +498,7 @@ global:
       # enabled:
       # externalUrl:
       # internalUrl:
+      # clientTimeoutSeconds:
 
     ## https://docs.gitlab.com/charts/charts/globals#suggested-reviewers-settings
     suggested_reviewers: {}

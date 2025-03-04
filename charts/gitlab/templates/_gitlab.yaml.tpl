@@ -50,6 +50,7 @@ gitlab_kas:
   secret_file: /etc/gitlab/kas/.gitlab_kas_secret
   external_url: {{ include "gitlab.appConfig.kas.externalUrl" . | quote }}
   internal_url: {{ include "gitlab.appConfig.kas.internalUrl" . | quote }}
+  {{- include "gitlab.appConfig.kas.clientTimeoutSeconds" . | nindent 2 }}
 {{- end -}}
 {{- end -}}
 
