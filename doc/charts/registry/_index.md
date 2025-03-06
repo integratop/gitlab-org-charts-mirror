@@ -1122,7 +1122,7 @@ The `loadBalancing` section allows configuring [database load balancing](https:/
 #### Manage the database
 
 See the [Container registry metadata database](metadata_database.md) page for
-more information about creating the database.
+more information about creating and maintaining the database.
 
 ### `gc` property
 
