@@ -30,6 +30,7 @@ check_docs_content:
     # Lint prose
     - vale --minAlertLevel error doc
   rules:
+    - !reference [.rule:skip_if_dev]
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
@@ -45,6 +46,7 @@ check_docs_markdown:
     # Lint Markdown
     - markdownlint-cli2 'doc/**/*.md'
   rules:
+    - !reference [.rule:skip_if_dev]
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
@@ -60,6 +62,7 @@ check_docs_links:
     # Check Markdown links
     - lychee --offline --include-fragments doc
   rules:
+    - !reference [.rule:skip_if_dev]
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
