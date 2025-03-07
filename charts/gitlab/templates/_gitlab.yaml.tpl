@@ -54,6 +54,23 @@ gitlab_kas:
 {{- end -}}
 {{- end -}}
 
+{{- define "gitlab.appConfig.cell" -}}
+{{- if eq .Values.global.appConfig.cell.enabled true -}}
+{{- with .Values.global.appConfig.cell -}}
+cell:
+  enabled: true
+  id: {{ .id }}
+  database:
+    skip_sequence_alteration: {{ eq .database.skipSequenceAlteration true }}
+  topology_service_client:
+    address: {{ .topologyServiceClient.address | quote }}
+    ca_file: {{ .topologyServiceClient.caFile | quote }}
+    private_key_file: {{ .topologyServiceClient.privateKeyFile | quote }}
+    certificate_file: {{ .topologyServiceClient.certificateFile | quote }}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "gitlab.appConfig.suggested_reviewers" -}}
 suggested_reviewers:
   secret_file: /etc/gitlab/suggested_reviewers/.gitlab_suggested_reviewers_secret
