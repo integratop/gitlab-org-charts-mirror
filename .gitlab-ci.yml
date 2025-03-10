@@ -52,6 +52,7 @@ variables:
   RUBY_VERSION: "3.3.7"
   CI_TOOLS_VERSION: "4.22.0"
   CI_TOOLS_NAMESPACE: "gitlab-org"
+  GITLAB_NAMESPACE: "gitlab-org"
   GITLAB_QA_VERSION: "15.1.0"
   # STRICT_VERSIONS is used in RSpecs to ensure exact version match for tools like "helm" and "kubectl"
   STRICT_VERSIONS: "true"
@@ -601,7 +602,7 @@ knapsack-qa-report:
 
 issue-bot:
   stage: report
-  image: registry.gitlab.com/gitlab-org/distribution/issue-bot:latest
+  image: "${CI_REGISTRY}/${GITLAB_NAMESPACE}/distribution/issue-bot:latest"
   script: /issue-bot
   rules:
     - if: '$PIPELINE_TYPE =~ /DEFAULT_BRANCH_PIPELINE$/'
