@@ -37,6 +37,12 @@ No changes.
 
 - [Document Kubernetes 1.28 as deprecated](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/2d8580c1ed16fa762f1fcdaaf8418989f7a104cf) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4115))
 
+## 8.8.5 (2025-03-11)
+
+### Changed (1 change)
+
+- [Update Helm release gitlab-runner to v0.73.3](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/e372f3a6c0d460b82699a63ddc61cd6a6a5795dc)
+
 ## 8.8.4 (2025-02-26)
 
 ### Fixed (1 change)
