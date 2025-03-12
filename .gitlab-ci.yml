@@ -162,7 +162,6 @@ update-trigger-branch:
     - if: '$PIPELINE_TYPE == "CANONICAL_DEFAULT_BRANCH_PIPELINE"'
     - if: '$TRIGGER_UPDATE'  # Allow us to manually trigger this job in a pipeline if we wish using this CI variable
 
-
 pin_image_versions:
   stage: approve-review-apps
   script:
@@ -174,6 +173,10 @@ pin_image_versions:
     paths:
       - ci.digests.yaml
   rules:
+    # If we ever enable cluster tests in Dev, we have to fix the
+    # pin_image_digtests.{bats|sh} to consider images built from
+    # CNG in Dev
+    - !reference [.rule:skip_if_not_canonical_or_security]
     - if: '$LIMIT_TO != "" && $LIMIT_TO != null && $PARENT_PIPELINE_ID != $CI_PIPELINE_ID'
       when: never
     - if: '$PIPELINE_TYPE =~ /DEFAULT_BRANCH_PIPELINE$/'
