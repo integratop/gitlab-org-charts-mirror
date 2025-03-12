@@ -2,6 +2,10 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 8.9.2 (2025-03-11)
+
+No changes.
+
 ## 8.9.1 (2025-02-26)
 
 No changes.
@@ -32,6 +36,12 @@ No changes.
 ### Deprecated (1 change)
 
 - [Document Kubernetes 1.28 as deprecated](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/2d8580c1ed16fa762f1fcdaaf8418989f7a104cf) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4115))
+
+## 8.8.5 (2025-03-11)
+
+### Changed (1 change)
+
+- [Update Helm release gitlab-runner to v0.73.3](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/e372f3a6c0d460b82699a63ddc61cd6a6a5795dc)
 
 ## 8.8.4 (2025-02-26)
 
@@ -74,6 +84,10 @@ No changes.
 - [Update dependency container-registry to v4.15.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/7d9b71c4adc0078424aa1e9ebfb65efd49ae20a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4059))
 - [Update Helm release gitlab-runner to v0.72.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/13515980ce6275fff3d8241b73725a48f443d2fb) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4038))
 - [Update dependency gitlab-qa to v15](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/a1b4854886a67007690053b6f7606636d9703f53) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4032))
+
+## 8.7.9 (2025-03-11)
+
+No changes.
 
 ## 8.7.8 (2025-02-26)
 
