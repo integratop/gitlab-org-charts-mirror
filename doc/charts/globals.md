@@ -1179,7 +1179,7 @@ application are described below:
 #### Content Security Policy
 
 Setting a Content Security Policy (CSP) can help thwart JavaScript cross-site
-scripting (XSS) attacks. See GitLab documentation for configuration details. [Content Security Policy Documentation](https://docs.gitlab.com/omnibus/settings/configuration.html#set-a-content-security-policy)
+scripting (XSS) attacks. See GitLab documentation for configuration details. [Content Security Policy Documentation](https://docs.gitlab.com/omnibus/settings/configuration/#set-a-content-security-policy)
 
 GitLab automatically provides secure default values for the CSP.
 
@@ -1840,7 +1840,7 @@ global:
 
 ### Sentry settings
 
-Use these settings to enable [GitLab error reporting with Sentry](https://docs.gitlab.com/omnibus/settings/configuration.html#error-reporting-and-logging-with-sentry).
+Use these settings to enable [GitLab error reporting with Sentry](https://docs.gitlab.com/omnibus/settings/configuration/#error-reporting-and-logging-with-sentry).
 
 ```yaml
 global:
@@ -2554,7 +2554,7 @@ More information on the available configuration options is available in the
 [outgoing email documentation](../installation/command-line-options.md#outgoing-email-configuration).
 
 More detailed examples can be found in the
-[Linux package SMTP settings documentation](https://docs.gitlab.com/omnibus/settings/smtp.html).
+[Linux package SMTP settings documentation](https://docs.gitlab.com/omnibus/settings/smtp/).
 
 ## Platform
 
