@@ -569,8 +569,8 @@ adds the following network restrictions to the Registry service:
 _Note that the registry service requires outbound connectivity to the public
 internet for images on [external object storage](../../advanced/external-object-storage) if no endpoint is used_  
 
-The example is based on the assumption that `kube-dns` was deployed 
-to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+The example is based on the assumption that `kube-dns` was deployed
+to the namespace `kube-system`, `prometheus` was deployed to the namespace
 `monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml

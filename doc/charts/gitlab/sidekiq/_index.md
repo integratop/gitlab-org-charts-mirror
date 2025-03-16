@@ -626,8 +626,8 @@ internet for images on [external object storage](../../../advanced/external-obje
 
 {{< /alert >}}
 
-The example is based on the assumption that `kube-dns` was deployed 
-to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+The example is based on the assumption that `kube-dns` was deployed
+to the namespace `kube-system`, `prometheus` was deployed to the namespace
 `monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml

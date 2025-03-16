@@ -491,7 +491,7 @@ After the command completes successfully, the registry is now fully migrated to 
 The container registry supports two types of migrations:
 
 - **Regular schema migrations**: Changes to the database structure that must run before deploying new application code. These should be fast to avoid deployment delays.
-      
+
 - **Post-deployment migrations**: Changes to the database structure that can run while the application is running. Used for longer operations like creating indexes on large tables, avoiding startup delays and extended upgrade downtime.
 
 ### Apply database migrations

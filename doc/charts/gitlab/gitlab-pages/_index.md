@@ -239,7 +239,7 @@ The `gitlab-pages` service requires Ingress connections for port 80 and 443 and
 Egress connections to various to default workhorse port 8181. This example adds
 the following network policy:
 
-- Allows Ingress requests: 
+- Allows Ingress requests:
   - From the `nginx-ingress` pod to port `8090`
   - From the `prometheus` pod to port `9235`
 - Allows Egress requests:
@@ -249,8 +249,8 @@ the following network policy:
 
 _Note the example provided is only an example and may not be complete_  
 
-The example is based on the assumption that `kube-dns` was deployed 
-to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+The example is based on the assumption that `kube-dns` was deployed
+to the namespace `kube-system`, `prometheus` was deployed to the namespace
 `monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml

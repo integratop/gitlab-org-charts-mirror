@@ -442,8 +442,8 @@ following network policy:
 
 _Note the example provided is only an example and may not be complete_
 
-The example is based on the assumption that `kube-dns` was deployed 
-to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+The example is based on the assumption that `kube-dns` was deployed
+to the namespace `kube-system`, `prometheus` was deployed to the namespace
 `monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml
