@@ -550,7 +550,7 @@ webservice:
 
 `annotations` is used to set annotations on the Webservice Ingress.
 
-### serviceUpstream 
+### serviceUpstream
 
 This helps balance traffic to the Webservice pods more evenly by telling NGINX to directly
 contact the Service itself as the upstream. For more information, see the
@@ -769,11 +769,11 @@ This examples adds the following network policy:
 
 _Note the example provided is only an example and may not be complete_
 
-_Note the Webservice requires outbound connectivity to the public internet 
+_Note the Webservice requires outbound connectivity to the public internet
 for images on [external object storage](../../../advanced/external-object-storage)_  
 
-The example is based on the assumption that `kube-dns` was deployed 
-to the namespace `kube-system`, `prometheus` was deployed to the namespace 
+The example is based on the assumption that `kube-dns` was deployed
+to the namespace `kube-system`, `prometheus` was deployed to the namespace
 `monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml
