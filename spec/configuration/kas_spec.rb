@@ -380,21 +380,6 @@ describe 'kas configuration' do
           ))
         end
 
-        context 'when redis is disabled' do
-          let(:kas_values) do
-            default_kas_values.deep_merge!(YAML.safe_load(%(
-              gitlab:
-                kas:
-                  redis:
-                    enabled: false
-            )))
-          end
-
-          it 'does not have redis config' do
-            expect(config_yaml_data['redis']).to eq(nil)
-          end
-        end
-
         context 'when redisConfigName is empty' do
           context 'when global redis has a username' do
             let(:kas_values) do

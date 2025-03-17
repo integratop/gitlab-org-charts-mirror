@@ -178,9 +178,6 @@ containerSecurityContext:
   capabilities:
     drop: [ "ALL" ]
 
-redis:
-  enabled: true
-
 networkpolicy:
   enabled: false
   egress:
