@@ -205,6 +205,11 @@ data:
     trusted_cidrs_for_x_forwarded_for = {{ $.Values.workhorse.trustedCIDRsForXForwardedFor | toStrings | toJson }}
     {{- end }}
 
+    {{- if ($.Values.workhorse.metadata).zipReaderLimitBytes }}
+    [metadata]
+    zip_reader_limit_bytes = {{ $.Values.workhorse.metadata.zipReaderLimitBytes | int }}
+    {{- end }}
+
     {{- if .workhorse.keywatcher }}
     {{- include "workhorse.redis.config" $ | nindent 4 }}
     {{- end }}
