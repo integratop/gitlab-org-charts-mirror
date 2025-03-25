@@ -571,7 +571,7 @@ gitlab:
 `proxyBodySize` is used to set the NGINX proxy maximum body size. This is commonly
 required to allow a larger Docker image than the default.
 It is equivalent to the `nginx['client_max_body_size']` configuration in a
-[Linux package installation](https://docs.gitlab.com/omnibus/settings/nginx.html#request-entity-too-large).
+[Linux package installation](https://docs.gitlab.com/omnibus/settings/nginx/#use-an-existing-passenger-and-nginx-installation).
 As an alternative option,
 you can set the body size with either of the following two parameters too:
 
@@ -771,7 +771,7 @@ This examples adds the following network policy:
 _Note the example provided is only an example and may not be complete_
 
 _Note the Webservice requires outbound connectivity to the public internet
-for images on [external object storage](../../../advanced/external-object-storage)_  
+for images on [external object storage](../../../advanced/external-object-storage)_
 
 The example is based on the assumption that `kube-dns` was deployed
 to the namespace `kube-system`, `prometheus` was deployed to the namespace

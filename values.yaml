@@ -501,7 +501,7 @@ global:
       # clientTimeoutSeconds:
 
     ## Configure GitLab Cells. Cells is a GitLab internal-use experiment.
-    ## https://docs.gitlab.com/ee/administration/cells.html
+    ## https://docs.gitlab.com/administration/cells/
     cell:
       enabled: false
       # id:
