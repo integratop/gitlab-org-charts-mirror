@@ -207,7 +207,7 @@ Various cloud providers' LoadBalancer implementations have an impact on configur
 Global setting that controls the automatic configuration of [cert-manager](https://cert-manager.io/docs/installation/helm/)
 for Ingress objects. If `true`, relies on `certmanager-issuer.email` being set.
 
-If `false` and `global.ingress.tls.secretName` is not set, this will activate automatic
+If `false` and `global.ingress.tls.secretName` is not set, and `global.ingress.tls.enabled` is true or unset, then this will activate automatic
 self-signed certificate generation, which creates a **wildcard** certificate for all
 Ingress objects.
 
