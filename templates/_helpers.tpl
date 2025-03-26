@@ -403,19 +403,30 @@ true
 
 {{/*
 Detect if `.Values.ingress.tls.enabled` is set
+Returns `global.ingress.tls.enabled` if it is a boolean.
+Return true in any other case.
+*/}}
+{{- define "gitlab.global.ingress.tls.enabled" -}}
+{{- $globalSet := and (hasKey .Values.global.ingress "tls") (and (hasKey .Values.global.ingress.tls "enabled") (kindIs "bool" .Values.global.ingress.tls.enabled)) -}}
+{{- if $globalSet }}
+{{-  .Values.global.ingress.tls.enabled }}
+{{- else }}
+{{-   true }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Detect if `.Values.ingress.tls.enabled` is set
 Returns `ingress.tls.enabled` if it is a boolean,
 Returns `global.ingress.tls.enabled` if it is a boolean, and `ingress.tls.enabled` is not.
 Return true in any other case.
 */}}
 {{- define "gitlab.ingress.tls.enabled" -}}
-{{- $globalSet := and (hasKey .Values.global.ingress "tls") (and (hasKey .Values.global.ingress.tls "enabled") (kindIs "bool" .Values.global.ingress.tls.enabled)) -}}
-{{- $localSet := and (hasKey .Values.ingress "tls") (and (hasKey .Values.ingress.tls "enabled") (kindIs "bool" .Values.ingress.tls.enabled)) -}}
+{{- $localSet := and (hasKey .Values "ingress") (hasKey .Values.ingress "tls") (and (hasKey .Values.ingress.tls "enabled") (kindIs "bool" .Values.ingress.tls.enabled)) -}}
 {{- if $localSet }}
 {{-   .Values.ingress.tls.enabled }}
-{{- else if $globalSet }}
-{{-  .Values.global.ingress.tls.enabled }}
 {{- else }}
-{{-   true }}
+{{-   include "gitlab.global.ingress.tls.enabled" . }}
 {{- end -}}
 {{- end -}}
 
