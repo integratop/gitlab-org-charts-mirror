@@ -246,3 +246,8 @@ data:
       {{- end }}
     {{- end }}
     {{- end }}
+    
+    {{- with .Values.bundleUri }}
+    [bundle_uri]
+    go_cloud_url = "{{ .goCloudUrl }}"
+    {{- end }}

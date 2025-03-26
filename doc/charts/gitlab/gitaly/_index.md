@@ -165,6 +165,7 @@ the `helm install` command using the `--set` flags.
 | `dailyMaintenance.startHour`                   |                                      | Start minute of the daily background maintenance.                                                                                              |
 | `dailyMaintenance.startMinute`                 |                                      | Start minute of the daily background maintenance.                                                                                              |
 | `dailyMaintenance.storages`                    |                                      | Array of storage names to perform the daily background maintenance. For example [ "default" ].                                                 |
+| `bundleUri.goCloudUrl`                         |                                      | See the [Bundle URIs documentation](https://docs.gitlab.com/administration/gitaly/bundle_uris/).                                               |
 
 ## Chart configuration examples
 

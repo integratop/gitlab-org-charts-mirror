@@ -555,6 +555,30 @@ describe 'Gitaly configuration' do
     end
   end
 
+  context 'bundleUri' do
+    let(:values) do
+      YAML.safe_load(%(
+        gitlab:
+          gitaly:
+            bundleUri:
+              goCloudUrl: 'gs://<bucket>'
+      )).deep_merge(default_values)
+    end
+
+    let(:template) { HelmTemplate.new(values) }
+    let(:gitaly_config) { template.dig('ConfigMap/test-gitaly', 'data', 'config.toml.tpl') }
+    let(:toml) { render_toml(gitaly_config, 'HOSTNAME' => 'default') }
+
+    it 'renders the template' do
+      puts values
+      expect(template.exit_code).to eq(0), "Unexpected error code #{template.exit_code} -- #{template.stderr}"
+    end
+
+    it 'sets the keys' do
+      expect(toml['bundle_uri']).to eq({ 'go_cloud_url' => 'gs://<bucket>' })
+    end
+  end
+
   context 'cgroups' do
     let(:values) do
       YAML.safe_load(%(
