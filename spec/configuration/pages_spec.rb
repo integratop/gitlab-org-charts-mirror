@@ -267,6 +267,7 @@ describe 'GitLab Pages' do
         end
 
         it 'populates Pages configuration' do
+          expect(pages_enabled_template.exit_code).to eq(0), "Unexpected error code #{pages_enabled_template.exit_code} -- #{pages_enabled_template.stderr}"
           expect(config_yaml_data['production']['pages']).to eq(
             'enabled' => true,
             'access_control' => true,
@@ -441,8 +442,8 @@ describe 'GitLab Pages' do
 
         it 'populates Pages config file' do
           default_content = <<~MSG
-            listen-proxy=0.0.0.0:8090
-            listen-http=0.0.0.0:9090
+            listen-proxy=:8090
+            listen-http=:9090
             pages-domain=pages.example.com
             pages-root=/srv/gitlab-pages
             log-format=json
@@ -529,8 +530,8 @@ describe 'GitLab Pages' do
           default_content = <<~MSG
             gitlab-retrieval-retries=3
             header=FOO: BAR;;BAZ: BAT
-            listen-proxy=0.0.0.0:8090
-            listen-http=0.0.0.0:9090
+            listen-proxy=:8090
+            listen-http=:9090
             pages-domain=pages.example.com
             pages-root=/srv/gitlab-pages
             log-format=text
@@ -646,11 +647,11 @@ describe 'GitLab Pages' do
           end
 
           it 'exposes listen-proxy correctly' do
-            expect(pages_config_data).to match(/listen-proxy=0.0.0.0:8090/)
+            expect(pages_config_data).to match(/listen-proxy=:8090/)
           end
 
           it 'configures readiness probe correctly' do
-            expect(pages_config_data).to match(/listen-http=0.0.0.0:9090/)
+            expect(pages_config_data).to match(/listen-http=:9090/)
             expect(pages_config_data).to match(%r{pages-status=/-/readiness})
           end
         end
@@ -704,7 +705,7 @@ describe 'GitLab Pages' do
           end
 
           it 'exposes listen-http correctly' do
-            expect(pages_config_data).to match(/listen-http=0.0.0.0:8090/)
+            expect(pages_config_data).to match(/listen-http=:8090/)
           end
         end
 
@@ -756,13 +757,13 @@ describe 'GitLab Pages' do
 
         describe 'pages configuration' do
           it 'exposes listen-https, root-cert, and root-key' do
-            expect(pages_config_data).to match(/listen-https=0.0.0.0:8091/)
+            expect(pages_config_data).to match(/listen-https=:8091/)
             expect(pages_config_data).to match(%r{root-cert=/etc/gitlab-secrets/pages/pages.example.com.crt})
             expect(pages_config_data).to match(%r{root-key=/etc/gitlab-secrets/pages/pages.example.com.key})
           end
 
           it 'configures readiness probe correctly' do
-            expect(pages_config_data).to match(/listen-http=0.0.0.0:9090/)
+            expect(pages_config_data).to match(/listen-http=:9090/)
             expect(pages_config_data).to match(%r{pages-status=/-/readiness})
           end
 
@@ -820,8 +821,8 @@ describe 'GitLab Pages' do
 
         describe 'pages configuration' do
           it 'exposes listen-http, listen-https, root-cert, and root-key' do
-            expect(pages_config_data).to match(/listen-http=0.0.0.0:8090/)
-            expect(pages_config_data).to match(/listen-https=0.0.0.0:8091/)
+            expect(pages_config_data).to match(/listen-http=:8090/)
+            expect(pages_config_data).to match(/listen-https=:8091/)
             expect(pages_config_data).to match(%r{root-cert=/etc/gitlab-secrets/pages/pages.example.com.crt})
             expect(pages_config_data).to match(%r{root-key=/etc/gitlab-secrets/pages/pages.example.com.key})
           end
@@ -964,8 +965,8 @@ describe 'GitLab Pages' do
 
         describe 'pages configuration' do
           it 'exposes proper listeners' do
-            expect(pages_config_data).to match(/listen-https-proxyv2=0.0.0.0:8091/)
-            expect(pages_config_data).not_to match(/listen-https=0.0.0.0:8091/)
+            expect(pages_config_data).to match(/listen-https-proxyv2=:8091/)
+            expect(pages_config_data).not_to match(/listen-https=:8091/)
           end
         end
       end
@@ -988,8 +989,8 @@ describe 'GitLab Pages' do
 
         describe 'pages configuration' do
           it 'exposes proper listeners' do
-            expect(pages_config_data).to match(/listen-proxy=0.0.0.0:8090/)
-            expect(pages_config_data).not_to match(/listen-http=0.0.0.0:8090/)
+            expect(pages_config_data).to match(/listen-proxy=:8090/)
+            expect(pages_config_data).not_to match(/listen-http=:8090/)
           end
         end
       end

@@ -226,7 +226,7 @@ data:
     max_filesize = {{ $.Values.workhorse.imageScaler.maxFileSizeBytes | int }}
     [[listeners]]
     network = "tcp"
-    addr = "0.0.0.0:{{ default 8181 $.Values.service.workhorseInternalPort | int }}"
+    addr = ":{{ default 8181 $.Values.service.workhorseInternalPort | int }}"
     {{- if $.Values.global.workhorse.tls.enabled }}
     [listeners.tls]
     certificate = "/etc/gitlab/gitlab-workhorse/tls.crt"
@@ -235,7 +235,7 @@ data:
     {{- if or $.Values.workhorse.monitoring.exporter.enabled $.Values.workhorse.metrics.enabled }}
     [metrics_listener]
     network = "tcp"
-    addr = "0.0.0.0:{{ $.Values.workhorse.monitoring.exporter.port }}"
+    addr = ":{{ $.Values.workhorse.monitoring.exporter.port }}"
     {{- $workhorseExporterTlsEnabled := eq (include "workhorse.monitoring.exporter.tls.enabled" $ ) "true" }}
     {{- if $workhorseExporterTlsEnabled }}
     [metrics_listener.tls]
