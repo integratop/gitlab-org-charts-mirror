@@ -35,6 +35,10 @@ No changes.
 
 - [Remove flag to toggle Redis in KAS chart](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/f75858ec82e9cada9c15720995a7a4182e6d76e7) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4165))
 
+## 8.9.5 (2025-04-02)
+
+No changes.
+
 ## 8.9.4 (2025-04-01)
 
 No changes.
