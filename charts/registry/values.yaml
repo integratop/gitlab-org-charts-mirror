@@ -193,6 +193,10 @@ init:
     if [ -f /config/registry/redis-rateLimiting-password ] ; then
       sed -i -e 's@REDIS_RATE_LIMITING_PASSWORD@'"$(cat /config/registry/redis-rateLimiting-password)"'@' /registry/config.yml
     fi
+    # Insert Redis(load balancing) password, if enabled
+    if [ -f /config/registry/redis-loadBalancing-password ] ; then
+      sed -i -e 's@REDIS_LOAD_BALANCING_PASSWORD@'"$(cat /config/registry/redis-loadBalancing-password)"'@' /registry/config.yml
+    fi
     # Copy the database TLS connection files to the expected location and set permissions
     if [ -d /config/ssl ]; then
       cp -r /config/ssl/ /registry/ssl
@@ -426,6 +430,12 @@ redis:
   # https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md?ref_type=heads#ratelimiter
   # TODO: add behavior settings https://gitlab.com/gitlab-org/container-registry/-/issues/1224
   rateLimiting:
+    enabled: false
+    password:
+      enabled: false
+  # Redis load balancing connection settings
+  # https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md?ref_type=heads#loadbalancing-1
+  loadBalancing:
     enabled: false
     password:
       enabled: false

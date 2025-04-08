@@ -671,6 +671,8 @@ global:
         password: {}
       rateLimiting:
         password: {}
+      loadBalancing:
+        password: {}
     # https://docs.docker.com/registry/notifications/#configuration
     notifications: {}
       # endpoints:
