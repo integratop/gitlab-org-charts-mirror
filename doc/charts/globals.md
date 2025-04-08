@@ -234,9 +234,9 @@ on enabling this, see [release notes](../releases/7_0.md#bundled-certmanager).
 
 {{< alert type="note" >}}
 
-This value should only used for development purposes, or by explicit request of GitLab support. Please avoid using this value
-on production environments and set the version as described
-in [Deploy using Helm](../installation/deployment.md#deploy-using-helm)
+This value should only be used for development purposes, or by explicit request of GitLab support. Please avoid using this value in the configuration file
+on production environments. Set the version as described
+in [Deploy using Helm](../installation/deployment.md#deploy-using-helm) instead.
 
 {{< /alert >}}
 
