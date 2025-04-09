@@ -94,6 +94,10 @@ No changes.
 
 - [Document Kubernetes 1.28 as deprecated](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/2d8580c1ed16fa762f1fcdaaf8418989f7a104cf) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4115))
 
+## 8.8.7 (2025-04-09)
+
+No changes.
+
 ## 8.8.6 (2025-03-26)
 
 No changes.
