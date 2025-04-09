@@ -560,6 +560,9 @@ global:
       enabled: false
       host: ""
 
+    oidcProvider:
+      openidIdTokenExpireInSeconds: 120
+
     smartcard:
       enabled: false
       CASecret:
