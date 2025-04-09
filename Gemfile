@@ -4,7 +4,7 @@ group :test do
   gem 'rspec'
   gem 'rspec-retry'
   gem 'rspec-parameterized', require: false
-  gem 'aws-sdk-s3', '>= 1.120'
+  gem 'aws-sdk-s3', '>= 1.183'
   gem 'capybara'
   gem 'docker-api'
   gem 'rake'
