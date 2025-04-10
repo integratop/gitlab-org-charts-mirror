@@ -1,6 +1,6 @@
 
 rubocop:
-  image: ruby:3.1-alpine
+  image: ${RUBY_IMAGE}
   stage: prepare
   dependencies: []
   before_script:
@@ -21,7 +21,7 @@ rubocop:
 
 # Perform content linting on documentation Markdown files
 check_docs_content:
-  image: registry.gitlab.com/gitlab-org/technical-writing/docs-gitlab-com/lint-markdown:alpine-3.20-vale-3.9.3-markdownlint2-0.17.1-lychee-0.15.1
+  image: ${DOCS_LINT_IMAGE}
   stage: prepare
   cache: {}
   dependencies: []
@@ -37,7 +37,7 @@ check_docs_content:
 
 # Perform linting on documentation Markdown files
 check_docs_markdown:
-  image: registry.gitlab.com/gitlab-org/technical-writing/docs-gitlab-com/lint-markdown:alpine-3.20-vale-3.9.3-markdownlint2-0.17.1-lychee-0.15.1
+  image: ${DOCS_LINT_IMAGE}
   stage: prepare
   cache: {}
   dependencies: []
@@ -53,7 +53,7 @@ check_docs_markdown:
 
 # Perform link checking on documentation Markdown files
 check_docs_links:
-  image: registry.gitlab.com/gitlab-org/technical-writing/docs-gitlab-com/lint-markdown:alpine-3.20-vale-3.9.3-markdownlint2-0.17.1-lychee-0.15.1
+  image: ${DOCS_LINT_IMAGE}
   stage: prepare
   cache: {}
   dependencies: []
@@ -93,7 +93,7 @@ docs-test hugo:
 # Initially motivated to detect duplicated environment variable definitions
 kube-score:
   image:
-    name: "zegl/kube-score:v1.19.0@sha256:94137f32ce139dc9fbdbbd380249025e4d378c282ff151a100b981cdeeb923b6"
+    name: ${KUBE_SCORE_IMAGE}
     entrypoint: [""]
   stage: prepare
   script:

@@ -2,6 +2,18 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 8.10.4 (2025-04-09)
+
+No changes.
+
+## 8.10.3 (2025-04-02)
+
+No changes.
+
+## 8.10.2 (2025-04-02)
+
+No changes.
+
 ## 8.10.1 (2025-03-26)
 
 No changes.
@@ -30,6 +42,18 @@ No changes.
 ### Other (1 change)
 
 - [Remove flag to toggle Redis in KAS chart](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/f75858ec82e9cada9c15720995a7a4182e6d76e7) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4165))
+
+## 8.9.6 (2025-04-09)
+
+No changes.
+
+## 8.9.5 (2025-04-02)
+
+No changes.
+
+## 8.9.4 (2025-04-01)
+
+No changes.
 
 ## 8.9.3 (2025-03-26)
 
@@ -69,6 +93,10 @@ No changes.
 ### Deprecated (1 change)
 
 - [Document Kubernetes 1.28 as deprecated](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/2d8580c1ed16fa762f1fcdaaf8418989f7a104cf) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4115))
+
+## 8.8.7 (2025-04-09)
+
+No changes.
 
 ## 8.8.6 (2025-03-26)
 

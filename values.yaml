@@ -560,6 +560,9 @@ global:
       enabled: false
       host: ""
 
+    oidcProvider:
+      openidIdTokenExpireInSeconds: 120
+
     smartcard:
       enabled: false
       CASecret:
@@ -573,6 +576,7 @@ global:
     # Config that only applies to the defaults on initial install
     initialDefaults: {}
       # signupEnabled:
+      # gitlabProductUsageData: true
   ## End of global.appConfig
 
   oauth:
@@ -670,6 +674,8 @@ global:
       cache:
         password: {}
       rateLimiting:
+        password: {}
+      loadBalancing:
         password: {}
     # https://docs.docker.com/registry/notifications/#configuration
     notifications: {}
@@ -1227,8 +1233,6 @@ prometheus:
 ## https://docs.gitlab.com/charts/installation/deployment.html#redis
 redis:
   install: true
-  image:
-    tag: "7.0.15-debian-12-r20"
   auth:
     existingSecret: gitlab-redis-secret
     existingSecretKey: redis-password
