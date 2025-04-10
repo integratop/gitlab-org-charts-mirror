@@ -10,7 +10,7 @@ The GitLab charts can be configured for IPv6 clusters. The default configuration
 ## Sample values
 
 We provide an example for GitLab chart values in [`examples/values-ipv6.yaml`](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/examples/values-ipv6.yaml)
-which can help you to deploy GitLab into a IPv6 cluster.
+which can help you to deploy GitLab into a IPv6 single stack cluster.
 
 If you configured a custom IP allowlist (`gitlab.webservice.monitoring.ipWhitelist`),
 make sure to update existing IPv4 addresses to their IPv6 representation.

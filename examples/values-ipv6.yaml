@@ -1,5 +1,4 @@
 gitlab:
-  # Configure Puma for IPv6.
   webservice:
     extraEnv:
       # Configure Puma to listen on IPv6.
@@ -11,6 +10,9 @@ gitlab:
         listenAddr: "::"
   sidekiq:
     # Configure sidekiq healthcheck and metrics listeners for IPv6. 
+    # Note: Because of a known bug these services stop working on IPv4 if
+    # a `::` listen address is used. Do not use this in IPv4 and dual stack
+    # clusters. https://github.com/ruby/webrick/issues/99
     metrics:
       listenAddr: "::"
     health_checks:
