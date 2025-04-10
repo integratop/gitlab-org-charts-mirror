@@ -249,3 +249,10 @@ gomemlimit:
 timeout: {}
   # uploadPackNegotiation: "10m"
   # uploadArchiveNegotiation: "1m"
+
+dailyMaintenance: {}
+  # disabled: true
+  # startHour:
+  # startMinute:
+  # duration:
+  # storages:
