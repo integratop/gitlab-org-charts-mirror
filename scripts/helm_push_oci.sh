@@ -7,16 +7,6 @@ HELM_PACKAGE="$1"
 REGISTRY_URL="us-east1-docker.pkg.dev"
 REGISTRY_PATH="oci://${REGISTRY_URL}/gitlab-com-artifact-registry/gitlab-devel-chart"
 
-echo "Vault Auth Path: ${VAULT_AUTH_PATH:=dev-gitlab-org}"
-echo "Vault Auth Role: ${VAULT_AUTH_ROLE:=unset}"
-echo "Vault Secret Path: ${VAULT_SECRETS_PATH:=unset}"
-
-export VAULT_ADDR='https://vault.ops.gke.gitlab.net'
-VAULT_TOKEN="$(vault write -field=token "auth/${VAULT_AUTH_PATH}/login" role="${VAULT_AUTH_ROLE}" jwt="${VAULT_ID_TOKEN}")"; export VAULT_TOKEN
-GAR_JSON_KEY="$(vault kv get -field key "ci/${VAULT_SECRETS_PATH}/shared/gitlab-devel-chart-rw-key")"
-
-echo "Vault Token SHA: ${GAR_JSON_KEY}" | sha256sum
-
 # "feature flag" this script
 : "${ENABLE_OCI_PUSH:=unset}"
 
@@ -61,6 +51,16 @@ log "Starting helm chart OCI push process..."
 # Run validations
 validate_ci_server
 validate_oci_push
+
+echo "Vault Auth Path: ${VAULT_AUTH_PATH:=dev-gitlab-org}"
+echo "Vault Auth Role: ${VAULT_AUTH_ROLE:=unset}"
+echo "Vault Secret Path: ${VAULT_SECRETS_PATH:=unset}"
+
+export VAULT_ADDR='https://vault.ops.gke.gitlab.net'
+VAULT_TOKEN="$(vault write -field=token "auth/${VAULT_AUTH_PATH}/login" role="${VAULT_AUTH_ROLE}" jwt="${VAULT_ID_TOKEN}")"; export VAULT_TOKEN
+GAR_JSON_KEY="$(vault kv get -field key "ci/${VAULT_SECRETS_PATH}/shared/gitlab-devel-chart-rw-key")"
+
+echo "Vault Token SHA: ${GAR_JSON_KEY}" | sha256sum
 
 # Perform registry login
 log "Logging into helm registry at ${REGISTRY_URL}..."
