@@ -72,11 +72,13 @@ GitLab CI pipelines run on pipelines for:
 - Default branch
 - Stable branches
 - Tags
+- Nightlies - run on the default branch on dev
 
 The configuration for these CI pipelines is managed in:
 
 - [`.gitlab-ci.yml`](https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/.gitlab-ci.yml)
 - Files under [`.gitlab/ci/`](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/.gitlab/ci/)
+- Nightly builds have further configuration discussed under [nightlies](nightlies/_index.md)
 
 ### Review apps
 
