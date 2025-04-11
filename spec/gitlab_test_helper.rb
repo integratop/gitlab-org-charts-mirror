@@ -1,4 +1,5 @@
 require 'active_support'
+require 'active_support/core_ext/object/blank'
 require 'open-uri'
 require 'base64'
 require 'fugit'
