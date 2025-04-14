@@ -256,3 +256,6 @@ dailyMaintenance: {}
   # startMinute:
   # duration:
   # storages:
+
+bundleUri: {}
+  # goCloudUrl:
