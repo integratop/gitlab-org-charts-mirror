@@ -25,8 +25,11 @@ Follow these steps for backing up a GitLab Helm chart based installation.
 1. Ensure the toolbox pod is running, by executing the following command
 
    ```shell
-   kubectl get pods -lrelease=RELEASE_NAME,app=toolbox
+   ```shell
+   kubectl get pods -lrelease=<release_name>,app=toolbox
    ```
+
+   Replace `<release_name>` with the name of the Helm release, usually `gitlab`.
 
 1. Run the backup utility
 
