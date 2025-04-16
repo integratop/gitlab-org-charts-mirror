@@ -2527,7 +2527,7 @@ This enables an additional clone URL in the GitLab UI that is dedicated for Kerb
 
 {{< alert type="note" >}}
 
-Due to a current limitation with [our fork of the `nginx-ingress` Helm chart](nginx/fork.md) - specifying a `dedicatedPort` will not currently expose the port for use in the chart's `nginx-ingress` controller. Cluster operators will need to expose this port themselves. Follow [this charts issue](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/3531) for more details and potential workarounds.
+Due to a current limitation with [our fork of the `nginx-ingress` Helm chart](nginx/_index.md) - specifying a `dedicatedPort` will not currently expose the port for use in the chart's `nginx-ingress` controller. Cluster operators will need to expose this port themselves. Follow [this charts issue](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/3531) for more details and potential workarounds.
 
 {{< /alert >}}
 
