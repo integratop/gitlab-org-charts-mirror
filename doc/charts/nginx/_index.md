@@ -186,13 +186,4 @@ The following adjustments were made to the NGINX fork:
       - get
   ```
 
-  Additionally, to support migration from v1.3.1 to v1.11.2, for those users that set their own RBAC rules, we've also
-  added these values which will be removed, once we drop the v1.3.1 fallback, which is scheduled for 8.8 release.
-
-  ```yaml
-  controller:
-    image:
-      fallbackTag: "v1.3.1"
-      fallbackDigest: "sha256:54f7fe2c6c5a9db9a0ebf1131797109bb7a4d91f56b9b362bde2abd237dd1974"
-      disableFallback: false
-  ```
+  Additionally, to support migration from v1.3.1 to v1.11.2 and forward, for those users that set their own RBAC rules, please make sure to update your RBAC rules accordingly, as we no longer fall back to the v1.3.1 image.
