@@ -17,7 +17,7 @@ rubocop:
   rules:
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
-    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
+    - if: '$PIPELINE_TYPE =~ /DOCS_PIPELINE/'
 
 # Perform content linting on documentation Markdown files
 check_docs_content:
@@ -31,9 +31,23 @@ check_docs_content:
     - vale --minAlertLevel error doc
   rules:
     - !reference [.rule:skip_if_dev]
-    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
+    - if: '$PIPELINE_TYPE =~ /DOCS_PIPELINE/'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
+
+# Perform content linting on i18n documentation Markdown files
+check_docs_i18n_content:
+  image: ${DOCS_LINT_IMAGE}
+  stage: prepare
+  cache: {}
+  dependencies: []
+  before_script: []
+  script:
+    # Lint prose
+    - vale --minAlertLevel error --filter='.Name matches "gitlab_docs"' doc-locale
+  rules:
+    - !reference [.rule:skip_if_dev]
+    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE_LOCALIZATION"'
 
 # Perform linting on documentation Markdown files
 check_docs_markdown:
@@ -47,9 +61,24 @@ check_docs_markdown:
     - markdownlint-cli2 'doc/**/*.md'
   rules:
     - !reference [.rule:skip_if_dev]
-    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
+    - if: '$PIPELINE_TYPE =~ /DOCS_PIPELINE/'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
+
+# Perform linting on i18n documentation Markdown files
+check_docs_i18n_markdown:
+  image: ${DOCS_LINT_IMAGE}
+  stage: prepare
+  cache: {}
+  dependencies: []
+  before_script: []
+  script:
+    # Lint Markdown
+    - markdownlint-cli2 'doc-locale/**/*.md'
+  allow_failure: true # Tell us what's breaking, but allow the failure
+  rules:
+    - !reference [.rule:skip_if_dev]
+    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE_LOCALIZATION"'
 
 # Perform link checking on documentation Markdown files
 check_docs_links:
@@ -63,7 +92,7 @@ check_docs_links:
     - lychee --offline --include-fragments doc
   rules:
     - !reference [.rule:skip_if_dev]
-    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
+    - if: '$PIPELINE_TYPE =~ /DOCS_PIPELINE/'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
 
@@ -85,7 +114,7 @@ docs-test hugo:
     - make check-index-pages SEARCH_DIR="../doc"
   rules:
     - !reference [.rule:skip_if_fork]
-    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
+    - if: '$PIPELINE_TYPE =~ /DOCS_PIPELINE/'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
 
@@ -101,7 +130,7 @@ kube-score:
     - helm template . --set certmanager-issuer.email=gitlab@example.com  > /tmp/test.yaml
     - /kube-score score --ignore-container-cpu-limit --ignore-container-memory-limit --ignore-test "container-image-pull-policy,container-security-context-user-group-id,container-ephemeral-storage-request-and-limit,container-security-context-readonlyrootfilesystem,pod-probes,pod-networkpolicy,container-resources,deployment-has-poddisruptionbudget,deployment-replicas,deployment-has-host-podantiaffinity" /tmp/test.yaml
   rules:
-    - if: '$PIPELINE_TYPE == "DOCS_PIPELINE"'
+    - if: '$PIPELINE_TYPE =~ /DOCS_PIPELINE/'
     - if: '$PIPELINE_TYPE =~ /MR_PIPELINE$/'
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
 
