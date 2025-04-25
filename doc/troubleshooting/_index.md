@@ -707,3 +707,11 @@ In the logs, this appears as a Puma worker being created shortly after the `502`
 ```
 
 To solve this problem, [raise memory limits for the webservice pods](../charts/gitlab/webservice/_index.md#memory-requestslimits).
+
+### Upgrade failed - `cannot patch "gitlab-prometheus-server" with kind Deployment`
+
+With chart 9.0 we updated the major version Prometheus subchart. The selector labels and version of Prometheus
+were changes and need manual interaction.
+
+Please follow the [migration guide](../releases/9_0.md#prometheus-upgrade) to upgrade
+the Prometheus chart.
