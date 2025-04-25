@@ -1070,20 +1070,16 @@ prometheus:
     create: true
   alertmanager:
     enabled: false
-  alertmanagerFiles:
-    alertmanager.yml: {}
-  kubeStateMetrics:
+  kube-state-metrics:
     enabled: false
-  nodeExporter:
+  prometheus-node-exporter:
     enabled: false
-  pushgateway:
+  prometheus-pushgateway:
     enabled: false
   server:
     retention: 15d
     strategy:
       type: Recreate
-    image:
-      tag: v2.38.0
     containerSecurityContext:
       runAsUser: 1000
       allowPrivilegeEscalation: false
