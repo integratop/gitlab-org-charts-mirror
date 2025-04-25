@@ -19,6 +19,8 @@ gitlab:
       listenAddr: "::"
   gitlab-exporter:
     listenAddr: "::"
+  spamcheck:
+    listenAddr: "[::]"
 
 nginx-ingress:
   controller:
