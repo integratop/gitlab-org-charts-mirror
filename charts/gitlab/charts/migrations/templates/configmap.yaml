@@ -19,6 +19,7 @@ data:
     production: &base
       gitlab:
         host: {{ template "gitlab.gitlab.hostname" . }}
+        https: {{ hasPrefix "https://" (include "gitlab.gitlab.url" .) }}
         {{- if hasKey .Values.global.appConfig.initialDefaults "signupEnabled" }}
         signup_enabled: {{ .Values.global.appConfig.initialDefaults.signupEnabled }}
         {{- end }}
