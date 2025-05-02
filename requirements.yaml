@@ -10,7 +10,7 @@ dependencies:
 - name: cert-manager
   version: v1.12.16
   repository: https://charts.jetstack.io/
-  condition: certmanager.install
+  condition: certmanager.install,installCertmanager
   alias: certmanager
 - name: prometheus
   version: 27.11.0

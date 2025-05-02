@@ -2225,8 +2225,7 @@ nginx:
 gitlab-runner:
   rbac:
     clusterWideAccess: false
-certmanager:
-  install: false
+installCertmanager: false
 ```
 
 ## GitLab base image
