@@ -64,7 +64,7 @@ The user should ensure all necessary secrets are created according to documentat
 {{-   if not (or .Values.global.ingress.configureCertmanager (include "gitlab.ingress.tls.configured" .)) }}
 {{ $WARNING }}
 {{-     if (eq (include "gitlab.global.ingress.tls.enabled" .) "false") }}
-TLS is globaly disabled. 
+TLS is globaly disabled.
 {{-     else }}
 Automatic TLS certificate generation with cert-manager is disabled.
 One or more of the components does not have a TLS certificate Secret configured.
