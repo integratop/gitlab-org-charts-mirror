@@ -73,9 +73,10 @@ check_docs_i18n_markdown:
   dependencies: []
   before_script: []
   script:
+    # Do not lint link-fragments, which are currently invalid in translations
+    - 'echo "  link-fragments: false" >> .markdownlint-cli2.yaml'
     # Lint Markdown
     - markdownlint-cli2 'doc-locale/**/*.md'
-  allow_failure: true # Tell us what's breaking, but allow the failure
   rules:
     - !reference [.rule:skip_if_dev]
     - if: '$PIPELINE_TYPE == "DOCS_PIPELINE_LOCALIZATION"'
