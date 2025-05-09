@@ -267,7 +267,7 @@ global:
       #   cron: "0 * * * *"
       ## Schedule pipelines in the near future
       # pipeline_schedule_worker:
-      #   cron: "19 * * * *"
+      #   cron: "3-59/10 * * * *"
       ## Remove expired build artifacts
       # expire_build_artifacts_worker:
       #   cron: "*/7 * * * *"
