@@ -13,7 +13,7 @@ dependencies:
   version: '*.*.*'
 - name: cert-manager
   repository: https://charts.jetstack.io/
-  version: v1.12.17
+  version: v1.17.4
 - name: prometheus
   repository: https://prometheus-community.github.io/helm-charts
   version: 27.23.0
@@ -44,5 +44,5 @@ dependencies:
 - name: kubernetes-ingress
   repository: https://haproxytech.github.io/helm-charts
   version: 1.32.0
-digest: sha256:4a1c72c58a30b0a204f3004fcc7c5b93f6e41aa50ba1e54cf50dec30433a3164
-generated: "2025-07-15T08:48:54.636498608+02:00"
+digest: sha256:51032291427ffeeebaf1dfb8a8b1014edd1ffab48a1106ea7839626f669c70f8
+generated: "2025-07-18T10:54:44.452200546+02:00"
