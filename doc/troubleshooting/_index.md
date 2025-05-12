@@ -715,3 +715,16 @@ were changes and need manual interaction.
 
 Please follow the [migration guide](../releases/9_0.md#prometheus-upgrade) to upgrade
 the Prometheus chart.
+
+## Toolbox backup failing on upload
+
+A backup may fail when trying to upload to the object storage with an error
+like:
+
+```plaintext
+An error occurred (XAmzContentSHA256Mismatch) when calling the UploadPart operation: The Content-SHA256 you specified did not match what we received
+```
+
+This might be caused by an incompatibility of the `awscli` tool and your object
+storage service. This issue has been reported when using Dell ECS S3 Storage.
+To avoid this issue you can [disable data integrity protection](../backup-restore/backup.md#data-integrity-protection-with-awscli).
