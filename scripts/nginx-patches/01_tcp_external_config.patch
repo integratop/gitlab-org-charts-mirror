@@ -1,0 +1,29 @@
+diff --git a/charts/nginx-ingress/templates/controller-configmap-tcp.yaml b/charts/nginx-ingress/templates/controller-configmap-tcp.yaml
+index 131a9ad51..da632c335 100644
+--- a/charts/nginx-ingress/templates/controller-configmap-tcp.yaml
++++ b/charts/nginx-ingress/templates/controller-configmap-tcp.yaml
+@@ -1,4 +1,4 @@
+-{{- if .Values.tcp -}}
++{{- if and .Values.tcp (not .Values.tcpExternalConfig) -}}
+ apiVersion: v1
+ kind: ConfigMap
+ metadata:
+diff --git a/charts/nginx-ingress/values.yaml b/charts/nginx-ingress/values.yaml
+index c1d3e68e7..c58c0c791 100644
+--- a/charts/nginx-ingress/values.yaml
++++ b/charts/nginx-ingress/values.yaml
+@@ -1191,3 +1191,14 @@ portNamePrefix: ""
+ # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
+ ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
+ dhParam: ""
++
++## GitLab-provided values starting below
++
++# Use an external configmap instead of generating the configmap from this chart.
++# Contents must match spec format for ingress-nginx and tcp ports must still be specified
++# using `tcp` setting above (although service name is meaningless with an external config)
++# e.g
++# --set tcp.22=ssh --set tcpExternalConfig=mynamespace/customconfigmap
++# Ref: https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/examples/tcp
++##
++tcpExternalConfig: ""

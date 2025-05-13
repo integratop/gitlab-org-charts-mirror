@@ -1,0 +1,13 @@
+diff --git a/charts/nginx-ingress/templates/controller-configmap-tcp.yaml b/charts/nginx-ingress/templates/controller-configmap-tcp.yaml
+index da632c335..34a2bce13 100644
+--- a/charts/nginx-ingress/templates/controller-configmap-tcp.yaml
++++ b/charts/nginx-ingress/templates/controller-configmap-tcp.yaml
+@@ -11,7 +11,7 @@ metadata:
+ {{- if .Values.controller.tcp.annotations }}
+   annotations: {{ toYaml .Values.controller.tcp.annotations | nindent 4 }}
+ {{- end }}
+-  name: {{ include "ingress-nginx.fullname" . }}-tcp
++  name: {{ template "ingress-nginx.tcp-configmap" . }}
+   namespace: {{ include "ingress-nginx.namespace" . }}
+ data: {{ tpl (toYaml .Values.tcp) . | nindent 2 }}
+ {{- end }}
