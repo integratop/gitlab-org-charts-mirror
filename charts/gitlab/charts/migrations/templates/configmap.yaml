@@ -23,6 +23,9 @@ data:
         {{- if hasKey .Values.global.appConfig.initialDefaults "signupEnabled" }}
         signup_enabled: {{ .Values.global.appConfig.initialDefaults.signupEnabled }}
         {{- end }}
+        {{- if hasKey .Values.global.appConfig.initialDefaults "gitlabProductUsageData" }}
+        initial_gitlab_product_usage_data: {{ .Values.global.appConfig.initialDefaults.gitlabProductUsageData }}
+        {{- end }}
       {{- include "gitlab.appConfig.gitaly" . | nindent 6 }}
       {{- include "gitlab.appConfig.repositories" . | nindent 6 }}
       {{- include "gitlab.appConfig.sidekiq.configuration" $ | nindent 6 }}
