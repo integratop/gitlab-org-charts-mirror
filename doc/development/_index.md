@@ -78,7 +78,7 @@ The configuration for these CI pipelines is managed in:
 
 - [`.gitlab-ci.yml`](https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/.gitlab-ci.yml)
 - Files under [`.gitlab/ci/`](https://gitlab.com/gitlab-org/charts/gitlab/tree/master/.gitlab/ci/)
-- Nightly builds have further configuration discussed under [nightlies](nightlies/_index.md)
+- Every commit builds have further configuration discussed under [release](release.md#consumed-by-production-services).
 
 ### Review apps
 
