@@ -136,6 +136,58 @@ to list available `devel` versions:
 helm search repo gitlab-devel --devel
 ```
 
+#### Consumed by production services
+
+Some development builds are built on the Dev instance and made available to a target Google Artifact Registry to be consumed by some production services.
+The target audience for these builds are the Cells infrastructure for GitLab.com.
+
+##### Helm OCI registry push script
+
+The `scripts/helm_push_oci.sh` script is used to push Helm charts to the Google Artifact Registry. This script handles Vault authentication and pushing of Helm charts to our OCI-compatible registry.
+
+##### Usage
+
+```shell
+./scripts/helm_push_oci.sh <helm_package_file>
+```
+
+##### Required Parameters
+
+- `helm_package_file`: Path to the Helm chart package file to be pushed (example: `./gitlab-chart.tgz`)
+
+##### Environment variables
+
+The script requires specific environment variables for Vault authentication:
+
+- `VAULT_AUTH_PATH`: Vault authentication path (defaults to `dev-gitlab-org`)
+- `VAULT_AUTH_ROLE`: Vault authentication role
+- `VAULT_SECRETS_PATH`: Path to the Vault secrets
+- `VAULT_ID_TOKEN`: JWT token for Vault authentication
+- `ENABLE_OCI_PUSH`: Must be set to `true` to enable pushing to the registry
+
+##### Registry details
+
+The script pushes Helm charts to:
+
+- Registry URL: `us-east1-docker.pkg.dev`
+- Registry Path: `gitlab-com-artifact-registry/gitlab-devel-chart`
+
+##### Process
+
+The script:
+
+1. Authenticates with Vault to obtain registry credentials
+1. Retrieves the service account key from Vault
+1. Logs into the Google Artifact Registry using the service account
+1. Pushes the specified Helm chart package to the OCI registry
+1. Provides detailed feedback about each operation's success or failure
+
+{{< alert type="note" >}}
+
+This script is designed to run in CI/CD environments with proper Vault access and permissions.
+
+{{< /alert >}}
+
 ### Manually releasing the chart
 
 Before manually releasing the chart, ensure all the chart changes you want from `master` have been picked into the
