@@ -2144,7 +2144,7 @@ gitlab:
 
 {{< alert type="note" >}}
 
-These settings do not affect charts from outside of this repository, via `requirements.yaml`.
+These settings do not affect bundled third-party charts.
 
 {{< /alert >}}
 

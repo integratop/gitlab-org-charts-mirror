@@ -3,7 +3,6 @@ template_settings.yaml
 charts/*.tgz
 .DS_Store
 tags
-requirements.lock
 .markdownlintrc
 gems
 .bundle
