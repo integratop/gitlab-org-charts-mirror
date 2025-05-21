@@ -188,6 +188,7 @@ pin_image_versions:
   script:
     - apt-get update -qq
     - apt install -y bats skopeo
+    - bash ./scripts/ci/add_dependency_repos.sh
     - bats --verbose-run ./scripts/ci/pin_image_digests.bats
     - bash ./scripts/ci/pin_image_digests.sh
   artifacts:
