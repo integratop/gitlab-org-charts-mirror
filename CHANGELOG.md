@@ -2,6 +2,10 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.0.1 (2025-05-21)
+
+No changes.
+
 ## 9.0.0 (2025-05-14)
 
 ### Added (2 changes)
@@ -23,6 +27,10 @@ entry.
 ### Removed (1 change)
 
 - [Remove nginx-ingress fallback](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4bb007f998c53680a70c640743e8fef978df22a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4225))
+
+## 8.11.3 (2025-05-21)
+
+No changes.
 
 ## 8.11.2 (2025-05-07)
 
@@ -53,6 +61,10 @@ No changes.
 - [Ingress NGINX: bump image tag and digest to 1.11.5](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/9dbbd04c81b872531e08f270575c63799aa291b2) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4186))
 - [Update dependency container-registry to v4.19.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/1d640153b60b512fdb508e74d13b27db3150a8b3) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4184))
 - [Update dependency container-registry to v4.18.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/3f78ebdd958db5267027a6d806a8ecdb2b1a779d) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4178))
+
+## 8.10.7 (2025-05-21)
+
+No changes.
 
 ## 8.10.6 (2025-05-07)
 
