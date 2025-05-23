@@ -102,10 +102,10 @@ GKE platform only.
 
 | Minor version | GKE       | EKS       | vCluster deploy | vCluster full QA |
 | ---           | ---       | ---       | ---             | ---              |
-| 1.32          | current   | secondary | secondary       | secondary        |
+| 1.33          | current   | NA        | secondary       | secondary        |
+| 1.32          | secondary | current   | NA              | NA               |
 | 1.31          | secondary | NA        | NA              | NA               |
 | 1.31 ARM      | current   | NA        | NA              | NA               |
-| 1.30          | secondary | NA        | NA              | NA               |
 
 This table is in development and subject to change.
 
