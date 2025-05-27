@@ -1421,3 +1421,96 @@ documentation:
 
 - [General Registry documentation](https://docs.docker.com/registry/)
 - [GitLab-specific Registry documentation](https://gitlab.com/gitlab-org/container-registry/-/tree/master/docs-gitlab)
+
+## Registry Rate Limiter Configuration
+
+The Registry can be configured with rate limiting to control the traffic to your container registry instance. This helps protect your registry from abuse, DoS attacks, or excessive usage.
+
+### Notes
+
+- Rate limiting requires Redis to be configured properly via the `registry.redis.rateLimiting` settings.
+- Rate limiting is disabled by default. Set `registry.rateLimiter.enabled: true` to enable it.
+- Limiters are applied in order of precedence (lowest values first).
+- The `log_only` option can be useful for testing rate limits before enforcing them.
+
+### Rate Limiter Configuration
+
+To enable and configure rate limiting for the container registry, you can use the `registry.rateLimiter` settings:
+
+```yaml
+registry:
+  rateLimiter:
+    enabled: true
+    limiters:
+      - name: global_rate_limit
+        description: "Global IP rate limit"
+        log_only: false
+        match:
+          type: IP
+        precedence: 10
+        limit:
+          rate: 5000
+          period: "minute"
+          burst: 8000
+        action:
+          warn_threshold: 0.7
+          warn_action: "log"
+          hard_action: "block"
+```
+
+### Limiters Configuration
+
+The rate limiter uses a list of limiters to define rate limiting rules. Each limiter has the following properties:
+
+- `name`: A unique identifier for the limiter
+- `description`: A human-readable description of the limiter's purpose
+- `log_only`: When set to `true`, violations are only logged without enforcement
+- `precedence`: Defines the order in which limiters are evaluated (lower values first)
+- `match`: Criteria for matching requests
+- `limit`: The rate limit parameters
+- `action`: Actions to take when limits are reached
+
+### Limit Configuration
+
+The `limit` section defines the actual rate limit parameters:
+
+```yaml
+limit:
+  rate: 100       # Number of requests allowed
+  period: "minute" # Time period (second, minute, hour, day)
+  burst: 200      # Allowed burst capacity
+```
+
+### Action Configuration
+
+The `action` section defines what happens when limits are approached or reached:
+
+```yaml
+action:
+  warn_threshold: 0.7      # Percentage of limit to trigger warning
+  warn_action: "log"       # Action when warning threshold is reached
+  hard_action: "block"     # Action when limit is reached
+```
+
+### Examples
+
+#### Global IP Rate Limit
+
+This example limits all requests from a single IP address:
+
+```yaml
+- name: global_rate_limit
+  description: "Global IP rate limit"
+  log_only: false
+  match:
+    type: IP
+  precedence: 10
+  limit:
+    rate: 5000
+    period: "minute"
+    burst: 8000
+  action:
+    warn_threshold: 0.7
+    warn_action: "log"
+    hard_action: "block"
+```
