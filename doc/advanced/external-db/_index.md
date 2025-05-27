@@ -5,7 +5,12 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Configure the GitLab chart with an external database
 ---
 
-For a production-ready GitLab chart deployment, use an external database.
+{{< alert type="warning" >}}
+
+The bundled bitnami PostgreSQL chart is not production ready. For a production-ready GitLab chart deployment, use an
+external database.
+
+{{< /alert >}}
 
 Prerequisites:
 
