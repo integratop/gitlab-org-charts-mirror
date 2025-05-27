@@ -448,6 +448,12 @@ redis:
 gc:
   disabled: false
 
+ # Container Registry rate limiter backed by Redis
+ # https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md#rate-limiter
+rateLimiter:
+  # Enable rate limiting for the container registry
+  enabled: false
+
 ## Configure TLS on the instance itself
 ## WARNING: All clients must trust the certificate used for service.
 tls:
