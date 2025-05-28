@@ -172,6 +172,16 @@ redis:
     https://docs.gitlab.com/charts/installation/upgrade.html#use-of-globalredispassword
 {{- end -}}
 
+{{/*
+Warn that `global.openbao.enabled` is present and true, noting an Experimenal feature.
+*/}}
+{{- if pluck "enabled" .Values.global.openbao }}
+{{ $WARNING }}
+openbao:
+  You have enabled the configuration of OpenBao. This feature is currently Experimental, and entirely unsupported.
+  See https://docs.gitlab.com/policy/development_stages_support/#experiment
+{{- end -}}
+
 {{- /* run removals */}}
 {{ include "gitlab.removals" . }}
 {{- /* run checkConfig */}}
