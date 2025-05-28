@@ -175,7 +175,7 @@ redis:
 {{/*
 Warn that `global.openbao.enabled` is present and true, noting an Experimenal feature.
 */}}
-{{- if pluck "enabled" .Values.global.openbao }}
+{{- if (pluck "enabled" .Values.global.openbao | first) }}
 {{ $WARNING }}
 openbao:
   You have enabled the configuration of OpenBao. This feature is currently Experimental, and entirely unsupported.

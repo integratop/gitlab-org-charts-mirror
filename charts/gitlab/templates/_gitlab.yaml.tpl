@@ -204,7 +204,7 @@ oidc_provider:
 
 
 {{/*
-Generates openbao configuration.
+Generates OpenBao configuration.
 
 Usage:
 {{ include "gitlab.appConfig.openbao.configuration" $ }}

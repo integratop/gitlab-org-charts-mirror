@@ -884,7 +884,7 @@ global:
     indexer:
       internalApi: {}
 
-  ## https://https://docs.gitlab.com/ci/secrets/
+  ## https://docs.gitlab.com/ci/secrets/
   ## Experimental, unsupported
   openbao:
     enabled: false
