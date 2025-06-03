@@ -72,6 +72,7 @@ global:
     smartcard: {}
     kas: {}
     pages: {}
+    openbao: {}
 
   ## https://docs.gitlab.com/charts/charts/globals#configure-ingress-settings
   ingress:
@@ -882,6 +883,14 @@ global:
       basicAuth: {}
     indexer:
       internalApi: {}
+
+  ## https://docs.gitlab.com/ci/secrets/
+  ## Experimental, unsupported
+  openbao:
+    enabled: false
+    host:
+    https:
+    url: # If present, must be a complete URI
 
   ## https://docs.gitlab.com/charts/charts/globals
   extraEnv: {}
