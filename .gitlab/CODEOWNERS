@@ -30,11 +30,12 @@
 /scripts/ci/ @gitlab-org/maintainers/helm-charts-gitlab @balasankarc
 .gitlab-ci.yml @gitlab-org/maintainers/helm-charts-gitlab @balasankarc
 
-# Chart Dependency
-/requirements.yaml @gitlab-org/maintainers/helm-charts-gitlab @DylanGriffith @dgruzd @terrichu @johnmason @hswimelar @jdrpereira @jaime @suleimiahmed
+[Chart Dependencies] @gitlab-org/maintainers/helm-charts-gitlab @DylanGriffith @dgruzd @terrichu @johnmason @hswimelar @jdrpereira @jaime @suleimiahmed
+/Chart.yaml
+/Chart.lock
 
 # Charts Architecture
-/doc/architecture/ @WarheadsSE @twk3 @ayufan @stanhu
+/doc/architecture/ @WarheadsSE @ayufan @stanhu
 
 ^[Documentation Directories] @gl-docsteam
 /doc/

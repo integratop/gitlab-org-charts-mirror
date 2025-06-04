@@ -963,7 +963,7 @@ upgradeCheck:
 
 ## Installation of certmananger.
 ## This value replaces `certmanager.install` to allow certmanager schema validation to pass.
-## See requirements.yaml for current version
+## See dependencies in Chart.yaml for current version
 installCertmanager: true
 
 ## Configuration of jetstack/cert-manager
@@ -1074,7 +1074,7 @@ haproxy:
       - --configmap-tcp-services=$(POD_NAMESPACE)/$(POD_NAMESPACE)-haproxy-tcp
 
 ## Installation & configuration of stable/prometheus
-## See requirements.yaml for current version
+## See dependencies in Chart.yaml for current version
 prometheus:
   install: true
   rbac:
@@ -1251,7 +1251,7 @@ redis:
     enabled: true
 
 ## Installation & configuration of stable/postgresql
-## See requirements.yaml for current version
+## See dependencies in Chart.yaml for current version
 postgresql:
   install: true
   auth:
@@ -1336,7 +1336,7 @@ shared-secrets:
   annotations: {}
 
 ## Installation & configuration of gitlab/gitlab-runner
-## See requirements.yaml for current version
+## See dependencies in Chart.yaml for current version
 gitlab-runner:
   install: true
   rbac:
