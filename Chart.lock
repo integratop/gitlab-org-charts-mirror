@@ -16,7 +16,7 @@ dependencies:
   version: v1.12.17
 - name: prometheus
   repository: https://prometheus-community.github.io/helm-charts
-  version: 27.14.0
+  version: 27.20.0
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 13.4.4
@@ -41,5 +41,5 @@ dependencies:
 - name: kubernetes-ingress
   repository: https://haproxytech.github.io/helm-charts
   version: 1.32.0
-digest: sha256:be481a5a4b9ae85afdf1aa9f03ed96b90f2d4a564bd6fcd73aa039afdc926903
-generated: "2025-06-03T08:56:57.243548767+02:00"
+digest: sha256:d536e8520a75ebbbec0be431891b98fff97a9ae9794eaea938559ffdec241a96
+generated: "2025-06-05T14:07:26.009249879Z"

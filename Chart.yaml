@@ -28,7 +28,7 @@ dependencies:
   condition: certmanager.install,installCertmanager
   alias: certmanager
 - name: prometheus
-  version: 27.14.0
+  version: 27.20.0
   repository: https://prometheus-community.github.io/helm-charts
   condition: prometheus.install
 - name: postgresql
