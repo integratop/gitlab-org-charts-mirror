@@ -275,6 +275,7 @@ trigger_review_current:
     - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_PIPELINE_SOURCE != "parent_pipeline" && $PIPELINE_TYPE =~ /STABLE_BRANCH_PIPELINE$/ '
     - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_PIPELINE_SOURCE != "parent_pipeline"'
       when: manual
+      allow_failure: true
     # Triggered from CNG
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $TEST_BRANCH == "true"'
 
@@ -303,11 +304,14 @@ trigger_review_secondary:
     - !reference [.rule:skip_if_not_canonical_or_security]
     - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_PIPELINE_SOURCE != "parent_pipeline"'
       when: manual
+      allow_failure: true
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: manual
+      allow_failure: true
       # Triggered from CNG
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $TEST_BRANCH == "true"'
       when: manual
+      allow_failure: true
 
 .trigger_review_secondary:
   rules:
@@ -319,6 +323,7 @@ trigger_review_secondary:
     # Triggered from CNG
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $TEST_BRANCH == "true"'
       when: manual
+      allow_failure: true
 
 .trigger_review_job:
   stage: review
@@ -620,6 +625,7 @@ release_package:
   image: ${BUSYBOX_IMAGE}
   stage: qa-manual
   when: manual
+  allow_failure: true
   artifacts:
     paths:
     - variables
