@@ -212,7 +212,7 @@ data:
 
     {{- if ($.Values.workhorse.metadata).zipReaderLimitBytes }}
     [metadata]
-    zip_reader_limit_bytes = {{ $.Values.workhorse.metadata.zipReaderLimitBytes | int }}
+    zip_reader_limit_bytes = {{ $.Values.workhorse.metadata.zipReaderLimitBytes | int64 }}
     {{- end }}
 
     {{- if .workhorse.keywatcher }}
