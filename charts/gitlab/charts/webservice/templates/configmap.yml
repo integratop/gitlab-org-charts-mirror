@@ -153,7 +153,7 @@ data:
           {{- end }}
         web_exporter:
           enabled: {{ or .Values.monitoring.exporter.enabled (and .Values.metrics.enabled (eq .Values.metrics.port .Values.monitoring.exporter.port)) }}
-          address: {{ .Values.monitoring.exporter.listenAddr }}
+          address: {{ .Values.monitoring.exporter.listenAddr | quote }}
           port: {{ .Values.monitoring.exporter.port }}
           {{- if eq (include "webservice-metrics.tls.enabled" $) "true" }}
           tls_enabled: true
