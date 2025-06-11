@@ -39,6 +39,7 @@ The table below maps some of the key previous supported chart versions and suppo
 | 9.0.2 | 18.0.2 |
 | 9.0.1 | 18.0.1 |
 | 9.0.0 | 18.0.0 |
+| 8.11.4 | 17.11.4 |
 | 8.11.3 | 17.11.3 |
 | 8.11.2 | 17.11.2 |
 | 8.11.1 | 17.11.1 |
