@@ -2,6 +2,12 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.0.2 (2025-06-11)
+
+### Changed (1 change)
+
+- [Update Helm release gitlab-runner to v0.77.2](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/db39681dfc7cfbcd6b5a2f1c68e1d6c38e7ac42f)
+
 ## 9.0.1 (2025-05-21)
 
 No changes.
@@ -27,6 +33,10 @@ No changes.
 ### Removed (1 change)
 
 - [Remove nginx-ingress fallback](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4bb007f998c53680a70c640743e8fef978df22a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4225))
+
+## 8.11.4 (2025-06-11)
+
+No changes.
 
 ## 8.11.3 (2025-05-21)
 
@@ -61,6 +71,10 @@ No changes.
 - [Ingress NGINX: bump image tag and digest to 1.11.5](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/9dbbd04c81b872531e08f270575c63799aa291b2) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4186))
 - [Update dependency container-registry to v4.19.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/1d640153b60b512fdb508e74d13b27db3150a8b3) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4184))
 - [Update dependency container-registry to v4.18.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/3f78ebdd958db5267027a6d806a8ecdb2b1a779d) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4178))
+
+## 8.10.8 (2025-06-11)
+
+No changes.
 
 ## 8.10.7 (2025-05-21)
 
