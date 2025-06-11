@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
 name: gitlab
-version: 9.0.1
+version: 9.0.2
 appVersion: master
 description: GitLab is the most comprehensive AI-powered DevSecOps Platform.
 keywords:
@@ -15,13 +15,13 @@ maintainers:
   email: support@gitlab.com
 dependencies:
 - name: gitlab
-  version: '*.*.*'
+  version: "*.*.*"
 - name: certmanager-issuer
-  version: '*.*.*'
+  version: "*.*.*"
 - name: minio
-  version: '*.*.*'
+  version: "*.*.*"
 - name: registry
-  version: '*.*.*'
+  version: "*.*.*"
 - name: cert-manager
   version: v1.12.17
   repository: https://charts.jetstack.io/
@@ -45,10 +45,10 @@ dependencies:
   condition: redis.install
 - name: nginx-ingress
   condition: nginx-ingress.enabled
-  version: '*.*.*'
+  version: "*.*.*"
 - name: nginx-ingress
   condition: nginx-ingress-geo.enabled
-  version: '*.*.*'
+  version: "*.*.*"
   alias: nginx-ingress-geo
 - name: gitlab-zoekt
   version: 2.4.0
