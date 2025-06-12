@@ -496,6 +496,7 @@ deployments:
       # inherits `nodeSelector`
     tolerations: # array
       # inherits `tolerations`
+    priorityClassName: # inherits `priorityClassName`
 ```
 
 ### Deployments Ingress
