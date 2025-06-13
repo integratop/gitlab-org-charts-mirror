@@ -34,12 +34,12 @@ dependencies:
   version: '*.*.*'
 - name: gitlab-zoekt
   repository: https://charts.gitlab.io/
-  version: 2.4.0
+  version: 2.6.0
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.19.4
 - name: kubernetes-ingress
   repository: https://haproxytech.github.io/helm-charts
   version: 1.32.0
-digest: sha256:d536e8520a75ebbbec0be431891b98fff97a9ae9794eaea938559ffdec241a96
-generated: "2025-06-05T14:07:26.009249879Z"
+digest: sha256:b425fb931a1c45fbe5691dcc688f19619576cb5c1f15e29f317cab988cff613b
+generated: "2025-06-13T09:39:50.136953529Z"
