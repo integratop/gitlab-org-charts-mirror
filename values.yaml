@@ -715,6 +715,7 @@ global:
     https: # default true
     externalHttp: []
     externalHttps: []
+    customDomainMode:
     artifactsServer: true
     localStore:
       enabled: false
