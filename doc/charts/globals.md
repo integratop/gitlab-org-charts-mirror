@@ -2075,6 +2075,7 @@ global:
     https:
     externalHttp:
     externalHttps:
+    customDomainMode:
     artifactsServer:
     objectStore:
       enabled:
@@ -2100,8 +2101,9 @@ global:
 | `host`                          | String  |                            | Pages root domain. |
 | `port`                          | String  |                            | Port to be used to construct Pages URLs in UI. If left unset, default value of 80 or 443 is set based on HTTPS situation of Pages. |
 | `https`                         | Boolean | `true`                     | Whether GitLab UI should show HTTPS URLs for Pages or not. Has precedence over `global.hosts.pages.https` and `global.hosts.https`. |
-| `externalHttp`                  |  List   | `[]`                       | List of IP addresses through which HTTP requests reach Pages daemon. For supporting custom domains. |
-| `externalHttps`                 |  List   | `[]`                       | List of IP addresses through which HTTPS requests reach Pages daemon. For supporting custom domains. |
+| `externalHttp`                  |  List   | `[]`                       | List of IP addresses through which HTTP requests reach Pages daemon. For supporting [custom domains](https://docs.gitlab.com/user/project/pages/custom_domains_ssl_tls_certification/). |
+| `externalHttps`                 |  List   | `[]`                       | List of IP addresses through which HTTPS requests reach Pages daemon. For supporting [custom domains](https://docs.gitlab.com/user/project/pages/custom_domains_ssl_tls_certification/). |
+| `customDomainMode`              | String  |                            | Configure to enable [custom domains](https://docs.gitlab.com/user/project/pages/custom_domains_ssl_tls_certification/): `http` or `https`. |
 | `artifactsServer`               | Boolean | `true`                     | Enable viewing artifacts in GitLab Pages. |
 | `objectStore.enabled`           | Boolean | `true`                     | Enable using object storage for Pages. |
 | `objectStore.bucket`            | String  | `gitlab-pages`             | Bucket to be used to store content related to Pages |
