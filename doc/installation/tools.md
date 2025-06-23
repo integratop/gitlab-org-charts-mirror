@@ -25,7 +25,7 @@ of the version running in your cluster.
 
 ### Helm
 
-Install Helm v3.10.3 or later by following [the Helm documentation](https://helm.sh/docs/intro/install/).
+Install Helm v3.17.3 or later by following [the Helm documentation](https://helm.sh/docs/intro/install/).
 
 ### PostgreSQL
 
@@ -35,10 +35,9 @@ This deployment is for trial purposes only and **not recommended for use in prod
 
 You should set up an
 [external, production-ready PostgreSQL instance](../advanced/external-db/_index.md).
-Recommended default versions:
 
-- PostgreSQL 13 since GitLab chart 6.0.
-- PostgreSQL 14 since GitLab chart 8.0.
+Check [the GitLab requirements](https://docs.gitlab.com/install/requirements/#postgresql) for
+the supported PostgreSQL versions.
 
 As of GitLab chart 4.0.0, replication is available internally, but not enabled by default.
 Such functionality has not been load tested by GitLab.
