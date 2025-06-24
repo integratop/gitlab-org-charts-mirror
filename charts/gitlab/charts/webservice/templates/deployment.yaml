@@ -81,7 +81,7 @@ spec:
       {{- end }}
       {{- $nodeSelectors := dict "Values" (dict "global" (dict "nodeSelector" $.Values.global.nodeSelector) "nodeSelector" .nodeSelector) -}}
       {{- include "gitlab.nodeSelector" $nodeSelectors | nindent 6 }}
-      {{- $priorityClassName := dict "Values" (dict "global" (dict "priorityClassName" $.Values.global.priorityClassName) "priorityClassName" $.Values.priorityClassName) -}}
+      {{- $priorityClassName := dict "Values" (dict "global" (dict "priorityClassName" $.Values.global.priorityClassName) "priorityClassName" (default $.Values.priorityClassName .priorityClassName)) -}}
       {{- include "gitlab.priorityClassName" $priorityClassName | nindent 6 }}
       {{- include "gitlab.podSecurityContext" $.Values.securityContext | nindent 6 }}
       {{- if eq (default $.Values.global.antiAffinity $.Values.antiAffinity) "hard" }}
