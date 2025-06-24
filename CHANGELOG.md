@@ -35,6 +35,16 @@ entry.
 - [Update dependency danger-review to v2.1.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/fb86835cb4c5b39ceea2e2349890016b2ae2ca49) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4196))
 - [Update Helm release gitlab-runner to v0.75.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/5e81a8f1e9a8a2d26de60edcf075a8797c3ea9e2) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4181))
 
+## 9.0.3 (2025-06-24)
+
+### Fixed (1 change)
+
+- [Include ClickHouse secrets in toolbox backup job](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/ddaf87c8cdf0bf8002437aa3b720785a1cb0f66b)
+
+### Changed (1 change)
+
+- [Update Helm release gitlab-runner to v0.77.3](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/2200d0b72b818404dd40abe125968ae9a3208f2a)
+
 ## 9.0.2 (2025-06-11)
 
 ### Changed (1 change)
