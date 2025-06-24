@@ -77,6 +77,12 @@ No changes.
 
 - [Remove nginx-ingress fallback](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4bb007f998c53680a70c640743e8fef978df22a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4225))
 
+## 8.11.5 (2025-06-24)
+
+### Fixed (1 change)
+
+- [Include ClickHouse secrets in toolbox backup job](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/0eec72cd03c12303082e1d865927d2068f1c7834)
+
 ## 8.11.4 (2025-06-11)
 
 No changes.
