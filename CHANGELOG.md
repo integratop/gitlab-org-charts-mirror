@@ -2,6 +2,12 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.1.1 (2025-06-24)
+
+### Changed (1 change)
+
+- [Update Helm release gitlab-runner to v0.78.0](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/3f67fdfa9aeedc2cf37e48652b335f214d88108c)
+
 ## 9.1.0 (2025-06-18)
 
 ### Added (2 changes)
@@ -28,6 +34,16 @@ entry.
 - [Update Helm release prometheus to v27.14.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/7f39e0da714f78f363a34e03c7e51c8d46dea380) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4265))
 - [Update dependency danger-review to v2.1.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/fb86835cb4c5b39ceea2e2349890016b2ae2ca49) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4196))
 - [Update Helm release gitlab-runner to v0.75.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/5e81a8f1e9a8a2d26de60edcf075a8797c3ea9e2) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4181))
+
+## 9.0.3 (2025-06-24)
+
+### Fixed (1 change)
+
+- [Include ClickHouse secrets in toolbox backup job](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/ddaf87c8cdf0bf8002437aa3b720785a1cb0f66b)
+
+### Changed (1 change)
+
+- [Update Helm release gitlab-runner to v0.77.3](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/2200d0b72b818404dd40abe125968ae9a3208f2a)
 
 ## 9.0.2 (2025-06-11)
 
@@ -60,6 +76,12 @@ No changes.
 ### Removed (1 change)
 
 - [Remove nginx-ingress fallback](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4bb007f998c53680a70c640743e8fef978df22a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4225))
+
+## 8.11.5 (2025-06-24)
+
+### Fixed (1 change)
+
+- [Include ClickHouse secrets in toolbox backup job](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/0eec72cd03c12303082e1d865927d2068f1c7834)
 
 ## 8.11.4 (2025-06-11)
 
