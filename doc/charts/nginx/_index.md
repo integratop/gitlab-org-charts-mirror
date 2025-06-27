@@ -167,23 +167,3 @@ The following adjustments were made to the NGINX fork:
   automountServiceAccountToken: {{ pluck "automountServiceAccountToken" .Values.defaultBackend.serviceAccount .Values.global.serviceAccount | first }}
   {{- end -}}
   ```
-
-- Add the following attributes to comply with Pod Security Standards Profile Restricted:
-  - `controller-deployment.yaml`
-    - `spec.template.spec.containers[0].securityContext.runAsNonRoot`
-    - `spec.template.spec.containers[0].securityContext.seccompProfile`
-- Add the following new RBAC rules. This is necessary while our chart is on 4.0.6, but we've bumped the controller image to 1.11.2. Once we bring the chart to 4.11.2, we can remove this patch. It was required because the controller now uses endpointslices to track endpoints.
-  This was added to both: `charts/nginx-ingress/templates/clusterrole.yaml` and `charts/nginx-ingress/templates/controller-role.yaml`:
-
-  ```yaml
-  - apiGroups:
-      - discovery.k8s.io
-    resources:
-      - endpointslices
-    verbs:
-      - list
-      - watch
-      - get
-  ```
-
-  Additionally, to support migration from v1.3.1 to v1.11.2 and forward, for those users that set their own RBAC rules, please make sure to update your RBAC rules accordingly, as we no longer fall back to the v1.3.1 image.

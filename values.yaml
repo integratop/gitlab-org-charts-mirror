@@ -983,6 +983,9 @@ nginx-ingress: &nginx-ingress
   enabled: true
   tcpExternalConfig: "true"
   controller: &nginx-ingress-controller
+    podSecurityContext:
+      seccompProfile:
+        type: "RuntimeDefault"
     image:
       registry: registry.gitlab.com
       image: gitlab-org/cloud-native/mirror/images/ingress-nginx/controller
@@ -1038,6 +1041,9 @@ nginx-ingress: &nginx-ingress
     admissionWebhooks:
       enabled: false
   defaultBackend:
+    podSecurityContext:
+      seccompProfile:
+        type: "RuntimeDefault"
     resources:
       requests:
         cpu: 5m
