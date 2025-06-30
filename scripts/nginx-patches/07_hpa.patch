@@ -81,3 +81,15 @@ index b2eff1b31..48375f08c 100644
    {{- end }}
 +  {{- include "gitlab.hpa.behavior" $hpaCfg | nindent 2 }}
  {{- end }}
+diff --git a/charts/nginx-ingress/values.yaml b/charts/nginx-ingress/values.yaml
+index dd2e41d04..15aaf2ca1 100644
+--- a/charts/nginx-ingress/values.yaml
++++ b/charts/nginx-ingress/values.yaml
+@@ -1143,6 +1143,7 @@ defaultBackend:
+     maxReplicas: 2
+     targetCPUUtilizationPercentage: 50
+     targetMemoryUtilizationPercentage: 50
++    behavior: {}
+   # NetworkPolicy for default backend component.
+   networkPolicy:
+     # -- Enable 'networkPolicy' or not
