@@ -50,7 +50,7 @@ index b2eff1b31..48375f08c 100644
 @@ -1,5 +1,6 @@
  {{- if and .Values.defaultBackend.enabled .Values.defaultBackend.autoscaling.enabled }}
 -apiVersion: {{ ternary "autoscaling/v2" "autoscaling/v2beta2" (.Capabilities.APIVersions.Has "autoscaling/v2") }}
-+{{- $hpaCfg := (dict "global" $.Values.global.hpa "local" .Values.controller.autoscaling "context" $) -}}
++{{- $hpaCfg := (dict "global" $.Values.global.hpa "local" .Values.backendConfig.autoscaling "context" $) -}}
 +apiVersion: {{ template "gitlab.hpa.apiVersion" $hpaCfg }}
  kind: HorizontalPodAutoscaler
  metadata:
