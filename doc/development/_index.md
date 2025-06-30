@@ -187,8 +187,9 @@ can not resolve the MinIO domain name and find the correct endpoint (you can see
 ## Troubleshooting a development environment
 
 Developers may encounter unique issues while working on new chart features.
-[Refer to the troubleshooting guide](troubleshooting.md) for
-information if your **_development_** cluster seems to have strange issues.
+
+If your development cluster seems to have strange issues, [refer to the troubleshooting guide](troubleshooting.md)
+for more information.
 
 {{< alert type="note" >}}
 
