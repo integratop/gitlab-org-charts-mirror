@@ -1,3 +1,4 @@
+# GitLab NGINX Patch: Use GitLab labels and annotations for consistent Pod metadata.
 diff --git a/charts/nginx-ingress/templates/admission-webhooks/job-patch/job-createSecret.yaml b/charts/nginx-ingress/templates/admission-webhooks/job-patch/job-createSecret.yaml
 index 463ab80d7..d60bd7067 100644
 --- a/charts/nginx-ingress/templates/admission-webhooks/job-patch/job-createSecret.yaml

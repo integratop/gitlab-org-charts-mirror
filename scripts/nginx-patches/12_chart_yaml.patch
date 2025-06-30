@@ -1,3 +1,4 @@
+# GitLab NGINX Patch: Patch chart name and sources.
 diff --git a/charts/nginx-ingress/Chart.yaml b/charts/nginx-ingress/Chart.yaml
 index 06faa4170..c3f21ec9d 100644
 --- a/charts/nginx-ingress/Chart.yaml

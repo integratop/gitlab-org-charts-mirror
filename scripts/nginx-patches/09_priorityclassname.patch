@@ -1,3 +1,5 @@
+# GitLab NGINX Patch: Allow to configure priority class names with global
+# chart configuration.
 diff --git a/charts/nginx-ingress/templates/admission-webhooks/job-patch/job-createSecret.yaml b/charts/nginx-ingress/templates/admission-webhooks/job-patch/job-createSecret.yaml
 index af3ea12a3..463ab80d7 100644
 --- a/charts/nginx-ingress/templates/admission-webhooks/job-patch/job-createSecret.yaml

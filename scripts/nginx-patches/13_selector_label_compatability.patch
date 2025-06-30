@@ -1,3 +1,5 @@
+# GitLab NGINX Patch: Use previous selector labels to not break
+# on upgrades.
 diff --git a/charts/nginx-ingress/templates/_helpers.tpl b/charts/nginx-ingress/templates/_helpers.tpl
 index 637e82e2d..2b1f6c4a1 100644
 --- a/charts/nginx-ingress/templates/_helpers.tpl

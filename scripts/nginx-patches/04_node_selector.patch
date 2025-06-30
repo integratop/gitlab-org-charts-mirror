@@ -1,3 +1,5 @@
+# GitLab NGINX Patch: Use GitLab node selector to control Pod assignment
+# with uniform/global configuration for all charts.
 diff --git a/charts/nginx-ingress/templates/controller-deployment.yaml b/charts/nginx-ingress/templates/controller-deployment.yaml
 index a9b38f24f..90fbe86c5 100644
 --- a/charts/nginx-ingress/templates/controller-deployment.yaml

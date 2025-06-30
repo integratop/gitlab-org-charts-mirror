@@ -1,3 +1,4 @@
+# GitLab NGINX Patch: Use global PDB API version.
 diff --git a/charts/nginx-ingress/templates/controller-poddisruptionbudget.yaml b/charts/nginx-ingress/templates/controller-poddisruptionbudget.yaml
 index 842b74b7e..c7d5b2cfb 100644
 --- a/charts/nginx-ingress/templates/controller-poddisruptionbudget.yaml

@@ -1,3 +1,4 @@
+# GitLab NGINX Patch: Allow to configure UBI/FIPS images by setting a global tag suffix.
 diff --git a/charts/nginx-ingress/templates/controller-daemonset.yaml b/charts/nginx-ingress/templates/controller-daemonset.yaml
 index 63cee2890..99153ac89 100644
 --- a/charts/nginx-ingress/templates/controller-daemonset.yaml
