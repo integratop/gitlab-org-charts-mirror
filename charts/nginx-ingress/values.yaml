@@ -1210,3 +1210,6 @@ dhParam: ""
 tcpExternalConfig: ""
 
 externalIpTpl: '{{ .Values.global.hosts.externalIP }}'
+
+common:
+  labels: {}

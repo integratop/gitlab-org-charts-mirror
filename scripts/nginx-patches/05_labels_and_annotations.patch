@@ -486,3 +486,14 @@ index 51bc5002c..235eaf102 100644
      {{- include "ingress-nginx.labels" . | nindent 4 }}
      {{- with .Values.controller.labels }}
      {{- toYaml . | nindent 4 }}
+diff --git a/charts/nginx-ingress/values.yaml b/charts/nginx-ingress/values.yaml
+index 15aaf2ca1..efe20d2ac 100644
+--- a/charts/nginx-ingress/values.yaml
++++ b/charts/nginx-ingress/values.yaml
+@@ -1210,3 +1210,6 @@ dhParam: ""
+ tcpExternalConfig: ""
+ 
+ externalIpTpl: '{{ .Values.global.hosts.externalIP }}'
++
++common:
++  labels: {}
