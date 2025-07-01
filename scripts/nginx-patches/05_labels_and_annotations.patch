@@ -461,3 +461,15 @@ index 15b1388f0..f023c054e 100644
      {{- include "ingress-nginx.labels" . | nindent 4 }}
      app.kubernetes.io/component: default-backend
      {{- with .Values.defaultBackend.labels }}
+diff --git a/charts/nginx-ingress/templates/default-backend-deployment.yaml b/charts/nginx-ingress/templates/default-backend-deployment.yaml
+index ea84caec9..8bfc3db50 100644
+--- a/charts/nginx-ingress/templates/default-backend-deployment.yaml
++++ b/charts/nginx-ingress/templates/default-backend-deployment.yaml
+@@ -43,6 +43,7 @@ spec:
+         {{- with .Values.defaultBackend.labels }}
+         {{- toYaml . | nindent 8 }}
+         {{- end }}
++      {{- include "gitlab.podLabels" . | nindent 8 }}
+       {{- if .Values.defaultBackend.podLabels }}
+         {{- toYaml .Values.defaultBackend.podLabels | nindent 8 }}
+       {{- end }}

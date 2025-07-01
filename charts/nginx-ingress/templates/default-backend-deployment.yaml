@@ -43,6 +43,7 @@ spec:
         {{- with .Values.defaultBackend.labels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+      {{- include "gitlab.podLabels" . | nindent 8 }}
       {{- if .Values.defaultBackend.podLabels }}
         {{- toYaml .Values.defaultBackend.podLabels | nindent 8 }}
       {{- end }}
