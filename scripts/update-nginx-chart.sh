@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+STOP_PATCH="$1"
 VERSION="helm-chart-4.12.2"
 
 project_root="$(realpath $(dirname -- "${BASH_SOURCE[0]}")/..)"
@@ -27,6 +28,10 @@ echo -e "This is a modified fork of https://github.com/kubernetes/ingress-nginx.
 
 echo "Applying patches from $nginx_patch_dir"
 for patch in $nginx_patch_dir*.patch; do
+  if [[ "$STOP_PATCH" != "" && "$patch" =~ "$STOP_PATCH"_* ]]; then
+      break
+  fi
+
   echo "Applying $patch";
   git apply $patch
 done
