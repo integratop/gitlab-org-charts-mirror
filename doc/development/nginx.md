@@ -20,6 +20,8 @@ a better overview of changes that we made.
    git diff charts/nginx-ingress/ > scripts/nginx-patches/00_new.patch
    ```
 
+   Multiple patch files can change the same NGINX manifest files. That's why patches need to be sorted. When adding a new patch, make sure to increment the `00_` above to a number greater than the last patch we have.
+
 1. Commit the new changes and the patchfile.
 1. Run `scripts/update-nginx-chart.sh` to validate all patches apply
    without any uncommited changes.
