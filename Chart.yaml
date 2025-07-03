@@ -51,7 +51,7 @@ dependencies:
   version: "*.*.*"
   alias: nginx-ingress-geo
 - name: gitlab-zoekt
-  version: 2.6.0
+  version: 2.7.0
   repository: https://charts.gitlab.io/
   condition: gitlab-zoekt.install
 - name: traefik
