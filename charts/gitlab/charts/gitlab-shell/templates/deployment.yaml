@@ -108,6 +108,7 @@ spec:
               value: '/etc/gitlab-secrets/ssh'
             - name: SSH_DAEMON
               value: {{ .Values.sshDaemon | quote }}
+            {{- include "gitlab.godebug.env" $ | nindent 12 }}
             {{- include "gitlab.extraEnv" . | nindent 12 }}
             {{- include "gitlab.extraEnvFrom" (dict "root" $ "local" .) | nindent 12 }}
             {{- include "gitlab.timeZone.env" . | nindent 12 }}
