@@ -509,10 +509,12 @@ global:
       database:
         skipSequenceAlteration: false
       topologyServiceClient:
-      # address:
-      # caFile:
-      # privateKeyFile:
-      # certificateFile:
+        tls:
+          enabled: false
+        # address:
+        # caFile:
+        # privateKeyFile:
+        # certificateFile:
 
     ## https://docs.gitlab.com/charts/charts/globals#suggested-reviewers-settings
     suggested_reviewers: {}

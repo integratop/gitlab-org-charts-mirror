@@ -308,3 +308,10 @@ cp -v -r -L /init-config/redis-sentinel/redis-sentinel-password /init-secrets-wo
 {{- end -}}
 {{- $_ := set . "redisConfigName" "" }}
 {{- end -}}
+
+{{/*
+Return the Topology Service TLS Secret name
+*/}}
+{{- define "topology-service.tls.secret" -}}
+{{- default (printf "%s-topology-service-tls" .Release.Name) $.Values.global.appConfig.cell.topologyServiceClient.tls.secret | quote -}}
+{{- end -}}
