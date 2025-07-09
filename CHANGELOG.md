@@ -91,6 +91,12 @@ No changes.
 
 - [Remove nginx-ingress fallback](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4bb007f998c53680a70c640743e8fef978df22a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4225))
 
+## 8.11.7 (2025-07-09)
+
+### Changed (1 change)
+
+- [Update default NGINX controller from 1.11.5 to 1.11.7](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/6beb7efa74bb25e8eec8f34d5d36f42832afd122)
+
 ## 8.11.6 (2025-06-25)
 
 No changes.
