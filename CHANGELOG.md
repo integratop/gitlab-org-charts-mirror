@@ -43,6 +43,12 @@ entry.
 - [Update dependency danger-review to v2.1.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/fb86835cb4c5b39ceea2e2349890016b2ae2ca49) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4196))
 - [Update Helm release gitlab-runner to v0.75.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/5e81a8f1e9a8a2d26de60edcf075a8797c3ea9e2) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4181))
 
+## 9.0.4 (2025-07-09)
+
+### Changed (1 change)
+
+- [Update default NGINX controller from 1.11.5 to 1.11.7](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/0f98fab87a7ca26f0403a154807d54a661f648fa)
+
 ## 9.0.3 (2025-06-24)
 
 ### Fixed (1 change)
