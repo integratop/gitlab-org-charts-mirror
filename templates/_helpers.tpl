@@ -661,3 +661,10 @@ Render GODEBUG environment variable if not already defined in extraEnv
   value: 'tlsmlkem=0,tlskyber=0'
 {{- end }}
 {{- end -}}
+
+{{/*
+Return the Topology Service TLS Secret name
+*/}}
+{{- define "topology-service.tls.secret" -}}
+{{- default (printf "%s-topology-service-tls" .Release.Name) $.Values.global.appConfig.cell.topologyServiceClient.tls.secret | quote -}}
+{{- end -}}
