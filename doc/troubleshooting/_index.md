@@ -752,3 +752,15 @@ To fix the Webservice probes, either:
 - Explicitly configure the monitoring endpoint to listen on IPv4 only
   (`gitlab.webservice.monitoring.listenAddr=0.0.0.0`).
 - [Disable IP mapping on a node/kernel level.](https://docs.kernel.org/networking/ip-sysctl.html#proc-sys-net-ipv6-variables)
+
+## invalid: `spec.progressDeadlineSeconds`
+
+If using Helm `v3.18.0`, you'll get this error when upgrading your chart:
+
+```shell
+Error: UPGRADE FAILED: cannot patch "gitlab-nginx-ingress-controller" with kind Deployment: Deployment.apps "gitlab-nginx-ingress-controller" is invalid: spec.progressDeadlineSeconds: Invalid value: 0: must be greater than minReadySeconds
+```
+
+To fix it, upgrade your Helm client to `v3.18.1` or later. Alternatively, you can downgrade it to `v3.17.x`.
+
+This is due to a [Helm issue 30878](https://github.com/helm/helm/issues/30878).
