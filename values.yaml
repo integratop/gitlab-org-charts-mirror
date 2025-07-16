@@ -1439,3 +1439,7 @@ gitlab-zoekt:
       secretName: '{{ include "gitlab.zoekt.indexer.internalApi.secretName" $ }}'
       secretKey: '{{ include "gitlab.zoekt.indexer.internalApi.secretKey" $ }}'
       gitlabUrl: '{{ include "gitlab.zoekt.indexer.internalApi.gitlabUrl" $ }}'
+
+## Installation & configuration of OpenBao
+openbao:
+  install: false
