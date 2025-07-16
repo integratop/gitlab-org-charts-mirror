@@ -35,11 +35,14 @@ dependencies:
 - name: gitlab-zoekt
   repository: https://charts.gitlab.io/
   version: 2.7.0
+- name: openbao
+  repository: https://charts.gitlab.io/
+  version: 0.1.1
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.19.4
 - name: kubernetes-ingress
   repository: https://haproxytech.github.io/helm-charts
   version: 1.32.0
-digest: sha256:e9e6697ede6127d21c55ed7edfa85b637daf3347c75e218d464c906bfe3609e7
-generated: "2025-07-03T10:19:03.288113473Z"
+digest: sha256:4a1c72c58a30b0a204f3004fcc7c5b93f6e41aa50ba1e54cf50dec30433a3164
+generated: "2025-07-15T08:48:54.636498608+02:00"
