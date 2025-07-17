@@ -17,7 +17,7 @@ Upgrade a Helm chart installation to a later version of GitLab.
 Before upgrading your GitLab installation, you need to check the
 [changelog](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/CHANGELOG.md)
 corresponding to the specific release you want to upgrade to and look for any
-[release notes](version_mappings.md#release-notes-for-each-supported-version) that might pertain to the new GitLab chart
+[release notes](version_mappings.md#upgrade-notes-for-each-supported-version) that might pertain to the new GitLab chart
 version.
 
 Upgrades have to follow a supported [upgrade path](https://docs.gitlab.com/update/#upgrade-paths).

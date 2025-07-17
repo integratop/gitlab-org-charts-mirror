@@ -2,7 +2,7 @@
 stage: GitLab Delivery
 group: Self Managed
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments
-title: GitLab chart versions
+title: GitLab Helm chart versions
 ---
 
 {{< details >}}
@@ -12,7 +12,7 @@ title: GitLab chart versions
 
 {{< /details >}}
 
-The GitLab chart doesn't have the same version number as GitLab itself. This means that breaking changes can be
+The GitLab Helm chart doesn't have the same version number as GitLab itself. This means that breaking changes can be
 introduced to the chart independent of GitLab.
 
 To quickly see the full list of the `gitlab` chart versions and the GitLab version
@@ -23,12 +23,16 @@ helm repo add gitlab https://charts.gitlab.io/
 helm search repo -l gitlab/gitlab
 ```
 
-## Release notes for each supported version
+## Upgrade notes for each supported version
+
+Upgrade notes for each supported version of the GitLab Helm chart are available:
 
 - [9.0](../releases/9_0.md)
 - [8.0](../releases/8_0.md)
 - [7.0](../releases/7_0.md)
 - [6.0](../releases/6_0.md)
+
+See also the project's [CHANGELOG](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/CHANGELOG.md).
 
 ## Previous chart versions
 
@@ -376,8 +380,3 @@ To see the full list, you can issue the following command with Helm:
 helm repo add gitlab https://charts.gitlab.io/
 helm search repo -l gitlab/gitlab
 ```
-
-For more information on charts versioning, see [the relevant documentation](../development/release.md#chart-versioning).
-
-Check the [releases documentation](#release-notes-for-each-supported-version) for information on important releases,
-and see the [changelog](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/CHANGELOG.md) for the full details on any release.
