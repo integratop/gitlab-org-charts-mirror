@@ -960,7 +960,7 @@ Praefect is disabled by default. When enabled with no extra settings, 3 Gitaly r
 
 To enable Praefect with default settings, set `global.praefect.enabled=true`.
 
-See the [Praefect documentation](https://docs.gitlab.com/administration/gitaly/praefect/) for details on how to operate a Gitaly cluster using Praefect.
+For more information, see [Gitaly Cluster (Praefect)](https://docs.gitlab.com/administration/gitaly/praefect/).
 
 ### Global settings for Praefect
 
