@@ -2,7 +2,7 @@
 stage: GitLab Delivery
 group: Self Managed
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments
-title: Upgrade the GitLab chart
+title: Upgrade Helm chart installations
 ---
 
 {{< details >}}
@@ -11,6 +11,8 @@ title: Upgrade the GitLab chart
 - Offering: GitLab Self-Managed
 
 {{< /details >}}
+
+Upgrade a Helm chart installation to a later version of GitLab.
 
 Before upgrading your GitLab installation, you need to check the
 [changelog](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/CHANGELOG.md)
