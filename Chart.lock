@@ -34,7 +34,7 @@ dependencies:
   version: '*.*.*'
 - name: gitlab-zoekt
   repository: https://charts.gitlab.io/
-  version: 2.7.0
+  version: 2.8.0
 - name: openbao
   repository: https://charts.gitlab.io/
   version: 0.1.1
@@ -44,5 +44,5 @@ dependencies:
 - name: kubernetes-ingress
   repository: https://haproxytech.github.io/helm-charts
   version: 1.32.0
-digest: sha256:51032291427ffeeebaf1dfb8a8b1014edd1ffab48a1106ea7839626f669c70f8
-generated: "2025-07-18T10:54:44.452200546+02:00"
+digest: sha256:c411a7cdbe556cf170f77c6a3946851e4a2bd3432f03b7a058ae5120ed71c36e
+generated: "2025-07-21T12:19:59.308989343Z"
