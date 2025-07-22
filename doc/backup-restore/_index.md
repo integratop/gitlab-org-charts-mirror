@@ -34,7 +34,7 @@ We provide a MinIO instance out of the box when using this charts unless an [ext
 
 ### Backups to S3
 
-The Toolbox uses `s3cmd` by default to connect to object storage unless you [specify another s3 tool to use](../backup-restore/backup.md#specify-s3-tool-to-use). In order to configure connectivity to external object storage `gitlab.toolbox.backups.objectStorage.config.secret` should be specified which points to a Kubernetes secret containing a `.s3cfg` file. `gitlab.toolbox.backups.objectStorage.config.key` should be specified if different from the default of `config`. This points to the key containing the contents of a `.s3cfg` file.
+The Toolbox uses `s3cmd` by default to connect to object storage unless you [specify another s3 tool to use](backup.md#specify-s3-tool-to-use). In order to configure connectivity to external object storage `gitlab.toolbox.backups.objectStorage.config.secret` should be specified which points to a Kubernetes secret containing a `.s3cfg` file. `gitlab.toolbox.backups.objectStorage.config.key` should be specified if different from the default of `config`. This points to the key containing the contents of a `.s3cfg` file.
 
 It should look like this:
 
