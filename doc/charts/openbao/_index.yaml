@@ -26,6 +26,9 @@ For more information, see [epic 14234](https://gitlab.com/groups/gitlab-org/-/ep
 
 {{< /alert >}}
 
-The OpenBao chart provides support to install OpenBao.
-You can install the chart by setting `openbao.install` to `true`.
-For more information, see [`openbao`](https://gitlab.com/gitlab-org/cloud-native/charts/openbao).
+The OpenBao chart provides experimental support to install OpenBao.
+For more information, see the [openbao chart repository](https://gitlab.com/gitlab-org/cloud-native/charts/openbao).
+
+The chart is meant for development purposes only at the moment.
+
+See the [developer docs](../../development/openbao/_index.md) to setup OpenBao.
