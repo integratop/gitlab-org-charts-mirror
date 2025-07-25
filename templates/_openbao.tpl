@@ -26,4 +26,33 @@ Populated from one of:
 {{- end -}}
 {{- end -}}
 
+{{/*
+Returns the OpenBao internal hostname.
+If the hostname is set in `global.openbao.internal_host`, that will be returned,
+otherwise falls back to the regular hostname.
+*/}}
+{{- define "gitlab.openbao.internal_hostname" -}}
+{{- coalesce .Values.global.openbao.internal_host (include "gitlab.openbao.hostname" .) -}}
+{{- end -}}
+
+{{/*
+Returns the OpenBao internal URL, ex: `https://openbao.internal.net`
+
+Populated from one of:
+- Direct setting of internal_url
+- Populated by "gitlab.openbao.internal_hostname", plus `https` boolean
+- Empty if neither internal_url nor internal_host are set
+*/}}
+{{- define "gitlab.openbao.internal_url" -}}
+{{- if $.Values.global.openbao.internal_url -}}
+{{-   $.Values.global.openbao.internal_url -}}
+{{- else if $.Values.global.openbao.internal_host -}}
+{{-   if has true (list .Values.global.openbao.https .Values.global.hosts.https .Values.global.hosts.openbao.https) -}}
+{{-    printf "https://%s" .Values.global.openbao.internal_host -}}
+{{-   else -}}
+{{-    printf "http://%s" .Values.global.openbao.internal_host -}}
+{{-   end -}}
+{{- end -}}
+{{- end -}}
+
 
