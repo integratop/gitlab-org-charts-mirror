@@ -132,25 +132,7 @@ If you notice that one or more of the `review_*` jobs have failed and need to de
    - View deployment: this button will open the environment URL of the running instance of GitLab.
    - Stop: this buttton will run the associated `stop_review_*` job.
 
-## When to fork upstream charts
-
-### No changes, no fork
-
-Let it be stated that any chart that does not require changes to function
-for our use *should not* be forked into this repository.
-
-### Guidelines for forking
-
-#### Sensitive information
-
-If a given chart expects that sensitive communication secrets will be presented
-from within environment, such as passwords or cryptographic keys,
-[we prefer to use `initContainers`](../architecture/decisions.md#preference-of-secrets-in-initcontainer-over-environment).
-
-#### Extending functionality
-
-There are some cases where it is needed to extend the functionality of a chart in
-such a way that an upstream may not accept.
+## Adding a new subchart
 
 ## Handling configuration deprecations
 
