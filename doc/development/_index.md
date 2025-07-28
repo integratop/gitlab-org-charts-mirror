@@ -15,6 +15,11 @@ Before starting development, it is helpful to review the goals, architecture, an
 
 See [Architecture of GitLab Helm charts](../architecture/_index.md) for this information.
 
+## Adding a new chart or component
+
+See the [new charts readiness documentation](readiness/_index.md) for guidance to add a new component or subchart
+to the GitLab Helm chart.
+
 ## Environment setup
 
 See [setting up your development environment](environment_setup.md) to prepare your workstation for charts development.
@@ -131,8 +136,6 @@ If you notice that one or more of the `review_*` jobs have failed and need to de
      This option is helpful if you need more time to debug a failed environment.
    - View deployment: this button will open the environment URL of the running instance of GitLab.
    - Stop: this buttton will run the associated `stop_review_*` job.
-
-## Adding a new subchart
 
 ## Handling configuration deprecations
 

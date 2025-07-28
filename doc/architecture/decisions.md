@@ -102,7 +102,7 @@ Related issue:
 ## Forked charts
 
 The following charts have been forked or re-created in this repository following
-our [guidelines for forking](../development/_index.md#guidelines-for-forking)
+our [guidelines for forks and new charts](../development/readiness/_index.md)
 
 ### Redis
 
