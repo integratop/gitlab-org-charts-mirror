@@ -221,3 +221,17 @@ openbao:
   {{- end }}
 {{- end }}
 {{- end -}}{{/* "gitlab.appConfig.openbao.configuration" */}}
+
+
+{{/*
+Generates CI ID token configuration.
+
+Usage:
+{{ include "gitlab.appConfig.ciIdTokens.configuration" $ }}
+*/}}
+{{- define "gitlab.appConfig.ciIdTokens.configuration" -}}
+{{- with $.Values.global.appConfig.ciIdTokens.issuerUrl }}
+ci_id_tokens:
+  issuer_url: {{ . }}
+{{- end }}
+{{- end }}
