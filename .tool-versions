@@ -1,6 +1,6 @@
 kubectl 1.33.1
 minikube 1.29.0
-helm 3.17.3
+helm 3.18.4
 stern 1.23.0
 yq 4.34.2
 gomplate v4.3.2
