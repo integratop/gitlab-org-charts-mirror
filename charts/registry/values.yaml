@@ -118,6 +118,7 @@ global:
     enabled:
     credentials: {}
   registry:
+    database: {}
     certificate: {}
     httpSecret: {}
   psql:
@@ -397,11 +398,11 @@ serviceAccount:
 database:
   configure: false
   enabled: false
-  user: registry
+  # user: registry
   password: {}
     # secret: RELEASE_NAME-registry-database-password
     # key: password
-  name: registry
+  # name: registry
   sslmode: disable
   ssl: {}
   # Load balancing settings

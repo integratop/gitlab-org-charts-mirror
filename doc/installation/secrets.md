@@ -383,12 +383,14 @@ To rotate the PostgreSQL secret:
    # Inside the pod, update the passwords in the database
    sed -i 's/^\(local .*\)md5$/\1trust/' /opt/bitnami/postgresql/conf/pg_hba.conf
    pg_ctl reload ; sleep 1
-   echo "ALTER USER postgres WITH PASSWORD '$(echo $POSTGRES_POSTGRES_PASSWORD)' ; ALTER USER gitlab WITH PASSWORD '$(echo POSTGRES_PASSWORD)'" | psql -U postgres -d gitlabhq_production -f -
+   echo "ALTER USER postgres WITH PASSWORD '$(echo $POSTGRES_POSTGRES_PASSWORD)' ; ALTER USER gitlab WITH PASSWORD '$(echo $POSTGRES_PASSWORD)' ; ALTER USER registry WITH PASSWORD '$(echo $REGISTRY_POSTGRES_PASSWORD)'" | psql -U postgres -d gitlabhq_production -f -
    sed -i 's/^\(local .*\)trust$/\1md5/' /opt/bitnami/postgresql/conf/pg_hba.conf
    pg_ctl reload
    ```
 
-1. Delete the `gitlab-exporter`, `postgresql`, `toolbox`, `sidekiq` and `webservice` pods using the `kubectl delete pod`
+   **Note**: The registry user password update is only needed if you have the [registry metadata database](../charts/registry/metadata_database.md) feature enabled. If the registry user doesn't exist, the `ALTER USER registry` command will produce an error but won't affect the other password updates.
+
+1. Delete the `gitlab-exporter`, `postgresql`, `toolbox`, `sidekiq`, `webservice`, and `registry` pods using the `kubectl delete pod`
 command so the new pods are loaded with the new secret and allow them to connect to the
 database.
 
