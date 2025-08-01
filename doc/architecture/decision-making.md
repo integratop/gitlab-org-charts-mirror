@@ -31,18 +31,18 @@ A dependency maintainer has the same responsibilities as a regular maintainer, b
 
 All changes need to result in a working chart, and the impact of the change in dependency versions needs to be fully understood by the dependency maintainer. Individuals that are already chart reviewers are good candidates to become dependency maintainers.
 
-| Username | Scope |
-| -- | -- |
-| @DylanGriffith | `gitlab-zoekt` |
-| @dgruzd | `gitlab-zoekt` |
-| @terrichu | `gitlab-zoekt` |
-| @johnmason | `gitlab-zoekt` |
+| Username         | Scope |
+|------------------|-------|
+| `@DylanGriffith` | `gitlab-zoekt` |
+| `@dgruzd`        | `gitlab-zoekt` |
+| `@terrichu`      | `gitlab-zoekt` |
+| `@johnmason`     | `gitlab-zoekt` |
 
 ## Project Leadership
 
-| Username | Role |
-| -- | -- |
-| @WarheadsSE | Staff Engineer, Distribution Deploy |
-| @twk3 | Engineering Manager, Distribution Build |
-| @ayufan | Distinguished Engineer, Enablement |
-| @stanhu | Engineering Fellow |
+| Username      | Role |
+|---------------|------|
+| `@WarheadsSE` | Staff Engineer, Distribution Deploy |
+| `@twk3`       | Engineering Manager, Distribution Build |
+| `@ayufan`     | Distinguished Engineer, Enablement |
+| `@stanhu`     | Engineering Fellow |
