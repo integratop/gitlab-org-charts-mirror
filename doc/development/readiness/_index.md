@@ -82,6 +82,8 @@ To integrate the new chart with GitLab chart make use of templates and (global) 
       common Helm jobs as part of your CI.
 - [ ] Use a [lightweight Kubernetes integration in CI](https://gitlab.com/gitlab-org/cluster-integration/test-utils/k3s-gitlab-ci)
       to perform end to end testing in a live cluster.
+- [ ] Avoid using [Helm hooks](https://helm.sh/docs/topics/charts_hooks/) if possible, as they are not
+      available for `helm template` based workflows.
 
 #### Chart delivery
 
