@@ -15,7 +15,7 @@ To add a new component the order of preference should be to:
 
 1. Reuse an existing community or vendor chart.
 1. Fork an existing community or vendor chart.
-1. Add a new GitLab owned (sub)chart.
+1. Add a new GitLab-owned chart and maintain it as dependency of GitLab chart.
 
 ### Community or vendor charts
 
