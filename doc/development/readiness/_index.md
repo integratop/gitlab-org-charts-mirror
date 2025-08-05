@@ -27,7 +27,7 @@ to add new components to GitLab chart.
 You should only create a fork of an existing chart in these situations:
 
 - The chart needs GitLab-specific features that upstream may not accept.
-- The original chart has features that should not be exposes to GitLab users.
+- The original chart has features that should not be exposed to GitLab users.
 
 ### Adding a new chart
 
@@ -53,15 +53,23 @@ To integrate the new chart with GitLab chart make use of templates and (global) 
    the parent chart. This allows to separate logic if the chart is used in standalone
    mode or if it's used as part of the GitLab (parent) chart.
 
+   Example: The GitLab chart [overrides templates defined by the OpenBao chart to inject it's database configuration](https://gitlab.com/gitlab-org/charts/gitlab/-/blob/302d58ed9de62ce61133662def9c8984974122f0/templates/_openbao.tpl#L65).
+
 1. [(Global) values](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/):
    Use and override (global) values to share information between two charts and define
    proper defaults in both the subcharts values file and the GitLab charts values.
+
+   Example: The GitLab chart allows to specify a [global API version for HPAs](https://gitlab.com/gitlab-org/charts/gitlab/-/blob/f811c66630a1c7ae28041157b048540ee8f23273/values.yaml#L79)
+   which can be consumed by all subcharts and dependency charts.
 
 1. Template values: Values can contain templates and can be rendered by using `tpl` in
    the subchart. This has similar use cases like template overrides but allows additional
    flexibility if the same chart is imported twice by allowing to customize the
    template/value for each instance, while a regular template override impacts all chart
    instances.
+
+   Example: The GitLab NGINX fork [templates the external LoadBalancer IP from a value](https://gitlab.com/gitlab-org/charts/gitlab/-/blob/f811c66630a1c7ae28041157b048540ee8f23273/charts/nginx-ingress/templates/_helpers.tpl#L297)
+   to allow different behavior in the default and the Geo NGINX instance.
 
 #### Best practices
 
@@ -85,5 +93,5 @@ To integrate the new chart with GitLab chart make use of templates and (global) 
 
 A list of forked charts is available maintained in the [architecture decisions](../../architecture/decisions.md#forked-charts).
 
-Charts that are being maintained as a seperate repository are [GitLab Zoekt](https://gitlab.com/gitlab-org/cloud-native/charts/gitlab-zoekt)
+Charts that are being maintained as a separate repository are [GitLab Zoekt](https://gitlab.com/gitlab-org/cloud-native/charts/gitlab-zoekt)
 and [OpenBao](https://gitlab.com/gitlab-org/cloud-native/charts/openbao).
