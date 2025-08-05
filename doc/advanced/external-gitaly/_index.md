@@ -170,7 +170,7 @@ To check that GitLab can connect to the external Gitaly server:
 kubectl exec -it <toolbox-pod> -- gitlab-rake gitlab:gitaly:check
 ```
 
-If you are using Gitaly with TLS, you can also check if GitLab Chart trusts the Gitaly certificate:
+If you are using Gitaly with TLS, you can also check if GitLab chart trusts the Gitaly certificate:
 
 ```shell
 kubectl exec -it <toolbox-pod> -- echo | /usr/bin/openssl s_client -connect <gitaly-host>:<gitaly-port>
@@ -435,10 +435,10 @@ external Gitaly service.
 - Does incur downtime to all users.
 - Has not been tested with the [Praefect chart](../../charts/gitlab/praefect/_index.md) and is not supported.
 
-#### Step 1: Get the current release revision of the GitLab Chart
+#### Step 1: Get the current release revision of the GitLab chart
 
 In the unlikely event that something goes wrong during the migration, get the current release
-revision of the GitLab Chart. Copy the output and put it aside just in case we need to perform a
+revision of the GitLab chart. Copy the output and put it aside just in case we need to perform a
 [rollback](#rollback):
 
 ```shell
@@ -449,7 +449,7 @@ helm history <release> --max=1
 
 Set up an [external Gitaly](https://docs.gitlab.com/administration/gitaly/configure_gitaly/)
 or [external Gitaly Cluster (Praefect)](https://docs.gitlab.com/administration/gitaly/praefect/). You must
-provide the Gitaly token and GitLab Shell secret from your Chart installation as part of those steps:
+provide the Gitaly token and GitLab Shell secret from your chart installation as part of those steps:
 
 ```shell
 # Get the GitLab Shell secret
@@ -772,8 +772,8 @@ If you run into any problems, you can rollback the changes made so the Gitaly su
 
 The original Gitaly PVC must exist to rollback successfully.
 
-1. Rollback the GitLab Chart to the previous release using the revision number obtained
-in [Step 1: Get the current release revision of the GitLab Chart](#step-1-get-the-current-release-revision-of-the-gitlab-chart):
+1. Rollback the GitLab chart to the previous release using the revision number obtained
+in [Step 1: Get the current release revision of the GitLab chart](#step-1-get-the-current-release-revision-of-the-gitlab-chart):
 
    ```shell
    helm rollback <release> <revision>
