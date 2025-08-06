@@ -1497,7 +1497,7 @@ openbao:
   config:
     storage:
       postgresql:
-        # Set predefined keys to empty values to enable enable us merging these keys
+        # Set predefined keys to empty values to enable us merging these keys
         # with the main DB settings.
         connection:
           host: ''
