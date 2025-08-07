@@ -84,6 +84,15 @@ To integrate the new chart with GitLab chart make use of templates and (global) 
       to perform end to end testing in a live cluster.
 - [ ] Avoid using [Helm hooks](https://helm.sh/docs/topics/charts_hooks/) if possible, as they are not
       available for `helm template` based workflows.
+- [ ] Ingresses should consume GitLab chart's:
+
+  - [host configuration](../../charts/globals.md#configure-host-settings),
+  - [certmanager configuration](../../charts/globals.md#globalingressconfigurecertmanager), and
+  - [global Ingress configuration](../../charts/globals.md#configure-ingress-settings)
+
+  to ensure a consistent TLS and domain configuration.
+
+- [ ] Workloads should optionally support [internal TLS](../../advanced/internal-tls/_index.md).
 
 #### Chart delivery
 
