@@ -1,4 +1,4 @@
-{{- if .Values.enabled -}}
+{{- if and .Values.enabled .Values.api.enabled -}}
 {{- $imageCfg := dict "global" .Values.global.image "local" .Values.image -}}
 {{- $initImageCfg := include "gitlab.configure.config" $.Values | fromYaml -}}
 apiVersion: apps/v1

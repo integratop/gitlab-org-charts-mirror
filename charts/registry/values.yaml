@@ -389,6 +389,9 @@ serviceAccount:
   ## Used for local override of global ServiceAccount token mounting
   # automountServiceAccountToken: false
 
+# Enables Service, Deployment, HPA and PDB resources
+api:
+  enabled: true
 
 
 # Disable metadata database by default
