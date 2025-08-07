@@ -385,7 +385,7 @@ To use Cloud CDN:
 
 ## Troubleshooting
 
-### Azure Blob: URL \[FILTERED] is blocked: Requests to the local network are not allowed
+### Azure Blob: `URL [FILTERED] is blocked: Requests to the local network are not allowed`
 
 This happens when the Azure Blob hostname is resolved to a [RFC1918 (local / private) IP address](https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints#dns-changes-for-private-endpoints). As a workaround,
 allow [Outbound requests](https://docs.gitlab.com/security/webhooks/#allowlist-for-local-requests)
