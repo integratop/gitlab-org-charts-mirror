@@ -2329,6 +2329,162 @@ describe 'registry configuration' do
     end
   end
 
+  describe 'api.enabled' do
+    let(:api_enabled) { true }
+    let(:t) { HelmTemplate.new(values) }
+
+    let(:values) do
+      YAML.safe_load(%(
+        global:
+          ingress:
+            configureCertmanager: false
+        registry:
+          enabled: true
+          api:
+            enabled: #{api_enabled}
+      ))
+    end
+
+    context 'when api.enabled is true (default)' do
+      it 'creates all registry resources' do
+        expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+        # Verify resources are created
+        expect(t.resource_exists?('Service/test-registry')).to be true
+        expect(t.resource_exists?('Deployment/test-registry')).to be true
+        expect(t.resource_exists?('HorizontalPodAutoscaler/test-registry')).to be true
+        expect(t.resource_exists?('PodDisruptionBudget/test-registry-v1')).to be true
+      end
+
+      context 'when api.enabled is combined with registry disabled' do
+        let(:values) do
+          super().merge(YAML.safe_load(%(
+            registry:
+              enabled: false
+          )))
+        end
+
+        it 'does not create any registry resources' do
+          expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+          # When registry is disabled, nothing should be created regardless of api.enabled
+          expect(t.resource_exists?('Service/test-registry')).to be false
+          expect(t.resource_exists?('Deployment/test-registry')).to be false
+          expect(t.resource_exists?('HorizontalPodAutoscaler/test-registry')).to be false
+          expect(t.resource_exists?('PodDisruptionBudget/test-registry-v1')).to be false
+        end
+      end
+    end
+
+    context 'when api.enabled is false' do
+      let(:api_enabled) { false }
+
+      it 'does not create registry application components' do
+        expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+        # Verify resources are NOT created
+        expect(t.resource_exists?('Service/test-registry')).to be false
+        expect(t.resource_exists?('Deployment/test-registry')).to be false
+        expect(t.resource_exists?('HorizontalPodAutoscaler/test-registry')).to be false
+        expect(t.resource_exists?('PodDisruptionBudget/test-registry-v1')).to be false
+      end
+    end
+  end
+
+  describe 'Registry migrations-only mode' do
+    let(:enabled) { true }
+    let(:t) { HelmTemplate.new(values) }
+
+    let(:values) do
+      YAML.safe_load(%(
+        global:
+          ingress:
+            enabled: #{enabled}
+            configureCertmanager: false
+          monitoring:
+            enabled: true
+        registry:
+          api:
+            enabled: #{enabled}
+          database:
+            enabled: true
+            migrations:
+              enabled: true
+          networkpolicy:
+            enabled: #{enabled}
+          serviceAccount:
+            enabled: true
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: #{enabled}
+      ))
+    end
+
+    context 'when api.enabled is true and other resources are enabled' do
+      it 'creates all registry resources' do
+        expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+        # Verify resources are created
+        expect(t.resource_exists?('Service/test-registry')).to be true
+        expect(t.resource_exists?('Deployment/test-registry')).to be true
+        expect(t.resource_exists?('HorizontalPodAutoscaler/test-registry')).to be true
+        expect(t.resource_exists?('PodDisruptionBudget/test-registry-v1')).to be true
+        expect(t.resource_exists?('Ingress/test-registry')).to be true
+        expect(t.resource_exists?('NetworkPolicy/test-registry-v1')).to be true
+        expect(t.resource_exists?('ConfigMap/test-registry')).to be true
+        expect(t.resource_exists?('ServiceAccount/test-registry')).to be true
+        expect(t.resource_exists?('ServiceMonitor/test-registry')).to be true
+      end
+
+      # If Keda is enabled, HPA is automatically disabled, so we verify that Keda can be enabled
+      # in a separate spec.
+      context 'when keda is enabled' do
+        let(:values) do
+          super().deep_merge(YAML.safe_load(%(
+            global:
+              keda:
+                enabled: true
+            registry:
+              keda:
+                triggers: true
+            )))
+        end
+
+        it 'creates ScaledObject resource' do
+          expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+          expect(t.resource_exists?('ScaledObject/test-registry')).to be true
+        end
+      end
+    end
+
+    # This spec verifies that it is possible to disable all resources that are not required
+    # for executing migrations.
+    # This allows the use of one Helm release for creating the Deployment and other resources
+    # and executing pre-migrations, and another Helm release for executing post-deployment
+    # migrations without the second Helm release creating duplicate resources.
+    #
+    # If a new resource is added to the chart, and it is not required
+    # for executing migrations, it should be possible to disable it using the existing
+    # `registry.api.enabled` or another Helm value. Then you can disable the new resource
+    # in this spec.
+    context 'when api.enabled is false and other resources are disabled' do
+      let(:enabled) { false }
+
+      it 'creates only the migration job' do
+        expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+        # Verify only resources required for executing migrations are created
+        resources = t.resources('test-registry')
+        expect(resources.length).to eq(3)
+        expect(resources).to include('ConfigMap/test-registry')
+        expect(resources).to include('ServiceAccount/test-registry')
+        expect(resources).to include(a_string_including('Job/test-registry-migrations-'))
+      end
+    end
+  end
+
   describe 'Registry enablement' do
     context 'when registry is enabled' do
       let(:registry_values) do

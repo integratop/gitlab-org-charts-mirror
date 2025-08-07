@@ -174,6 +174,7 @@ If you chose to deploy this chart as a standalone, remove the `registry` at the 
 | `draintimeout`                                           | `'0'`                                                                | Amount of time to wait for HTTP connections to drain after receiving a SIGTERM signal (e.g. `'10s'`) |
 | `relativeurls`                                           | `false`                                                              | Enable the registry to return relative URLs in Location headers. |
 | `enabled`                                                | `true`                                                               | Enable registry flag |
+| `api.enabled`                                            | `true`                                                               | Enables the Service, Deployment, HPA and PDB resources. |
 | `extraContainers`                                        |                                                                      | Multiline literal style string containing a list of containers to include |
 | `extraInitContainers`                                    |                                                                      | List of extra init containers to include |
 | `hpa.behavior`                                           | `{scaleDown: {stabilizationWindowSeconds: 300 }}`                    | Behavior contains the specifications for up- and downscaling behavior (requires `autoscaling/v2beta2` or higher) |
@@ -444,6 +445,13 @@ to disable the components that you may not want in a given deployment. For this 
 the first setting you should decide on is `enabled`.
 
 By default, Registry is enabled out of the box. Should you wish to disable it, set `enabled: false`.
+
+## Enable resources required for the application
+
+The Service, Deployment, HPA, and PDB resources are enabled by the `registry.api.enabled` value (default: `true`).
+
+Read more about how this setting is used on GitLab.com at
+[Container Registry post deployment migrations on GitLab.com](../../development/registry_post_deployment_migrations_on_gitlab_com.md).
 
 ## Configuring the `image`
 
