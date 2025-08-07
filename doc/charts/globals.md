@@ -18,39 +18,6 @@ These global settings are used across several charts, while all other settings a
 within their chart. See the [Helm documentation on globals](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/#global-chart-values)
 for more information on how the global variables work.
 
-- [Hosts](#configure-host-settings)
-- [Ingress](#configure-ingress-settings)
-- [GitLab Version](#gitlab-version)
-- [PostgreSQL](#configure-postgresql-settings)
-- [Redis](#configure-redis-settings)
-- [Registry](#configure-registry-settings)
-- [Gitaly](#configure-gitaly-settings)
-- [Praefect](#configure-praefect-settings)
-- [MinIO](#configure-minio-settings)
-- [appConfig](#configure-appconfig-settings)
-- [Rails](#configure-rails-settings)
-- [Workhorse](#configure-workhorse-settings)
-- [GitLab Shell](#configure-gitlab-shell)
-- [Pages](#configure-gitlab-pages)
-- [Webservice](#configure-webservice)
-- [Custom Certificate Authorities](#custom-certificate-authorities)
-- [Application Resource](#application-resource)
-- [GitLab base image](#gitlab-base-image)
-- [Service Accounts](#service-accounts)
-- [Annotations](#annotations)
-- [Tracing](#tracing)
-- [extraEnv](#extraenv)
-- [extraEnvFrom](#extraenvfrom)
-- [OAuth](#configure-oauth-settings)
-- [Kerberos](#kerberos)
-- [Outgoing email](#outgoing-email)
-- [Platform](#platform)
-- [Affinity](#affinity)
-- [Pod priority and preemption](#pod-priority-and-preemption)
-- [Log rotation](#log-rotation)
-- [Jobs](#jobs)
-- [Traefik](#traefik)
-
 ## Configure Host settings
 
 The GitLab global host settings are located under the `global.hosts` key.
@@ -541,7 +508,7 @@ global:
     sentinels:
       - host: sentinel1.example.com
         port: 26379
-      - host: sentinel2.exeample.com
+      - host: sentinel2.example.com
         port: 26379
     auth:
       enabled: true
