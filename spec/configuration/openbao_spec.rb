@@ -30,6 +30,10 @@ describe 'OpenBao installation' do
   describe 'with a custom DB' do
     let(:values) do
       HelmTemplate.with_defaults(%(
+      global:
+        psql:
+          keepalivesInterval: "10s"
+          keepalivesIdle: "2"
       openbao:
         install: true
         config:
@@ -40,12 +44,20 @@ describe 'OpenBao installation' do
                 port: 5555
                 database: baodb
                 username: baouser
+                keepalivesIdle: "3"
       ))
     end
 
     it 'uses the custom PostgreSQL database' do
       expect(openbao_psql_config['connection_url'])
         .to start_with('postgres://baouser@psql.openbao.example.com:5555/baodb')
+    end
+
+    it 'merges connection arguments' do
+      expect(openbao_psql_config['connection_url']).to include(
+        'keepalives_interval=10s',
+        'keepalives_idle=3'
+      )
     end
   end
 end

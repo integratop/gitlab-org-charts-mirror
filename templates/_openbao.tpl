@@ -64,6 +64,7 @@ Render the OpenBao postgresql configuration yaml.
 */}}
 {{- define "openbao.postgresql.configuration" -}}
 {{- $main := (fromYaml (include "gitlab.database.yml" .)).production.main -}}
+{{- $_ := (include "gitlab.keysToCamelCase" $main) -}}
 {{- range $k, $v := $main -}}
 {{-   if and (kindIs "string" $v) (eq $v "<no value>") }}
 {{      $_ := unset $main $k }}
