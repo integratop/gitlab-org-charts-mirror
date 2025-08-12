@@ -19,15 +19,16 @@ To add a new component the order of preference should be to:
 
 ### Community or vendor charts
 
-Using or forking community or vendor charts should be the preferred approach
-to add new components to GitLab chart.
+Community or vendor charts should be the preferred approach to add new components
+to GitLab chart.
 
-### Guidelines for forking
+When an existing chart can be used as is or with modifications that can be
+upstreamed, the chart can be added as a dependency to GitLab chart.
 
-You should only create a fork of an existing chart in these situations:
-
-- The chart needs GitLab-specific features that upstream may not accept.
-- The original chart has features that should not be exposed to GitLab users.
+When a chart requires GitLab-specific functionality that upstream maintainers
+won't accept, or when it includes features that shouldn't be exposed to GitLab
+users, you can fork it to a separate repository, apply your patches, and integrate
+it into the GitLab chart - provided the license permits this approach.
 
 ### Adding a new chart
 
