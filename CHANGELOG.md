@@ -47,6 +47,16 @@ No changes.
 - [Update recommended Helm version to 3.17.3+](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4e70185ac1f8ee8d755b77b87190d5e30eb91c14) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4336))
 - [Update Helm release gitlab-runner to v0.78.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/c0509f329431e8eb8a9b9e991eb2608be97617c6) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4344))
 
+## 9.1.4 (2025-08-12)
+
+### Added (1 change)
+
+- [Support configuring CI/CD token issuer](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/5d88f06399d02ef17b6414c42854a6dacac701c7)
+
+### Changed (1 change)
+
+- [PostgreSQL/Redis: Switch to bitnami legacy repo](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/434201a5d8271400b4bf7a1b1c1ce45ff2aaaad7)
+
 ## 9.1.3 (2025-07-22)
 
 No changes.
