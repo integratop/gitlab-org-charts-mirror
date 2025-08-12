@@ -17,12 +17,10 @@ Populated from one of:
 {{- define "gitlab.openbao.url" -}}
 {{- if $.Values.global.openbao.url -}}
 {{-   $.Values.global.openbao.url -}}
+{{- else if or .Values.global.openbao.https .Values.global.hosts.https .Values.global.hosts.openbao.https -}}
+{{-   printf "https://%s" (include "gitlab.openbao.hostname" .) -}}
 {{- else -}}
-{{-   if has true (list .Values.global.openbao.https .Values.global.hosts.https .Values.global.hosts.openbao.https) -}}
-{{-    printf "https://%s" (include "gitlab.openbao.hostname" .) -}}
-{{-   else -}}
-{{-    printf "http://%s" (include "gitlab.openbao.hostname" .) -}}
-{{-   end -}}
+{{-   printf "http://%s" (include "gitlab.openbao.hostname" .) -}}
 {{- end -}}
 {{- end -}}
 
@@ -55,4 +53,29 @@ Populated from one of:
 {{- end -}}
 {{- end -}}
 
+{{/*
+Render the OpenBao postgresql configuration yaml.
 
+* Takes the rails main DB as base, and merges OpenBao custom storage
+  configuration in.
+* This needs special handling for <no value> objects because these are not
+  considered empty: https://github.com/helm/helm/issues/13487.
+
+*/}}
+{{- define "openbao.postgresql.configuration" -}}
+{{- $main := (fromYaml (include "gitlab.database.yml" .)).production.main -}}
+{{- $_ := (include "gitlab.keysToCamelCase" $main) -}}
+{{- range $k, $v := $main -}}
+{{-   if and (kindIs "string" $v) (eq $v "<no value>") }}
+{{      $_ := unset $main $k }}
+{{-   end }}
+{{- end -}}
+{{- $psqlSecret := dict "secret" (include "gitlab.psql.password.secret" .Values.local.psql.main) -}}
+{{- $_ := set $psqlSecret "key" (include "gitlab.psql.password.key" .Values.local.psql.main) -}}
+{{- $_ := set $main "password" $psqlSecret -}}
+{{ merge .Values.config.storage.postgresql.connection $main | toYaml }}
+{{- end -}}
+
+{{- define "gitlab.openbao.configureCertmanager" -}}
+{{ pluck "configureCertmanager" .Values.ingress .Values.global.ingress (dict "configureCertmanager" false) | first }}
+{{- end }}

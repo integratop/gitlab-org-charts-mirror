@@ -127,6 +127,12 @@ global:
 
   ## https://docs.gitlab.com/charts/charts/globals#configure-postgresql-settings
   psql:
+    # This exists to support template handling
+    knownDecompositions:
+      - main
+      - ci
+      - embedding
+      - sec
     connectTimeout:
     keepalives:
     keepalivesIdle:
@@ -1487,3 +1493,14 @@ gitlab-zoekt:
 ## Installation & configuration of OpenBao
 openbao:
   install: false
+  psql: {}
+  config:
+    storage:
+      postgresql:
+        # Set predefined keys to empty values to enable us merging these keys
+        # with the main DB settings.
+        connection:
+          host: ''
+          database: ''
+          username: ''
+          sslMode: ''
