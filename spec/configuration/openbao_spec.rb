@@ -32,8 +32,8 @@ describe 'OpenBao installation' do
       HelmTemplate.with_defaults(%(
       global:
         psql:
-          keepalivesInterval: "10s"
-          keepalivesIdle: "2"
+          keepalivesInterval: 10
+          keepalivesIdle: 2
       openbao:
         install: true
         config:
@@ -44,7 +44,7 @@ describe 'OpenBao installation' do
                 port: 5555
                 database: baodb
                 username: baouser
-                keepalivesIdle: "3"
+                keepalivesIdle: 3
       ))
     end
 
@@ -55,7 +55,7 @@ describe 'OpenBao installation' do
 
     it 'merges connection arguments' do
       expect(openbao_psql_config['connection_url']).to include(
-        'keepalives_interval=10s',
+        'keepalives_interval=10',
         'keepalives_idle=3'
       )
     end
