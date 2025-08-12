@@ -1621,7 +1621,7 @@ See [Custom Certificate Authorities](#custom-certificate-authorities) for more i
 
 ### `duoAuth`
 
-Use these settings to enable [two-factor authentication (2FA) with GitLab Duo](https://docs.gitlab.com/user/profile/account/two_factor_authentication/#enable-one-time-password).
+Use these settings to enable [two-factor authentication (2FA) with Cisco Duo](https://docs.gitlab.com/user/profile/account/two_factor_authentication/#enable-one-time-password).
 
 ```yaml
 global:
@@ -1637,16 +1637,16 @@ global:
 
 | Name             |  Type   | Default | Description |
 |:-----------------|:-------:|:--------|:------------|
-| `enabled`        | Boolean | `false` | Enable or disable the integration with GitLab Duo |
-| `hostname`       | String  |         | GitLab Duo API hostname |
-| `integrationKey` | String  |         | GitLab Duo API integration key |
-| `secretKey`      |         |         | GitLab Duo API secret key that must be [configured with the name of secret and key name](#configure-the-gitlab-duo-secret-key) |
+| `enabled`        | Boolean | `false` | Enable or disable the integration with Cisco Duo |
+| `hostname`       | String  |         | Cisco Duo API hostname |
+| `integrationKey` | String  |         | Cisco Duo API integration key |
+| `secretKey`      |         |         | Cisco Duo API secret key that must be [configured with the name of secret and key name](#configure-the-cisco-duo-secret-key) |
 
-### Configure the GitLab Duo secret key
+### Configure the Cisco Duo secret key
 
-To configure GitLab Duo auth integration in the GitLab Helm chart you must provide a secret in the `global.appConfig.duoAuth.secretKey.secret` setting containing GitLab Duo auth secret_key value.
+To configure Cisco Duo auth integration in the GitLab Helm chart you must provide a secret in the `global.appConfig.duoAuth.secretKey.secret` setting containing Cisco Duo auth secret_key value.
 
-To create a Kubernetes secret object to store your GitLab Duo account `secretKey`, from the command line, run:
+To create a Kubernetes secret object to store your Cisco Duo account `secretKey`, from the command line, run:
 
 ```shell
 kubectl create secret generic <secret_object_name> --from-literal=secretKey=<duo_secret_key_value>
