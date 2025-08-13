@@ -1,6 +1,6 @@
 ---
 stage: GitLab Delivery
-group: Self Managed
+group: Operate
 info: To determine the technical writer assigned to the Stage/Group associated with this page, see https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments
 title: Contribute to Helm chart development
 ---
@@ -37,6 +37,8 @@ from these recommendations, please document your reasons and alternative approac
 
 #### Project setup
 
+- [ ] Create a new project in the [`gitlab-org/cloud-native/charts`](https://gitlab.com/gitlab-org/cloud-native/charts)
+      group.
 - [ ] Create the chart in its own separate repository following the default Helm
       project layout (initialised with `helm create`).
 - [ ] Treat the chart as a dependency of GitLab chart.
