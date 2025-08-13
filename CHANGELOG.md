@@ -2,6 +2,21 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.2.2 (2025-08-12)
+
+### Added (1 change)
+
+- [Support configuring CI/CD token issuer](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/992936c02038ff7e9db94d355dfb739a80603251)
+
+### Fixed (1 change)
+
+- [NGINX Ingress: Set static election ID](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/a78aae6ec8c86ed295d7d0b4e7826522a8af138a)
+
+### Changed (2 changes)
+
+- [Backport Runner 0.79.1](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/d191a17c25a9353ddc336cfdec742d79fd25c6d1)
+- [PostgreSQL/Redis: Switch to bitnami legacy repo](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/4e39f1a125a9a6916d5a65f1576a9301300d1d6e)
+
 ## 9.2.1 (2025-07-22)
 
 No changes.
@@ -31,6 +46,16 @@ No changes.
 - [Migrations: add objectstorage bits for migrations that test config](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/e17eb09c5ff81cf289900746df3473908769c4e6) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4349))
 - [Update recommended Helm version to 3.17.3+](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4e70185ac1f8ee8d755b77b87190d5e30eb91c14) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4336))
 - [Update Helm release gitlab-runner to v0.78.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/c0509f329431e8eb8a9b9e991eb2608be97617c6) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4344))
+
+## 9.1.4 (2025-08-12)
+
+### Added (1 change)
+
+- [Support configuring CI/CD token issuer](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/5d88f06399d02ef17b6414c42854a6dacac701c7)
+
+### Changed (1 change)
+
+- [PostgreSQL/Redis: Switch to bitnami legacy repo](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/434201a5d8271400b4bf7a1b1c1ce45ff2aaaad7)
 
 ## 9.1.3 (2025-07-22)
 
@@ -76,6 +101,12 @@ No changes.
 - [Update Helm release prometheus to v27.14.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/7f39e0da714f78f363a34e03c7e51c8d46dea380) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4265))
 - [Update dependency danger-review to v2.1.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/fb86835cb4c5b39ceea2e2349890016b2ae2ca49) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4196))
 - [Update Helm release gitlab-runner to v0.75.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/5e81a8f1e9a8a2d26de60edcf075a8797c3ea9e2) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4181))
+
+## 9.0.6 (2025-08-12)
+
+### Changed (1 change)
+
+- [PostgreSQL/Redis: Switch to bitnami legacy repo](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/f71b5d06e12f9a4123a0192db28b2d89ea7a08d2)
 
 ## 9.0.5 (2025-07-22)
 
