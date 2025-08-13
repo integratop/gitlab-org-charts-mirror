@@ -16,7 +16,7 @@ Some of the key benefits of this chart and [corresponding containers](https://gi
 See the [repository documentation](doc/_index.md) for how to install GitLab and
 other information on charts, tools, and advanced configuration.
 
-For easy of reading, you can find this documentation rendered on
+For ease of reading, you can find this documentation rendered on
 [docs.gitlab.com/charts](https://docs.gitlab.com/charts).
 
 ### Configuration Properties
@@ -31,8 +31,8 @@ jumping directly into the settings list.
 
 ## Architecture and goals
 
-See [architecture documentation](doc/architecture/_index.md) for an overview
-of this project goals and architecture.
+See the [architecture documentation](doc/architecture/_index.md) for an overview
+of this project's goals and architecture.
 
 ## Release Notes
 
