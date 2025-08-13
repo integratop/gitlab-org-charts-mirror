@@ -679,7 +679,7 @@ The secrets can be rotated if required for security purposes.
 1. Update the secret keys in your `values.yaml` file to point to the new secret names. Most secret
    names are documented under each respective secret in the [manual secret creation](#manual-secret-creation-optional)
    section.
-1. Upgrade the GitLab Chart release with the updated `values.yaml` file.
+1. Upgrade the GitLab chart release with the updated `values.yaml` file.
 1. If you are rotating the PostgreSQL secret, there are [additional steps to complete the rotation](#changing-the-postgresql-password-for-the-bundled-postgresql-subchart).
 1. Confirm that GitLab is working as expected. If it is, it should be safe to delete the
    old secrets.
