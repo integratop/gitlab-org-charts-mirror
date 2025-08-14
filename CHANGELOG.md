@@ -160,6 +160,10 @@ No changes.
 
 - [Remove nginx-ingress fallback](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/4bb007f998c53680a70c640743e8fef978df22a9) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4225))
 
+## 8.11.8 (2025-08-14)
+
+No changes.
+
 ## 8.11.7 (2025-07-09)
 
 ### Changed (1 change)
