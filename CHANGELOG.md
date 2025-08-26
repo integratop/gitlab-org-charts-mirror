@@ -35,6 +35,10 @@ No changes.
 - [Update certmanager from v1.12 to v1.17](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/c990cd36ed7d6910be91a7bd01e65ad98fed8148) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4234))
 - [Update dependency container-registry to v4.25.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/ca12af55763a3a4ae2fe8352b35f9a7aef91d6aa) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4412))
 
+## 9.2.5 (2025-08-26)
+
+No changes.
+
 ## 9.2.4 (2025-08-18)
 
 No changes.
