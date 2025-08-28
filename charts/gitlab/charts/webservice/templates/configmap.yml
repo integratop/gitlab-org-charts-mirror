@@ -227,7 +227,7 @@ data:
     zip_reader_limit_bytes = {{ $.Values.workhorse.metadata.zipReaderLimitBytes | int64 }}
     {{- end }}
 
-    {{- if .workhorse.keywatcher }}
+    {{- if or .workhorse.keywatcher .workhorse.circuitBreaker.enabled }}
     {{-   include "workhorse.redis.config" $ | nindent 4 }}
     {{- end }}
     {{- include "workhorse.object_storage.config" $ | nindent 4 }}
@@ -252,6 +252,14 @@ data:
     certificate = "/etc/gitlab/gitlab-workhorse/tls.crt"
     key = "/etc/gitlab/gitlab-workhorse/tls.key"
     {{-   end }}
+    {{- end }}
+    {{- if .workhorse.circuitBreaker.enabled }}
+    [circuit_breaker]
+    enabled = true
+    timeout = {{ .workhorse.circuitBreaker.timeout | int }}
+    interval = {{ .workhorse.circuitBreaker.interval | int }}
+    max_requests = {{ .workhorse.circuitBreaker.maxRequests | int }}
+    consecutive_failures = {{ .workhorse.circuitBreaker.consecutiveFailures | int }}
     {{- end }}
   configure: |
       set -e
