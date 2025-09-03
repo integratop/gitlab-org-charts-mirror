@@ -183,15 +183,7 @@ data:
       cp -v -L /init-config/webservice-metrics/webservice-metrics.crt /init-secrets/webservice-metrics/webservice-metrics.crt
       cp -v -L /init-config/webservice-metrics/webservice-metrics.key /init-secrets/webservice-metrics/webservice-metrics.key
     {{- end }}
-    {{- if $.Values.global.appConfig.cell.enabled }}
-      if [ -d /init-config/topology-service ]; then
-        mkdir -p /init-secrets/topology-service
-        {{- if $.Values.global.appConfig.cell.topologyServiceClient.tls.enabled }}
-        cp -v -L /init-config/topology-service/tls.key /init-secrets/topology-service/tls.key
-        cp -v -L /init-config/topology-service/tls.crt /init-secrets/topology-service/tls.crt
-        {{- end }}
-      fi
-    {{- end }}
+    {{- include "gitlab.topologyService.configureScript" $ | nindent 4 }}
 
 {{- include "webservice.datamodel.prepare" $ -}}
 {{/* BEGIN range deployments */}}
