@@ -162,6 +162,9 @@ spec:
           {{-   include "gitlab.psql.secret" . | nindent 10 }}
           {{- end }}
           {{- include "gitlab.topologyService.mountSecrets" $ | nindent 10 }}
+          {{- if $.Values.global.clickhouse.enabled }}
+            {{- include "gitlab.clickhouse.main.secrets" $ | nindent 10 }}
+          {{- end }}
           {{- if include "gitlab.geo.secondary" $ }}
           - secret:
               name: {{ template "gitlab.geo.psql.password.secret" . }}
