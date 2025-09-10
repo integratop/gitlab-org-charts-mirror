@@ -827,6 +827,103 @@ describe 'registry configuration' do
           end
         end
       end
+
+      describe 'database metrics config' do
+        context 'when metrics is enabled with all settings' do
+          let(:values) do
+            YAML.safe_load(%(
+              registry:
+                redis:
+                  cache:
+                    enabled: true
+                database:
+                  enabled: true
+                  metrics:
+                    enabled: true
+                    interval: 15s
+                    leaseDuration: 45s
+            )).deep_merge(default_values)
+          end
+
+          it 'populates the metrics settings correctly' do
+            t = HelmTemplate.new(values)
+            expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+            expect(t.dig('ConfigMap/test-registry', 'data', 'config.yml.tpl')).to include(
+              <<~CONFIG
+              database:
+                enabled: true
+                host: "test-postgresql.default.svc"
+                port: 5432
+                user: registry
+                password: "DB_PASSWORD_FILE"
+                dbname: registry
+                sslmode: disable
+                metrics:
+                  enabled: true
+                  interval: "15s"
+                  leaseduration: "45s"
+              CONFIG
+            )
+          end
+        end
+
+        context 'when metrics is enabled with default settings' do
+          let(:values) do
+            YAML.safe_load(%(
+              registry:
+                redis:
+                  cache:
+                    enabled: true
+                database:
+                  enabled: true
+                  metrics:
+                    enabled: true
+            )).deep_merge(default_values)
+          end
+
+          it 'populates the metrics settings with defaults' do
+            t = HelmTemplate.new(values)
+            expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+            expect(t.dig('ConfigMap/test-registry', 'data', 'config.yml.tpl')).to include(
+              <<~CONFIG
+              database:
+                enabled: true
+                host: "test-postgresql.default.svc"
+                port: 5432
+                user: registry
+                password: "DB_PASSWORD_FILE"
+                dbname: registry
+                sslmode: disable
+                metrics:
+                  enabled: true
+                  interval: "10s"
+                  leaseduration: "30s"
+              CONFIG
+            )
+          end
+        end
+
+        context 'when metrics is disabled' do
+          let(:values) do
+            YAML.safe_load(%(
+              registry:
+                database:
+                  enabled: true
+                  metrics:
+                    enabled: false
+            )).deep_merge(default_values)
+          end
+
+          it 'does not include metrics settings' do
+            t = HelmTemplate.new(values)
+            expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+            expect(t.dig('ConfigMap/test-registry', 'data', 'config.yml.tpl')).not_to include('metrics:')
+          end
+        end
+      end
     end
 
     describe 'redis cache config' do
