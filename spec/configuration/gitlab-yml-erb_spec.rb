@@ -665,4 +665,36 @@ describe 'gitlab.yml.erb configuration' do
       end
     end
   end
+
+  context 'Workspaces host' do
+    let(:values) { HelmTemplate.defaults }
+    let(:template) { HelmTemplate.new(values) }
+
+    def gitlab_yml(chart)
+      YAML.safe_load(
+        template.dig("ConfigMap/test-#{chart}", 'data', 'gitlab.yml.erb')
+      )['production']['workspaces']['host']
+    end
+
+    %w[webservice toolbox sidekiq].each do |chart|
+      context "for #{chart}" do
+        context 'is configured' do
+          let(:values) do
+            HelmTemplate.with_defaults(%(
+             global:
+               hosts:
+                 workspaces:
+                     name: workspaces.example.com
+               workspaces:
+                 enabled: true
+             ))
+          end
+
+          it 'populates the value to gitlab.yml.erb' do
+            expect(gitlab_yml(chart)).to eq('workspaces.example.com')
+          end
+        end
+      end
+    end
+  end
 end

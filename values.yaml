@@ -73,6 +73,7 @@ global:
     kas: {}
     pages: {}
     openbao: {}
+    workspaces: {}
 
   ## https://docs.gitlab.com/charts/charts/globals#configure-ingress-settings
   ingress:
@@ -508,6 +509,8 @@ global:
       # externalUrl:
       # internalUrl:
       # clientTimeoutSeconds:
+    
+    workspaces: {}
 
     ## Configure GitLab Cells. Cells is a GitLab internal-use experiment.
     ## https://docs.gitlab.com/administration/cells/
@@ -637,6 +640,10 @@ global:
       verify: true
       # secretName:
       # caSecretName:
+
+  workspaces:
+    ## If workspaces is enabled, you must provide a hostname under global.hosts
+    enabled: false
 
   ## https://docs.gitlab.com/charts/charts/gitlab/spamcheck/
   spamcheck:

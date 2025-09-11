@@ -412,6 +412,7 @@ We're explicitly checking for an actual value being present, not the existence o
 {{- $minio       := pluck "secretName" $.Values.minio.ingress.tls | first -}}
 {{- $pages       := pluck "secretName" ((index $.Values.gitlab "gitlab-pages").ingress).tls | first -}}
 {{- $kas         := pluck "secretName" $.Values.gitlab.kas.ingress.tls | first -}}
+{{- $workspaces  := pluck "workspacesSecretName" $.Values.gitlab.kas.ingress.tls | first -}}
 {{- $smartcard   := pluck "smartcardSecretName" $.Values.gitlab.webservice.ingress.tls | first -}}
 {{/* Set each item to configured value, or !enabled
      This works because `false` is the same as empty, so we'll use the value when `enabled: true`
@@ -426,6 +427,7 @@ We're explicitly checking for an actual value being present, not the existence o
 {{- $minio       :=  default $minio (not $.Values.global.minio.enabled) -}}
 {{- $pages       :=  default $pages (not $.Values.global.pages.enabled) -}}
 {{- $kas         :=  default $kas (not $.Values.global.kas.enabled) -}}
+{{- $workspaces  :=  default $workspaces (not $.Values.global.workspaces.enabled) -}}
 {{- $smartcard   :=  default $smartcard (not $.Values.global.appConfig.smartcard.enabled) -}}
 {{/* Check that all enabled items have been configured */}}
 {{- if or $global (and $webservice $registry $minio $pages $kas $smartcard) -}}

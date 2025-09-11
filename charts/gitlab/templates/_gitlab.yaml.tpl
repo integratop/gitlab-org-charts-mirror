@@ -54,6 +54,14 @@ gitlab_kas:
 {{- end -}}
 {{- end -}}
 
+{{- define "gitlab.appConfig.workspaces" -}}
+{{- if .Values.global.workspaces.enabled -}}
+workspaces:
+  enabled: true
+  host: {{ include "gitlab.workspaces.hostname" . | quote }}
+{{- end -}}
+{{- end -}}
+
 {{- define "gitlab.appConfig.cell" -}}
 {{- if eq .Values.global.appConfig.cell.enabled true -}}
 {{- with .Values.global.appConfig.cell -}}
