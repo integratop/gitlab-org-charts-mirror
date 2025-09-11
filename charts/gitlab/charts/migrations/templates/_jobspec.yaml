@@ -21,7 +21,7 @@ spec:
   backoffLimit: {{ .Values.backoffLimit }}
   template:
     metadata:
-      {{- if or .Values.PodAnnotations .Values.annotations}}
+      {{- if or .Values.podAnnotations .Values.annotations}}
       annotations:
       {{- range $key, $value := merge .Values.podAnnotations (deepCopy .Values.annotations) }}
         {{ $key }}: {{ $value | quote }}
