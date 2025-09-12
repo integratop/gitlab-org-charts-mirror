@@ -697,4 +697,82 @@ describe 'gitlab.yml.erb configuration' do
       end
     end
   end
+
+  context 'relativeUrlRoot configuration' do
+    let(:required_values) do
+      YAML.safe_load(%(
+        global:
+          appConfig:
+            relativeUrlRoot: #{value}
+      )).deep_merge!(default_values)
+    end
+
+    context 'when configured' do
+      let(:value) { "/gitlab" }
+
+      it 'populates relative_url_root in gitlab.yml.erb' do
+        t = HelmTemplate.new(required_values)
+        expect(t.exit_code).to eq(0)
+
+        # Check webservice config
+        expect(t.dig(
+          'ConfigMap/test-webservice',
+          'data',
+          'gitlab.yml.erb'
+        )).to include('relative_url_root: "/gitlab"')
+
+        # Check sidekiq config
+        expect(t.dig(
+          'ConfigMap/test-sidekiq',
+          'data',
+          'gitlab.yml.erb'
+        )).to include('relative_url_root: "/gitlab"')
+      end
+
+      it 'includes relativeUrlRoot in registry auth endpoint' do
+        t = HelmTemplate.new(required_values)
+        expect(t.exit_code).to eq(0)
+
+        expect(t.dig(
+          'ConfigMap/test-registry',
+          'data',
+          'config.yml.tpl'
+        )).to include('realm: https://gitlab.example.com/gitlab/jwt/auth')
+      end
+    end
+
+    context 'when not configured' do
+      let(:value) { nil }
+
+      it 'does not populate relative_url_root in gitlab.yml.erb' do
+        t = HelmTemplate.new(required_values)
+        expect(t.exit_code).to eq(0)
+
+        # Check webservice config
+        expect(t.dig(
+          'ConfigMap/test-webservice',
+          'data',
+          'gitlab.yml.erb'
+        )).not_to include('relative_url_root')
+
+        # Check sidekiq config
+        expect(t.dig(
+          'ConfigMap/test-sidekiq',
+          'data',
+          'gitlab.yml.erb'
+        )).not_to include('relative_url_root')
+      end
+
+      it 'does not include relativeUrlRoot in registry auth endpoint' do
+        t = HelmTemplate.new(required_values)
+        expect(t.exit_code).to eq(0)
+
+        expect(t.dig(
+          'ConfigMap/test-registry',
+          'data',
+          'config.yml.tpl'
+        )).to include('realm: https://gitlab.example.com/jwt/auth')
+      end
+    end
+  end
 end
