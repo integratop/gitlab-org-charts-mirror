@@ -255,6 +255,10 @@ spec:
             {{- end }}
             - name: WORKHORSE_ARCHIVE_CACHE_DISABLED
               value: "true"
+            {{- if $.Values.global.appConfig.relativeUrlRoot }}
+            - name: RAILS_RELATIVE_URL_ROOT
+              value: {{ $.Values.global.appConfig.relativeUrlRoot | quote }}
+            {{- end }}
             {{- include "webservice.extraEnv" (dict "global" $.Values.global "local" .) | nindent 12 }}
             {{- include "gitlab.extraEnvFrom" (dict "root" $ "local" .) | nindent 12 }}
           volumeMounts:
@@ -312,7 +316,7 @@ spec:
           {{- end }}
           livenessProbe:
             httpGet:
-              path: /-/liveness
+              path: {{ $.Values.global.appConfig.relativeUrlRoot }}/-/liveness
               {{- if and (not $.Values.http.enabled) $.Values.tls.enabled }}
               scheme: HTTPS
               port: {{ $.Values.service.tls.internalPort }}
@@ -326,7 +330,7 @@ spec:
             failureThreshold: {{ .deployment.livenessProbe.failureThreshold }}
           readinessProbe:
             httpGet:
-              path: /-/readiness
+              path: {{ $.Values.global.appConfig.relativeUrlRoot }}/-/readiness
               {{- if and (not $.Values.http.enabled) $.Values.tls.enabled }}
               scheme: HTTPS
               port: {{ $.Values.service.tls.internalPort }}
@@ -364,7 +368,7 @@ spec:
             - name: TMPDIR
               value: "/tmp/gitlab"
             - name: GITLAB_WORKHORSE_AUTH_BACKEND
-              value: "http://localhost:{{ $.Values.service.internalPort }}"
+              value: "http://localhost:{{ $.Values.service.internalPort }}{{ $.Values.global.appConfig.relativeUrlRoot }}"
             - name: GITLAB_WORKHORSE_EXTRA_ARGS
               value: {{ .workhorse.extraArgs | quote }}
             - name: GITLAB_WORKHORSE_LISTEN_PORT
