@@ -44,6 +44,14 @@ Returns the workspaces external hostname
 {{- $hostname -}}
 {{- end -}}
 
+{{/*
+Returns the workspaces wildcard hostname
+*/}}
+{{- define "gitlab.workspaces.wildcardHostname" -}}
+{{- $hostname := include "gitlab.workspaces.hostname" . -}}
+{{- print "*." $hostname -}}
+{{- end -}}
+
 {{- define "gitlab.kas.internal.scheme" -}}
 {{- printf "%s" (ternary "grpcs" "grpc" (eq $.Values.global.kas.tls.enabled true)) -}}
 {{- end -}}
