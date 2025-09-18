@@ -12,7 +12,7 @@ title: Using the GitLab-Migrations chart
 
 {{< /details >}}
 
-The `migrations` sub-chart provides a single migration [Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) that handles seeding/migrating the GitLab database. The chart runs using the GitLab Rails codebase.
+The `migrations` sub-chart provides a single migration [Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) that handles seeding/migrating the databases used by GitLab. The chart runs using the GitLab Rails codebase.
 
 If [ClickHouse](../../../development/clickhouse.md) is enabled, then this sub-chart runs migrations for [ClickHouse](../../../development/clickhouse.md) as well.
 
@@ -21,6 +21,8 @@ After migrating, this Job also edits the application settings in the database to
 ## Requirements
 
 This chart depends on Redis, and PostgreSQL, either as part of the complete GitLab chart or provided as external services reachable from the Kubernetes cluster this chart is deployed onto.
+
+If ClickHouse is enabled for an installation, then this chart also depends on ClickHouse.
 
 ## Design Choices
 
@@ -267,7 +269,43 @@ The username with which to authenticate to the database. This defaults to `gitla
 
 #### password
 
-The `password` attribute for PostgreSQL has to sub keys:
+The `password` attribute for PostgreSQL has two sub keys:
 
-- `secret` defines the name of the Kubernetes `Secret` to pull from
+- `secret` defines the name of the Kubernetes `Secret` to pull from.
 - `key` defines the name of the key in the above secret that contains the password.
+
+### ClickHouse (optional)
+
+``` yaml
+global:
+  clickhouse:
+    enabled: true
+    main:
+      url: https://clickhouse.example.com
+      database: default
+      username: default
+      password:
+        secret: gitlab-clickhouse-password
+        key: main_password
+```
+
+If ClickHouse is enabled for an installation, this Chart will also run migrations for the ClickHouse database. The configuration for ClickHouse must be provided under the `global.clickhouse` key.
+
+#### `main.url`
+
+URL of the ClickHouse instance.
+
+#### `main.database`
+
+Database name in ClickHouse.
+
+#### `main.username`
+
+Username to use to authenticate in ClickHouse.
+
+#### `main.password`
+
+The `password` attribute for ClickHouse contains two subkeys:
+
+- `secret` defines the name of the Kubernetes secret to pull from.
+- `key` defines the name of the key within the above `secret` that contains the password.

@@ -45,3 +45,26 @@ helm upgrade --install gitlab . \
   -f examples/kind/values-no-ssl.yaml \
   -f examples/clickhouse/enable-clickhouse.yaml
 ```
+
+## ClickHouse setup
+
+ClickHouse must be set up as per the guide provided in [Run and configure ClickHouse](https://docs.gitlab.com/integration/clickhouse/#run-and-configure-clickhouse).
+
+The GitLab Helm chart will not perform the initial setup steps required to start using ClickHouse such as creating databases or creating a user with the appropriate permissions.
+
+## ClickHouse migrations
+
+Database migrations for ClickHouse are executed using the [GitLab-Migrations chart](../charts/gitlab/migrations/_index.md)
+
+The [Webservice](../charts/gitlab/webservice/_index.md) and [Sidekiq](../charts/gitlab/sidekiq/_index.md) charts create Deployments with an `initContainer` called `dependencies`.
+When ClickHouse is enabled for an installation, the `dependencies` `initContainer` fails if:
+
+- ClickHouse is not available.
+- Some database migrations have not been executed yet.
+
+The behavior of this container can be controlled using these environment variables:
+
+- `BYPASS_POST_DEPLOYMENT=true`: The dependencies check passes if all regular migrations have been executed and only post-deployment migrations are pending.
+- `BYPASS_CLICKHOUSE_SCHEMA_VERSION=true` (not recommended): The dependencies check passes even if regular migrations for ClickHouse have not been executed.
+
+Add these environment variables to the `extraEnv` configuration of the [Webservice](../charts/gitlab/webservice/_index.md) and [Sidekiq](../charts/gitlab/sidekiq/_index.md) charts.
