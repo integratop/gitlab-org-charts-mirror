@@ -640,6 +640,20 @@ page. Please consult this page for the latest Redis configuration options.
 The PostgreSQL documentation has been consolidated in the [globals](../../globals.md#configure-postgresql-settings)
 page. Please consult this page for the latest PostgreSQL configuration options.
 
+The `dependencies` `initContainer` in the Webservice deployment runs scripts to check:
+
+- Whether the dependencies of GitLab are available.
+- Whether database migrations for PostgreSQL have been executed.
+ 
+You can use the `extraEnv` configuration key of the Webservice chart to control the behavior of these scripts. Two environment variables are
+supported:
+
+- `BYPASS_POST_DEPLOYMENT=true`: The dependencies check passes if all regular migrations have been executed and only post-deployment migrations
+  are pending
+- `BYPASS_SCHEMA_VERSION=true` (not recommended): The dependencies check passes even if regular migrations have not been executed. Using this 
+  environment variable can cause the Rails deployment to run into errors after starting up because the database schema does not match the
+  application code's expectations.
+
 ### Gitaly
 
 Gitaly is configured by [global settings](../../globals.md). Please see the
