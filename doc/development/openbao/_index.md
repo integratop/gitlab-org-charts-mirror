@@ -77,7 +77,11 @@ at the same time.
 
 ## Configuration
 
+
+## Configuration
+
 The following tables list all available OpenBao configuration options.
+
 ### Installation command line options
 
 The table below contains all the possible charts configurations that can be supplied to
