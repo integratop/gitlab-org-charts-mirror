@@ -37,12 +37,12 @@ dependencies:
   version: 3.6.0
 - name: openbao
   repository: https://charts.gitlab.io/
-  version: 0.5.1
+  version: 0.6.1
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.19.4
 - name: kubernetes-ingress
   repository: https://haproxytech.github.io/helm-charts
   version: 1.39.4
-digest: sha256:b82b9c68dac0259d02f58180b2a07768d1c3e83c422adbc702fbd899131282f5
-generated: "2025-10-09T19:23:06.450084383Z"
+digest: sha256:9d9bc7d5583f83499401f455ec7964e2de58762dd9c423c0189934562318c2ff
+generated: "2025-10-13T09:37:43.718743621+02:00"
