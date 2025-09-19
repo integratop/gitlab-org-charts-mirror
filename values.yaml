@@ -1514,8 +1514,29 @@ gitlab-zoekt:
 ## Installation & configuration of OpenBao
 openbao:
   install: false
+  # Disable Openbao managed unseal secret and mount secret managed by shared secrets.
+  staticUnsealSecret:
+    generate: false
+  extraVolumes: |
+    - name: unseal
+      secret:
+        secretName: '{{ template "gitlab.openbao.unseal.secret" . }}'
+  extraVolumeMounts: |
+    - name: unseal
+      mountPath: /srv/openbao/keys/gl-unseal-1
+      subPath: '{{ template "gitlab.openbao.unseal.key" . }}'
+      readOnly: true
   psql: {}
   config:
+    unseal:
+      static:
+        enabled: true
+        currentKeyId: "gl-unseal-1"
+        currentKey: "/srv/openbao/keys/gl-unseal-1"
+    # Use external hostname in OpenBao auth.
+    initialize:
+      oidcDiscoveryUrl: '{{ include "gitlab.gitlab.hostname" . }}'
+      boundIssuer: '{{ include "gitlab.gitlab.hostname" . }}'
     storage:
       postgresql:
         # Set predefined keys to empty values to enable us merging these keys
