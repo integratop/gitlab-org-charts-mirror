@@ -77,7 +77,8 @@ at the same time.
 
 ## Configuration
 
-## Installation command line options
+The following tables list all available OpenBao configuration options.
+### Installation command line options
 
 The table below contains all the possible charts configurations that can be supplied to
 the `helm install` command using the `--set` flags.
@@ -91,16 +92,16 @@ the `helm install` command using the `--set` flags.
 | `serviceAccount.create`                                  | true                                                    | Create a service account for OpenBao. |
 | `serviceAccount.automount`                               | true                                                    | |
 | `serviceAccount.annotations`                             | `{}`                                                    | Additional service account annotations. |
-| `serviceAccount.name`                                    |                                                         | Overrides the generated service account name. |
+| `serviceAccount.name`                                    |                                                         | Override the generated service account name. |
 | `role.create`                                            |                                                         | Create a role with necessary RBAC permissions. |
 | `securityContext.capabilities`                           | `{ drop: ["ALL"] }`                                     | |
 | `securityContext.runAsNonRoot`                           | true                                                    | |
 | `securityContext.allowPrivilegeEscalation`               | false                                                   | |
 | `securityContext.runAsUser`                              | 1000                                                    | |
-| `serviceActive.type`                                     | ClusterIP                                               | Type of the Service selecting the leading OpenBao Pod. |
-| `serviceActive.annotations`                              | `{}`                                                    | Annotations of the Service selecting the leading OpenBao Pod. |
-| `serviceInactive.type`                                   | ClusterIP                                               | Type of the Service selecting the standby OpenBao Pods. |
-| `serviceInactive.annotations`                            | `{}`                                                    | Annotations of the Service selecting the standby OpenBao Pods. |
+| `serviceActive.type`                                     | ClusterIP                                               | Service type of the active OpenBao pod. |
+| `serviceActive.annotations`                              | `{}`                                                    | Service annotations of the active OpenBao pod. |
+| `serviceInactive.type`                                   | ClusterIP                                               | Service type of the standby OpenBao pods. |
+| `serviceInactive.annotations`                            | `{}`                                                    | Service annotations of the standby OpenBao pods. |
 | `resources`                                              | `{}`                                                    | Resource limits and requests. |
 | `autoscaling.minReplicas`                                | 2                                                       | Minimum OpenBao replicas. |
 | `autoscaling.maxReplicas`                                | 4                                                       | Maximum OpenBao replicas. |
@@ -109,13 +110,13 @@ the `helm install` command using the `--set` flags.
 | `livenessProbe`                                          |                                                         | OpenBao liveness probe. Check [OpenBao values](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/blob/main/values.yaml) for the default. |
 | `readinessProbe`                                         |                                                         | OpenBao readiness probe. Check [OpenBao values](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/blob/main/values.yaml) for the default. |
 | `nodeSelector`                                           | {}                                                      | Node selector labels. |
-| `tolerations`                                            | []                                                      | Toleration labels for pod assignment |
-| `addinity`                                               | {}                                                      | Toleration labels for pod assignment |
-| `config.ui`                                              | true                                                    | Enable the OpenBao UI |
+| `tolerations`                                            | []                                                      | Toleration labels for pod assignment. |
+| `affinity`                                               | {}                                                      | Affinity labels for pod assignment. |
+| `config.ui`                                              | true                                                    | Enable the OpenBao UI. |
 | `config.clusterPort`                                     | 8201                                                    | OpenBao cluster port. |
 | `config.apiPort`                                         | 8200                                                    | OpenBao API port. |
 
-## Ingress and TLS
+### Ingress and TLS
 
 The OpenBao charts defaults to end-to-end TLS encryption, which means the Ingress passes the TLS encryption to OpenBao.
 
@@ -126,14 +127,14 @@ The OpenBao charts defaults to end-to-end TLS encryption, which means the Ingres
 | `ingress.hostname`                                       | External OpenBao host based on global hosts config.     | Hostname the Ingress should match. |
 | `ingress.tls.enabled`                                    | true                                                    | Enable Ingress TLS. |
 | `ingress.tls.secretName`                                 |                                                         | The name of the [Kubernetes TLS Secret](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). Managed by certmanager by default. |
-| `ingress.annotations`                                    | true                                                    | Annotations rendered to the Ingess. Use this to configure OpenBao for any non-NGINX Ingress controllers. |
+| `ingress.annotations`                                    | true                                                    | Annotations rendered to the Ingress. Use this to configure OpenBao for any non-NGINX Ingress controllers. |
 | `ingress.configureCertmanager`                           | Global certmanager config                               | Use certmanager to manage the TLS certificate. |
 | `ingress.certmanagerIssuerRef.name`                      | <release>-issuer                                        | Name of the certmanager issuer. |
-| `ingress.certmanagerIssuerRef.kind`                      | Issuer                                                  | Kind of the certmanager issuer to use. Must be Issuer or ClusterIssuer. |
+| `ingress.certmanagerIssuerRef.kind`                      | Issuer                                                  | Kind of certmanager issuer to use. Must be Issuer or ClusterIssuer. |
 | `config.tlsDisable`                                      | false                                                   | Disable internal TLS. If disabled, Ingress TLS passthrough is also disabled. |
 | `config.metricsListener.tlsDisable`                      | false                                                   | Disable internal TLS of the metrics listener. |
 
-## Monitoring
+### Monitoring
 
 OpenBao is preconfigured to expose Prometheus metrics which will be scraped by the bundled Prometheus subchart.
 
@@ -143,12 +144,12 @@ OpenBao is preconfigured to expose Prometheus metrics which will be scraped by t
 | `config.telemetry.disableHostname`                       | true                                                    | Prefix gauge values with local hostname. |
 | `config.telemetry.prometheusRetentionTime`               | `24h`                                                   | Metrics retention time. |
 | `config.telemetry.metricsPrefix`                         | `openbao`                                               | Prefix for all metrics. |
-| `config.metricsListener.enabled`                         | true                                                    | Enable a second API port for scrape metrics from. The listener can serve all API requests, but allows to scrape metrics with no authentication. |
+| `config.metricsListener.enabled`                         | true                                                    | Enable a second API port to serve requests for metrics. The listener can serve all API requests, but serves requests for metrics without authentication. |
 | `config.metricsListener.tlsDisable`                      | false                                                   | Disable internal TLS of the metrics listener. |
 | `config.metricsListener.port`                            | 8209                                                    | Port of the metrics listener. |
-| `config.metricsListener.unauthenticatedMetricsAccess`    | true                                                    | Allow to scrape metrics without authentication. |
+| `config.metricsListener.unauthenticatedMetricsAccess`    | true                                                    | Allow requests for metrics to be served without authentication. |
 
-## Unsealing and initialization
+### Unsealing and initialization
 
 The OpenBao chart makes use of [static auto unsealing](https://openbao.org/docs/configuration/seal/static/) and OpenBao's
 declarative [self initialization](https://openbao.org/docs/configuration/self-init/).
@@ -165,9 +166,9 @@ declarative [self initialization](https://openbao.org/docs/configuration/self-in
 | `config.initialize.oidcDiscoveryUrl`                     | External GitLab host                                    | OIDC discovery URL. Defaults to the external GitLab hostname. |
 | `config.initialize.boundIssuer`                          | External OpenBao host                                   | OIDC issuer. Defaults to the external OpenBao hostname. |
 | `config.initialize.boundAudiences`                       | External OpenBao host                                   | OIDC role audiences. Defaults to the external OpenBao hostname. |
-| `initializeTpl`                                          |                                                         | Template passed used to self initialize OpenBao. Check [OpenBao values](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/blob/main/values.yaml) for the default. |
+| `initializeTpl`                                          |                                                         | Template passed to self initialize OpenBao. Check [OpenBao values](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/blob/main/values.yaml) for the default. |
 
-## Configuring the database
+### Configuring the database
 
 By default, OpenBao connects to the main rails database with the same
 credentials and configuration.
@@ -200,6 +201,6 @@ openbao:
 
 Current known limitations:
 
-1. OpenBao updates imply downtime. Zero downtime upgrades are being investigates in [issue 13](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/issues/13).
-1. Certmanager must be installed before OpenBao, so Helm can locale the `Certificate` custom resource definition.
-1. OpenBao does not integrate with GitLab Geo yet. This is being tracked in [issue 485595](https://gitlab.com/gitlab-org/gitlab/-/issues/485595).
+1. OpenBao updates imply downtime. Zero downtime upgrades are proposed in [issue 13](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/issues/13).
+1. Certmanager must be installed before OpenBao so Helm can locale the `Certificate` custom resource definition.
+1. OpenBao does not integrate with GitLab Geo. This is proposed in [issue 485595](https://gitlab.com/gitlab-org/gitlab/-/issues/485595).
