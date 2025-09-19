@@ -71,12 +71,8 @@ built-in backup procedure.
 If you've configured OpenBao to use a different database (logical or physical), this
 database must be backed up manually. The default backup tooling only covers the standard
 PostgreSQL setup, because the tooling has no awareness of other external databases.
-
 To avoid any synchronisation issues, the GitLab and OpenBao database should be backed up
 at the same time.
-
-## Configuration
-
 
 ## Configuration
 
