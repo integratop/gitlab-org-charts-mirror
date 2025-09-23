@@ -1535,8 +1535,8 @@ openbao:
         currentKey: "/srv/openbao/keys/gl-unseal-1"
     # Use external hostname in OpenBao auth.
     initialize:
-      oidcDiscoveryUrl: '{{ include "gitlab.gitlab.hostname" . }}'
-      boundIssuer: '{{ include "gitlab.gitlab.hostname" . }}'
+      oidcDiscoveryUrl: '{{ include "gitlab.gitlab.url" . }}'
+      boundIssuer: '{{ include "gitlab.gitlab.url" . }}'
     storage:
       postgresql:
         # Set predefined keys to empty values to enable us merging these keys
