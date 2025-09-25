@@ -8,6 +8,16 @@ title: Enabling OpenBao (Development Only)
 This guide is meant to target developers who want to enable the OpenBao integration
 with GitLab.
 
+## Known issues
+
+- OpenBao updates imply downtime. Zero downtime upgrades are proposed in [issue 13](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/issues/13).
+- The OpenBao chart needs a existing cert-manager in the cluster to locate the `Certificate` custom resource definition. If you're using the bundled cert-manager, follow a
+  two-stage installation:
+  1. Deploy GitLab initially with OpenBao disabled.
+  1. Upgrade the deployment to enable OpenBao.
+- OpenBao does not integrate with GitLab Geo. This is proposed in [issue 485595](https://gitlab.com/gitlab-org/gitlab/-/issues/485595).
+- OpenBao can not be deployed with the [GitLab Operator](https://gitlab.com/gitlab-org/cloud-native/gitlab-operator).
+
 ## Prerequisites
 
 - GitLab Ultimate (developer) license.
@@ -16,7 +26,7 @@ with GitLab.
 
 ## Setup GitLab and OpenBao
 
-1. Install/upgrade GitLab with your a [developer license](../environment_setup.md#developer-license)
+1. Install or upgrade GitLab with your [developer license](../environment_setup.md#developer-license)
    and enable OpenBao:
 
    ```yaml
@@ -173,34 +183,46 @@ declarative [self initialization](https://openbao.org/docs/configuration/self-in
 By default, OpenBao connects to the main rails database with the same
 credentials and configuration.
 
-If you want to use another database, you can override these settings:
+If you want to use an external database, you need to:
 
-```yaml
-openbao:
-  config:
-    storage:
-      postgresql:
-        connection:
-          host: "psql.openbao.example.com"
-          port: 5432
-          database: openbao
-          username: openbao
-          connectTimeout:
-          keepalives:
-          keepalivesIdle:
-          keepalivesInterval:
-          keepalivesCount:
-          tcpUserTimeout:
-          sslMode: "disable"
-          password: {}
-          # secret:
-          # key:
-```
+1. Create a PostgreSQL user and database on your database server:
 
-## Limitations
+   ```sql
+   -- Create the OpenBao user
+   CREATE USER openbao WITH PASSWORD '<password>';
 
-Current known limitations:
+   -- Create the OpenBao database
+   CREATE DATABASE openbao OWNER openbao;
+   ```
 
-1. OpenBao updates imply downtime. Zero downtime upgrades are proposed in [issue 13](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/issues/13).
-1. Certmanager must be installed before OpenBao so Helm can locale the `Certificate` custom resource definition.
-1. OpenBao does not integrate with GitLab Geo. This is proposed in [issue 485595](https://gitlab.com/gitlab-org/gitlab/-/issues/485595).
+1. Create a Kubernetes secret containing the password:
+
+   ```shell
+   kubectl create secret -n bao generic openbao-db-password --from-literal=password="<password>"
+   ```
+
+1. Configure OpenBao to connect to your external database:
+
+   ```yaml
+   openbao:
+     config:
+       storage:
+         postgresql:
+           connection:
+             host: "psql.openbao.example.com"
+             port: 5432
+             database: openbao
+             username: openbao
+             # connectTimeout:
+             # keepalives:
+             # keepalivesIdle:
+             # keepalivesInterval:
+             # keepalivesCount:
+             # tcpUserTimeout:
+             # sslMode: "disable"
+             password:
+               secret: openbao-db-passowrd
+               key: password
+   ```
+
+1. Deploy or upgrade OpenBao. When starting, OpenBao automatically create its database schema in the specified database.

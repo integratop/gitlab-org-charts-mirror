@@ -31,4 +31,4 @@ For more information, see the [openbao chart repository](https://gitlab.com/gitl
 
 The chart is meant for development purposes only at the moment.
 
-See the [developer docs](../../development/openbao/_index.md) to setup OpenBao.
+See documentation for [enabling OpenBao](../../development/openbao/_index.md).
