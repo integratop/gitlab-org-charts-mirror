@@ -33,7 +33,7 @@ with GitLab.
 
    ```script
    Feature.enable(:secrets_manager)
-   Feature.enable(:ci_tanukey_ui)   
+   Feature.enable(:ci_tanukey_ui)
    ```
 
 1. In GitLab, on the left sidebar, select **Search or go to** and find your project.
