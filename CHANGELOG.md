@@ -2,6 +2,10 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.4.1 (2025-09-25)
+
+No changes.
+
 ## 9.4.0 (2025-09-17)
 
 ### Added (5 changes)
@@ -30,6 +34,10 @@ entry.
 - [Update Helm release gitlab-runner to v0.80.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/14a920b84e5186fa06e4a25e190a6c60e35c3d8a) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4483))
 - [Update dependency gitlab-exporter to v16.1.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/d420c9e6489842d744165858d39d0b3093667770) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4459))
 - [Update dependency container-registry to v4.26.1-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bb95fd2687befab1b9daf0b21d55e3cc939f0973) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4469))
+
+## 9.3.3 (2025-09-25)
+
+No changes.
 
 ## 9.3.2 (2025-09-09)
 
@@ -67,6 +75,10 @@ No changes.
 - [Update Helm release gitlab-zoekt to v2.8.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/c7c56b976e1374bf84db3e6d00a23a5e00708b70) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4422))
 - [Update certmanager from v1.12 to v1.17](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/c990cd36ed7d6910be91a7bd01e65ad98fed8148) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4234))
 - [Update dependency container-registry to v4.25.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/ca12af55763a3a4ae2fe8352b35f9a7aef91d6aa) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4412))
+
+## 9.2.7 (2025-09-25)
+
+No changes.
 
 ## 9.2.6 (2025-09-09)
 
