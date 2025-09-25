@@ -291,7 +291,7 @@ Replace `<name>` with the name of the release.
 kubectl create secret generic <name>-gitlab-kas-secret --from-literal=kas_shared_secret=$(head -c 512 /dev/urandom | LC_CTYPE=C tr -cd 'a-zA-Z0-9' | head -c 32 | base64)
 ```
 
-This secret is referenced by the `global.appConfig.gitlab_kas.key` setting.
+This secret is referenced by the `global.appConfig.gitlab_kas.secret` setting.
 
 ### GitLab KAS API secret
 
