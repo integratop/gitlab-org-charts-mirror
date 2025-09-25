@@ -42,6 +42,7 @@ The table below maps some of the key previous supported chart versions and suppo
 |---------------|----------------|
 | 9.4.1 | 18.4.1 |
 | 9.4.0 | 18.4.0 |
+| 9.3.3 | 18.3.3 |
 | 9.3.2 | 18.3.2 |
 | 9.3.1 | 18.3.1 |
 | 9.3.0 | 18.3.0 |
