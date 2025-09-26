@@ -240,6 +240,24 @@ Let's look at two snippet examples, which easily exemplify the reasoning:
 
 Related issue: [#729 Refactoring: Helm templates](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/729)
 
+### Nested Value Access
+
+When accessing nested values in Helm templates, always use safe navigation patterns to prevent template rendering failures.
+
+**Preferred approach**: Use parentheses syntax for safe nested value access:
+
+```yaml
+{{- $host := (((.Values.database).connection).host) -}}
+{{- $port := (((.Values.database).connection).port) -}}
+```
+
+**Avoid**: Direct nested access without safety checks:
+
+```yaml
+{{/* ❌ Unsafe - will fail if intermediate objects are null */}}
+{{- if .Values.database.connection.host -}}
+```
+
 ### When to utilize `toYaml` in templates
 
 It is frowned upon to default to utilizing a `toYaml` in the template files as
