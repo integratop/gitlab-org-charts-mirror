@@ -111,7 +111,7 @@ docs-i18n-lint paths:
     - if: '$PIPELINE_TYPE =~ /BRANCH_PIPELINE$/'
 
 docs-test hugo:
-  image: registry.gitlab.com/gitlab-org/technical-writing/docs-gitlab-com/docs-gitlab-com-builder:hugo-0.148.2
+  image: registry.gitlab.com/gitlab-org/technical-writing/docs-gitlab-com/docs-gitlab-com-builder:hugo-0.150.1
   stage: prepare
   variables:
     DOCS_BRANCH: "main"
