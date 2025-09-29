@@ -456,7 +456,7 @@ Gitaly [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/s
 because the StatefulSet's Volume Template is immutable, and cannot be changed.
 
 You can delete the StatefulSet without deleting the Gitaly Pods:
-`kubectl --namespace <namespace> delete --cascade=false StatefulSet <release-name>-gitaly`
+`kubectl --namespace <namespace> delete --cascade=orphan StatefulSet <release-name>-gitaly`
 The Helm update command will recreate the StatefulSet, which will adopt and
 update the Gitaly pods.
 
