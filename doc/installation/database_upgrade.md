@@ -93,7 +93,7 @@ kubectl delete pvc data-RELEASE_NAME-postgresql-0
 
 ### Upgrade GitLab
 
-Upgrade GitLab following our [standard procedure](upgrade.md#steps), with the following additions of:
+Upgrade GitLab following our [standard procedure](upgrade.md), with the following additions of:
 
 Disable migrations using the following flag on your upgrade command:
 

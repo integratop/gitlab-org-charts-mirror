@@ -15,28 +15,17 @@ title: GitLab Helm chart versions
 The GitLab Helm chart doesn't have the same version number as GitLab itself. This means that breaking changes can be
 introduced to the chart independent of GitLab.
 
-To quickly see the full list of the `gitlab` chart versions and the GitLab version
-they map to, run the following command with [Helm](tools.md):
+To see the full list of the `gitlab` chart versions and the GitLab version they map to, run the following
+command with [Helm](tools.md):
 
 ```shell
 helm repo add gitlab https://charts.gitlab.io/
 helm search repo -l gitlab/gitlab
 ```
 
-## Upgrade notes for each supported version
+## GitLab chart version mappings
 
-Upgrade notes for each supported version of the GitLab Helm chart are available:
-
-- [9.0](../releases/9_0.md)
-- [8.0](../releases/8_0.md)
-- [7.0](../releases/7_0.md)
-- [6.0](../releases/6_0.md)
-
-See also the project's [CHANGELOG](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/CHANGELOG.md).
-
-## Previous chart versions
-
-The table below maps some of the key previous supported chart versions and supported GitLab versions.
+The table below maps supported GitLab Helm chart versions to supported GitLab versions.
 
 | Chart version | GitLab version |
 |---------------|----------------|
@@ -393,10 +382,3 @@ The table below maps some of the key previous supported chart versions and suppo
 | 6.0.2 | 15.0.2 |
 | 6.0.1 | 15.0.1 |
 | 6.0.0 | 15.0.0 |
-
-To see the full list, you can issue the following command with Helm:
-
-```shell
-helm repo add gitlab https://charts.gitlab.io/
-helm search repo -l gitlab/gitlab
-```
