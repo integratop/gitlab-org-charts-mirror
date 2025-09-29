@@ -194,8 +194,7 @@ The default logic (when `global.ingress.useNewIngressForCerts` is `false`) reuse
 validation. This default is not suitable in some situations. Setting the flag to `true` will mean that a new
 Ingress object is created for each validation.
 
-`global.ingress.useNewIngressForCerts` cannot be set to `true` when used with GKE Ingress Controllers. For full details
-on enabling this, see [release notes](../releases/7_0.md#bundled-certmanager).
+`global.ingress.useNewIngressForCerts` cannot be set to `true` when used with GKE Ingress Controllers.
 
 ## GitLab Version
 
