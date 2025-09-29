@@ -211,6 +211,9 @@ data:
     gitlab-helm-chart
   workhorse-config.toml.tpl: |
     shutdown_timeout = "{{ template "gitlab.workhorse.shutdownTimeout" $ }}"
+    {{- if $.Values.workhorse.adoptCfRayHeader }}
+    adopt_cf_ray_header = {{ $.Values.workhorse.adoptCfRayHeader | toJson }}
+    {{- end }}
     {{- if $.Values.workhorse.trustedCIDRsForPropagation }}
     trusted_cidrs_for_propagation = {{ $.Values.workhorse.trustedCIDRsForPropagation | toStrings | toJson }}
     {{- end }}
