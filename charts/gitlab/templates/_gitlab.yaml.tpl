@@ -62,6 +62,22 @@ workspaces:
 {{- end -}}
 {{- end -}}
 
+{{- define "gitlab.appConfig.databaseTrafficCapture" -}}
+{{- with .Values.global.appConfig.databaseTrafficCapture -}}
+{{- $connector := dig "config" "storage" "connector" (dict "provider" "") . -}}
+{{- if ne $connector.provider "" -}}
+database_traffic_capture:
+  config:
+    storage:
+      connector:
+        provider: {{ $connector.provider | quote }}
+        project_id: {{ $connector.projectId | quote }}
+        credentials: {{ $connector.credentials | quote }}
+        bucket: {{ $connector.bucket | quote }}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "gitlab.appConfig.cell" -}}
 {{- if eq .Values.global.appConfig.cell.enabled true -}}
 {{- with .Values.global.appConfig.cell -}}
