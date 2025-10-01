@@ -15,7 +15,8 @@ with GitLab.
   two-stage installation:
   1. Deploy GitLab initially with OpenBao disabled.
   1. Upgrade the deployment to enable OpenBao.
-- OpenBao does not integrate with GitLab Geo. This is proposed in [issue 485595](https://gitlab.com/gitlab-org/gitlab/-/issues/485595).
+- GitLab Geo is unsupported. Basic validation passed, but failover and recommended setups are not tested and documented yet.
+  Full validation will be part of [issue #568357](https://gitlab.com/gitlab-org/gitlab/-/issues/568357).
 - OpenBao can not be deployed with the [GitLab Operator](https://gitlab.com/gitlab-org/cloud-native/gitlab-operator).
 
 ## Prerequisites
@@ -179,7 +180,7 @@ declarative [self initialization](https://openbao.org/docs/configuration/self-in
 
 ### Configuring the database
 
-By default, OpenBao connects to the main rails database with the same
+By default, OpenBao connects to the main Rails database with the same
 credentials and configuration.
 
 If you want to use an external database, you need to:
