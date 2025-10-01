@@ -19,10 +19,9 @@ include:
 
 - Mounting different volumes to the Pods
 - Changing the effective accessModes or [Storage Class](https://kubernetes.io/docs/concepts/storage/storage-classes/)
-- Expanding the storage size of your volume*<sup>1</sup>
-
-<sup>1</sup> In Kubernetes 1.11, [expanding the storage size of your volume is supported](https://kubernetes.io/blog/2018/07/12/resizing-persistent-volumes-using-kubernetes/)
-if you have `allowVolumeExpansion` configured to true in your [Storage Class](https://kubernetes.io/docs/concepts/storage/storage-classes/).
+- Expanding the storage size of your volume. In Kubernetes 1.11,
+  if you have `allowVolumeExpansion` configured to true in your [Storage Class](https://kubernetes.io/docs/concepts/storage/storage-classes/),
+  [expanding the storage size of your volume is supported](https://kubernetes.io/blog/2018/07/12/resizing-persistent-volumes-using-kubernetes/).
 
 Automating theses changes is complicated due to:
 
@@ -449,18 +448,17 @@ settings as well.
 See the [installation storage guide](../../installation/storage.md#using-the-custom-storage-class)
 for the options.
 
-{{< alert type="note" >}}
-
 If you made changes to the Gitaly [volume claim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), you will need to delete the
 Gitaly [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) before you will be able to issue a Helm update. This is
 because the StatefulSet's Volume Template is immutable, and cannot be changed.
 
-You can delete the StatefulSet without deleting the Gitaly Pods:
-`kubectl --namespace <namespace> delete --cascade=orphan StatefulSet <release-name>-gitaly`
-The Helm update command will recreate the StatefulSet, which will adopt and
-update the Gitaly pods.
+You can delete the StatefulSet without deleting the Gitaly pods:
 
-{{< /alert >}}
+```shell
+kubectl --namespace <namespace> delete --cascade=orphan StatefulSet <release-name>-gitaly
+```
+
+The Helm update command will recreate the StatefulSet, which will adopt and update the Gitaly pods.
 
 Update the chart, and include the updated configuration:
 
