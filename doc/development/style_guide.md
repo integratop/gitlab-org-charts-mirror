@@ -242,16 +242,54 @@ Related issue: [#729 Refactoring: Helm templates](https://gitlab.com/gitlab-org/
 
 ### Nested Value Access
 
-When accessing nested values in Helm templates, always use safe navigation patterns to prevent template rendering failures.
+When accessing nested values in Helm templates, choose the appropriate safe navigation pattern based on your use case to prevent template rendering failures. Below we describe each case with examples.
 
-**Preferred approach**: Use parentheses syntax for safe nested value access:
+#### When to use each approach
+
+- **`dig`**: When you need fallback defaults and the path is known at template time. Best for most use cases.
+- **`index`**: When accessing dynamic keys, working with complex nested structures, or when performance is critical.
+- **Parentheses**: For simple cases where you just need safe navigation without defaults.
+- **Direct access**: Only when you can guarantee the full path exists (rare in practice).
+
+#### Performance considerations
+
+Functions like `dig` and `index` can be more efficient than deeply nested parentheses, especially when accessing the same nested structure multiple times. Consider storing the result in a variable for reuse.
+
+#### Use `dig` for safe access with fallback defaults
+
+The [`dig` function](https://masterminds.github.io/sprig/dicts.html#dig) provides safe nested access with default values and is often the most robust approach:
+
+```yaml
+{{- $host := dig "database" "connection" "host" "localhost" .Values -}}
+{{- $port := dig "database" "connection" "port" 5432 .Values -}}
+{{- $enabled := dig "registry" "enabled" false .Values.global -}}
+```
+
+#### Use `index` for dynamic keys or performance-critical paths
+
+The [`index` function](https://helm.sh/docs/chart_template_guide/function_list/#index) is ideal when accessing dynamic keys or when performance matters:
+
+```yaml
+{{- $config := index .Values.global.redis .redisConfigName | default dict -}}
+{{- $image := index .Values "shared-secrets" "selfsign" "image" -}}
+{{- $settings := index .Values.gitlab "gitlab-shell" -}}
+```
+
+#### Use parentheses for simple safe navigation
+
+Parentheses syntax works well for straightforward cases where you need basic safe navigation:
 
 ```yaml
 {{- $host := (((.Values.database).connection).host) -}}
 {{- $port := (((.Values.database).connection).port) -}}
 ```
 
-**Avoid**: Direct nested access without safety checks:
+But note that if you already know for other means that, ofr instance, `.Values.database` is present, you can simplify
+the safe navitation with `(.Values.database.connection).port`.
+
+#### Avoid direct nested access without safety checks
+
+Direct access should only be used when you can guarantee the full path exists:
 
 ```yaml
 {{/* ❌ Unsafe - will fail if intermediate objects are null */}}
