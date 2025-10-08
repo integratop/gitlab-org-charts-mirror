@@ -171,9 +171,9 @@ resources:
 
 ### extraEnv
 
-`extraEnv` allows you to expose additional environment variables in the dependencies container.
+Use `extraEnv` to expose additional environment variables in the dependencies container.
 
-Below is an example use of `extraEnv`:
+For example, to expose `SOME_KEY` and `SOME_OTHER_KEY` environment variables:
 
 ```yaml
 extraEnv:
@@ -181,7 +181,8 @@ extraEnv:
   SOME_OTHER_KEY: some_other_value
 ```
 
-When the container is started, you can confirm that the environment variables are exposed:
+When the container is started, confirm that the environment variables are exposed by running the `env` command
+and grepping the name of the variables. For example:
 
 ```shell
 env | grep SOME
@@ -189,7 +190,7 @@ SOME_KEY=some_value
 SOME_OTHER_KEY=some_other_value
 ```
 
-You can also set `extraEnv` for a specific pod:
+You can also set `extraEnv` for a specific pod. For example:
 
 ```yaml
 extraEnv:
