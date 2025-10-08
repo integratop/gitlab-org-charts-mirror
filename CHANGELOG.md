@@ -39,6 +39,10 @@ No changes.
 - [Update dependency gitlab-exporter to v16.1.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/d420c9e6489842d744165858d39d0b3093667770) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4459))
 - [Update dependency container-registry to v4.26.1-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bb95fd2687befab1b9daf0b21d55e3cc939f0973) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4469))
 
+## 9.3.4 (2025-10-08)
+
+No changes.
+
 ## 9.3.3 (2025-09-25)
 
 No changes.
