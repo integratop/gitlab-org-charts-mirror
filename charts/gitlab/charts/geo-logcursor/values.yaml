@@ -68,7 +68,7 @@ resources:
   #  memory: 1.5G
   requests:
     cpu: 300m
-    memory: 700M
+    memory: 1G
 
 deployment:
   livenessProbe:
