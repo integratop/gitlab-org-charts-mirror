@@ -696,12 +696,7 @@ Usage: {{- include "gitlab.godebug.env" $ -}}
 Usage with webservice deployments or sidekiq pods context: {{- include "gitlab.godebug.env" (dict "rootScope" $ "deploymentScope" .) -}}
 */}}
 {{- define "gitlab.godebug.env" -}}
-{{- $rootScope := . -}}
-{{- $deploymentScope := .deploymentScope -}}
-{{- if .rootScope -}}
-{{-   $rootScope = .rootScope -}}
-{{- end -}}
-{{- $godebugIsDuplicate := include "checkDuplicateKeyFromEnv" (dict "rootScope" $rootScope "keyToFind" "GODEBUG" "deploymentScope" $deploymentScope) }}
+{{- $godebugIsDuplicate := include "checkDuplicateKeyFromEnv" (dict "rootScope" (hasKey . "rootScope" | ternary .rootScope . ) "keyToFind" "GODEBUG" "deploymentScope" .deploymentScope) }}
 {{- if eq $godebugIsDuplicate "false" }}
 - name: GODEBUG
   value: 'tlsmlkem=0,tlskyber=0'
