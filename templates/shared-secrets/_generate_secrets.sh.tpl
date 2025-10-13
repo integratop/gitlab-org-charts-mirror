@@ -14,7 +14,7 @@ function gen_random(){
 # Args: length
 function gen_random_base64(){
   local len="$1"
-  head -c "$len" /dev/urandom | base64 -w0
+  gen_random_bytes "$len" | base64 -w0
 }
 
 # Args: length
