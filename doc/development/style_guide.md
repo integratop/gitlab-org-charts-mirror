@@ -247,13 +247,9 @@ When accessing nested values in Helm templates, choose the appropriate safe navi
 #### When to use each approach
 
 - **`dig`**: When you need fallback defaults and the path is known at template time. Best for most use cases.
-- **`index`**: When accessing dynamic keys, working with complex nested structures, or when performance is critical.
+- **`index`**: When accessing dynamic keys, working with complex nested structures, or naming conventions imcompatible with Go, like kebab-case or snake_case.
 - **Parentheses**: For simple cases where you just need safe navigation without defaults.
 - **Direct access**: Only when you can guarantee the full path exists (rare in practice).
-
-#### Performance considerations
-
-Functions like `dig` and `index` can be more efficient than deeply nested parentheses, especially when accessing the same nested structure multiple times. Consider storing the result in a variable for reuse.
 
 #### Use `dig` for safe access with fallback defaults
 
@@ -265,14 +261,12 @@ The [`dig` function](https://masterminds.github.io/sprig/dicts.html#dig) provide
 {{- $enabled := dig "registry" "enabled" false .Values.global -}}
 ```
 
-#### Use `index` for dynamic keys or performance-critical paths
+#### Use `index` for dynamic keys, or naming conventions incompatible with Go
 
-The [`index` function](https://helm.sh/docs/chart_template_guide/function_list/#index) is ideal when accessing dynamic keys or when performance matters:
+Use [`index`](https://helm.sh/docs/chart_template_guide/function_list/#index) for dynamic keys or Go-incompatible naming like `kebab-case`:
 
 ```yaml
-{{- $config := index .Values.global.redis .redisConfigName | default dict -}}
 {{- $image := index .Values "shared-secrets" "selfsign" "image" -}}
-{{- $settings := index .Values.gitlab "gitlab-shell" -}}
 ```
 
 #### Use parentheses for simple safe navigation
@@ -284,7 +278,7 @@ Parentheses syntax works well for straightforward cases where you need basic saf
 {{- $port := (((.Values.database).connection).port) -}}
 ```
 
-But note that if you already know for other means that, ofr instance, `.Values.database` is present, you can simplify
+But note that if you already know for other means that, for instance, `.Values.database` is present, you can simplify
 the safe navitation with `(.Values.database.connection).port`.
 
 #### Avoid direct nested access without safety checks
