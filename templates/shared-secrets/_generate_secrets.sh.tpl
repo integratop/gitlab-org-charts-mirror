@@ -263,4 +263,6 @@ generate_secret_if_needed {{ template "gitlab.praefect.authToken.secret" . }} --
 generate_secret_if_needed {{ template "gitlab.zoekt.gateway.basicAuth.secretName" . }}  --from-literal=gitlab_username=gitlab --from-literal=gitlab_password=$(gen_random 'a-zA-Z0-9' 64)
 {{ end }}
 
+{{ if .Values.openbao.install -}}
 generate_secret_if_needed {{ template "gitlab.openbao.unseal.secret" . }} --from-literal={{ template "gitlab.openbao.unseal.key" . }}="$(gen_random_bytes 32)"
+{{ end }}
