@@ -364,7 +364,7 @@ spec:
           {{- end }}
           env:
             {{- include "gitlab.timeZone.env" $ | nindent 12 }}
-            {{- include "gitlab.godebug.env" $ | nindent 12 }}
+            {{- include "gitlab.godebug.env" (dict "rootScope" $ "deploymentScope" .) | nindent 12 }}
             - name: TMPDIR
               value: "/tmp/gitlab"
             - name: GITLAB_WORKHORSE_AUTH_BACKEND

@@ -670,15 +670,19 @@ Return a boolean value that indicates whether a given key exists in the provided
 variables from either local or global scope.
 
 Usage: {{- include checkDuplicateKeyFromEnv (dict "rootScope" $ "keyToFind" "MY_KEY") -}}
+Usage with webservice deployments or sidekiq pods context: {{- include checkDuplicateKeyFromEnv (dict "rootScope" $ "keyToFind" "MY_KEY" "deploymentScope" .) -}}
 */}}
 {{- define "checkDuplicateKeyFromEnv" -}}
   {{- $keyToFind := .keyToFind -}}
   {{- $rootScope := .rootScope -}}
+  {{- $deploymentScope := .deploymentScope -}}
   {{- $localHasKey := and $rootScope.Values.extraEnv (hasKey $rootScope.Values.extraEnv $keyToFind) -}}
   {{- $globalHasKey := and $rootScope.Values.global.extraEnv (hasKey $rootScope.Values.global.extraEnv $keyToFind) -}}
   {{- $localHasKeyFrom := and $rootScope.Values.extraEnvFrom (hasKey $rootScope.Values.extraEnvFrom $keyToFind) -}}
   {{- $globalHasKeyFrom := and $rootScope.Values.global.extraEnvFrom (hasKey $rootScope.Values.global.extraEnvFrom $keyToFind) -}}
-  {{- if or $localHasKey $globalHasKey $localHasKeyFrom $globalHasKeyFrom -}}
+  {{- $deploymentHasKey := and $deploymentScope $deploymentScope.extraEnv (hasKey $deploymentScope.extraEnv $keyToFind) -}}
+  {{- $deploymentHasKeyFrom := and $deploymentScope $deploymentScope.extraEnvFrom (hasKey $deploymentScope.extraEnvFrom $keyToFind) -}}
+  {{- if or $localHasKey $globalHasKey $localHasKeyFrom $globalHasKeyFrom $deploymentHasKey $deploymentHasKeyFrom -}}
 true
   {{- else -}}
 false
@@ -687,9 +691,12 @@ false
 
 {{/*
 Render GODEBUG environment variable if not already defined in extraEnv
+
+Usage: {{- include "gitlab.godebug.env" $ -}}
+Usage with webservice deployments or sidekiq pods context: {{- include "gitlab.godebug.env" (dict "rootScope" $ "deploymentScope" .) -}}
 */}}
 {{- define "gitlab.godebug.env" -}}
-{{- $godebugIsDuplicate := include "checkDuplicateKeyFromEnv" (dict "rootScope" . "keyToFind" "GODEBUG") }}
+{{- $godebugIsDuplicate := include "checkDuplicateKeyFromEnv" (dict "rootScope" (hasKey . "rootScope" | ternary .rootScope . ) "keyToFind" "GODEBUG" "deploymentScope" .deploymentScope) }}
 {{- if eq $godebugIsDuplicate "false" }}
 - name: GODEBUG
   value: 'tlsmlkem=0,tlskyber=0'

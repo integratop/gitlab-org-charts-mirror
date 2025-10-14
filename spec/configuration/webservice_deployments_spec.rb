@@ -241,6 +241,62 @@ describe 'Webservice Deployments configuration' do
       expect(items.dig('ConfigMap/test-webservice')).to be_truthy
       expect(items.dig(item_key('ConfigMap', 'tests'))).to be_truthy
     end
+
+    context 'extraEnv configuration for deployments' do
+      let(:extra_env_values) do
+        YAML.safe_load(%(
+        global:
+          extraEnv:
+            GLOBAL_VAR: "global_value"
+        gitlab:
+          webservice:
+            extraEnv:
+              WEBSERVICE_VAR: "webservice_value"
+            deployments:
+              default:
+                ingress:
+                  path: /
+                extraEnv:
+                  DEPLOYMENT_VAR: "default_deployment_value"
+                  WEBSERVICE_VAR: "overridden_webservice_value"
+              api:
+                ingress:
+                  path: /api
+                extraEnv:
+                  API_SPECIFIC_VAR: "api_value"
+                  GODEBUG: "foo=bar"
+        )).deep_merge(default_values)
+      end
+
+      let(:chart_extra_env) { HelmTemplate.new(extra_env_values) }
+
+      it 'properly inherits and merges extraEnv variables across deployment levels' do
+        expect(chart_extra_env.exit_code).to eq(0)
+
+        # Test default deployment - should have global, webservice (overridden), and deployment-specific vars
+        default_env = chart_extra_env.env(item_key('Deployment', 'default'), 'webservice')
+        expect(default_env).to include(env_value('GLOBAL_VAR', 'global_value'))
+        expect(default_env).to include(env_value('WEBSERVICE_VAR', 'overridden_webservice_value'))
+        expect(default_env).to include(env_value('DEPLOYMENT_VAR', 'default_deployment_value'))
+
+        # Test api deployment - should have global, webservice, and api-specific vars
+        api_env = chart_extra_env.env(item_key('Deployment', 'api'), 'webservice')
+        expect(api_env).to include(env_value('GLOBAL_VAR', 'global_value'))
+        expect(api_env).to include(env_value('WEBSERVICE_VAR', 'webservice_value'))
+        expect(api_env).to include(env_value('API_SPECIFIC_VAR', 'api_value'))
+        expect(api_env).not_to include(env_value('DEPLOYMENT_VAR', 'default_deployment_value'))
+        expect(api_env).not_to include(env_value('API_SPECIFIC_VAR', 'default_deployment_value'))
+
+        # Test GODEBUG without deployment overrides
+        default_workhorse_env = chart_extra_env.env(item_key('Deployment', 'default'), 'gitlab-workhorse')
+        expect(default_workhorse_env).to include(env_value('GODEBUG', 'tlsmlkem=0,tlskyber=0'))
+
+        # Test GODEBUG gets overriden on api deployment
+        default_workhorse_env = chart_extra_env.env(item_key('Deployment', 'api'), 'gitlab-workhorse')
+        expect(default_workhorse_env).to_not include(env_value('GODEBUG', 'tlsmlkem=0,tlskyber=0'))
+        expect(default_workhorse_env).to include(env_value('GODEBUG', 'foo=bar'))
+      end
+    end
   end
 
   context 'deployments datamodel' do
