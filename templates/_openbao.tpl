@@ -79,3 +79,11 @@ Render the OpenBao postgresql configuration yaml.
 {{- define "gitlab.openbao.configureCertmanager" -}}
 {{ pluck "configureCertmanager" .Values.ingress .Values.global.ingress (dict "configureCertmanager" false) | first }}
 {{- end }}
+
+{{- define "gitlab.openbao.unseal.secret" -}}
+{{- printf "%s-openbao-unseal" .Release.Name -}}
+{{- end -}}
+
+{{- define "gitlab.openbao.unseal.key" -}}
+key
+{{- end -}}

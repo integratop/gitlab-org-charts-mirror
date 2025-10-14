@@ -14,7 +14,13 @@ function gen_random(){
 # Args: length
 function gen_random_base64(){
   local len="$1"
-  head -c "$len" /dev/urandom | base64 -w0
+  gen_random_bytes "$len" | base64 -w0
+}
+
+# Args: length
+function gen_random_bytes(){
+  local len="$1"
+  head -c "$len" /dev/urandom
 }
 
 # Args: yaml file, search path
@@ -255,4 +261,8 @@ generate_secret_if_needed {{ template "gitlab.praefect.authToken.secret" . }} --
 {{ if (index .Values "gitlab-zoekt" "gateway" "basicAuth" "enabled") -}}
 # Zoekt basic auth credentials
 generate_secret_if_needed {{ template "gitlab.zoekt.gateway.basicAuth.secretName" . }}  --from-literal=gitlab_username=gitlab --from-literal=gitlab_password=$(gen_random 'a-zA-Z0-9' 64)
+{{ end }}
+
+{{ if .Values.openbao.install -}}
+generate_secret_if_needed {{ template "gitlab.openbao.unseal.secret" . }} --from-literal={{ template "gitlab.openbao.unseal.key" . }}="$(gen_random_bytes 32)"
 {{ end }}
