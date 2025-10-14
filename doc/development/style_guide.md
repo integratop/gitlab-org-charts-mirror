@@ -240,6 +240,56 @@ Let's look at two snippet examples, which easily exemplify the reasoning:
 
 Related issue: [#729 Refactoring: Helm templates](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/729)
 
+### Nested Value Access
+
+When accessing nested values in Helm templates, choose the appropriate safe navigation pattern based on your use case to prevent template rendering failures. Below we describe each case with examples.
+
+#### When to use each approach
+
+- **`dig`**: When you need fallback defaults and the path is known at template time. Best for most use cases.
+- **`index`**: When accessing dynamic keys, working with complex nested structures, or naming conventions imcompatible with Go, like kebab-case or snake_case.
+- **Parentheses**: For simple cases where you just need safe navigation without defaults.
+- **Direct access**: Only when you can guarantee the full path exists (rare in practice).
+
+#### Use `dig` for safe access with fallback defaults
+
+The [`dig` function](https://masterminds.github.io/sprig/dicts.html#dig) provides safe nested access with default values and is often the most robust approach:
+
+```yaml
+{{- $host := dig "database" "connection" "host" "localhost" .Values -}}
+{{- $port := dig "database" "connection" "port" 5432 .Values -}}
+{{- $enabled := dig "registry" "enabled" false .Values.global -}}
+```
+
+#### Use `index` for dynamic keys, or naming conventions incompatible with Go
+
+Use [`index`](https://helm.sh/docs/chart_template_guide/function_list/#index) for dynamic keys or Go-incompatible naming like `kebab-case`:
+
+```yaml
+{{- $image := index .Values "shared-secrets" "selfsign" "image" -}}
+```
+
+#### Use parentheses for simple safe navigation
+
+Parentheses syntax works well for straightforward cases where you need basic safe navigation:
+
+```yaml
+{{- $host := (((.Values.database).connection).host) -}}
+{{- $port := (((.Values.database).connection).port) -}}
+```
+
+But note that if you already know for other means that, for instance, `.Values.database` is present, you can simplify
+the safe navitation with `(.Values.database.connection).port`.
+
+#### Avoid direct nested access without safety checks
+
+Direct access should only be used when you can guarantee the full path exists:
+
+```yaml
+{{/* ❌ Unsafe - will fail if intermediate objects are null */}}
+{{- if .Values.database.connection.host -}}
+```
+
 ### When to utilize `toYaml` in templates
 
 It is frowned upon to default to utilizing a `toYaml` in the template files as
