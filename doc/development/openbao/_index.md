@@ -51,6 +51,16 @@ with GitLab.
 1. Expand **Visibility, project features, permissions**.
 1. Turn on the **Secrets Manager** toggle, and wait for the Secrets Manager to be provisioned.
 
+## Rolling back OpenBao upgrades
+
+During an OpenBao upgrade, there can be changes to the PostgreSQL data that are not backwards
+compatible, which can cause compatibility issues if the OpenBao upgrade must be rolled back.
+
+You should always [backup your database](#database-backup) before upgrading OpenBao.
+If you need to roll back an OpenBao upgrade, also restore the database backup matching the OpenBao version.
+
+Check the [upstream documentation](https://openbao.org/docs/upgrading/) for more details.
+
 ## Backup and Restore
 
 A complete OpenBao backup requires securing two critical components: unseal keys and the
