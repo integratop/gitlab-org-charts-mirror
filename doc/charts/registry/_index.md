@@ -775,7 +775,7 @@ To create this secret manually:
 kubectl create secret generic gitlab-registry-notification --from-literal=secret=[\"strongrandomstring\"]
 ```
 
-Then proceed to set
+Then proceed to set these configs, ensuring the `secret` value is set to the name of the secret created above.
 
 ```yaml
 global:
@@ -784,17 +784,30 @@ global:
     notificationSecret:
         secret: gitlab-registry-notification
         key: secret
-
-  # If utilising Geo, and wishing to sync the container registry.
-  # Define this in the primary site configs only.
-  geo:
-    registry:
-      replication:
-        enabled: true
-        primaryApiUrl: <URL to primary registry>
 ```
 
-Ensuring the `secret` value is set to the name of the secret created above
+If utilising Geo, and wishing to replicate the container registry, follow the next two steps:
+
+1. In the primary site configs:
+
+   ```yaml
+     geo:
+       registry:
+         replication:
+           enabled: true
+   ```
+
+1. In the secondary site configs:
+
+   ```yaml
+     geo:
+       registry:
+         replication:
+           enabled: true
+           primaryApiUrl: <URL to primary registry>
+   ```
+
+   The `primaryApiUrl` is used by the secondary site to do pulls against the primary site.
 
 ### Redis cache Secret
 
