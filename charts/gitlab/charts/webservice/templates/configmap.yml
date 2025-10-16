@@ -261,6 +261,25 @@ data:
     max_requests = {{ .workhorse.circuitBreaker.maxRequests | int }}
     consecutive_failures = {{ .workhorse.circuitBreaker.consecutiveFailures | int }}
     {{- end }}
+    {{- if .workhorse.healthcheckListener.enabled -}}
+    {{-   with .workhorse.healthcheckListener }}
+    # Health check listener configuration
+    # Enables a dedicated health check endpoint for readiness probes
+    [health_check_listener]
+      network = "tcp"
+      addr = ":{{ .port | int }}"
+      # `readiness_probe_url` is automatic as authBackend + /-/readiness
+      {{- if .pumaControl }}
+      puma_control_url = "http://localhost:{% env.Getenv "PUMA_CONTROL_PORT" "9293" %}"
+      {{- end }}
+      check_interval = {{ .checkInterval | quote }}
+      timeout = {{ .timeout | quote }}
+      graceful_shutdown_delay = {{ .gracefulShutdownDelay | quote }}
+      max_consecutive_failures = {{ .maxConsecutiveFailures | int }}
+      min_successful_probes = {{ .minSuccessfulProbes | int }}
+      rails_skip_interval = {{ .railsSkipInterval | quote }}
+    {{-   end }}
+    {{- end }}
   configure: |
       set -e
       mkdir -p /init-secrets-workhorse/gitlab-workhorse

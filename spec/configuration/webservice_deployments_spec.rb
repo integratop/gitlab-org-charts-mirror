@@ -924,4 +924,29 @@ describe 'Webservice Deployments configuration' do
       end
     end
   end
+
+  context 'when workhorse health check is enabled' do
+    let(:deployments_values) do
+      YAML.safe_load(%(
+        gitlab:
+          webservice:
+            workhorse:
+              healthcheckListener:
+                enabled: true
+      )).deep_merge(default_values)
+    end
+
+    it 'readiness probe is disabled on Webservice, and HTTP on Workhorse' do
+      t = HelmTemplate.new(deployments_values)
+      expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+      # Read ConfigMaps from the rendered template
+      workhorse = t.find_container(item_key('Deployment', 'default'), 'gitlab-workhorse')
+      webservice = t.find_container(item_key('Deployment', 'default'), 'webservice')
+
+      expect(webservice).not_to have_key('readinessProbe')
+      expect(workhorse['readinessProbe']).to have_key('httpGet')
+      expect(workhorse['readinessProbe']).not_to have_key('exec')
+    end
+  end
 end
