@@ -245,6 +245,8 @@ spec:
               value: "{{ .puma.disableWorkerKiller }}"
             - name: BIND_IP6
               value: {{ eq .puma.bindIp6 true | quote }}
+            - name: PUMA_CONTROL_PORT
+              value: "{{ default 9293 .puma.controlPort | int }}"
             {{- end }}
             - name: SHUTDOWN_BLACKOUT_SECONDS
               value: "{{ .shutdown.blackoutSeconds }}"
@@ -328,6 +330,7 @@ spec:
             timeoutSeconds: {{ .deployment.livenessProbe.timeoutSeconds }}
             successThreshold: {{ .deployment.livenessProbe.successThreshold }}
             failureThreshold: {{ .deployment.livenessProbe.failureThreshold }}
+          {{- if not .workhorse.healthcheckListener.enabled }}
           readinessProbe:
             httpGet:
               path: {{ $.Values.global.appConfig.relativeUrlRoot }}/-/readiness
@@ -342,6 +345,7 @@ spec:
             timeoutSeconds: {{ .deployment.readinessProbe.timeoutSeconds }}
             successThreshold: {{ .deployment.readinessProbe.successThreshold }}
             failureThreshold: {{ .deployment.readinessProbe.failureThreshold }}
+          {{- end }}
           lifecycle:
             preStop:
               exec:
@@ -385,6 +389,10 @@ spec:
             {{- end }}
             - name: SHUTDOWN_BLACKOUT_SECONDS
               value: "{{ .shutdown.blackoutSeconds }}"
+            {{- if eq $.Values.webServer "puma" }}
+            - name: PUMA_CONTROL_PORT
+              value: "{{ default 9293 .puma.controlPort | int }}"
+            {{- end }}
             {{- include "gitlab.tracing.env" $ | nindent 12 }}
             {{- include "webservice.extraEnv" (dict "global" $.Values.global "local" .) | nindent 12 }}
             {{- include "gitlab.extraEnvFrom" (dict "root" $ "local" .) | nindent 12 }}
@@ -424,9 +432,15 @@ spec:
             successThreshold: {{ .workhorse.livenessProbe.successThreshold }}
             failureThreshold: {{ .workhorse.livenessProbe.failureThreshold }}
           readinessProbe:
+            {{ if .workhorse.healthcheckListener.enabled }}
+            httpGet:
+              path: /readiness
+              port: {{ default 8182 .workhorse.healthcheckListener.port | int }}
+            {{- else }}
             exec:
               command:
               - /scripts/healthcheck
+            {{- end }}
             initialDelaySeconds: {{ .workhorse.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .workhorse.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .workhorse.readinessProbe.timeoutSeconds }}

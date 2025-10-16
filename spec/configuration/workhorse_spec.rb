@@ -706,4 +706,64 @@ CFG
       end
     end
   end
+
+  context 'with health check listener' do
+    let(:custom_values) do
+      HelmTemplate.with_defaults(%(
+        gitlab:
+          webservice:
+            workhorse:
+              healthcheckListener:
+                enabled: true
+     ))
+    end
+
+    let(:template) { HelmTemplate.new(custom_values) }
+
+    it 'renders a valid TOML configuration file with health check listener values' do
+      toml = render_toml(raw_toml)
+
+      health_check_listener = toml['health_check_listener']
+      expect(health_check_listener['network']).to eq('tcp')
+      expect(health_check_listener['puma_control_url']).to eq('http://localhost:9293')
+      expect(health_check_listener['check_interval']).to eq('10s')
+      expect(health_check_listener['timeout']).to eq('5s')
+      expect(health_check_listener['graceful_shutdown_delay']).to eq('10s')
+      expect(health_check_listener['max_consecutive_failures']).to eq(1)
+      expect(health_check_listener['min_successful_probes']).to eq(1)
+      expect(health_check_listener['rails_skip_interval']).to eq('20s')
+    end
+
+    context 'with custom settings' do
+      let(:custom_values) do
+        HelmTemplate.with_defaults(%(
+          gitlab:
+            webservice:
+              workhorse:
+                healthcheckListener:
+                  enabled: true
+                  checkInterval: 30s
+                  timeout: 10s
+                  gracefulShutdownDelay: 0s
+                  maxConsecutiveFailures: 2
+                  minSuccessfulProbes: 2
+                  railsSkipInterval: 30s
+        ))
+      end
+
+      it 'renders a valid TOML configuration file with custom setings' do
+        toml = render_toml(raw_toml)
+
+        health_check_listener = toml['health_check_listener']
+        expect(health_check_listener['network']).to eq('tcp')
+        expect(health_check_listener['puma_control_url']).to eq('http://localhost:9293')
+        expect(health_check_listener['check_interval']).to eq('30s')
+        expect(health_check_listener['timeout']).to eq('10s')
+        expect(health_check_listener['graceful_shutdown_delay']).to eq('0s')
+        expect(health_check_listener['max_consecutive_failures']).to eq(2)
+        expect(health_check_listener['min_successful_probes']).to eq(2)
+        expect(health_check_listener['rails_skip_interval']).to eq('30s')
+      end
+    end
+  end
 end
