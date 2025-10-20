@@ -726,3 +726,35 @@ Error: UPGRADE FAILED: cannot patch "gitlab-nginx-ingress-controller" with kind 
 To fix it, upgrade your Helm client to `v3.18.1` or later. Alternatively, you can downgrade it to `v3.17.x`.
 
 This is due to a [Helm issue 30878](https://github.com/helm/helm/issues/30878).
+
+## Migrations failing: `TypeError: Invalid type for configuration.`
+
+By default, the GitLab chart sets up two database connections:
+
+- To the main Rails application database.
+- To the CI database.
+
+When both connections target the same database, only one database should have database tasks enabled
+(`databaseTasks: true`) to prevent configuration conflicts.
+
+If both connections have database tasks enabled, migrations fail with this error:
+
+```plaintext
+Running db:schema:load:main rake task
+rake aborted!
+TypeError: Invalid type for configuration. Expected Symbol, String, or Hash. Got nil
+```
+
+To resolve this issue, either:
+
+- Change your values to omit `global.psql.databaseTasks`.
+- Configure `databaseTasks` explicitly and choose a database for database tasks. For example:
+
+  ```yaml
+  global:
+    psql:
+      main:
+        databaseTasks: true
+      ci:
+        databaseTasks: false
+  ```
