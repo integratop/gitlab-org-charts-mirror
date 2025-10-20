@@ -48,8 +48,8 @@ The Container Registry database metrics feature has been enabled. This is an exp
 {{- if $usesThreshold }}
 {{ $NOTICE }}
 registry:
-    The configuration of `global.registry.notifications.endpoints[].threshold` has been deprecated and is planned for removal in GitLab 18.0.
-    Please use `global.registry.notifications.endpoints[].maxretries` instead https://gitlab.com/gitlab-org/container-registry/-/issues/1243.
+    The configuration of `global.registry.notifications.endpoints[].threshold` has been deprecated and is planned for removal in GitLab 23.0.
+    Please use `global.registry.notifications.endpoints[].maxretries` instead https://docs.gitlab.com/administration/packages/container_registry/#configure-container-registry-notifications.
 {{- end -}}
 {{- /* END gitlab.deprecate.registry.notifications.endpoints.threshold */}}
 
