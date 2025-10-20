@@ -113,15 +113,15 @@ To use the Zoekt chart with a Linux package instance:
    Install or upgrade the GitLab Helm chart if you make further changes to `values.yaml`.
 
 1. [Enable exact code search](https://docs.gitlab.com/integration/zoekt/#enable-exact-code-search).
-1. Set up indexing:
+1. To index a top-level group, do one of the following:
+   - [Index all root namespaces automatically](https://docs.gitlab.com/integration/zoekt/#index-root-namespaces-automatically).
+   - Index a specific top-level group manually:
 
-   ```ruby
-   node = ::Search::Zoekt::Node.online.last
-   namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
-   enabled_namespace = Search::Zoekt::EnabledNamespace.find_or_create_by(namespace: namespace)
-   replica = enabled_namespace.replicas.find_or_create_by(namespace_id: enabled_namespace.root_namespace_id)
-   node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id)
-   ```
+     ```ruby
+     node = ::Search::Zoekt::Node.online.last
+     namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
+     Search::Zoekt::EnabledNamespace.find_or_create_by(namespace: namespace)
+     ```
 
 ## Zoekt chart with the GitLab Helm chart
 
@@ -161,35 +161,35 @@ To configure Zoekt for a top-level group in GitLab:
    ```
 
 1. [Enable exact code search](https://docs.gitlab.com/integration/zoekt/#enable-exact-code-search).
-1. Set up indexing:
+1. To index a top-level group, do one of the following:
+   - [Index all root namespaces automatically](https://docs.gitlab.com/integration/zoekt/#index-root-namespaces-automatically).
+   - Index a specific top-level group manually:
 
-   {{< tabs >}}
+     {{< tabs >}}
 
-   {{< tab title="GitLab 17.7 and later" >}}
+     {{< tab title="GitLab 17.7 and later" >}}
 
-   ```shell
-   node = ::Search::Zoekt::Node.online.last
-   namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
-   enabled_namespace = Search::Zoekt::EnabledNamespace.find_or_create_by(namespace: namespace)
-   replica = enabled_namespace.replicas.find_or_create_by(namespace_id: enabled_namespace.root_namespace_id)
-   node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id)
-   ```
+     ```shell
+     node = ::Search::Zoekt::Node.online.last
+     namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
+     Search::Zoekt::EnabledNamespace.find_or_create_by(namespace: namespace)
+     ```
 
-   {{< /tab >}}
+     {{< /tab >}}
 
-   {{< tab title="GitLab 17.6 and earlier" >}}
+     {{< tab title="GitLab 17.6 and earlier" >}}
 
-   ```shell
-   node = ::Search::Zoekt::Node.online.last
-   namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
-   enabled_namespace = Search::Zoekt::EnabledNamespace.find_or_create_by(namespace: namespace)
-   replica = enabled_namespace.replicas.find_or_create_by(namespace_id: enabled_namespace.root_namespace_id)
-   replica.ready!
-   node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id, state: :ready)
-   ```
+     ```shell
+     node = ::Search::Zoekt::Node.online.last
+     namespace = Namespace.find_by_full_path('<top-level-group-to-index>')
+     enabled_namespace = Search::Zoekt::EnabledNamespace.find_or_create_by(namespace: namespace)
+     replica = enabled_namespace.replicas.find_or_create_by(namespace_id: enabled_namespace.root_namespace_id)
+     replica.ready!
+     node.indices.create!(zoekt_enabled_namespace_id: enabled_namespace.id, namespace_id: namespace.id, zoekt_replica_id: replica.id, state: :ready)
+     ```
 
-      {{< /tab >}}
+     {{< /tab >}}
 
-   {{< /tabs >}}
+     {{< /tabs >}}
 
 Zoekt can now index projects in that group after any project is updated or created. For the initial indexing, wait at least a few minutes for Zoekt to start indexing the namespace.
