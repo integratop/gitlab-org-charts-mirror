@@ -415,6 +415,7 @@ spec:
           startupProbe:
             {{- toYaml .workhorse.startupProbe | nindent 12 }}
           {{- end }}
+          {{ if not .workhorse.healthcheckListener.enabled }}
           lifecycle:
             preStop:
               exec:
@@ -422,6 +423,7 @@ spec:
                 - /bin/bash
                 - -c
                 - sleep $SHUTDOWN_BLACKOUT_SECONDS
+          {{- end }}
           livenessProbe:
             exec:
               command:
