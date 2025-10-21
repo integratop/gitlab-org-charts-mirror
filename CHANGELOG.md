@@ -26,6 +26,12 @@ entry.
 - [Update Helm release gitlab-zoekt to v3.5.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/af559e0f062088aacd17ea0d5885aa183d60571c) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4550))
 - [Update Helm release gitlab-runner to v0.81.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/62c7c4f8602822ef0c30c305e3aa6d15d6c5d926) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4528))
 
+## 9.4.3 (2025-10-21)
+
+### Changed (1 change)
+
+- [Ingress NGINX: update controller to v1.11.8](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/4cb96cf0a84be4513a0a9a2ff562eeb55b83e3ea)
+
 ## 9.4.2 (2025-10-08)
 
 No changes.
