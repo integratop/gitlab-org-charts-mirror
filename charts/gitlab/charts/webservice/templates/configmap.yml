@@ -274,7 +274,7 @@ data:
       {{- end }}
       check_interval = {{ .checkInterval | quote }}
       timeout = {{ .timeout | quote }}
-      graceful_shutdown_delay = {{ .gracefulShutdownDelay | quote }}
+      graceful_shutdown_delay = "{% env.Getenv "SHUTDOWN_BLACKOUT_SECONDS" "10" %}s"
       max_consecutive_failures = {{ .maxConsecutiveFailures | int }}
       min_successful_probes = {{ .minSuccessfulProbes | int }}
       rails_skip_interval = {{ .railsSkipInterval | quote }}

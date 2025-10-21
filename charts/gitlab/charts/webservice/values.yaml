@@ -262,7 +262,6 @@ workhorse:
     pumaControl: true
     checkInterval: 10s
     timeout: 5s
-    gracefulShutdownDelay: 10s
     maxConsecutiveFailures: 1
     minSuccessfulProbes: 1
     railsSkipInterval: 20s

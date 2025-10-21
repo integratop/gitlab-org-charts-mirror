@@ -16,7 +16,7 @@ describe 'Workhorse configuration' do
   let(:global_redis_sentinel_password) { SecureRandom.hex }
   let(:workhorse_redis_password) { SecureRandom.hex }
 
-  def render_toml(raw_template, object_store_config = nil)
+  def render_toml(raw_template, object_store_config: nil, env: {})
     Dir.mktmpdir do |tmpdir|
       raw_template.gsub!(%r{/etc/gitlab}, tmpdir)
       input_file = File.join(tmpdir, 'input.tpl')
@@ -31,7 +31,7 @@ describe 'Workhorse configuration' do
       File.write(File.join(tmpdir, "objectstorage", "object_store"), object_store_config) if object_store_config
 
       cmd = "gomplate --left-delim '{%' --right-delim '%}' --file #{input_file}"
-      result = Open3.capture3(cmd)
+      result = Open3.capture3(env, cmd)
       stdout, stderr, exit_code = result
 
       raise "Unable to call gomplate: #{stderr}" if exit_code != 0
@@ -110,7 +110,7 @@ describe 'Workhorse configuration' do
       let(:s3_config) { File.read('examples/objectstorage/rails.s3.yaml') }
 
       it 'renders a TOML configuration file' do
-        toml = render_toml(raw_toml, s3_config)
+        toml = render_toml(raw_toml, object_store_config: s3_config)
 
         expect(toml.keys).to match_array(%w[shutdown_timeout listeners object_storage image_resizer redis])
 
@@ -126,7 +126,7 @@ describe 'Workhorse configuration' do
       let(:azure_config) { File.read('examples/objectstorage/rails.azurerm.yaml') }
 
       it 'renders a TOML configuration file' do
-        toml = render_toml(raw_toml, azure_config)
+        toml = render_toml(raw_toml, object_store_config: azure_config)
 
         expect(toml.keys).to match_array(%w[shutdown_timeout listeners object_storage image_resizer redis])
 
@@ -146,7 +146,7 @@ CFG
         end
 
         it 'renders a TOML configuration file' do
-          toml = render_toml(raw_toml, azure_config)
+          toml = render_toml(raw_toml, object_store_config: azure_config)
 
           expect(toml.keys).to match_array(%w[shutdown_timeout listeners object_storage image_resizer redis])
 
@@ -163,7 +163,7 @@ CFG
       let(:s3_config) { File.read('examples/objectstorage/rails.gcs.yaml') }
 
       it 'renders a TOML configuration file' do
-        toml = render_toml(raw_toml, s3_config)
+        toml = render_toml(raw_toml, object_store_config: s3_config)
         yaml = YAML.safe_load(s3_config)
 
         expect(toml.keys).to match_array(%w[shutdown_timeout listeners object_storage image_resizer redis])
@@ -744,25 +744,36 @@ CFG
                   enabled: true
                   checkInterval: 30s
                   timeout: 10s
-                  gracefulShutdownDelay: 0s
                   maxConsecutiveFailures: 2
                   minSuccessfulProbes: 2
                   railsSkipInterval: 30s
         ))
       end
+      let(:env) { {} }
+      let(:toml) { render_toml(raw_toml, env: env) }
 
       it 'renders a valid TOML configuration file with custom setings' do
-        toml = render_toml(raw_toml)
-
         health_check_listener = toml['health_check_listener']
         expect(health_check_listener['network']).to eq('tcp')
         expect(health_check_listener['puma_control_url']).to eq('http://localhost:9293')
         expect(health_check_listener['check_interval']).to eq('30s')
         expect(health_check_listener['timeout']).to eq('10s')
-        expect(health_check_listener['graceful_shutdown_delay']).to eq('0s')
+        expect(health_check_listener['graceful_shutdown_delay']).to eq('10s')
         expect(health_check_listener['max_consecutive_failures']).to eq(2)
         expect(health_check_listener['min_successful_probes']).to eq(2)
         expect(health_check_listener['rails_skip_interval']).to eq('30s')
+      end
+
+      context 'with SHUTDOWN_BLACKOUT_SECONDS set in the environment' do
+        let(:env) do
+          { 'SHUTDOWN_BLACKOUT_SECONDS' => '240' }
+        end
+
+        it 'renders a valid TOML configuration file with custom setings' do
+          health_check_listener = toml['health_check_listener']
+
+          expect(health_check_listener['graceful_shutdown_delay']).to eq('240s')
+        end
       end
     end
   end
