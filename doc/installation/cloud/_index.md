@@ -23,22 +23,19 @@ you can reduce the defaults to fit into a smaller cluster.
 
 The GitLab Helm chart supports the following Kubernetes releases:
 
-| Kubernetes release | Status      | Minimum GitLab version | Architectures | End of life |
-|--------------------|-------------|------------------------|---------------|-------------|
-| 1.33               | Supported   | 18.1                   | x86-64        | 2026-06-28  |
-| 1.32               | Supported   | 17.11                  | x86-64        | 2026-02-28  |
-| 1.31               | Supported   | 17.6                   | x86-64        | 2025-10-28  |
-| 1.30               | Deprecated  | 17.6                   | x86-64        | 2025-06-28  |
-| 1.29               | Unsupported | 17.0                   | x86-64        | 2025-02-28  |
-| 1.28               | Unsupported | 17.0                   | x86-64        | 2024-10-28  |
-| 1.27               | Unsupported | 16.6                   | x86-64        | 2024-06-28  |
-| 1.26               | Unsupported | 16.5                   | x86-64        | 2024-02-28  |
-| 1.25               | Unsupported | 16.5                   | x86-64        | 2023-10-28  |
-| 1.24               | Unsupported | 16.5                   | x86-64        | 2023-07-28  |
-| 1.23               | Unsupported | 16.5                   | x86-64        | 2023-02-28  |
-| 1.22               | Unsupported | 16.5                   | x86-64        | 2022-10-28  |
+| Kubernetes release | Status      | Minimum GitLab version | Architectures |
+|--------------------|-------------|------------------------|---------------|
+| 1.34               | Supported   | 18.6                   | x86-64        |
+| 1.33               | Supported   | 18.1                   | x86-64        |
+| 1.32               | Supported   | 17.11                  | x86-64        |
+| 1.31               | Deprecated  | 17.6                   | x86-64        |
+| 1.30               | Unsupported | 17.6                   | x86-64        |
 
-The GitLab Helm Chart aims to support new minor Kubernetes releases three months after their initial release.
+The GitLab Helm Chart aims to support three Kubernetes minor versions at a time and plans
+to support new Kubernetes releases three months after their initial release.
+
+For more details [refer to our Kubernetes support policy](https://handbook.gitlab.com/handbook/engineering/infrastructure/core-platform/systems/distribution/k8s-release-support-policy/).
+
 We welcome reports made to our [issue tracker](https://gitlab.com/gitlab-org/charts/gitlab/-/issues) about compatibility issues in releases newer than those listed above.
 
 Some GitLab features might not work on deprecated releases or releases older than the releases listed above.
