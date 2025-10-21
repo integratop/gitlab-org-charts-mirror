@@ -60,7 +60,7 @@ review_specs_gke133:
     RSPEC_TAGS: type:feature
   environment:
     name: gke133_review/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA
-    url: https://gitlab-$CI_ENVIRONENMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    url: https://gitlab-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
     on_stop: stop_review_gke133
     action: access
   rules:
