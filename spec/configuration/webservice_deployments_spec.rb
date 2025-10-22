@@ -242,6 +242,14 @@ describe 'Webservice Deployments configuration' do
       expect(items.dig(item_key('ConfigMap', 'tests'))).to be_truthy
     end
 
+    it 'sets preStop hooks' do
+      webservice = chart_deployments.find_container(item_key('Deployment', 'default'), 'webservice')
+      expect(webservice.dig('lifecycle', 'preStop', 'exec', 'command')).to eq(["/bin/bash", "-c", "pkill -SIGINT -o ruby"])
+
+      workhorse = chart_deployments.find_container(item_key('Deployment', 'default'), 'gitlab-workhorse')
+      expect(workhorse.dig('lifecycle', 'preStop', 'exec', 'command')).to eq(["/bin/bash", "-c", "sleep $SHUTDOWN_BLACKOUT_SECONDS"])
+    end
+
     context 'extraEnv configuration for deployments' do
       let(:extra_env_values) do
         YAML.safe_load(%(
@@ -936,17 +944,18 @@ describe 'Webservice Deployments configuration' do
       )).deep_merge(default_values)
     end
 
-    it 'readiness probe is disabled on Webservice, and HTTP on Workhorse' do
+    it 'preStop hooks and readiness probes configured properly for workhorse and gitlab-workhorse containers' do
       t = HelmTemplate.new(deployments_values)
       expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
 
       # Read ConfigMaps from the rendered template
       workhorse = t.find_container(item_key('Deployment', 'default'), 'gitlab-workhorse')
-      webservice = t.find_container(item_key('Deployment', 'default'), 'webservice')
-
-      expect(webservice).not_to have_key('readinessProbe')
+      expect(workhorse).not_to have_key('lifecycle')
       expect(workhorse['readinessProbe']).to have_key('httpGet')
       expect(workhorse['readinessProbe']).not_to have_key('exec')
+
+      webservice = t.find_container(item_key('Deployment', 'default'), 'webservice')
+      expect(webservice).not_to have_key('readinessProbe')
     end
   end
 end
