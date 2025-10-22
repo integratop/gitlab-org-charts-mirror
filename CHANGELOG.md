@@ -2,6 +2,12 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.5.1 (2025-10-21)
+
+### Changed (1 change)
+
+- [Update dependency container-registry to v4.28.0-gitlab](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/c8629be2d2261988949cb0a526928a30b3f92113)
+
 ## 9.5.0 (2025-10-15)
 
 ### Added (1 change)
@@ -19,6 +25,12 @@ entry.
 - [Update Helm release gitlab-zoekt to v3.6.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/829e1cfb33fdad58edac221fd7b59a3125e8c700) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4561))
 - [Update Helm release gitlab-zoekt to v3.5.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/af559e0f062088aacd17ea0d5885aa183d60571c) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4550))
 - [Update Helm release gitlab-runner to v0.81.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/62c7c4f8602822ef0c30c305e3aa6d15d6c5d926) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4528))
+
+## 9.4.3 (2025-10-21)
+
+### Changed (1 change)
+
+- [Ingress NGINX: update controller to v1.11.8](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/4cb96cf0a84be4513a0a9a2ff562eeb55b83e3ea)
 
 ## 9.4.2 (2025-10-08)
 
@@ -56,6 +68,12 @@ No changes.
 - [Update Helm release gitlab-runner to v0.80.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/14a920b84e5186fa06e4a25e190a6c60e35c3d8a) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4483))
 - [Update dependency gitlab-exporter to v16.1.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/d420c9e6489842d744165858d39d0b3093667770) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4459))
 - [Update dependency container-registry to v4.26.1-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bb95fd2687befab1b9daf0b21d55e3cc939f0973) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4469))
+
+## 9.3.5 (2025-10-21)
+
+### Changed (1 change)
+
+- [Ingress NGINX: update controller to v1.11.8](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/1799cbae56d475dd67c3cfa3ea0583deab17de88)
 
 ## 9.3.4 (2025-10-08)
 
