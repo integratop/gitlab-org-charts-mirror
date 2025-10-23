@@ -34,9 +34,9 @@ Before upgrading a GitLab Helm chart instance:
    [GitLab documentation archives](https://docs.gitlab.com/archives/) to access older versions of the documentation.
 1. Perform a [backup](../backup-restore/_index.md).
 
-## Upgrade GitLab
+## Upgrade a GitLab Helm chart instance
 
-To upgrade GitLab:
+To upgrade a GitLab Helm chart instance:
 
 1. Consider [turning on maintenance mode](https://docs.gitlab.com/administration/maintenance_mode/) during the upgrade
    to restrict users from write operations to help not disturb any workflows.
