@@ -90,16 +90,17 @@ gitaly['configuration'] = {
     auth: {
         token: 'AUTH_TOKEN',
     },
+    storage: [
+      {
+         name: 'default',
+         path: '/var/opt/gitlab/git-data',
+      },
+      {
+         name: 'storage1',
+         path: '/mnt/gitlab/git-data',
+      },
+   ],
 }
-
-git_data_dirs({
- 'default' => {
-   'path' => '/var/opt/gitlab/git-data'
- },
- 'storage1' => {
-   'path' => '/mnt/gitlab/git-data'
- },
-})
 
 # To use TLS for Gitaly you need to add
 gitaly['tls_listen_addr'] = "0.0.0.0:8076"
