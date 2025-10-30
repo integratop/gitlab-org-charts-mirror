@@ -518,9 +518,9 @@ webservice:
     default:
       ingress:
         path: /
-   api:
-     ingress:
-       path: /api
+    api:
+      ingress:
+        path: /api
 ```
 
 The `path` property is directly populated into the Ingress's `path` property, and allows one to control URI paths which are directed to each service. In the example above,
@@ -534,12 +534,12 @@ webservice:
     default:
       ingress:
         path: /
-   api:
-     ingress:
-       path: /api
-   internal-api:
-     ingress:
-       path:
+    api:
+      ingress:
+        path: /api
+    internal-api:
+      ingress:
+        path:
 ```
 
 ## Ingress settings
