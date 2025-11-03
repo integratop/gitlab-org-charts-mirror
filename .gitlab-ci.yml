@@ -349,11 +349,11 @@ trigger_review_secondary:
 trigger-gke134a:
   extends: .trigger_review_job
   needs:
-    - trigger_review_current
+    - trigger_review_secondary
   variables:
     LIMIT_TO: gke134a
   rules:
-    - !reference [.trigger_review_current, rules]
+    - !reference [.trigger_review_secondary, rules]
 
 trigger-gke132:
   extends: .trigger_review_job
@@ -362,7 +362,7 @@ trigger-gke132:
   variables:
     LIMIT_TO: gke132
   rules:
-    - !reference [.trigger_review_current, rules]
+    - !reference [.trigger_review_secondary, rules]
 
 trigger-gkevc134:
   extends: .trigger_review_job
@@ -376,7 +376,7 @@ trigger-gkevc134:
 trigger-gke133:
   extends: .trigger_review_job
   needs:
-    - trigger_review_current
+    - trigger_review_secondary
   variables:
     LIMIT_TO: gke133
   rules:
@@ -385,7 +385,7 @@ trigger-gke133:
 trigger-gke134:
   extends: .trigger_review_job
   needs:
-    - trigger_review_secondary
+    - trigger_review_current
   variables:
     LIMIT_TO: gke134
   rules:
@@ -394,11 +394,11 @@ trigger-gke134:
 trigger-eks133:
   extends: .trigger_review_job
   needs:
-    - trigger_review_secondary
+    - trigger_review_current
   variables:
     LIMIT_TO: eks133
   rules:
-    - !reference [.trigger_review_secondary, rules]
+    - !reference [.trigger_review_current, rules]
 # Jobs using auto_stop_in that exit with a failure will not execute the on_stop
 # action. We get frequent failures during review_* jobs. Their accompanying
 # partially deployed environments then hang around forever which may eventually
