@@ -109,7 +109,7 @@ GKE platform only.
 | ---           | ---       | ---       | ---             | ---              |
 | 1.34          | current   | NA        | secondary       | secondary        |
 | 1.34 ARM      | secondary | NA        | NA              | NA               |
-| 1.33          | secondary | secondary | NA              | NA               |
+| 1.33          | secondary | current   | NA              | NA               |
 | 1.32          | secondary | NA        | NA              | NA               |
 
 This table is in development and subject to change.
