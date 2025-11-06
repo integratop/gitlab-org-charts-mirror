@@ -146,6 +146,7 @@ to the `helm install` command using the `--set` flags:
 | `serviceAccount.enabled`                                 | `false`                                                      | Indicates whether or not to use a ServiceAccount |
 | `serviceAccount.name`                                    |                                                              | Name of the ServiceAccount. If not set, the full chart name is used |
 | `priorityClassName`                                      | `""`                                                         | Allow configuring pods `priorityClassName`, this is used to control pod priority in case of eviction |
+| `antiAffinity`                                           | `""`                                                         | Allow you to overwrite antiAffinity values from chart global values, default is read from global, could be set to `soft` or `hard` |
 
 ## Chart configuration examples
 

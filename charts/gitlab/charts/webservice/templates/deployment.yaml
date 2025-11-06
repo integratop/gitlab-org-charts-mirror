@@ -1,6 +1,8 @@
 {{- if $.Values.enabled }}
 {{- $imageCfg := dict "global" $.Values.global.image "local" $.Values.image -}}
 {{- $initImageCfg := include "gitlab.configure.config" $.Values | fromYaml -}}
+{{- $affinityMode := coalesce $.Values.antiAffinity $.Values.global.antiAffinity -}}
+{{- $topologyKey := coalesce $.Values.affinity.podAntiAffinity.topologyKey $.Values.global.affinity.podAntiAffinity.topologyKey -}}
 {{- include "database.datamodel.prepare" $ -}}
 {{- include "webservice.datamodel.prepare" $ -}}
 {{/* BEGIN range deployments */}}
@@ -84,22 +86,22 @@ spec:
       {{- $priorityClassName := dict "Values" (dict "global" (dict "priorityClassName" $.Values.global.priorityClassName) "priorityClassName" (default $.Values.priorityClassName .priorityClassName)) -}}
       {{- include "gitlab.priorityClassName" $priorityClassName | nindent 6 }}
       {{- include "gitlab.podSecurityContext" $.Values.securityContext | nindent 6 }}
-      {{- if eq (default $.Values.global.antiAffinity $.Values.antiAffinity) "hard" }}
+      {{- if eq $affinityMode "hard" }}
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: {{ default $.Values.global.affinity.podAntiAffinity.topologyKey $.Values.affinity.podAntiAffinity.topologyKey | quote }}
+            - topologyKey: {{ $topologyKey | quote }}
               labelSelector:
                 matchLabels:
                   {{- include "gitlab.selectorLabels" $ | nindent 18 }}
                   {{- include "webservice.labels" . | nindent 18}}
-      {{- else if eq (default $.Values.global.antiAffinity $.Values.antiAffinity) "soft" }}
+      {{- else if eq $affinityMode "soft" }}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 1
             podAffinityTerm:
-              topologyKey: {{ default $.Values.global.affinity.podAntiAffinity.topologyKey $.Values.affinity.podAntiAffinity.topologyKey | quote }}
+              topologyKey: {{ $topologyKey | quote }}
               labelSelector:
                 matchLabels:
                   {{- include "gitlab.selectorLabels" $ | nindent 18 }}

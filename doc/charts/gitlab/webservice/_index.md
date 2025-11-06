@@ -206,6 +206,7 @@ to the `helm install` command using the `--set` flags.
 | `workhorse.circuitBreaker.consecutiveFailures`                | `5`.                                                            | The number of consecutive failed requests to open the circuit breaker when closed |
 | `webServer`                                                   | `puma`                                                          | Selects web server (Webservice/Puma) that would be used for request handling |
 | `priorityClassName`                                           | `""`                                                            | Allow configuring pods `priorityClassName`, this is used to control pod priority in case of eviction |
+| `antiAffinity`                                           | `""`                                                         | Allow you to overwrite antiAffinity values from chart global values, default is read from global, could be set to `soft` or `hard` |
 
 ## Chart configuration examples
 
