@@ -131,7 +131,7 @@ extraIngress:
   proxyConnectTimeout: 15
   proxyReadTimeout: 600
   proxyBodySize: "512m"
-  # hostname: 
+  # hostname:
   tls: {}
     # secretName:
     # smartcardSecretName:
@@ -527,6 +527,8 @@ deployments: {}
   # default:
   #   ingress:
   #     path: /
+
+antiAffinity: "" # options: "hard", "soft"
 
 affinity:
   podAntiAffinity:

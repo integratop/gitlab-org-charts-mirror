@@ -157,6 +157,38 @@ describe 'local affinity configuration' do
     ))
   end
 
+  let(:values_with_sidekiq_anti_affinity_override) do
+    HelmTemplate.with_defaults(%(
+      global:
+        antiAffinity: "soft"
+        affinity:
+          podAntiAffinity:
+            topologyKey: "global.test/hostname"
+      gitlab:
+        sidekiq:
+          antiAffinity: "hard"
+          affinity:
+            podAntiAffinity:
+              topologyKey: "sidekiq.test/hostname"
+    ))
+  end
+
+  let(:values_with_webservice_anti_affinity_override) do
+    HelmTemplate.with_defaults(%(
+      global:
+        antiAffinity: "soft"
+        affinity:
+          podAntiAffinity:
+            topologyKey: "global.test/hostname"
+      gitlab:
+        webservice:
+          antiAffinity: "hard"
+          affinity:
+            podAntiAffinity:
+              topologyKey: "webservice.test/hostname"
+    ))
+  end
+
   context 'when setting a local antiAffinity override' do
     it 'applies to a single Deployment' do
       t = HelmTemplate.new(values_with_override)
@@ -196,6 +228,39 @@ describe 'local affinity configuration' do
           expect(t.dig(key, 'spec', 'template', 'spec', 'affinity', 'nodeAffinity', 'requiredDuringSchedulingIgnoredDuringExecution')['nodeSelectorTerms'][0]['matchExpressions'][0]['key']).to eq('test.com/zone')
         end
       end
+    end
+  end
+
+  context 'when overriding sidekiq antiAffinity locally' do
+    it 'enforces required antiAffinity with the queue label' do
+      t = HelmTemplate.new(values_with_sidekiq_anti_affinity_override)
+      expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+      key = 'Deployment/test-sidekiq-all-in-1-v2'
+      affinity = t.dig(key, 'spec', 'template', 'spec', 'affinity', 'podAntiAffinity')
+
+      expect(affinity).to be_present
+      expect(affinity['requiredDuringSchedulingIgnoredDuringExecution']).to be_present
+      rule = affinity['requiredDuringSchedulingIgnoredDuringExecution'].first
+      expect(rule['topologyKey']).to eq('sidekiq.test/hostname')
+      expect(rule.dig('labelSelector', 'matchLabels', 'queue-pod-name')).to eq('all-in-1')
+      expect(affinity['preferredDuringSchedulingIgnoredDuringExecution']).not_to be_present
+    end
+  end
+
+  context 'when overriding webservice antiAffinity locally' do
+    it 'enforces required antiAffinity with the custom topology key' do
+      t = HelmTemplate.new(values_with_webservice_anti_affinity_override)
+      expect(t.exit_code).to eq(0), "Unexpected error code #{t.exit_code} -- #{t.stderr}"
+
+      key = 'Deployment/test-webservice-default'
+      affinity = t.dig(key, 'spec', 'template', 'spec', 'affinity', 'podAntiAffinity')
+
+      expect(affinity).to be_present
+      expect(affinity['requiredDuringSchedulingIgnoredDuringExecution']).to be_present
+      rule = affinity['requiredDuringSchedulingIgnoredDuringExecution'].first
+      expect(rule['topologyKey']).to eq('webservice.test/hostname')
+      expect(affinity['preferredDuringSchedulingIgnoredDuringExecution']).not_to be_present
     end
   end
 end

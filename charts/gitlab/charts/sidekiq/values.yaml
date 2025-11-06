@@ -380,6 +380,8 @@ serviceAccount:
 #  https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
 priorityClassName: ""
 
+antiAffinity: "" # options: "hard", "soft"
+
 affinity:
   podAntiAffinity:
     topologyKey:
