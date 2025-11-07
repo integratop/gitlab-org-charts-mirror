@@ -264,7 +264,7 @@ workhorse:
     timeout: 5s
     maxConsecutiveFailures: 1
     minSuccessfulProbes: 1
-    railsSkipInterval: 20s
+    railsSkipInterval: 0s
   imageScaler:
     maxProcs: 2 # aim for max(2, requested_cpus / 2)
     maxFileSizeBytes: 250000

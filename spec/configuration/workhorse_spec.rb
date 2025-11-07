@@ -731,7 +731,7 @@ CFG
       expect(health_check_listener['graceful_shutdown_delay']).to eq('10s')
       expect(health_check_listener['max_consecutive_failures']).to eq(1)
       expect(health_check_listener['min_successful_probes']).to eq(1)
-      expect(health_check_listener['rails_skip_interval']).to eq('20s')
+      expect(health_check_listener['rails_skip_interval']).to eq('0s')
     end
 
     context 'with custom settings' do
