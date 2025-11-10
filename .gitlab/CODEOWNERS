@@ -40,7 +40,7 @@
 ^[Documentation Directories] @gl-docsteam
 /doc/
 
-[Container Registry] @gitlab-org/maintainers/helm-charts-gitlab @hswimelar @jdrpereira @jaime @suleimiahmed
+[Container Registry] @gitlab-org/maintainers/helm-charts-gitlab @hswimelar @jdrpereira @jaime @suleimiahmed @vespian_gl
 charts/registry/Chart.yaml
 charts/registry/values.yaml
 doc/charts/registry/index.md
