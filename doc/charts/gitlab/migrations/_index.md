@@ -42,56 +42,56 @@ The `migrations` chart is configured in two parts: external services, and chart 
 
 Table below contains all the possible charts configurations that can be supplied to `helm install` command using the `--set` flags
 
-| Parameter                   | Description                              | Default           |
-| --------------------------- | ---------------------------------------- | ----------------  |
-| `common.labels`             | Supplemental labels that are applied to all objects created by this chart.  | `{}` |
-| `image.repository`          | Migrations image repository              | `registry.gitlab.com/gitlab-org/build/cng/gitlab-toolbox-ee` |
-| `image.tag`                 | Migrations image tag                     |                   |
-| `image.pullPolicy`          | Migrations pull policy                   | `Always`          |
-| `image.pullSecrets`         | Secrets for the image repository         |                   |
-| `init.image.repository`     | initContainer image repository           | `registry.gitlab.com/gitlab-org/build/cng/gitlab-base` |
-| `init.image.tag`            | initContainer image tag                  | `master`          |
-| `init.image.containerSecurityContext` | init container securityContext overrides | `{}`    |
-| `init.containerSecurityContext.allowPrivilegeEscalation` | initContainer specific: Controls whether a process can gain more privileges than its parent process                                                                             | `false`                                                                               |
-| `init.containerSecurityContext.runAsNonRoot`             | initContainer specific: Controls whether the container runs with a non-root user                                                                                                | `true`                                                                                |
-| `init.containerSecurityContext.capabilities.drop`        | initContainer specific: Removes [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) for the container                                               | `[ "ALL" ]`                                                                           |
-| `enabled`                   | Migrations enable flag                   | `true`            |
-| `tolerations`               | Toleration labels for pod assignment     | `[]`              |
-| `affinity`                  | [Affinity rules](../_index.md#affinity) for pod assignment            | `{}`              |
-| `annotations`               | Annotations for the job spec             | `{}`              |
-| `podAnnotations`            | Annotations for the pob spec             | `{}`              |
-| `podLabels`                 | Supplemental Pod labels. Will not be used for selectors. |   |
-| `redis.serviceName`         | Redis service name                       | `redis`           |
-| `psql.serviceName`          | Name of Service providing PostgreSQL     | `release-postgresql` |
-| `psql.password.secret`      | psql secret                              | `gitlab-postgres` |
-| `psql.password.key`         | key to psql password in psql secret      | `psql-password`   |
-| `psql.port`                 | Set PostgreSQL server port. Takes precedence over `global.psql.port` |   |
-| `resources.requests.cpu`    | GitLab Migrations minimum CPU                  | `250m`                                   |
-| `resources.requests.memory` | GitLab Migrations minimum memory               | `200Mi`                                  |
-| `securityContext.fsGroup`   | Group ID under which the pod should be started | `1000`                                   |
-| `securityContext.runAsUser` | User ID under which the pod should be started  | `1000`                                   |
-| `securityContext.fsGroupChangePolicy` | Policy for changing ownership and permission of the volume (requires Kubernetes 1.23) |    |
-| `securityContext.seccompProfile.type`                    | Seccomp profile to use                                                                                                                                                          | `RuntimeDefault`                                                                      |
-| `containerSecurityContext.runAsUser`  | Override container [securityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#securitycontext-v1-core) under which the container is started | `1000` |
-| `containerSecurityContext.allowPrivilegeEscalation`      | Controls whether a process of the container can gain more privileges than its parent process                                                                                    | `false`                                                                               |
-| `containerSecurityContext.runAsNonRoot`                  | Controls whether the container runs with a non-root user                                                                                                                        | `true`                                                                                |
-| `containerSecurityContext.capabilities.drop`             | Removes [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) for the Gitaly container                                                                | `[ "ALL" ]`                                                                           |
-| `serviceAccount.annotations` | ServiceAccount annotations              | `{}`                                                    |
-| `serviceAccount.automountServiceAccountToken`| Indicates whether or not the default ServiceAccount access token should be mounted in pods | `false`    |
-| `serviceAccount.create`     | Indicates whether or not a ServiceAccount should be created                                      | `false`           |
-| `serviceAccount.enabled`    | Indicates whether or not to use a ServiceAccount                                | `false`           |
-| `serviceAccount.name`       | Name of the ServiceAccount. If not set, the full chart name is used  |                   |
-| `extraInitContainers`       | List of extra init containers to include |                   |
-| `extraContainers`           | Multiline literal style string containing a list of containers to include      |                   |
-| `extraVolumes`              | List of extra volumes to create          |                   |
-| `extraVolumeMounts`         | List of extra volumes mounts to do       |                   |
-| `extraEnv`                  | List of extra environment variables to expose |              |
-| `extraEnvFrom`              | List of extra environment variables from other data sources to expose|                              |
-| `priorityClassName`         | [Priority class](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/) assigned to pods. |                   |
+| Parameter                                                | Default                                                      | Description |
+|----------------------------------------------------------|--------------------------------------------------------------|-------------|
+| `common.labels`                                          | `{}`                                                         | Supplemental labels that are applied to all objects created by this chart. |
+| `image.repository`                                       | `registry.gitlab.com/gitlab-org/build/cng/gitlab-toolbox-ee` | Migrations image repository |
+| `image.tag`                                              |                                                              | Migrations image tag |
+| `image.pullPolicy`                                       | `Always`                                                     | Migrations pull policy |
+| `image.pullSecrets`                                      |                                                              | Secrets for the image repository |
+| `init.image.repository`                                  | `registry.gitlab.com/gitlab-org/build/cng/gitlab-base`       | `initContainer` image repository |
+| `init.image.tag`                                         | `master`                                                     | `initContainer` image tag |
+| `init.image.containerSecurityContext`                    | `{}`                                                         | `initContainer` `securityContext` overrides |
+| `init.containerSecurityContext.allowPrivilegeEscalation` | `false`                                                      | `initContainer` specific: Controls whether a process can gain more privileges than its parent process |
+| `init.containerSecurityContext.runAsNonRoot`             | `true`                                                       | `initContainer` specific: Controls whether the container runs with a non-root user |
+| `init.containerSecurityContext.capabilities.drop`        | `[ "ALL" ]`                                                  | `initContainer` specific: Removes [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) for the container |
+| `enabled`                                                | `true`                                                       | Migrations enable flag |
+| `tolerations`                                            | `[]`                                                         | Toleration labels for pod assignment |
+| `affinity`                                               | `{}`                                                         | [Affinity rules](../_index.md#affinity) for pod assignment |
+| `annotations`                                            | `{}`                                                         | Annotations for the job spec |
+| `podAnnotations`                                         | `{}`                                                         | Annotations for the pod spec |
+| `podLabels`                                              |                                                              | Supplemental Pod labels. Will not be used for selectors. |
+| `redis.serviceName`                                      | `redis`                                                      | Redis service name |
+| `psql.serviceName`                                       | `release-postgresql`                                         | Name of Service providing PostgreSQL |
+| `psql.password.secret`                                   | `gitlab-postgres`                                            | `psql` secret |
+| `psql.password.key`                                      | `psql-password`                                              | key to `psql` password in `psql` secret |
+| `psql.port`                                              |                                                              | Set PostgreSQL server port. Takes precedence over `global.psql.port` |
+| `resources.requests.cpu`                                 | `250m`                                                       | GitLab Migrations minimum CPU |
+| `resources.requests.memory`                              | `200Mi`                                                      | GitLab Migrations minimum memory |
+| `securityContext.fsGroup`                                | `1000`                                                       | Group ID under which the pod should be started |
+| `securityContext.runAsUser`                              | `1000`                                                       | User ID under which the pod should be started |
+| `securityContext.fsGroupChangePolicy`                    |                                                              | Policy for changing ownership and permission of the volume (requires Kubernetes 1.23) |
+| `securityContext.seccompProfile.type`                    | `RuntimeDefault`                                             | Seccomp profile to use |
+| `containerSecurityContext.runAsUser`                     | `1000`                                                       | Override container [`securityContext`](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#securitycontext-v1-core) under which the container is started |
+| `containerSecurityContext.allowPrivilegeEscalation`      | `false`                                                      | Controls whether a process of the container can gain more privileges than its parent process |
+| `containerSecurityContext.runAsNonRoot`                  | `true`                                                       | Controls whether the container runs with a non-root user |
+| `containerSecurityContext.capabilities.drop`             | `[ "ALL" ]`                                                  | Removes [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) for the Gitaly container |
+| `serviceAccount.annotations`                             | `{}`                                                         | ServiceAccount annotations |
+| `serviceAccount.automountServiceAccountToken`            | `false`                                                      | Indicates whether or not the default ServiceAccount access token should be mounted in pods |
+| `serviceAccount.create`                                  | `false`                                                      | Indicates whether or not a ServiceAccount should be created |
+| `serviceAccount.enabled`                                 | `false`                                                      | Indicates whether or not to use a ServiceAccount |
+| `serviceAccount.name`                                    |                                                              | Name of the ServiceAccount. If not set, the full chart name is used |
+| `extraInitContainers`                                    |                                                              | List of extra init containers to include |
+| `extraContainers`                                        |                                                              | Multiline literal style string containing a list of containers to include |
+| `extraVolumes`                                           |                                                              | List of extra volumes to create |
+| `extraVolumeMounts`                                      |                                                              | List of extra volumes mounts to do |
+| `extraEnv`                                               |                                                              | List of extra environment variables to expose |
+| `extraEnvFrom`                                           |                                                              | List of extra environment variables from other data sources to expose |
+| `priorityClassName`                                      |                                                              | [Priority class](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/) assigned to pods. |
 
 ## Chart configuration examples
 
-### extraEnv
+### `extraEnv`
 
 `extraEnv` allows you to expose additional environment variables in all containers in the pods.
 
@@ -111,7 +111,7 @@ SOME_KEY=some_value
 SOME_OTHER_KEY=some_other_value
 ```
 
-### extraEnvFrom
+### `extraEnvFrom`
 
 `extraEnvFrom` allows you to expose additional environment variables from other data sources in all containers in the pods.
 
@@ -138,7 +138,7 @@ extraEnvFrom:
       # optional: boolean
 ```
 
-### image.pullSecrets
+### `image.pullSecrets`
 
 `pullSecrets` allow you to authenticate to a private registry to pull images for a pod.
 
@@ -156,7 +156,7 @@ image:
   - name: my-secondary-secret-name
 ```
 
-### serviceAccount
+### `serviceAccount`
 
 This section controls if a ServiceAccount should be created and if the default access token should be mounted in pods.
 
@@ -168,7 +168,7 @@ This section controls if a ServiceAccount should be created and if the default a
 | `enabled`                      | Boolean | `false` | Indicates whether or not to use a ServiceAccount. |
 | `name`                         | String  |         | Name of the ServiceAccount. If not set, the full chart name is used. |
 
-### affinity
+### `affinity`
 
 For more information, see [`affinity`](../_index.md#affinity).
 
@@ -195,26 +195,26 @@ redis:
     key: redis-password
 ```
 
-#### host
+#### `host`
 
 The hostname of the Redis server with the database to use. This can be omitted in lieu of `serviceName`. If using Redis Sentinels, the `host` attribute needs to be set to the cluster name as specified in the `sentinel.conf`.
 
-#### serviceName
+#### `serviceName`
 
-The name of the `service` which is operating the Redis database. If this is present, and `host` is not, the chart will template the hostname of the service (and current `.Release.Name`) in place of the `host` value. This is convenient when using Redis as a part of the overall GitLab chart. This will default to `redis`
+The name of the `service` which is operating the Redis database. If this is present, and `host` is not, the chart will template the hostname of the service (and current `.Release.Name`) in place of the `host` value. This is convenient when using Redis as a part of the overall GitLab chart. This will default to `redis`.
 
-#### port
+#### `port`
 
 The port on which to connect to the Redis server. Defaults to `6379`.
 
-#### password
+#### `password`
 
 The `password` attribute for Redis has two sub keys:
 
 - `secret` defines the name of the Kubernetes `Secret` to pull from
 - `key` defines the name of the key in the above secret that contains the password.
 
-#### sentinels
+#### `sentinels`
 
 The `sentinels` attribute allows for a connection to a Redis HA cluster.
 The sub keys describe each Sentinel connection.
@@ -222,11 +222,15 @@ The sub keys describe each Sentinel connection.
 - `host` defines the hostname for the Sentinel service
 - `port` defines the port number to reach the Sentinel service, defaults to `26379`
 
-_Note_: The current Redis Sentinel support only supports Sentinels that have
+{{< alert type="note" >}}
+
+The current Redis Sentinel support only supports Sentinels that have
 been deployed separately from the GitLab chart. As a result, the Redis
 deployment through the GitLab chart should be disabled with `redis.install=false`.
 The Secret containing the Redis password will need to be manually created
 before deploying the GitLab chart.
+
+{{< /alert >}}
 
 ### PostgreSQL
 
@@ -243,31 +247,31 @@ psql:
     key: psql-password
 ```
 
-#### host
+#### `host`
 
 The hostname of the PostgreSQL server with the database to use. This can be omitted if `postgresql.install=true` (default non-production).
 
-#### serviceName
+#### `serviceName`
 
 The name of the service which is operating the PostgreSQL database. If this is present, and `host` is not, the chart will template the hostname of the service in place of the `host` value.
 
-#### port
+#### `port`
 
 The port on which to connect to the PostgreSQL server. Defaults to `5432`.
 
-#### database
+#### `database`
 
 The name of the database to use on the PostgreSQL server. This defaults to `gitlabhq_production`.
 
-#### preparedStatements
+#### `preparedStatements`
 
 If prepared statements should be used when communicating with the PostgreSQL server. Defaults to `false`.
 
-#### username
+#### `username`
 
 The username with which to authenticate to the database. This defaults to `gitlab`
 
-#### password
+#### `password`
 
 The `password` attribute for PostgreSQL has two sub keys:
 
