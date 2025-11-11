@@ -176,7 +176,7 @@ The persistence stores are disabled by default, thus `.enabled` needs to
 be set to `true` for a backup or restoration of any appreciable size.
 In addition, either `.storageClass` needs to be specified for a PersistentVolume
 to be created by Kubernetes or a PersistentVolume needs to be manually created.
-If `.storageClass` is specified as '-', then the PersistentVolume will be
+If `.storageClass` is specified as `-`, then the PersistentVolume will be
 created using the [default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/)
 as specified in the Kubernetes cluster.
 
@@ -233,6 +233,6 @@ gitlab-rails console -e production
 gitlab-rake gitlab:env:info
 ```
 
-### affinity
+### `affinity`
 
 For more information, see [`affinity`](../_index.md#affinity).
