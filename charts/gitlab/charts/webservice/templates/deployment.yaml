@@ -574,6 +574,13 @@ spec:
                 - key: "ca.crt"
                   path: rails-secrets/smartcard-ca.crt
           {{- end }}
+          {{- if $.Values.global.openbao.enabled }}
+          - secret:
+              name: {{ template "gitlab.openbao.authenticationTokenSecretFilePath.secret" $ }}
+              items:
+                - key: {{ template "gitlab.openbao.authenticationTokenSecretFilePath.key" $ }}
+                  path: openbao/.gitlab_openbao_authentication_token_secret
+          {{- end }}
       {{- if $.Values.global.email.smime.enabled }}
       - name: smime-creds
         secret:

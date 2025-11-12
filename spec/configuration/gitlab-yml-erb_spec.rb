@@ -497,7 +497,10 @@ describe 'gitlab.yml.erb configuration' do
             'gitlab.yml.erb'
           )
         )['production']).to include(
-          'openbao' => { 'url' => 'https://openbao.example.com' }
+          'openbao' => {
+            "url" => "https://openbao.example.com",
+            "authentication_token_secret_file_path" => "/etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret"
+          }
         )
 
         expect(YAML.safe_load(
@@ -507,7 +510,10 @@ describe 'gitlab.yml.erb configuration' do
             'gitlab.yml.erb'
           )
         )['production']).to include(
-          'openbao' => { 'url' => 'https://openbao.example.com' }
+          'openbao' => {
+            'url' => 'https://openbao.example.com',
+            "authentication_token_secret_file_path" => "/etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret"
+          }
         )
       end
 
@@ -529,7 +535,10 @@ describe 'gitlab.yml.erb configuration' do
             'gitlab.yml.erb'
           )
         )['production']).to include(
-          'openbao' => { 'url' => 'https://openbao.external' }
+          'openbao' => {
+            'url' => 'https://openbao.external',
+            "authentication_token_secret_file_path" => "/etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret"
+          }
         )
 
         expect(YAML.safe_load(
@@ -539,7 +548,10 @@ describe 'gitlab.yml.erb configuration' do
             'gitlab.yml.erb'
           )
         )['production']).to include(
-          'openbao' => { 'url' => 'https://openbao.external' }
+          'openbao' => {
+            'url' => 'https://openbao.external',
+            "authentication_token_secret_file_path" => "/etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret"
+          }
         )
       end
 
@@ -561,7 +573,10 @@ describe 'gitlab.yml.erb configuration' do
             'gitlab.yml.erb'
           )
         )['production']).to include(
-          'openbao' => { 'url' => 'http://insecure.openbao.test' }
+          'openbao' => {
+            'url' => 'http://insecure.openbao.test',
+            "authentication_token_secret_file_path" => "/etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret"
+          }
         )
 
         expect(YAML.safe_load(
@@ -571,7 +586,7 @@ describe 'gitlab.yml.erb configuration' do
             'gitlab.yml.erb'
           )
         )['production']).to include(
-          'openbao' => { 'url' => 'http://insecure.openbao.test' }
+          'openbao' => { 'url' => 'http://insecure.openbao.test', "authentication_token_secret_file_path" => "/etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret" }
         )
       end
 
@@ -595,7 +610,8 @@ describe 'gitlab.yml.erb configuration' do
         )['production']).to include(
           'openbao' => {
             'url' => 'https://openbao.external',
-            'internal_url' => 'https://openbao.internal'
+            'internal_url' => 'https://openbao.internal',
+            'authentication_token_secret_file_path' => '/etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret'
           }
         )
       end

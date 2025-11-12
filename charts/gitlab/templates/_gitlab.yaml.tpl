@@ -243,6 +243,7 @@ openbao:
   {{- if include "gitlab.openbao.internal_url" . }}
   internal_url: {{ include "gitlab.openbao.internal_url" . | quote }}
   {{- end }}
+  authentication_token_secret_file_path: /etc/gitlab/openbao/.gitlab_openbao_authentication_token_secret
 {{- end }}
 {{- end -}}{{/* "gitlab.appConfig.openbao.configuration" */}}
 
