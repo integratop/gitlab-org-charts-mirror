@@ -63,6 +63,46 @@ This example uses `kas.my-other-domain.com` as the host for the KAS Ingress alon
 The rest of the services (including GitLab, Registry, MinIO, etc.) use the domain
 specified in `global.hosts.domain`.
 
+### gRPC Ingress Support
+
+The KAS service supports gRPC traffic through the same port as WebSocket traffic, using path-based routing with regex matching to distinguish between the two protocols.
+
+{{< alert type="warning" >}}
+
+gRPC Ingress is not supported when [`global.appConfig.relativeUrlRoot`](../../globals.md#configure-a-relative-url-root) is set to a non-empty value.
+
+{{< /alert >}}
+
+#### Controller Support
+
+- **NGINX Ingress Controller**: Fully supported with automatic configuration
+- **Other Controllers**: Any controller that supports regex-based path matching can be used
+
+#### Path Pattern
+
+The gRPC Ingress uses the following path pattern:
+
+```regex
+/gitlab\.agent\.(.+)
+```
+
+This pattern ensures proper routing of gRPC traffic to the KAS service while maintaining WebSocket functionality on the same port.
+
+#### Configuration
+
+To enable gRPC Ingress, set `gitlab.kas.ingress.grpc.enabled` and make sure that KAS is running under its own subdomain:
+
+```yaml
+gitlab:
+  kas:
+    ingress:
+      grpc:
+        enabled: true
+```
+
+No additional configuration is needed when using the NGINX Ingress Controller as it's automatically set up.
+For other controllers, add relevant annotations to support gRPC and ensure they support regex-based path matching and configure them to route the specified path pattern to the KAS service.
+
 ### Installation command line options
 
 You can pass these parameters to the `helm install` command by using the `--set` flags.
