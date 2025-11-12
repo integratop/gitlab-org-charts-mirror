@@ -267,34 +267,6 @@ To fix this, either:
 
 Note that for optional keys, an empty map (`{}`) is a valid value.
 
-## Error: `cannot drop view pg_stat_statements because extension pg_stat_statements requires it`
-
-You may face this error when restoring a backup on your Helm chart instance. Use the following steps as a workaround:
-
-1. Inside your `toolbox` pod open the DB console:
-
-   ```shell
-   /srv/gitlab/bin/rails dbconsole -p
-   ```
-
-1. Drop the extension:
-
-   ```shell
-   DROP EXTENSION pg_stat_statements;
-   ```
-
-1. Perform the restoration process.
-1. After the restoration is complete, re-create the extension in the DB console:
-
-   ```shell
-   CREATE EXTENSION pg_stat_statements;
-   ```
-
-If you encounter the same issue with the `pg_buffercache` extension,
-follow the same steps above to drop and re-create it.
-
-You can find more details about this error in issue [#2469](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2469).
-
 ## Bundled PostgreSQL pod fails to start: `database files are incompatible with server`
 
 The following error message may appear in the bundled PostgreSQL pod after upgrading to a new version of the GitLab Helm chart:
@@ -677,19 +649,6 @@ were changes and need manual interaction.
 
 Please follow the [migration guide](../releases/9_0.md#prometheus-upgrade) to upgrade
 the Prometheus chart.
-
-## Toolbox backup failing on upload
-
-A backup may fail when trying to upload to the object storage with an error
-like:
-
-```plaintext
-An error occurred (XAmzContentSHA256Mismatch) when calling the UploadPart operation: The Content-SHA256 you specified did not match what we received
-```
-
-This might be caused by an incompatibility of the `awscli` tool and your object
-storage service. This issue has been reported when using Dell ECS S3 Storage.
-To avoid this issue you can [disable data integrity protection](../backup-restore/backup.md#data-integrity-protection-with-awscli).
 
 ## Webservice readiness probe fails
 
