@@ -111,7 +111,7 @@ To destroy the OpenShift cluster:
 Configuration can be applied during runtime by setting the following environment
 variables. All options have defaults, no options are required.
 
-| Variable                         | Default------------------------------------- | Description |
+| Variable                         | Default                                      | Description |
 |----------------------------------|----------------------------------------------|-------------|
 | `GOOGLE_APPLICATION_CREDENTIALS` | `gcloud.json`                                | Path to Google Cloud service account JSON file |
 | `GOOGLE_CREDENTIALS`             | Content of `$GOOGLE_APPLICATION_CREDENTIALS` | Content of Google Cloud service account JSON file |
