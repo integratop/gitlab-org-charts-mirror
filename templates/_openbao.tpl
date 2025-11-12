@@ -87,3 +87,11 @@ Render the OpenBao postgresql configuration yaml.
 {{- define "gitlab.openbao.unseal.key" -}}
 key
 {{- end -}}
+
+{{- define "gitlab.openbao.authenticationTokenSecretFilePath.secret" -}}
+{{- printf "%s-openbao-audit-secret" .Release.Name -}}
+{{- end -}}
+
+{{- define "gitlab.openbao.authenticationTokenSecretFilePath.key" -}}
+token
+{{- end -}}

@@ -1514,17 +1514,27 @@ gitlab-zoekt:
 ## Installation & configuration of OpenBao
 openbao:
   install: false
-  # Disable Openbao managed unseal secret and mount secret managed by shared secrets.
+  workhorse: {}
+  # Disable Openbao managed unseal and audting secret and mount secret managed by shared secrets.
   staticUnsealSecret:
+    generate: false
+  httpAuditSecret:
     generate: false
   extraVolumes: |
     - name: unseal
       secret:
         secretName: '{{ template "gitlab.openbao.unseal.secret" . }}'
+    - name: audit
+      secret:
+        secretName: '{{ template "gitlab.openbao.authenticationTokenSecretFilePath.secret" . }}'
   extraVolumeMounts: |
     - name: unseal
       mountPath: /srv/openbao/keys/gl-unseal-1
       subPath: '{{ template "gitlab.openbao.unseal.key" . }}'
+      readOnly: true
+    - name: audit
+      mountPath: /srv/openbao/audit/gitlab-auth
+      subPath: '{{ template "gitlab.openbao.authenticationTokenSecretFilePath.key" . }}'
       readOnly: true
   psql: {}
   config:
@@ -1537,6 +1547,10 @@ openbao:
     initialize:
       oidcDiscoveryUrl: '{{ include "gitlab.gitlab.url" . }}'
       boundIssuer: '{{ include "gitlab.gitlab.url" . }}'
+    audit:
+      http:
+        enabled: true
+        streamingUri: '{{ include "gitlab.workhorse.url" . }}/api/v4/internal/secrets_manager/audit_logs'
     storage:
       postgresql:
         # Set predefined keys to empty values to enable us merging these keys

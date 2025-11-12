@@ -264,5 +264,11 @@ generate_secret_if_needed {{ template "gitlab.zoekt.gateway.basicAuth.secretName
 {{ end }}
 
 {{ if .Values.openbao.install -}}
-generate_secret_if_needed {{ template "gitlab.openbao.unseal.secret" . }} --from-literal={{ template "gitlab.openbao.unseal.key" . }}="$(gen_random_bytes 32)"
+gen_random_bytes 32 > bao-unseal
+generate_secret_if_needed {{ template "gitlab.openbao.unseal.secret" . }} --from-file={{ template "gitlab.openbao.unseal.key" . }}=bao-unseal
 {{ end }}
+
+{{ if or .Values.openbao.install .Values.global.openbao.enabled -}}
+# Authentication token secret for Openbao Rails requests
+generate_secret_if_needed {{ template "gitlab.openbao.authenticationTokenSecretFilePath.secret" . }} --from-literal={{ template "gitlab.openbao.authenticationTokenSecretFilePath.key" . }}="$(gen_random 'a-zA-Z0-9' 32)"
+{{ end -}}
