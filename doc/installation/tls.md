@@ -134,7 +134,7 @@ disabling it, as shown below.
 
 {{< alert type="note" >}}
 
-If you're disabling TLS globally, with something like `--set global.ingres.tls.enabled=false`, the self-signed certificates won't be generated.
+If you're disabling TLS globally, with something like `--set global.ingress.tls.enabled=false`, the self-signed certificates won't be generated.
 
 {{< /alert >}}
 
