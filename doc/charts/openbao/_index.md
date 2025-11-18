@@ -36,7 +36,7 @@ OpenBao, which is required to enable the [GitLab secrets manager](https://docs.g
   [OpenBao chart issue 13](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/issues/13).
 - GitLab Geo is unsupported. Basic validation passed, but failover and recommended setups are not tested and documented yet.
   Full validation is discussed in [GitLab issue 568357](https://gitlab.com/gitlab-org/gitlab/-/issues/568357).
-- You can't deploy OpenBao with [GitLab Operator](https://gitlab.com/gitlab-org/cloud-native/gitlab-operator).  
+- You can't deploy OpenBao with [GitLab Operator](https://gitlab.com/gitlab-org/cloud-native/gitlab-operator).
 - A FIPS variant of the OpenBao image is already being build, but OpenBao is not FIPS validated.
   FIPS validation is tracked in [GitLab issue 574875](https://gitlab.com/gitlab-org/gitlab/-/issues/574875).
 
