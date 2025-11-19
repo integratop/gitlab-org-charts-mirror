@@ -53,7 +53,7 @@ This annotation can be changed by setting the `gitlab.toolbox.backups.cron.safeT
 
 {{< /alert >}}
 
-Cron based backups can be enabled in this chart to happen at regular intervals as defined by the [Kubernetes schedule](https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#schedule).
+Cron based backups can be enabled in this chart to happen at regular intervals as defined by the [Kubernetes schedule](https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs).
 
 You need to set the following parameters:
 
