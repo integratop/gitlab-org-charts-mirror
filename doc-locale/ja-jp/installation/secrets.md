@@ -288,22 +288,6 @@ kubectl create secret generic <name>-kas-websocket-token --from-literal=kas_webs
 
 このシークレットは、`gitlab.kas.websocketToken.secret`設定によって参照されます。
 
-### GitLab推奨レビュアーのシークレット {#gitlab-suggested-reviewers-secret}
-
-{{< alert type="note" >}}
-
-レビュアーの推奨シークレットは自動的に作成され、GitLab.comでのみ使用されます。このシークレットは、GitLab Self-Managedでは不要です。
-
-{{< /alert >}}
-
-GitLab Railsには、推奨レビュアーのシークレットが存在する必要があります。チャートにシークレットを自動生成させるか、このシークレットを手動で作成できます（`<name>`をリリースの名前に置き換えます）:
-
-```shell
-kubectl create secret generic <name>-gitlab-suggested-reviewers --from-literal=suggested_reviewers_secret=$(head -c 512 /dev/urandom | LC_CTYPE=C tr -cd 'a-zA-Z0-9' | head -c 32 | base64)
-```
-
-このシークレットは、`global.appConfig.suggested_reviewers.secret`設定によって参照されます。
-
 ### MinIOシークレット {#minio-secret}
 
 MinIOのランダムな20文字と64文字の英数字キーのセットを生成します。`<name>`をリリースの名前に置き換えます。
