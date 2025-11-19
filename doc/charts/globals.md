@@ -476,9 +476,6 @@ redis:
     tag: x.y.z
 ```
 
-Refer to the [full list of settings](https://artifacthub.io/packages/helm/bitnami/redis/11.3.4#parameters)
-for more information.
-
 ### Redis Sentinel support
 
 The current Redis Sentinel support only supports Sentinels that have
