@@ -52,13 +52,13 @@ spec: Forbidden: updates to statefulset spec for fields other than 'replicas', '
 This is due to known issues with Helm 2 to 3 migration in [Cert Manager](https://github.com/jetstack/cert-manager/issues/2451)
 and [Redis](https://github.com/bitnami/charts/issues/3482) dependencies. In a nutshell, the `heritage` label
 on some Deployments and StatefulSets are immutable and can not be changed from `Tiller` (set by Helm 2) to `Helm`
-(set by Helm 3). So they must be replaced _forcefully_.
+(set by Helm 3). So they must be forcefully replaced.
 
 To work around this use the following instructions:
 
 {{< alert type="note" >}}
 
-These instructions _forcefully replace resources_, notably Redis StatefulSet.
+These instructions forcefully replace resources, notably Redis StatefulSet.
 You need to ensure that the attached data volume to this StatefulSet is safe and remains intact.
 
 {{< /alert >}}
