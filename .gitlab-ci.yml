@@ -569,6 +569,10 @@ publish_devel_package:
       aud: https://vault.gitlab.net
 
   rules:
+    - if: $CI_PIPELINE_SOURCE == "parent_pipeline" 
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "trigger"
+      when: never
     - if: '$PIPELINE_TYPE =~ /DEFAULT_BRANCH_PIPELINE$/'
 
 release_package:
