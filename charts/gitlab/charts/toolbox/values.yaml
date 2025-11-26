@@ -195,6 +195,30 @@ backups:
     #   gcpProject: my-gcp-project-id
 extra: {}
 
+## Automatic database reindexing
+## https://docs.gitlab.com/omnibus/settings/database/#automatic-database-reindexing
+databaseReindex:
+  cron:
+    enabled: false
+    concurrencyPolicy: Replace
+    failedJobsHistoryLimit: 1
+    schedule: "12 * * * 0,6"
+    startingDeadlineSeconds: null
+    successfulJobsHistoryLimit: 3
+    suspend: false
+    backoffLimit: 6
+    # activeDeadlineSeconds:
+    # ttlSecondsAfterFinished:
+    safeToEvict: false
+    restartPolicy: "OnFailure"
+    resources:
+      # limits:
+      #  cpu: 1
+      #  memory: 2G
+      requests:
+        cpu: 200m
+        memory: 400M
+
 rack_attack:
   git_basic_auth:
     enabled: false
