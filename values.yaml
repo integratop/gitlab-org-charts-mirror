@@ -926,6 +926,9 @@ global:
     host:
     https:
     url: # If present, must be a complete URI
+    httpAudit:
+      secret: ""
+      key: "token"
 
   ## https://docs.gitlab.com/charts/charts/globals
   extraEnv: {}

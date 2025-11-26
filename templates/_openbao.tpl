@@ -89,9 +89,9 @@ key
 {{- end -}}
 
 {{- define "gitlab.openbao.authenticationTokenSecretFilePath.secret" -}}
-{{- printf "%s-openbao-audit-secret" .Release.Name -}}
+{{- .Values.global.openbao.httpAudit.secret | default (printf "%s-openbao-audit-secret" .Release.Name) -}}
 {{- end -}}
 
 {{- define "gitlab.openbao.authenticationTokenSecretFilePath.key" -}}
-token
+{{- .Values.global.openbao.httpAudit.key }}
 {{- end -}}

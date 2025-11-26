@@ -239,6 +239,8 @@ The OpenBao chart configures [auditing devices](https://openbao.org/docs/audit/)
 
 | Parameter                                                | Default                                                 | Description |
 |----------------------------------------------------------|---------------------------------------------------------|-------------|
+| `global.openbao.httpAudit.secret`                        | `<release>-openbao-audit-secret`                        | Name of the secret storing the token shared between OpenBao and GitLab. |
+| `global.openbao.httpAudit.key`                           | `token`                                                 | Secret key storing the shared token. |
 | `config.audit.http.enabled`                              | true                                                    | Enable streaming of auditing events by using HTTP to GitLab. |
 | `config.audit.http.streamingUri`                         | Internal workhorse URL                                  | Endpoint to stream auditing events to. |
 | `config.audit.http.authTokenPath`                        | `/srv/openbao/audit/gitlab-auth`                        | Path the token shared with GitLab is mounted at. |

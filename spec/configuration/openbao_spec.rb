@@ -14,6 +14,8 @@ describe 'OpenBao installation' do
   end
 
   let(:template) { HelmTemplate.new(values) }
+  let(:webservice_deployment) { template["Deployment/test-webservice-default"] }
+  let(:openbao_deployment) { template["Deployment/test-openbao"] }
   let(:openbao_psql_config) do
     config = template.dig("ConfigMap/test-openbao-config", 'data', 'config.json')
 
@@ -57,6 +59,37 @@ describe 'OpenBao installation' do
       expect(openbao_psql_config['connection_url']).to include(
         'keepalives_interval=10',
         'keepalives_idle=3'
+      )
+    end
+  end
+
+  describe 'with custom http audit secret' do
+    let(:values) do
+      HelmTemplate.with_defaults(%(
+      global:
+        openbao:
+          enabled: true
+          httpAudit:
+            secret: audit-secret
+            key: audit-key
+      openbao:
+        install: true
+      ))
+    end
+
+    let(:expected_volume) do
+      { "name" => "audit", "secret" => { "secretName" => "audit-secret" } }
+    end
+
+    it 'mounts the custom secret to webservice' do
+      expect(template.get_projected_secret('Deployment/test-webservice-default', 'init-webservice-secrets', 'audit-secret')).to eq(
+        { "items" => [{ "key" => "audit-key", "path" => "openbao/.gitlab_openbao_authentication_token_secret" }], "name" => "audit-secret" }
+      )
+    end
+
+    it 'mounts the custom secret to OpenBao' do
+      expect(openbao_deployment["spec"]["template"]["spec"]["volumes"]).to include(
+        { "name" => "audit", "secret" => { "secretName" => "audit-secret" } }
       )
     end
   end
