@@ -19,17 +19,11 @@ title: Zoekt chart
 - [Enabled on GitLab.com and GitLab Self-Managed](https://gitlab.com/gitlab-org/gitlab/-/issues/388519) in GitLab 16.6.
 - Global code search [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/147077) in GitLab 16.11 [with a flag](https://docs.gitlab.com/administration/feature_flags/) named `zoekt_cross_namespace_search`. Disabled by default.
 - Feature flags `index_code_with_zoekt` and `search_code_with_zoekt` [removed](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/148378) in GitLab 17.1.
+- Feature flag `zoekt_rollout_worker` [added](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/175666) in GitLab 17.9. Disabled by default.
 - [Changed](https://gitlab.com/groups/gitlab-org/-/epics/17918) from beta to limited availability in GitLab 18.6.
-- Feature flag `zoekt_cross_namespace_search` [removed](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/213413) in GitLab 18.7.
+- Feature flags [`zoekt_cross_namespace_search`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/213413) and [`zoekt_rollout_worker`](https://gitlab.com/gitlab-org/gitlab/-/issues/519660) removed in GitLab 18.7.
 
 {{< /history >}}
-
-{{< alert type="flag" >}}
-
-The availability of this feature is controlled by a feature flag.
-For more information, see the history.
-
-{{< /alert >}}
 
 {{< alert type="warning" >}}
 
