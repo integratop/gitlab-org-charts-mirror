@@ -7,7 +7,7 @@ imageTag: "RELEASE.2017-12-28T01-21-00Z"
 # pullSecrets: []
 
 minioMc:
-  image: minio/mc
+  image: "minio/mc"
   tag: "RELEASE.2018-07-13T00-53-22Z"
 
 ingress:
