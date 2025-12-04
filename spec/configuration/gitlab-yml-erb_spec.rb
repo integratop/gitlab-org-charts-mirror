@@ -791,4 +791,72 @@ describe 'gitlab.yml.erb configuration' do
       end
     end
   end
+
+  context 'ActionCable allowed origins' do
+    let(:required_values) do
+      YAML.safe_load(%(
+      global:
+        appConfig:
+          actionCableAllowedOrigins: #{value}
+    )).deep_merge!(default_values)
+    end
+
+    context 'when configured with array of origins' do
+      let(:value) { '["https://primary.example.com", "https://secondary.example.com"]' }
+
+      it 'populates the gitlab.yml.erb with the origins array' do
+        t = HelmTemplate.new(required_values)
+        expect(t.exit_code).to eq(0)
+
+        # Test webservice
+        webservice_yml = YAML.safe_load(t.dig('ConfigMap/test-webservice', 'data', 'gitlab.yml.erb'))
+        expect(webservice_yml.dig('production', 'gitlab', 'action_cable_allowed_origins'))
+                             .to eq(['https://primary.example.com', 'https://secondary.example.com'])
+
+        # Test sidekiq
+        sidekiq_yml = YAML.safe_load(t.dig('ConfigMap/test-sidekiq', 'data', 'gitlab.yml.erb'))
+        expect(sidekiq_yml.dig('production', 'gitlab', 'action_cable_allowed_origins'))
+          .to eq(['https://primary.example.com', 'https://secondary.example.com'])
+      end
+    end
+
+    context 'when not configured' do
+      let(:value) { nil }
+
+      it 'populates the gitlab.yml.erb with empty array' do
+        t = HelmTemplate.new(required_values)
+        expect(t.exit_code).to eq(0)
+
+        # Test webservice
+        webservice_yml = YAML.safe_load(t.dig('ConfigMap/test-webservice', 'data', 'gitlab.yml.erb'))
+        expect(webservice_yml.dig('production', 'gitlab', 'action_cable_allowed_origins')).to eq([])
+
+        # Test sidekiq
+        sidekiq_yml = YAML.safe_load(t.dig('ConfigMap/test-sidekiq', 'data', 'gitlab.yml.erb'))
+        expect(sidekiq_yml.dig('production', 'gitlab', 'action_cable_allowed_origins')).to eq([])
+      end
+    end
+
+    context 'when Geo is disabled' do
+      let(:required_values) do
+        YAML.safe_load(%(
+        global:
+          geo:
+            enabled: false
+          psql:
+            host: foo
+            password:
+              secret: bar
+      )).deep_merge!(default_values)
+      end
+
+      it 'does not populate geo configuration in gitlab.yml.erb' do
+        t = HelmTemplate.new(required_values)
+        expect(t.exit_code).to eq(0)
+
+        webservice_yml = YAML.safe_load(t.dig('ConfigMap/test-webservice', 'data', 'gitlab.yml.erb'))
+        expect(webservice_yml['production']).not_to have_key('geo')
+      end
+    end
+  end
 end
