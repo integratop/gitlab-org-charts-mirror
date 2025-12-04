@@ -11,6 +11,11 @@
      password:
        secret: geo
        key: postgresql-password
+   appConfig:
+     actionCableAllowedOrigins:
+       - https://primary-external.example.com # primary external URL;
+       - https://secondary-external.example.com # secondary external URL; OR
+       - https://unified.example.com # unified external URL
    # configure geo (primary)
    geo:
      nodeName: London Office
