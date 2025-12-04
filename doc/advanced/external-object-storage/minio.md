@@ -15,7 +15,7 @@ To connect GitLab to an external [MinIO](https://min.io/) instance,
 first create MinIO buckets for the GitLab application, using the bucket names
 in this [example configuration file](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/examples/values-external-objectstorage.yaml).
 
-Using the [MinIO client](https://min.io/docs/minio/kubernetes/upstream/), create the necessary buckets before use:
+Using the MinIO client, create the necessary buckets before use:
 
 ```shell
 mc mb gitlab-registry-storage
