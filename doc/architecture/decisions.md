@@ -99,6 +99,71 @@ Related issue:
 
 - [#352](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/352)
 
+## Bundling Envoy Gateway
+
+We're packaging the official [Envoy Gateway](https://gateway.envoyproxy.io/) chart
+to assist transitions from our previously bundled NGINX Ingress chart and ensure a
+seamless installation process.
+
+### Gateway API Background
+
+The [Gateway API](https://gateway-api.sigs.k8s.io/) is Kubernetes' successor to the
+Ingress API, designed to provide more expressive routing capabilities and better
+separation of concerns. Unlike Ingress, which conflated configuration responsibilities,
+Gateway API defines three distinct roles:
+
+- **Infrastructure Provider**: Installs and manages the Gateway controller implementation
+  (e.g., Envoy Gateway, Istio, Kong) and defines GatewayClass resources.
+- **Cluster Operator**: Configures Gateway resources that provision load balancers and
+  define network boundaries.
+- **Application Developer** (for example GitLab, Inc): Creates Route resources (HTTPRoute, TCPRoute, etc.) that
+  attach to Gateways and route traffic to their services.
+
+This separation allows organizations to divide networking responsibilities: infrastructure
+teams manage the controller and gateway infrastructure, while application teams manage
+their own routing without needing cluster-level permissions.
+
+### Why Bundle a Gateway Controller?
+
+Packaging Envoy Gateway with GitLab intentionally diverges from Gateway API's intended
+persona separation. In the Gateway API model, infrastructure providers (not applications)
+would install controllers, and cluster operators would provision Gateways separately
+from application deployments.
+
+However, bundling provides critical advantages for GitLabs use case, but also carries some risks.
+
+### Advantages
+
+- Delivers a validated, pre-configured networking solution for GitLab exposure.
+- Streamlines the transition from existing bundled Ingress controllers.
+- Simplifies adoption across GitLab-managed infrastructure (including .com,
+  Dedicated) and the GitLab Environment Toolkit.
+- Many Cloud Provider's Gateway implementation do not support TCPRoutes, which
+  are a requirement to expose GitLab for SSH traffic.
+- Giving FIPS customers, including Dedicated for Governmant, a path to migrate
+  from the bundled NGINX Ingress, which GitLab currently offers FIPS builds for.
+- Enables adoption of Envoy, which other [GitLab functionalities](https://gitlab.com/gitlab-org/architecture/auth-architecture/design-doc/-/blob/0d779e8aae72db3f1f045c69d0e693739f2f5fc8/decisions/005_adopt_envoy.md)
+  will depend on.
+- Customers can still choose to deploy their preferred Gateway API controller
+  to use instead of the bundled Envoy Gateway. 
+
+The implementation of the Gateway within the GitLab application will consider customers
+who to follow the prescribed personas of Gateway API and maintain the option to allow
+Cluster Operators the choice of managing the Gateway themselves. 
+Likewise, customers with special or unusual configuration requirements for their Gateways 
+will be encouraged to manage and configure the Gateway themselves.
+
+### Considerations
+
+- Gateway API and Envoy Gateway require specific Cluster Resource Definitions.
+  Since [Helm doesn't support CRD upgrades](https://helm.sh/docs/v3/chart_best_practices/custom_resource_definitions),
+  manual intervention may be necessary.
+- Packaging a Gateway API controller alongside an application diverges from the
+  intended [separation of user personas](https://gateway-api.sigs.k8s.io/).
+- FIPS-compliant deployments must utilize alternative images rather than official
+  upstream versions. GitLab owned FIPS builds are currently
+  [work in progress](https://gitlab.com/gitlab-org/build/CNG/-/merge_requests/2716).
+
 ## Forked charts
 
 The following charts have been forked or re-created in this repository following
