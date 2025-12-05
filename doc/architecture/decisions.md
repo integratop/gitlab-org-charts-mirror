@@ -145,12 +145,12 @@ However, bundling provides critical advantages for GitLabs use case, but also ca
 - Enables adoption of Envoy, which other [GitLab functionalities](https://gitlab.com/gitlab-org/architecture/auth-architecture/design-doc/-/blob/0d779e8aae72db3f1f045c69d0e693739f2f5fc8/decisions/005_adopt_envoy.md)
   will depend on.
 - Customers can still choose to deploy their preferred Gateway API controller
-  to use instead of the bundled Envoy Gateway. 
+  to use instead of the bundled Envoy Gateway.
 
 The implementation of the Gateway within the GitLab application will consider customers
 who to follow the prescribed personas of Gateway API and maintain the option to allow
-Cluster Operators the choice of managing the Gateway themselves. 
-Likewise, customers with special or unusual configuration requirements for their Gateways 
+Cluster Operators the choice of managing the Gateway themselves.
+Likewise, customers with special or unusual configuration requirements for their Gateways
 will be encouraged to manage and configure the Gateway themselves.
 
 ### Considerations

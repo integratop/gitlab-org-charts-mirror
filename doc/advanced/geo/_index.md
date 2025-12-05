@@ -195,8 +195,8 @@ We must replace several items:
 - `gitlab_rails['geo_node_name']` must be replaced with a unique name for your
   site. See the Name field in
   [Common settings](https://docs.gitlab.com/administration/geo_sites/#common-settings).
-- `gitlab_rails['action_cable_allowed_origins']` must be replaced with an array 
-  containing the **external URLs** of all clusters: both primary and secondary, 
+- `gitlab_rails['action_cable_allowed_origins']` must be replaced with an array
+  containing the **external URLs** of all clusters: both primary and secondary,
   or their unified URL if they have the same external URL.
 - `gitlab_user_password_hash` must be replaced with the hashed form of the
   `gitlab` password.
