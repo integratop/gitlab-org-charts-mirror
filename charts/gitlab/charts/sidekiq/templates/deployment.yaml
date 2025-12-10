@@ -179,7 +179,6 @@ spec:
             mountPath: /srv/gitlab/config/secrets.yml
             subPath: rails-secrets/secrets.yml
             readOnly: true
-          {{- include "gitlab.topologyService.volumeMounts" (dict "context" $ "secretsVolumeName" "sidekiq-secrets") | nindent 10 }}
           resources:
             {{- toYaml $.Values.init.resources | nindent 12 }}
       {{- include "gitlab.image.pullSecrets" $imageCfg | indent 6 }}
@@ -238,6 +237,7 @@ spec:
             name: http-metrics
         {{- end }}
           volumeMounts:
+          {{- include "gitlab.topologyService.volumeMounts" (dict "context" $ "secretsVolumeName" "sidekiq-secrets") | nindent 10 }}
           {{- tpl (default "" .extraVolumeMounts) $ | nindent 10 }}
           {{- include "gitlab.extraVolumeMounts" $ | nindent 10 }}
         {{- if $metricsEnabled }}
