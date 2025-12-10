@@ -2,6 +2,12 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.6.2 (2025-12-10)
+
+### Changed (1 change)
+
+- [Update Helm release gitlab-runner to v0.83.3](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/30af1ba0c1a6d20333cebe224ff468474635cd65)
+
 ## 9.6.1 (2025-11-25)
 
 ### Changed (1 change)
@@ -33,6 +39,10 @@ entry.
 - [Update dependency container-registry to v4.29.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/ef7b3911840c12e282ae1c1f032833ecb06214c6) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4579))
 - [Update Helm release gitlab-zoekt to v3.6.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bc26720416f3bdec8e02b3772df379343293dc9d) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4563))
 - [Update dependency container-registry to v4.28.0-gitlab](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/b6ad075821eb5a68056f37607c87c1d04b3e34ef) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4530))
+
+## 9.5.4 (2025-12-10)
+
+No changes.
 
 ## 9.5.3 (2025-11-25)
 
@@ -67,6 +77,10 @@ No changes.
 - [Update Helm release gitlab-zoekt to v3.6.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/829e1cfb33fdad58edac221fd7b59a3125e8c700) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4561))
 - [Update Helm release gitlab-zoekt to v3.5.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/af559e0f062088aacd17ea0d5885aa183d60571c) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4550))
 - [Update Helm release gitlab-runner to v0.81.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/62c7c4f8602822ef0c30c305e3aa6d15d6c5d926) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4528))
+
+## 9.4.6 (2025-12-10)
+
+No changes.
 
 ## 9.4.5 (2025-11-25)
 
