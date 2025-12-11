@@ -213,6 +213,10 @@ OpenBao is preconfigured to expose Prometheus metrics which will be scraped by t
 | `config.metricsListener.tlsDisable`                      | true                                                    | Disable internal TLS of the metrics listener. |
 | `config.metricsListener.port`                            | 8209                                                    | Port of the metrics listener. |
 | `config.metricsListener.unauthenticatedMetricsAccess`    | true                                                    | Allow requests for metrics to be served without authentication. |
+| `podMonitor.enabled`                                     | false                                                   | Enable PodMonitor resource for Prometheus Operator. Requires Prometheus Operator to be installed in the cluster. |
+| `podMonitor.additionalLabels`                            | `{}`                                                    | Additional labels to add to the PodMonitor resource. |
+| `podMonitor.selectorLabels`                              | `{}`                                                    | Additional selector labels to filter which pods to scrape. |
+| `podMonitor.endpointConfig`                              | `{}`                                                    | Additional endpoint configuration (for example, `interval`, `scrapeTimeout`). |
 
 ### Unsealing and initialization options
 
