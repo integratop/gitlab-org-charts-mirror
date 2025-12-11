@@ -56,7 +56,7 @@ Port assignment is automatically determined based on the selected protocol.
     namespaces:
       from: Same
 {{- with .local.hostname }}
-  hostname: {{ . }}
+  hostname: {{ . | quote }}
 {{- end }}
 {{- with .local.tls }} 
   tls:
