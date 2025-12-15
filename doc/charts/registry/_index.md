@@ -791,6 +791,12 @@ If utilising Geo, and wishing to replicate the container registry, follow the ne
 1. In the primary site configs:
 
    ```yaml
+   global:
+     # To provide your own secret, as described above
+     registry:
+       notificationSecret:
+           secret: gitlab-registry-notification
+           key: secret
      geo:
        registry:
          replication:
@@ -800,6 +806,7 @@ If utilising Geo, and wishing to replicate the container registry, follow the ne
 1. In the secondary site configs:
 
    ```yaml
+   global:
      geo:
        registry:
          replication:
