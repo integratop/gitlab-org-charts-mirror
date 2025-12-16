@@ -68,8 +68,9 @@ When dealing with networking, storage, or other complex issues, a cloud Kubernet
 Official GitLab images are built with the x86-64 architecture.
 For local development, Apple silicon users can use an [alternate Docker setup](kind/_index.md#apple-silicon-m1m2)
 to emulate a compatible architecture.
-Support for multiple architectures, including AArch64/ARM64, is under active development.
-See [issue 2899](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2899) for more information.
+Kubernetes nodes support x86-64 and ARM64 architectures.
+FIPS-validated images are only available for x86-64.
+See [issue 2285](https://gitlab.com/gitlab-org/build/CNG/-/issues/2285) for ARM64 FIPS status.
 
 {{< /alert >}}
 

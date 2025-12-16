@@ -40,9 +40,10 @@ or use the GitLab-provided scripts to [automate the cluster creation](../install
 
 {{< alert type="warning" >}}
 
-Kubernetes nodes must use the x86-64 architecture.
-Support for multiple architectures, including AArch64/ARM64, is under active development.
-See [issue 2899](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2899) for more information.
+Kubernetes nodes support x86-64 and ARM64 architectures.
+
+FIPS-validated images are only available for x86-64.
+See [issue 2285](https://gitlab.com/gitlab-org/build/CNG/-/issues/2285) for ARM64 FIPS status.
 
 {{< /alert >}}
 
