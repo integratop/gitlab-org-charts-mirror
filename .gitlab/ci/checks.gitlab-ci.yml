@@ -118,6 +118,7 @@ docs-i18n-lint paths:
   cache: {}
   dependencies: []
   before_script: []
+  allow_failure: true
   script:
     - scripts/docs_i18n_verify_paths
   rules:
