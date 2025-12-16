@@ -45,7 +45,7 @@ The steps have been documented in the [upgrade steps](#steps-for-upgrading-the-b
 This is due to [an issue](https://github.com/bitnami/charts/issues/16707) in upstream PostgreSQL chart. If you do not
 want to use environment variables for PostgreSQL passwords and prefer to use files you need to follow the instructions
 for manual [editing the existing PostgreSQL passwords Secret](#edit-the-existing-postgresql-passwords-secret) and
-enabling password files for PostgreSQL chart before preforming the following steps.
+enabling password files for PostgreSQL chart before performing the following steps.
 
 ### Prepare the existing database
 
@@ -141,7 +141,7 @@ Note the following:
 
 {{< alert type="note" >}}
 
-This is only for `7.0.0` upgrade, and only when you want enforce the use password files inside of the
+This is only for `7.0.0` upgrade, and only when you want enforce the use password files inside the
 PostgreSQL service containers.
 
 {{< /alert >}}
@@ -157,7 +157,7 @@ need to edit the Secret and change the keys.
 After editing the secret you _MUST_ **set `postgresql.auth.usePasswordFiles` to `true` in Helm upgrade values**. The
 default is `false`.
 
-The follwoing script can help you to patch the secret:
+The following script can help you to patch the secret:
 
 1. First create a backup of the existing Secret. The following command copies it into a new Secret with `-backup` name suffix:
 
