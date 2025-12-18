@@ -4,6 +4,10 @@ require 'yaml'
 require 'hash_deep_merge'
 
 describe 'GitLab Ingress configuration(s)' do
+  def ignored_ingresses
+    ['test-kas-grpc'].freeze
+  end
+
   def get_paths(template, ingress_name)
     template.dig("Ingress/#{ingress_name}", 'spec', 'rules', 0, 'http', 'paths')
   end
@@ -54,6 +58,7 @@ describe 'GitLab Ingress configuration(s)' do
     %w[
       test-gitlab-pages
       test-kas
+      test-kas-grpc
       test-webservice-default
       test-webservice-default-smartcard
       test-minio
@@ -63,6 +68,11 @@ describe 'GitLab Ingress configuration(s)' do
 
   let(:enable_all_ingress) do
     default_values.deep_merge(YAML.safe_load(%(
+      gitlab:
+        kas:
+          ingress:
+            grpc:
+              enabled: true
       global:
         appConfig:
           smartcard:
@@ -70,8 +80,6 @@ describe 'GitLab Ingress configuration(s)' do
         minio:
           enabled: true
         pages:
-          enabled: true
-        kas:
           enabled: true
       registry:
         enabled: true
@@ -93,7 +101,9 @@ describe 'GitLab Ingress configuration(s)' do
         template = HelmTemplate.new(enable_all_ingress)
         expect(template.exit_code).to eq(0)
 
-        ingress_names.each do |ingress_name|
+        ingress_under_test = ingress_names - ignored_ingresses
+
+        ingress_under_test.each do |ingress_name|
           paths = get_paths(template, ingress_name)
           paths.each do |p|
             expect(p["path"]).to end_with('/')
@@ -115,7 +125,9 @@ describe 'GitLab Ingress configuration(s)' do
         template = HelmTemplate.new(asterisk)
         expect(template.exit_code).to eq(0)
 
-        ingress_names.each do |ingress_name|
+        ingress_under_test = ingress_names - ignored_ingresses
+
+        ingress_under_test.each do |ingress_name|
           paths = get_paths(template, ingress_name)
           paths.each do |p|
             expect(p["path"]).to end_with('/*')
@@ -555,6 +567,52 @@ describe 'GitLab Ingress configuration(s)' do
           expect(issuer_annotation).to eq("test-issuer")
           expect(edit_in_place_annotation).to be_nil
         end
+      end
+    end
+  end
+
+  describe 'KAS gRPC ingress conditional logic' do
+    let(:grpc_enabled_no_explicit_hostname) do
+      default_values.deep_merge(YAML.safe_load(%(
+        gitlab:
+          kas:
+            ingress:
+              grpc:
+                enabled: true
+      )))
+    end
+
+    let(:grpc_enabled_with_relative_url_root) do
+      default_values.deep_merge(YAML.safe_load(%(
+        gitlab:
+          kas:
+            ingress:
+              grpc:
+                enabled: true
+        global:
+          appConfig:
+            relativeUrlRoot: /gitlab
+      )))
+    end
+
+    context 'when gRPC is enabled and KAS has its own subdomain' do
+      it 'creates the gRPC ingress' do
+        template = HelmTemplate.new(grpc_enabled_no_explicit_hostname)
+        expect(template.exit_code).to eq(0)
+
+        grpc_ingress = template["Ingress/test-kas-grpc"]
+        expect(grpc_ingress).not_to be_nil
+        expect(grpc_ingress['spec']['rules'][0]['host']).to eq('kas.example.com')
+      end
+    end
+
+    context 'when gRPC is enabled and global.appConfig.relativeUrlRoot is non-empty' do
+      it 'does not create the gRPC ingress' do
+        template = HelmTemplate.new(grpc_enabled_with_relative_url_root)
+        expect(template.exit_code).to eq(0)
+
+        grpc_ingress = template["Ingress/test-kas-grpc"]
+        expect(grpc_ingress).to be_nil
       end
     end
   end

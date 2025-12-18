@@ -89,6 +89,8 @@ ingress:
   workspacesServerApiPath: /workspaces
   k8sApiPath: /k8s-proxy
   autoflowCodecServerApiPath: /autoflow/codec-server
+  grpc:
+    enabled: false
 maxReplicas: 10
 maxUnavailable: 1
 minReplicas: 2
