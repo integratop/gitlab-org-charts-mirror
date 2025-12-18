@@ -37,7 +37,7 @@ dependencies:
   version: 3.7.1
 - name: openbao
   repository: https://charts.gitlab.io/
-  version: 0.10.0
+  version: 0.11.0
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.19.4
@@ -47,5 +47,5 @@ dependencies:
 - name: gateway-helm
   repository: oci://registry-1.docker.io/envoyproxy
   version: 1.6.1
-digest: sha256:8011b50ba8d8b06354cc8e369173666105af5e0c2de2ffea8fe057527878c9a2
-generated: "2025-12-17T04:23:25.55122152Z"
+digest: sha256:1e8a193a43638335a97246c02b19285ced4ad840d75fd934e033630b0d47b5db
+generated: "2025-12-18T22:25:13.663799248Z"
