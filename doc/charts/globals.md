@@ -1380,6 +1380,7 @@ of shared configuration for these items. Making use of `object_store`, you can c
 are not individually configured with a `connection` property.
 
 ```yaml
+object_store:
   enabled: true
   proxy_download: true
   storage_options:
