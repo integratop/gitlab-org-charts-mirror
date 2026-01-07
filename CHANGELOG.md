@@ -27,6 +27,10 @@ No changes.
 - [Update Helm release gitlab-runner to v0.83.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bd1bc85cf2ea47931cf3dc5363a87f8d261566e0) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4659))
 - [Update Helm release gitlab-runner to v0.83.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/ff93cc6c6b49b2d3a2bda5ff8d8bbdaedfa01dfb) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4654))
 
+## 9.6.3 (2026-01-07)
+
+No changes.
+
 ## 9.6.2 (2025-12-10)
 
 ### Changed (1 change)
