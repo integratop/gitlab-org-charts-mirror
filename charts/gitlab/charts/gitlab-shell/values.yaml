@@ -78,6 +78,7 @@ gatewayRoute:
 traefik:
   entrypoint: gitlab-shell
   apiVersion: ""
+  tcpAnnotations: {}
   tcpMiddlewares: []
 
 hpa:

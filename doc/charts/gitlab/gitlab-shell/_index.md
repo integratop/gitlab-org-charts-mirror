@@ -141,6 +141,7 @@ controlled by `global.shell.port`.
 | `sshDaemon`                                              | `openssh`                                               | Selects which SSH daemon would be run, possible values (`openssh`, `gitlab-sshd`) |
 | `tolerations`                                            | `[]`                                                    | Toleration labels for pod assignment |
 | `traefik.entrypoint`                                     | `gitlab-shell`                                          | When using traefik, which traefik entrypoint to use for GitLab Shell. Defaults to `gitlab-shell` |
+| `traefik.tcpAnnotations`                                 | `{}`                                                    | When using traefik, which annotations to add to IngressRouteTCP resource. No annotations by default |
 | `traefik.tcpMiddlewares`                                 | `[]`                                                    | When using traefik, which TCP Middlewares to add to IngressRouteTCP resource. No middlewares by default |
 | `workhorse.serviceName`                                  | `webservice`                                            | Workhorse service name (by default, Workhorse is a part of the webservice Pods / Service) |
 | `metrics.enabled`                                        | `false`                                                 | If a metrics endpoint should be made available for scraping (requires `sshDaemon=gitlab-sshd`). |
