@@ -75,4 +75,10 @@ spec:
     {{- $_ := set $listener "hostname" (include "gitlab.minio.hostname" .) }}
     {{- include "gitlab.gatewayApi.gateway.listener" (dict "local" $listener "root" $root) | nindent 2 }}
   {{- end }}
+  {{- if .Values.openbao.install }}
+    {{- $listener = index $listeners "openbao-web" }}
+    {{- $_ := set $listener "name" "openbao-web" }}
+    {{- $_ := set $listener "hostname" (include "gitlab.openbao.hostname" .) }}
+    {{- include "gitlab.gatewayApi.gateway.listener" (dict "local" $listener "root" $root) | nindent 2 }}
+  {{- end }}
 {{ end }}

@@ -200,6 +200,19 @@ Note: Enabling SSL passthrough requires cert-manager to create another Ingress t
 If you use the bundled certmanager and `Issuer`, make sure the Issuer sets the correct `IngressClass` by
 configuring [`global.ingress.useNewIngressForCerts`](../globals.md#globalingressusenewingressforcerts).
 
+### Gateway API
+
+The OpenBao chart allows to expose traffic via an `HTTPRoute`. If [Gateway API is enabled globally](../globals.md#gateway-api),
+a listener for OpenBao will be created in the managed `Gateway` resource.
+
+| Parameter                  | Default                                                 | Description |
+|----------------------------|---------------------------------------------------------|-------------|
+| `gatewayRoute.enabled`     | Defaults to value of `global.gatewayApi.enabled`        | Enable exposing OpenBao via a `HTTPRoute`. |
+| `gatewayRoute.sectionName` | openbao-web                                             | Gateway section to be used by the `HTTPRoute`. |
+| `gatewayRoute.gatewayName` | GitLab chart managed Gateway                            | Gateway name to be used by the `HTTPRoute`. |
+| `gatewayRoute.annotations` | `{}`                                                    | Extra annotations for the `HTTPRoute`. |
+| `gatewayRoute.timeouts`    | `{}`                                                    | Custom timeout config for the `HTTPRoute`. |
+
 ### Monitoring configuration options
 
 OpenBao is preconfigured to expose Prometheus metrics which will be scraped by the bundled Prometheus subchart.
