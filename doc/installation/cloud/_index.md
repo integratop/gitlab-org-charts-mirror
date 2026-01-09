@@ -23,13 +23,13 @@ you can reduce the defaults to fit into a smaller cluster.
 
 The GitLab Helm chart supports the following Kubernetes releases:
 
-| Kubernetes release | Status      | Minimum GitLab version | Architectures |
-|--------------------|-------------|------------------------|---------------|
-| 1.34               | Supported   | 18.6                   | x86-64        |
-| 1.33               | Supported   | 18.1                   | x86-64        |
-| 1.32               | Supported   | 17.11                  | x86-64        |
-| 1.31               | Deprecated  | 17.6                   | x86-64        |
-| 1.30               | Unsupported | 17.6                   | x86-64        |
+| Kubernetes release | Status      | Minimum GitLab version |
+|--------------------|-------------|------------------------|
+| 1.34               | Supported   | 18.6                   |
+| 1.33               | Supported   | 18.1                   |
+| 1.32               | Supported   | 17.11                  |
+| 1.31               | Deprecated  | 17.6                   |
+| 1.30               | Unsupported | 17.6                   |
 
 The GitLab Helm Chart aims to support three Kubernetes minor versions at a time and plans
 to support new Kubernetes releases three months after their initial release.
@@ -44,7 +44,7 @@ For some components, like the [agent for Kubernetes](https://docs.gitlab.com/use
 
 {{< alert type="warning" >}}
 
-Kubernetes nodes support x86-64 and ARM64 architectures.
+The [GitLab container images](../_index.md#container-images) can be deployed on x86-64 and ARM64 architectures.
 
 FIPS-validated images are only available for x86-64.
 See [issue 2285](https://gitlab.com/gitlab-org/build/CNG/-/issues/2285) for ARM64 FIPS status.
