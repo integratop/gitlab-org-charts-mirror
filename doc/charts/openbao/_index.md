@@ -17,6 +17,7 @@ title: OpenBao chart
 
 - Introduced as a [experiment](https://docs.gitlab.com/policy/development_stages_support/#experiment) in GitLab 18.3 [with flags](https://docs.gitlab.com/administration/feature_flags/) named `ci_tanukey_ui` and `secrets_manager`. Disabled by default.
 - [Flag](https://docs.gitlab.com/administration/feature_flags/) `ci_tanukey_ui` was merged into `secrets_manager` in GitLab 18.4.
+- Made available to some users in a closed beta in GitLab 18.8.
 
 {{< /history >}}
 
