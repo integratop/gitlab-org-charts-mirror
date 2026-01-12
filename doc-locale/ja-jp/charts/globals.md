@@ -525,7 +525,7 @@ GitLabチャートには、さまざまな永続クラス用に別個のRedisイ
 1. `global.redis.sharedState`
 1. `global.redis.host`
 
-例: 
+例:
 
 ```yaml
 redis:
@@ -1378,33 +1378,6 @@ global:
       secretName: *internal-tls
       caSecretName: *internal-ca
 ```
-
-### レビュアーの推奨設定 {#suggested-reviewers-settings}
-
-{{< alert type="note" >}}
-
-レビュアーの推奨シークレットは自動的に作成され、GitLab.comでのみ使用されます。このシークレットは、GitLab Self-Managedインスタンスでは不要です。
-
-{{< /alert >}}
-
-オプションとして、レビュアーの推奨の`secret`の名前と`key`をカスタマイズできます。そのためには、以下のようにしてHelmの`--set variable`オプションを使用するか、:
-
-```shell
---set global.appConfig.suggested_reviewers.secret=custom-secret-name \
---set global.appConfig.suggested_reviewers.key=custom-secret-key \
-```
-
-または、`values.yaml`を以下のように設定します:
-
-```yaml
-global:
-  appConfig:
-    suggested_reviewers:
-      secret: "custom-secret-name"
-      key: "custom-secret-key"
-```
-
-シークレット値をカスタマイズする場合は、[シークレットに関するドキュメント](../installation/secrets.md#gitlab-suggested-reviewers-secret)を参照してください。
 
 ### LDAP {#ldap}
 

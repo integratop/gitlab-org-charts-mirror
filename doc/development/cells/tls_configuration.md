@@ -21,7 +21,7 @@ global:
           secret: topology-service-tls
 ```
 
-This aligns with how other sensitive settings (e.g., `client_secret`, `suggested_reviewers`) are stored under `appConfig`.
+This aligns with how other sensitive settings (e.g., `client_secret`) are stored under `appConfig`.
 
 ---
 
