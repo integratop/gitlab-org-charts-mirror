@@ -40,7 +40,7 @@ from these recommendations, please document your reasons and alternative approac
 - [ ] Create a new project in the [`gitlab-org/cloud-native/charts`](https://gitlab.com/gitlab-org/cloud-native/charts)
       group.
 - [ ] Create the chart in its own separate repository following the default Helm
-      project layout (initialised with `helm create`).
+      project layout (initialized with `helm create`).
 - [ ] Treat the chart as a dependency of GitLab chart.
 
 #### Kubernetes compatibility

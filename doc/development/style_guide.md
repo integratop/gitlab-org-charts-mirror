@@ -477,7 +477,7 @@ careful how these strings are added into various configuration formats.
    - For rendered YAML, use JSON strings because YAML is a superset of JSON.
    - For rendered TOML, use JSON strings because [TOML strings](https://toml.io/en/v0.3.0#string) escape similarly.
 1. Be wary of complexity, such as quoted strings _inside_ quoted stings such
-as database connection strings.
+   as database connection strings.
 
 #### Example of encoding passwords
 

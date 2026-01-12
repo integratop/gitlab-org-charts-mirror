@@ -773,7 +773,7 @@ If you run into any problems, you can rollback the changes made so the Gitaly su
 The original Gitaly PVC must exist to rollback successfully.
 
 1. Rollback the GitLab chart to the previous release using the revision number obtained
-in [Step 1: Get the current release revision of the GitLab chart](#step-1-get-the-current-release-revision-of-the-gitlab-chart):
+   in [Step 1: Get the current release revision of the GitLab chart](#step-1-get-the-current-release-revision-of-the-gitlab-chart):
 
    ```shell
    helm rollback <release> <revision>

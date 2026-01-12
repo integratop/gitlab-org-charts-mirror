@@ -371,8 +371,8 @@ To rotate the PostgreSQL secret:
    **Note**: The registry user password update is only needed if you have the [registry metadata database](../charts/registry/metadata_database.md) feature enabled. If the registry user doesn't exist, the `ALTER USER registry` command will produce an error but won't affect the other password updates.
 
 1. Delete the `gitlab-exporter`, `postgresql`, `toolbox`, `sidekiq`, `webservice`, and `registry` pods using the `kubectl delete pod`
-command so the new pods are loaded with the new secret and allow them to connect to the
-database.
+   command so the new pods are loaded with the new secret and allow them to connect to the
+   database.
 
 ### GitLab Pages secret
 
