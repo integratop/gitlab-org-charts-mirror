@@ -525,7 +525,7 @@ After configuration above is prepared:
    **secondary** PostgreSQL node.
 
 1. Replicate the databases. Replace `PRIMARY_DATABASE_HOST` with the IP or hostname
-of your Primary PostgreSQL node:
+   of your Primary PostgreSQL node:
 
    ```shell
    gitlab-ctl replicate-geo-database --slot-name=geo_2 --host=PRIMARY_DATABASE_HOST --sslmode=verify-ca
