@@ -10,6 +10,8 @@ title: Configure the GitLab chart with an external database
 The bundled bitnami PostgreSQL chart is not production ready. For a production-ready GitLab chart deployment, use an
 external database.
 
+For information on migrating away from the bundled PostgreSQL chart, see [migrate from the bundled Redis, PostgreSQL, and MinIO](../../installation/bundled_chart_migration.md).
+
 {{< /alert >}}
 
 Prerequisites:
