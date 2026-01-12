@@ -83,7 +83,7 @@ and testing scenarios, these components and charts have experienced several proj
 licencing changes upstream impacting our ability to maintain them.
 
 If you are running a production system with one of these bundled charts, you should
-[migrate](bundled_chart_migration.md) to external solutions.
+[migrate](migration/bundled_chart_migration.md) to external solutions.
 
 ### Use the reference architectures
 

@@ -40,14 +40,14 @@ Before you begin migrating from the bundled Redis, MinIO, or PostgreSQL:
 
 ## Backup GitLab
 
-First [back up](../backup-restore/_index.md) all of the current data and note the backup ID.
+First [back up](../../backup-restore/_index.md) all of the current data and note the backup ID.
 
 Please note that:
 
 - If you are migrating of MinIO, you will need to download the backup archive to a local machine.
 - If you are only migrating MinIO, you will need to backup the object storage buckets only.
 - If you are only migrating Redis, you can skip the backup and restore steps.
-- If you are only migrating PostgreSQL, you can [skip](../backup-restore/backup.md#skipping-components) backing
+- If you are only migrating PostgreSQL, you can [skip](../../backup-restore/backup.md#skipping-components) backing
   up all components but the `db`.
 - If you enabled the [Registry Metadata Database](https://docs.gitlab.com/administration/packages/container_registry_metadata_database/)
   the metadata data will not be covered by the [default backup/restore process](https://docs.gitlab.com/administration/packages/container_registry_metadata_database/#backup-with-metadata-database).
@@ -175,7 +175,7 @@ One option is [Garage](https://garagehq.deuxfleurs.fr/). Before installing it, r
 
    Since GitLab stores both primary object data and backups in the same storage backend (Garage in this case), any
    failures at the object storage or persistence layer could affect both datasets. Therefore, in addition to
-   [backing up GitLab](../backup-restore/_index.md) regularly, you should also familiarize yourself with
+   [backing up GitLab](../../backup-restore/_index.md) regularly, you should also familiarize yourself with
    [recovering from Garage failures](https://garagehq.deuxfleurs.fr/documentation/operations/recovering/).
 
    ```shell
@@ -318,8 +318,8 @@ PostgreSQL.
      install: false
    ```
 
-   Check the related [Redis](../advanced/external-redis/_index.md), [PostgreSQL](../advanced/external-db/_index.md),
-   and [object storage](../advanced/external-object-storage/_index.md) documentation for more
+   Check the related [Redis](../../advanced/external-redis/_index.md), [PostgreSQL](../../advanced/external-db/_index.md),
+   and [object storage](../../advanced/external-object-storage/_index.md) documentation for more
    information.
 
 1. If you are migrating PostgreSQL, upgrade your GitLab instance with migrations disabled:
@@ -339,7 +339,7 @@ PostgreSQL.
    s3cmd put /tmp/LOCAL_BACKUP_ARCHIVE.tar s3://gitlab-backups/
    ```
 
-1. If you are migrating PostgreSQL or MinIO, [scale down the workloads and restore the backup](../backup-restore/restore.md#restoring-the-backup-file).
+1. If you are migrating PostgreSQL or MinIO, [scale down the workloads and restore the backup](../../backup-restore/restore.md#restoring-the-backup-file).
 1. After the upgrade is complete, upgrade your GitLab instance to run any pending migrations.
 
    ```shell
@@ -348,7 +348,7 @@ PostgreSQL.
 
 1. Confirm GitLab is operational.
 
-1. Confirm [backups](../backup-restore/backup.md) work as intended by doing a fresh backup.
+1. Confirm [backups](../../backup-restore/backup.md) work as intended by doing a fresh backup.
 
 1. Delete Secrets and PersistentVolumeClaims related to the bundled PostgreSQL, MinIO, and Redis.
 
