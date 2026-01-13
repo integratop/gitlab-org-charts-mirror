@@ -55,6 +55,7 @@ variables:
   CI_TOOLS_NAMESPACE: "gitlab-org"
   GITLAB_NAMESPACE: "gitlab-org"
   GITLAB_QA_VERSION: "15.7.0"
+  VALKEY_CHART_VERSION: "0.9.2"
   # STRICT_VERSIONS is used in RSpecs to ensure exact version match for tools like "helm" and "kubectl"
   STRICT_VERSIONS: "true"
   KUBE_CRD_SCHEMA_URL: "https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/v3/apis__apiextensions.k8s.io__v1_openapi.json"
@@ -118,9 +119,9 @@ include:
   - local: '/.gitlab/ci/environments/vcluster.134.arm64.gitlab-ci.yml'
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == "v134a"'
-  - local: '/.gitlab/ci/environments/vcluster.134.amd64.gatewayapi.gitlab-ci.yml'
+  - local: '/.gitlab/ci/environments/vcluster.134.amd64.flux.gitlab-ci.yml'
     rules:
-      - if: '$LIMIT_TO == "" || $LIMIT_TO == "v134gw"'
+      - if: '$LIMIT_TO == "" || $LIMIT_TO == "flux"'
   - local: '/.gitlab/ci/environments/gke.134.amd64.gitlab-ci.yml'
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == "gke134"'
@@ -220,6 +221,7 @@ pin_image_versions:
   script:
     - ensure_namespace
     - create_secret
+    - deploy_external_components
     - deploy
     - wait_for_deploy
 
@@ -386,12 +388,12 @@ trigger-v134a:
   rules:
     - !reference [.trigger_review_secondary, rules]
 
-trigger-v134-envoy-gw:
+trigger-flux:
   extends: .trigger_review_job
   needs:
     - trigger_review_current
   variables:
-    LIMIT_TO: v134gw
+    LIMIT_TO: flux
   rules:
     - !reference [.trigger_review_current, rules]
 
@@ -439,6 +441,7 @@ trigger-eks133:
     - source scripts/ci/autodevops.sh
     - set_context
     - delete
+    - remove_external_components
     - cleanup
   when: manual
   allow_failure: true
