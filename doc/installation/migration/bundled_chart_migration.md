@@ -166,11 +166,11 @@ One option is [Garage](https://garagehq.deuxfleurs.fr/). Before installing it, r
 1. Initialize the cluster layout.
 
   {{< alert type="note" >}}
-  
+
   This example provisions a Garage layout with three zones, one node per zone, and uses the default replication
   factor of three. Review the [Garage production recommendations](https://garagehq.deuxfleurs.fr/documentation/cookbook/real-world/)
   and adjust these settings to suit your requirements.
-  
+
   {{< /alert >}}
 
    Since GitLab stores both primary object data and backups in the same storage backend (Garage in this case), any
@@ -194,12 +194,12 @@ One option is [Garage](https://garagehq.deuxfleurs.fr/). Before installing it, r
 1. Create the GitLab buckets:
 
   {{< alert type="note" >}}
-  
+
   The following command uses the default bucket names from the GitLab chart. If you've customized your bucket names
   previously, adjust them accordingly here and in the steps below.
-  
+
   {{< /alert >}}
-   
+
    ```shell
    buckets=("git-lfs" "gitlab-artifacts" "gitlab-backups" "gitlab-ci-secure-files" \
             "gitlab-dependency-proxy" "gitlab-mr-diffs" "gitlab-packages" "gitlab-pages" \
@@ -250,7 +250,7 @@ One option is [Garage](https://garagehq.deuxfleurs.fr/). Before installing it, r
 ## Configure and upgrade GitLab
 
 With all replacements provisioned, you can now disable the bundled MinIO, Redis, and
-PostgreSQL. 
+PostgreSQL.
 
 1. Ensure the MinIO persistent volume will be retained for now.
 
@@ -266,14 +266,14 @@ PostgreSQL.
    helm upgrade <RELEASE> gitlab/gitlab -f your-values.yaml
    kubectl annotate pvc <RELEASE>-minio --list
    ```
-  
+
   {{< alert type="note" >}}
 
   The Redis and PostgreSQL persistent volumes are managed by their StatefulSet
   instead of Helm. The default retention policy is [`Retain`](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention).
   Unless you modified this policy, these two volumes will not be deleted when you remove
   their StatefulSet.
-  
+
   {{< /alert >}}
 
 1. Update your values to point to the newly provisioned services:

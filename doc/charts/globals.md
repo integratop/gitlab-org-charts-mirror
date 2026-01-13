@@ -151,7 +151,7 @@ can be found in the examples folder.
 ### Ingress Path
 
 This chart employs `global.ingress.path` as a means to assist those users that need to alter the definition of `path` entries for their Ingress objects.
-Many users have no need for this setting, and _should not configure it_.
+Many users have no need for this setting and should not configure it.
 
 For those users who need to have their `path` definitions end in `/*` to match their load balancer / proxy behaviors, such as when using `ingress.class: gce` in GCP,
 `ingress.class: alb` in AWS, or another such provider.
@@ -420,10 +420,10 @@ In some complex deployments, it may be desired to configure different parts of
 this chart with different configurations for PostgreSQL. As of `v4.2.0`, all
 properties available within `global.psql` can be set on a per-chart basis,
 for example `gitlab.sidekiq.psql`. The local settings will override global values
-when supplied, inheriting any _not present_ from `global.psql`, with the exception
+when supplied, inheriting any not present from `global.psql`, with the exception
 of `psql.load_balancing`.
 
-[PostgreSQL load balancing](#postgresql-load-balancing) will _never_ inherit
+[PostgreSQL load balancing](#postgresql-load-balancing) will never inherit
 from the global, by design.
 
 ### PostgreSQL SSL
@@ -478,7 +478,7 @@ The Rails components in GitLab have the ability to
 
 This feature can be configured in two fashions:
 
-- Using a static lists of _hostnames_ for the secondaries.
+- Using a static lists of hostnames for the secondaries.
 - Using a DNS based service discovery mechanism.
 
 Configuration with a static list of is straight forward:
@@ -2693,7 +2693,7 @@ global:
 
 - `global.antiAffinity` can take two values:
   - `soft`: Define a `preferredDuringSchedulingIgnoredDuringExecution` anti-affinity where the Kubernetes scheduler will try to enforce the rule but will not guarantee the result.
-  - `hard`: Defined a `requiredDuringSchedulingIgnoredDuringExecution` anti-affinity where the rule _must_ be met for a pod to be scheduled onto a node.
+  - `hard`: Defined a `requiredDuringSchedulingIgnoredDuringExecution` anti-affinity where the rule must be met for a pod to be scheduled onto a node.
 - `global.affinity.podAntiAffinity.topologyKey` define a node attribute used two divide them into logical zone. Most common `topologyKey` values are:
   - `kubernetes.io/hostname`
   - `topology.kubernetes.io/zone`

@@ -257,7 +257,7 @@ kubectl create secret generic <name>-rails-secret --from-file=secrets.yml
 
 This secret is referenced by the `global.railsSecrets.secret` setting.
 
-It is **not recommended**  to rotate this secret as it contains the database encryption keys. If the secret is
+It is not recommended to rotate this secret as it contains the database encryption keys. If the secret is
 rotated, the result will be the same behavior exhibited [when the secrets file is lost](https://docs.gitlab.com/administration/backup_restore/troubleshooting_backup_gitlab/#when-the-secrets-file-is-lost).
 
 ### GitLab Workhorse secret

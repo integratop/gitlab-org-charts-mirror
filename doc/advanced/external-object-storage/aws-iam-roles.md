@@ -145,7 +145,7 @@ Ensure that the IAM role's trust policy is configured to [trust these Kubernetes
 
 #### Using chart-owned service accounts
 
-The `eks.amazonaws.com/role-arn` annotation can be applied to _all_ ServiceAccounts
+The `eks.amazonaws.com/role-arn` annotation can be applied to all ServiceAccounts
 created by GitLab owned charts by configuring `global.serviceAccount.annotations`.
 
 ```yaml
