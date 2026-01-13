@@ -1,5 +1,5 @@
 
-{{- if and .Values.global.gatewayApi.enabled .Values.global.gatewayApi.class.create .Values.global.gatewayApi.installEnvoy }}
+{{- if and .Values.global.gatewayApi.enabled .Values.global.gatewayApi.installEnvoy }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyProxy
 metadata:
