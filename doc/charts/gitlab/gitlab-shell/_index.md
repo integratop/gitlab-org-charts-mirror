@@ -441,10 +441,8 @@ following network policy:
   - To the `webservice` pod to port `8181`
   - To the `gitaly` pod to port `8075`
 
-_Note the example provided is only an example and may not be complete_
-
-The example is based on the assumption that `kube-dns` was deployed
-to the namespace `kube-system`, `prometheus` was deployed to the namespace
+The example provided is only an example and may not be complete. The example is based on the assumption that `kube-dns`
+was deployed to the namespace `kube-system`, `prometheus` was deployed to the namespace
 `monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml

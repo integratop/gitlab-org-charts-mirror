@@ -87,7 +87,7 @@ helm install gitlab gitlab/gitlab \
 ### Use AWS ACM to manage certificates
 
 If you are using AWS ACM to create your wildcard certificate, it is not possible to specify it via secret because ACM certificates cannot be downloaded.
-Instead, specify them via  `nginx-ingress.controller.service.annotations`:
+Instead, specify them via `nginx-ingress.controller.service.annotations`:
 
 ```yaml
 nginx-ingress:

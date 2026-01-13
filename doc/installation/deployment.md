@@ -51,7 +51,7 @@ Note the following:
   positional argument on the command line unless the `--generate-name` option is used.
 - Helm v3 requires one to specify a duration with a unit appended to the value
   (e.g. `120s` = `2m` and `210s` = `3m30s`). The `--timeout` option is handled as the
-  number of seconds _without_ the unit specification.
+  number of seconds without the unit specification.
 - The use of the `--timeout` option is deceptive in that there are multiple components that are
   deployed during an Helm install or upgrade in which the `--timeout` is applied. The `--timeout`
   value is applied to the installation of each component individually and not applied for the

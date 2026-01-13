@@ -482,7 +482,7 @@ kubectl get secret <release>-gitaly-secret -ojsonpath='{.data.token}' | base64 -
 To ensure the data integrity of the migration, prevent any changes from being made to your Git
 repositories in the following steps:
 
-**1. Enable Maintenance Mode**
+##### 1. Enable Maintenance Mode
 
 If you are using GitLab Enterprise Edition, enable [maintenance mode](https://docs.gitlab.com/administration/maintenance_mode/#enable-maintenance-mode) either through the UI, API or the Rails console:
 
@@ -490,7 +490,7 @@ If you are using GitLab Enterprise Edition, enable [maintenance mode](https://do
 kubectl exec <toolbox pod name> -it -- gitlab-rails runner 'Gitlab::CurrentSettings.update!(maintenance_mode: true)'
 ```
 
-**2. Scale down Runner pods**
+##### 2. Scale down Runner pods
 
 If you are using GitLab Community Edition, you must scale down any GitLab Runner pods that are running in the cluster. This prevents
 the Runners from connecting to GitLab to process CI/CD jobs.
@@ -506,11 +506,11 @@ kubectl get deploy -lapp=gitlab-gitlab-runner,release=<release> -o jsonpath='{.i
 kubectl scale deploy -lapp=gitlab-gitlab-runner,release=<release> --replicas=0
 ```
 
-**3. Confirm no CI jobs are running**
+##### 3. Confirm no CI jobs are running
 
 In the Admin Area, go to **CI/CD > Jobs**. This page shows you all jobs, but confirm that there are no jobs with the **Running** status. You need to wait for the jobs to complete before proceeding to the next step.
 
-**4. Disable Sidekiq cron jobs**
+##### 4. Disable Sidekiq cron jobs
 
 To prevent Sidekiq jobs from being scheduled and executed during the migration, disable all Sidekiq cron jobs:
 
@@ -518,7 +518,7 @@ To prevent Sidekiq jobs from being scheduled and executed during the migration, 
 kubectl exec <toolbox pod name> -it -- gitlab-rails runner 'Sidekiq::Cron::Job.all.map(&:disable!)'
 ```
 
-**5. Confirm no background jobs are running**
+##### 5. Confirm no background jobs are running
 
 We need to wait for any enqueued or in progress jobs to complete before proceeding to the next step.
 
@@ -528,7 +528,7 @@ We need to wait for any enqueued or in progress jobs to complete before proceedi
 
    ![Sidekiq background jobs](img/sidekiq_bg_jobs_v16_5.png)
 
-**6. Scale down Sidekiq and Webservice pods**
+##### 6. Scale down Sidekiq and Webservice pods
 
 Scale down the Sidekiq and Webservice pods to ensure that a consistent backup is taken. Both services are scaled
 up at a later stage:
@@ -546,7 +546,7 @@ kubectl scale deploy -lapp=sidekiq,release=<release> --replicas=0
 kubectl scale deploy -lapp=webservice,release=<release> --replicas=0
 ```
 
-**7. Restrict external connections to the cluster**
+##### 7. Restrict external connections to the cluster
 
 To prevent users and external GitLab Runners from making any changes to GitLab, we need to restrict all
 unnecessary connections to GitLab.
@@ -576,7 +576,7 @@ IP address for the external Gitaly service to the `nginx-ingress` configuration 
      -f ingress-only-allow-ext-gitaly.yml
    ```
 
-**8. Create list of repository checksums**
+##### 8. Create list of repository checksums
 
 Prior to running the backup, [check all GitLab repositories](https://docs.gitlab.com/administration/raketasks/check/#check-all-gitlab-repositories)
 and create a list of repository checksums. Pipe the output to a file so we can `diff` the checksums after the migration:
@@ -760,7 +760,7 @@ kubectl exec <toolbox pod name> -it -- backup-utility --skip artifacts,ci_secure
 1. After you have confirmed everything is working as expected, you can delete the Gitaly PVC:
 
    WARNING: Do not delete the Gitaly PVC until you have confirmed the checksums match as per [step 6](#step-6-restore-and-validate-repository-backup) and
-  double checked that everything is working as expected.
+   double checked that everything is working as expected.
 
    ```shell
    kubectl delete pvc repo-data-<release>-gitaly-0

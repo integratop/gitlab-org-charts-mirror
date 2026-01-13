@@ -801,13 +801,9 @@ This examples adds the following network policy:
   - To the internet `0.0.0.0/0` to port `443`
   - To endpoints like AWS VPC endpoint for S3 or STS `172.16.1.0/24` to port `443`
 
-_Note the example provided is only an example and may not be complete_
-
-_Note the Webservice requires outbound connectivity to the public internet
-for images on [external object storage](../../../advanced/external-object-storage)_
-
-The example is based on the assumption that `kube-dns` was deployed
-to the namespace `kube-system`, `prometheus` was deployed to the namespace
+The example provided is only an example and may not be complete. The Webservice requires outbound connectivity to the
+public internet for images on [external object storage](../../../advanced/external-object-storage). The example is based
+on the assumption that `kube-dns` was deployed to the namespace `kube-system`, `prometheus` was deployed to the namespace
 `monitoring` and `nginx-ingress` was deployed to the namespace `nginx-ingress`.
 
 ```yaml

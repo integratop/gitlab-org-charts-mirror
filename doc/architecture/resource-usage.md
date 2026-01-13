@@ -43,7 +43,7 @@ We will measure:
 
 ### GitLab Shell
 
-Load was tested using a bash loop calling  `nohup git clone <project> <random-path-name>` in order to have some concurrency.
+Load was tested using a bash loop calling `nohup git clone <project> <random-path-name>` in order to have some concurrency.
 In future tests we will try to include sustained concurrent load, to better match the types of tests we have done for the other services.
 
 - **Idle values**

@@ -776,7 +776,7 @@ In some cases, you may want to give users control over which site they visit. Fo
 
 To sync the secondary registry with the primary registry you can configure
 [registry replication](https://docs.gitlab.com/administration/geo/replication/container_registry/#configure-container-registry-replication)
-using a  [notification secret](../../charts/registry/_index.md#notification-secret).
+using a [notification secret](../../charts/registry/_index.md#notification-secret).
 
 ## Cert-manager and unified URL
 

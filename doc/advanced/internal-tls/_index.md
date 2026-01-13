@@ -162,7 +162,7 @@ Key items to configure:
 
 1. Global [Custom Certificate Authorities](../../charts/globals.md#custom-certificate-authorities).
 1. Per-component TLS for the service listeners.
-  (See each chart's documentation, under [charts/](../../charts/_index.md))
+   (See each chart's documentation, under [charts/](../../charts/_index.md))
 
 This process is greatly simplified by making use of YAML's native anchor
 functionality. A truncated snippet of `shared-cert-values.yaml` shows this:
