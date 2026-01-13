@@ -20,5 +20,5 @@ Migrate from and to the Helm chart:
 Other migrations:
 
 - [Migrate between Helm versions.](helm.md)
-- [Migrate to the built-in MinIO service for object storage.](minio.md)
+- [Migrate from the bundled Redis, PostgreSQL, and MinIO charts.](bundled_chart_migration.md)
 - [Migrate from Gitaly chart to external Gitaly](../../advanced/external-gitaly/_index.md#migrate-from-gitaly-chart-to-external-gitaly)
