@@ -59,6 +59,7 @@ data:
       {{- include "gitlab.appConfig.sidekiq.configuration" $ | nindent 6 }}
       {{- include "gitlab.appConfig.oidcProvider.configuration" $ | nindent 6 }}
       {{- include "gitlab.appConfig.cell" . | nindent 6 }}
+      {{- include "gitlab.appConfig.gravatar" $.Values.global.appConfig | nindent 6 }}
       {{- include "gitlab.geo.config" $ | nindent 6 }}
   configure: |
     {{- include "gitlab.scripts.configure.secrets" (dict "required" "rails-secrets migrations gitaly") | nindent 4 }}

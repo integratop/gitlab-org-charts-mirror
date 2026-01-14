@@ -60,6 +60,7 @@ data:
       {{-     include "gitlab.appConfig.microsoft_graph_mailer" . | nindent 6 }}
       {{-   end }}
       {{-   include "gitlab.appConfig.cronJobs" . | nindent 6 }}
+      {{-   include "gitlab.appConfig.gravatar" . | nindent 6 }}
       {{- end }}
 
       {{- if $.Values.global.appConfig.object_store.enabled }}

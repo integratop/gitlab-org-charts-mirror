@@ -254,3 +254,15 @@ ci_id_tokens:
   issuer_url: {{ . }}
 {{- end }}
 {{- end }}
+
+{{/*
+Generates Gravatar/Libravatar configuration.
+
+Usage:
+{{ include "gitlab.appConfig.gravatar" .Values.global.appConfig }}
+*/}}
+{{- define "gitlab.appConfig.gravatar" -}}
+gravatar:
+  plain_url: {{ .gravatar.plainUrl }}
+  ssl_url: {{ .gravatar.sslUrl }}
+{{- end -}}
