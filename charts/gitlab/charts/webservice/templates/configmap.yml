@@ -89,9 +89,7 @@ data:
       {{-     include "gitlab.appConfig.service_desk_email" . | nindent 6 }}
       {{-   end }}
       {{-   include "gitlab.appConfig.cronJobs" . | nindent 6 }}
-      gravatar:
-        plain_url: {{ .gravatar.plainUrl }}
-        ssl_url: {{ .gravatar.sslUrl }}
+      {{-   include "gitlab.appConfig.gravatar" . | nindent 6 }}
       {{-   include "gitlab.appConfig.extra" . | nindent 6 }}
       {{- end }}
 
