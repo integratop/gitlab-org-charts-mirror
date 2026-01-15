@@ -16,7 +16,7 @@ include:
   extends:
   - .vcluster_base
   variables:
-    VCLUSTER_K8S_VERSION: "v1.34.3"
+    VCLUSTER_K8S_VERSION: "v1.35.0"
     VCLUSTER_NAME: "flux-${REVIEW_REF_PREFIX}${CI_COMMIT_SHORT_SHA}"
     HOST_SUFFIX: "${CI_ENVIRONMENT_SLUG}-flux"
     # the VARIABLES_FILE value is from the CI_JOB_NAME of the review job
@@ -25,7 +25,7 @@ include:
     USE_GATEWAY_API: "true"
     USE_EXTERNAL_VALKEY: "true"
   environment:
-    name: gkevc_134/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA
+    name: gkevc_135/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA
     url: "https://gitlab${DOMAIN}"
 
 create_review_flux:
@@ -35,7 +35,7 @@ create_review_flux:
   variables:
     GIT_STRATEGY: none
   script:
-    - echo "Configuring gkevc_134/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA to automatically stop in $REVIEW_APPS_AUTO_STOP_IN."
+    - echo "Configuring gkevc_135/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA to automatically stop in $REVIEW_APPS_AUTO_STOP_IN."
   environment:
     on_stop: stop_review_flux
     auto_stop_in: $REVIEW_APPS_AUTO_STOP_IN
@@ -78,7 +78,7 @@ qa_flux:
 
 qa_flux_full_suite_manual_trigger:
   extends: .qa_full_suite_manual_trigger
-  script: echo 'The job will trigger Full E2E suite against GKE134 vcluster'
+  script: echo 'The job will trigger Full E2E suite against GKE135 vcluster'
 
 qa_flux_manual_full_suite:
   extends:

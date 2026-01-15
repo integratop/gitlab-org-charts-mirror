@@ -107,27 +107,34 @@ include:
   - local: '/.gitlab/ci/operator.gitlab-ci.yml'
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == null'
-  - local: '/.gitlab/ci/environments/vcluster.132.amd64.gitlab-ci.yml'
-    rules:
-      - if: '$LIMIT_TO == "" || $LIMIT_TO == "v132"'
+  # Vcluster 1.33
   - local: '/.gitlab/ci/environments/vcluster.133.amd64.gitlab-ci.yml'
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == "v133"'
+  # Vcluster 1.34
   - local: '/.gitlab/ci/environments/vcluster.134.amd64.gitlab-ci.yml'
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == "v134"'
-  - local: '/.gitlab/ci/environments/vcluster.134.arm64.gitlab-ci.yml'
+  # Vcluster 1.35
+  - local: '/.gitlab/ci/environments/vcluster.135.amd64.gitlab-ci.yml'
     rules:
-      - if: '$LIMIT_TO == "" || $LIMIT_TO == "v134a"'
-  - local: '/.gitlab/ci/environments/vcluster.134.amd64.flux.gitlab-ci.yml'
+      - if: '$LIMIT_TO == "" || $LIMIT_TO == "v135"'
+  # Vcluster 1.35 ARM
+  - local: '/.gitlab/ci/environments/vcluster.135.arm64.gitlab-ci.yml'
+    rules:
+      - if: '$LIMIT_TO == "" || $LIMIT_TO == "v135a"'
+  # Vcluster 1.35 Flux
+  - local: '/.gitlab/ci/environments/vcluster.135.amd64.flux.gitlab-ci.yml'
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == "flux"'
-  - local: '/.gitlab/ci/environments/gke.134.amd64.gitlab-ci.yml'
+  # GKE 1.35
+  - local: '/.gitlab/ci/environments/gke.135.amd64.gitlab-ci.yml'
     rules:
-      - if: '$LIMIT_TO == "" || $LIMIT_TO == "gke134"'
-  - local: '/.gitlab/ci/environments/eks.133.amd64.gitlab-ci.yml'
+      - if: '$LIMIT_TO == "" || $LIMIT_TO == "gke135"'
+  # EKS 1.34
+  - local: '/.gitlab/ci/environments/eks.134.amd64.gitlab-ci.yml'
     rules:
-      - if: '$LIMIT_TO == "eks133"'
+      - if: '$LIMIT_TO == "eks134"'
   - local: /.gitlab/ci/scanners.gitlab-ci.yml
     rules:
       - if: '$LIMIT_TO == "" || $LIMIT_TO == null'
@@ -352,23 +359,14 @@ trigger_review_secondary:
   variables:
     PARENT_PIPELINE_ID: $CI_PIPELINE_ID
 
-trigger-v132:
+trigger-v133:
   extends: .trigger_review_job
   needs:
     - trigger_review_current
   variables:
-    LIMIT_TO: v132
-  rules:
-    - !reference [.trigger_review_current, rules]
-
-trigger-v133:
-  extends: .trigger_review_job
-  needs:
-    - trigger_review_secondary
-  variables:
     LIMIT_TO: v133
   rules:
-    - !reference [.trigger_review_secondary, rules]
+    - !reference [.trigger_review_current, rules]
 
 trigger-v134:
   extends: .trigger_review_job
@@ -379,12 +377,21 @@ trigger-v134:
   rules:
     - !reference [.trigger_review_secondary, rules]
 
-trigger-v134a:
+trigger-v135:
   extends: .trigger_review_job
   needs:
     - trigger_review_secondary
   variables:
-    LIMIT_TO: v134a
+    LIMIT_TO: v135
+  rules:
+    - !reference [.trigger_review_secondary, rules]
+
+trigger-v135a:
+  extends: .trigger_review_job
+  needs:
+    - trigger_review_secondary
+  variables:
+    LIMIT_TO: v135a
   rules:
     - !reference [.trigger_review_secondary, rules]
 
@@ -397,22 +404,22 @@ trigger-flux:
   rules:
     - !reference [.trigger_review_current, rules]
 
-trigger-gke134:
+trigger-gke135:
   extends: .trigger_review_job
   needs:
     - trigger_review_current
   variables:
-    LIMIT_TO: gke134
+    LIMIT_TO: gke135
   rules:
     - !reference [.trigger_review_current, rules]
 
-trigger-eks133:
+trigger-eks134:
   extends: .trigger_review_job
   needs:
     # TODO revert to current
     - trigger_review_secondary
   variables:
-    LIMIT_TO: eks133
+    LIMIT_TO: eks134
   rules:
     - !reference [.trigger_review_secondary, rules]
 # Jobs using auto_stop_in that exit with a failure will not execute the on_stop
