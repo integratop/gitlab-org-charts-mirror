@@ -1,7 +1,7 @@
 include:
   - component: "gitlab.com/gitlab-org/quality/pipeline-common/allure-report@9.6.3"
     inputs:
-      job_name: "e2e-test-v134a"
+      job_name: "e2e-test-v135a"
       job_stage: "qa-report"
       gitlab_auth_token_variable_name: "DANGER_GITLAB_API_TOKEN"
       aws_access_key_id_variable_name: "QA_ALLURE_AWS_ACCESS_KEY_ID"
@@ -12,80 +12,80 @@ include:
         when: never
       - if: '$CI_PIPELINE_SOURCE == "pipeline" || $CI_PIPELINE_SOURCE == "parent_pipeline"'
 
-.v134a_base:
+.v135a_base:
   extends:
   - .vcluster_base
   variables:
-    VCLUSTER_K8S_VERSION: "v1.34.3"
-    VCLUSTER_NAME: "v134a-${REVIEW_REF_PREFIX}${CI_COMMIT_SHORT_SHA}"
-    HOST_SUFFIX: "${CI_ENVIRONMENT_SLUG}-vc134a"
+    VCLUSTER_K8S_VERSION: "v1.35.0"
+    VCLUSTER_NAME: "v135a-${REVIEW_REF_PREFIX}${CI_COMMIT_SHORT_SHA}"
+    HOST_SUFFIX: "${CI_ENVIRONMENT_SLUG}-vc135a"
     # the VARIABLES_FILE value is from the CI_JOB_NAME of the review job
-    VARIABLES_FILE: "variables/review_v134a"
+    VARIABLES_FILE: "variables/review_v135a"
     DOMAIN: "-${HOST_SUFFIX}.${KUBE_INGRESS_BASE_DOMAIN}"
     REVIEW_ARCH: arm64
   environment:
-    name: gkevc_134a/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA
+    name: gkevc_135a/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA
     url: "https://gitlab${DOMAIN}"
 
-create_review_v134a:
+create_review_v135a:
   stage: review
   image: ${BUSYBOX_IMAGE}
-  extends: .v134a_base
+  extends: .v135a_base
   variables:
     GIT_STRATEGY: none
   script:
-    - echo "Configuring gkevc_134a/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA to automatically stop in $REVIEW_APPS_AUTO_STOP_IN."
+    - echo "Configuring gkevc_135a/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA to automatically stop in $REVIEW_APPS_AUTO_STOP_IN."
   environment:
-    on_stop: stop_review_v134a
+    on_stop: stop_review_v135a
     auto_stop_in: $REVIEW_APPS_AUTO_STOP_IN
     action: start
 
-review_v134a:
+review_v135a:
   extends:
     - .vcluster_review_template
-    - .v134a_base
+    - .v135a_base
   environment:
     action: access
 
-stop_review_v134a:
+stop_review_v135a:
   extends:
     - .stop_vcluster_review_template
-    - .v134a_base
+    - .v135a_base
   environment:
     action: stop
 
-review_specs_v134a:
+review_specs_v135a:
   extends:
     - .vcluster_specs_template
-    - .v134a_base
+    - .v135a_base
   environment:
     action: access
-  needs: ['review_v134a']
+  needs: ['review_v135a']
 
-qa_v134a:
+qa_v135a:
   extends:
     - .qa_branch
-    - .v134a_base
+    - .v135a_base
   variables:
     TEST_SUITE: $QA_SANITY_SUITE_OPTIONS
   environment:
     action: access
   needs:
-    - review_v134a
-    - job: review_specs_v134a
+    - review_v135a
+    - job: review_specs_v135a
       artifacts: false
 
-qa_v134a_full_suite_manual_trigger:
+qa_v135a_full_suite_manual_trigger:
   extends: .qa_full_suite_manual_trigger
-  script: echo 'The job will trigger Full E2E suite against GKE134a vcluster'
+  script: echo 'The job will trigger Full E2E suite against GKE135a vcluster'
 
-qa_v134a_manual_full_suite:
+qa_v135a_manual_full_suite:
   extends:
     - .qa_branch
-    - .v134a_base
+    - .v135a_base
   parallel: 7
   variables:
     TEST_SUITE: $QA_FULL_SUITE_OPTIONS
   environment:
     action: access
-  needs: ["qa_v134a_full_suite_manual_trigger"]
+  needs: ["qa_v135a_full_suite_manual_trigger"]

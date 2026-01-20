@@ -1,7 +1,7 @@
 include:
   - component: "gitlab.com/gitlab-org/quality/pipeline-common/allure-report@9.6.3"
     inputs:
-      job_name: "e2e-test-v132"
+      job_name: "e2e-test-v135"
       job_stage: "qa-report"
       gitlab_auth_token_variable_name: "DANGER_GITLAB_API_TOKEN"
       aws_access_key_id_variable_name: "QA_ALLURE_AWS_ACCESS_KEY_ID"
@@ -12,80 +12,79 @@ include:
         when: never
       - if: '$CI_PIPELINE_SOURCE == "pipeline" || $CI_PIPELINE_SOURCE == "parent_pipeline"'
 
-.v132_base:
+.v135_base:
   extends:
   - .vcluster_base
   variables:
-    VCLUSTER_K8S_VERSION: "v1.32.0"
-    VCLUSTER_NAME: "v132-${REVIEW_REF_PREFIX}${CI_COMMIT_SHORT_SHA}"
-    HOST_SUFFIX: "${CI_ENVIRONMENT_SLUG}-vc132"
+    VCLUSTER_K8S_VERSION: "v1.35.0"
+    VCLUSTER_NAME: "v135-${REVIEW_REF_PREFIX}${CI_COMMIT_SHORT_SHA}"
+    HOST_SUFFIX: "${CI_ENVIRONMENT_SLUG}-vc135"
     # the VARIABLES_FILE value is from the CI_JOB_NAME of the review job
-    VARIABLES_FILE: "variables/review_v132"
+    VARIABLES_FILE: "variables/review_v135"
     DOMAIN: "-${HOST_SUFFIX}.${KUBE_INGRESS_BASE_DOMAIN}"
   environment:
-    name: gkevc_132/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA
+    name: gkevc_135/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA
     url: "https://gitlab${DOMAIN}"
 
-
-create_review_v132:
+create_review_v135:
   stage: review
   image: ${BUSYBOX_IMAGE}
-  extends: .v132_base
+  extends: .v135_base
   variables:
     GIT_STRATEGY: none
   script:
-    - echo "Configuring gkevc_132/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA to automatically stop in $REVIEW_APPS_AUTO_STOP_IN."
+    - echo "Configuring gkevc_135/$REVIEW_REF_PREFIX$CI_COMMIT_SHORT_SHA to automatically stop in $REVIEW_APPS_AUTO_STOP_IN."
   environment:
-    on_stop: stop_review_v132
+    on_stop: stop_review_v135
     auto_stop_in: $REVIEW_APPS_AUTO_STOP_IN
     action: start
 
-review_v132:
+review_v135:
   extends:
     - .vcluster_review_template
-    - .v132_base
+    - .v135_base
   environment:
     action: access
 
-stop_review_v132:
+stop_review_v135:
   extends:
     - .stop_vcluster_review_template
-    - .v132_base
+    - .v135_base
   environment:
     action: stop
 
-review_specs_v132:
+review_specs_v135:
   extends:
     - .vcluster_specs_template
-    - .v132_base
+    - .v135_base
   environment:
     action: access
-  needs: ['review_v132']
+  needs: ['review_v135']
 
-qa_v132:
+qa_v135:
   extends:
     - .qa_branch
-    - .v132_base
+    - .v135_base
   variables:
     TEST_SUITE: $QA_SANITY_SUITE_OPTIONS
   environment:
     action: access
   needs:
-    - review_v132
-    - job: review_specs_v132
+    - review_v135
+    - job: review_specs_v135
       artifacts: false
 
-qa_v132_full_suite_manual_trigger:
+qa_v135_full_suite_manual_trigger:
   extends: .qa_full_suite_manual_trigger
-  script: echo 'The job will trigger Full E2E suite against GKE132 vcluster'
+  script: echo 'The job will trigger Full E2E suite against GKE135 vcluster'
 
-qa_v132_manual_full_suite:
+qa_v135_manual_full_suite:
   extends:
     - .qa_branch
-    - .v132_base
+    - .v135_base
   parallel: 7
   variables:
     TEST_SUITE: $QA_FULL_SUITE_OPTIONS
   environment:
     action: access
-  needs: ["qa_v132_full_suite_manual_trigger"]
+  needs: ["qa_v135_full_suite_manual_trigger"]
