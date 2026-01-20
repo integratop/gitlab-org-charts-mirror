@@ -34,7 +34,7 @@ dependencies:
   version: '*.*.*'
 - name: gitlab-zoekt
   repository: https://charts.gitlab.io/
-  version: 3.8.0
+  version: 3.8.1
 - name: openbao
   repository: https://charts.gitlab.io/
   version: 0.12.0
@@ -47,5 +47,5 @@ dependencies:
 - name: gateway-helm
   repository: oci://registry-1.docker.io/envoyproxy
   version: 1.6.2
-digest: sha256:cb57a3be6308ef8890baa77754eb9aba0d87b999430f2ab21672a1f95d7b8792
-generated: "2026-01-13T11:21:30.347652514+01:00"
+digest: sha256:b2e253c63bf0533be106571bc8d7348100d29bfec1947b2f519487cbee38feb1
+generated: "2026-01-20T16:27:14.139323219Z"
