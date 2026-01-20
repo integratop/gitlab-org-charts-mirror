@@ -33,6 +33,13 @@ No changes.
 
 - [Remove suggested reviewers secret and config](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bcdce46616a5f76a12514615497e7d290b22a11b) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4643))
 
+## 9.7.2 (2026-01-20)
+
+### Changed (2 changes)
+
+- [Update Helm release gitlab-runner to v0.84.2](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/83744322de78670f02f608482c98d9421deda49c)
+- [Update Helm release gitlab-runner to v0.84.1](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/4ae726651288d55e8f76f7b26ca75508a3fda7f4)
+
 ## 9.7.1 (2026-01-07)
 
 No changes.
