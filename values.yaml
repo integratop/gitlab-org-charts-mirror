@@ -137,6 +137,12 @@ global:
           mode: Terminate
           certificateRefs:
             - name: minio-tls
+      openbao-web:
+        protocol: ""
+        tls:
+          mode: Terminate
+          certificateRefs:
+            - name: openbao-tls
 
   ## https://docs.gitlab.com/charts/charts/globals#configure-ingress-settings
   ingress:
