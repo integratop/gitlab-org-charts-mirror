@@ -16,6 +16,7 @@ describe 'Gateway API configuration' do
   let(:registry_route) { template["HTTPRoute/test-registry"] }
   let(:kas_route) { template["HTTPRoute/test-kas"] }
   let(:pages_route) { template["HTTPRoute/test-gitlab-pages"] }
+  let(:routes) { [shell_route, webservice_route, registry_route, kas_route, pages_route] }
 
   describe "Gateway API is enabled" do
     let(:values) do
@@ -41,16 +42,12 @@ describe 'Gateway API configuration' do
     it 'creates all expected Gateway API objects' do
       expect(template.exit_code).to eq(0), "Unexpected error code #{template.exit_code} -- #{template.stderr}"
 
-      # GatewayClass Object
+      # GatewayClass object
       expect(gatewayclass).not_to be_nil
-      # Gateway Object
+      # Gateway object
       expect(gateway).not_to be_nil
       # Route objects
-      expect(pages_route).not_to be_nil
-      expect(registry_route).not_to be_nil
-      expect(shell_route).not_to be_nil
-      expect(kas_route).not_to be_nil
-      expect(webservice_route).not_to be_nil
+      expect(routes).not_to include(nil)
       # Optional policies
       expect(clienttrafficpolicy).to be_nil
       expect(securitypolicy).to be_nil
@@ -86,6 +83,56 @@ describe 'Gateway API configuration' do
         expect(securitypolicy).not_to be_nil
         expect(securitypolicy["spec"]["targetRefs"][0]["name"]).to eq("test-gw")
         expect(securitypolicy["spec"]["authorization"]["defaultAction"]).to eq("Deny")
+      end
+    end
+
+    describe "Externally managed Gateway is configured" do
+      let(:values) do
+        HelmTemplate.with_defaults(%(
+        nginx-ingress:
+          enabled: false
+
+        global:
+          hosts:
+            externalIP: 127.0.0.1
+          pages:
+            enabled: true
+          gatewayApi:
+            enabled: true
+            gateway:
+              create: false
+              name: "external-gateway"
+              namespace: "external-gateway-namespace"
+            installEnvoy: false
+        gitlab:
+          gitlab-pages:
+            gatewayRoute:
+              gatewayName: "pages-gateway"
+              gatewayNamespace: "pages-gateway-namespace"
+        ))
+      end
+
+      it 'renders the template' do
+        expect(template.exit_code).to eq(0), "Unexpected error code #{template.exit_code} -- #{template.stderr}"
+      end
+
+      it 'configures the manifests for the externally managed Gateway' do
+        expect(template.exit_code).to eq(0), "Unexpected error code #{template.exit_code} -- #{template.stderr}"
+
+        # Creates no GatewayClass and Gateway object
+        expect(gatewayclass).to be_nil
+        expect(gateway).to be_nil
+        # Route objects reference external Gateway
+        expect(routes).not_to include(nil)
+        routes.each do |route|
+          next if route == pages_route
+
+          expect(route["spec"]["parentRefs"][0]["name"]).to eq("external-gateway")
+          expect(route["spec"]["parentRefs"][0]["namespace"]).to eq("external-gateway-namespace")
+        end
+
+        expect(pages_route["spec"]["parentRefs"][0]["name"]).to eq("pages-gateway")
+        expect(pages_route["spec"]["parentRefs"][0]["namespace"]).to eq("pages-gateway-namespace")
       end
     end
   end

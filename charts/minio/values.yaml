@@ -14,6 +14,7 @@ gatewayRoute:
   enabled: null
   sectionName: "minio-web"
   gatewayName: ""
+  gatewayNamespace: ""
   annotations: {}
 
 ingress:

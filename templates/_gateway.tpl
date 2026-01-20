@@ -78,7 +78,15 @@ Renders the Gateway name referenced from a Route resource.
 Defaults to the GitLab chart managed Gateway but can be overriden per Route.
 */}}
 {{- define "gitlab.gatewayApi.route.gateway" -}}
-{{ .Values.gatewayRoute.gatewayName | default (include "gitlab.gatewayApi.gateway" .) }}
+{{ coalesce .Values.gatewayRoute.gatewayName .Values.global.gatewayApi.gateway.name (include "gitlab.gatewayApi.gateway" .) }}
+{{- end -}}
+
+{{/*
+Renders the Gateway namespace referenced from a Route resource.
+Defaults to the release namespace.
+*/}}
+{{- define "gitlab.gatewayApi.route.gateway.namespace" -}}
+{{ coalesce .Values.gatewayRoute.gatewayNamespace .Values.global.gatewayApi.gateway.namespace .Release.Namespace }}
 {{- end -}}
 
 {{/*

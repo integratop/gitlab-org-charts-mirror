@@ -72,6 +72,7 @@ gatewayRoute:
   enabled: null
   sectionName: "gitlab-ssh"
   gatewayName: ""
+  gatewayNamespace: ""
   annotations: {}
 
 # When using traefik ingress

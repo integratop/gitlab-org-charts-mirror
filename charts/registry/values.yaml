@@ -83,6 +83,7 @@ gatewayRoute:
   enabled: null
   sectionName: "registry-web"
   gatewayName: ""
+  gatewayNamespace: ""
   annotations: {}
   timeouts:
     request: 900s

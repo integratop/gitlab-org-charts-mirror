@@ -14,6 +14,7 @@ metadata:
 spec:
   parentRefs:
   - name: {{ template "gitlab.gatewayApi.route.gateway" . }}
+    namespace: {{ template "gitlab.gatewayApi.route.gateway.namespace" . }}
     sectionName: {{ .Values.gatewayRoute.sectionName }}
   hostnames:
     {{- $hostname := (include "gitlab.pages.hostname" .) }}

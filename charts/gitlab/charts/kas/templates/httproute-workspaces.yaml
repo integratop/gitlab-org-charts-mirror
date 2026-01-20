@@ -13,6 +13,7 @@ metadata:
 spec:
   parentRefs:
   - name: {{ template "gitlab.gatewayApi.route.gateway" . }}
+    namespace: {{ template "gitlab.gatewayApi.route.gateway.namespace" . }}
     sectionName: {{ .Values.gatewayRoute.workspacesSectionName }}
   hostnames:
     - {{ include "gitlab.workspaces.wildcardHostname" . | quote }}

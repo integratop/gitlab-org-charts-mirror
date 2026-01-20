@@ -85,6 +85,10 @@ global:
             type: LoadBalancer
     envoyClientTrafficPolicySpec: {}
     envoySecurityPolicySpec: {}
+    gateway:
+      create: true
+      name: ""
+      namespace: ""
     class:
       name: "gitlab-gw"
       controllerName: "gateway.envoyproxy.io/gitlab-gatewayclass-controller"
