@@ -2,6 +2,10 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## 9.8.2 (2026-01-20)
+
+No changes.
+
 ## 9.8.1 (2026-01-19)
 
 No changes.
@@ -29,6 +33,13 @@ No changes.
 
 - [Remove suggested reviewers secret and config](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bcdce46616a5f76a12514615497e7d290b22a11b) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4643))
 
+## 9.7.2 (2026-01-20)
+
+### Changed (2 changes)
+
+- [Update Helm release gitlab-runner to v0.84.2](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/83744322de78670f02f608482c98d9421deda49c)
+- [Update Helm release gitlab-runner to v0.84.1](https://gitlab.com/gitlab-org/security/charts/gitlab/-/commit/4ae726651288d55e8f76f7b26ca75508a3fda7f4)
+
 ## 9.7.1 (2026-01-07)
 
 No changes.
@@ -53,6 +64,10 @@ No changes.
 - [Update Helm release openbao to v0.9.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/e8edf9bf84403a826d34163a505697c7c6a890a5) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4661))
 - [Update Helm release gitlab-runner to v0.83.1](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/bd1bc85cf2ea47931cf3dc5363a87f8d261566e0) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4659))
 - [Update Helm release gitlab-runner to v0.83.0](https://gitlab.com/gitlab-org/charts/gitlab/-/commit/ff93cc6c6b49b2d3a2bda5ff8d8bbdaedfa01dfb) ([merge request](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4654))
+
+## 9.6.4 (2026-01-20)
+
+No changes.
 
 ## 9.6.3 (2026-01-07)
 
