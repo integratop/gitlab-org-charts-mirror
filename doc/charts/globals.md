@@ -213,7 +213,8 @@ Gateway API support is currently under active development. Please be aware that:
 1. The Gateway API resources are currently only tested with [Envoy Gateway](https://gateway.envoyproxy.io/).
    Other Gateway API controllers might need additional configuration.
 
-Full support is planned to release before March 2026.
+Check the [relevant epic](https://gitlab.com/groups/gitlab-com/gl-infra/software-delivery/operate/-/work_items/5) for details
+and known limitations.
 
 {{< /alert >}}
 
