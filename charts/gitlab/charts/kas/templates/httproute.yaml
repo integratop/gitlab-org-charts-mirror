@@ -11,9 +11,7 @@ metadata:
     {{ .Values.gatewayRoute.annotations | toYaml | nindent 4 }}
 spec:
   parentRefs:
-  - name: {{ template "gitlab.gatewayApi.route.gateway" . }}
-    namespace: {{ template "gitlab.gatewayApi.route.gateway.namespace" . }}
-    sectionName: {{ .Values.gatewayRoute.sectionName }}
+  {{- include "gitlab.gatewayApi.gatewayRef" . | nindent 4 }}
   hostnames:
     - {{ include "gitlab.kas.hostname" . | quote }}
   rules:

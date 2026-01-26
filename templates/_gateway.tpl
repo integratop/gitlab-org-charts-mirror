@@ -8,25 +8,28 @@ Returns name of the Gateway class. Consumed by chart managed Gateway and Gateway
 {{/*
 Returns the name of the EnvoyProxy resource.
 */}}
-{{- define "gitlab.gatewayApi.envoyProxy.config.name" -}}
+{{- define "gitlab.gatewayApi.envoy.config.name" -}}
 {{- printf "%s-envoy-proxy" .Release.Name -}}
 {{- end -}}
 
-{{/*
-Returns name of the managed Gateway resource.
-*/}}
-{{- define "gitlab.gatewayApi.gateway" -}}
-{{ printf "%s-gw" .Release.Name }}
+{{- define "gitlab.gatewayApi.gateway.name.default" -}}
+{{- printf "%s-gw" .Release.Name -}}
 {{- end -}}
 
 {{/*
-Returns a target refs to the managed Gateway resource.
+Returns a target refs to the Gateway resource.
 */}}
-{{- define "gitlab.gatewayApi.gatewayRef" }}
-group: gateway.networking.k8s.io
-kind: Gateway
-name: {{ include "gitlab.gatewayApi.gateway" . }}
+{{- define "gitlab.gatewayApi.gatewayRef" -}}
+- group: gateway.networking.k8s.io
+  kind: Gateway
+  name: {{ coalesce (.Values.gatewayRoute).gatewayName .Values.global.gatewayApi.gatewayRef.name (include "gitlab.gatewayApi.gateway.name.default" .) }}
+  namespace: {{ coalesce (.Values.gatewayRoute).gatewayNamespace .Values.global.gatewayApi.gatewayRef.namespace .Release.Namespace }}
+{{- with .Values.gatewayRoute }}
+{{-   with .sectionName }}
+  sectionName: {{ . | quote }}
+{{-   end }}
 {{- end }}
+{{- end -}}
 
 {{/*
 Renders a single listener configuration for the managed Gateway resource.
@@ -71,22 +74,6 @@ Port assignment is automatically determined based on the selected protocol.
   tls:
 {{- toYaml . | nindent 4 }}
 {{- end }}
-{{- end -}}
-
-{{/*
-Renders the Gateway name referenced from a Route resource.
-Defaults to the GitLab chart managed Gateway but can be overriden per Route.
-*/}}
-{{- define "gitlab.gatewayApi.route.gateway" -}}
-{{ coalesce .Values.gatewayRoute.gatewayName .Values.global.gatewayApi.gateway.name (include "gitlab.gatewayApi.gateway" .) }}
-{{- end -}}
-
-{{/*
-Renders the Gateway namespace referenced from a Route resource.
-Defaults to the release namespace.
-*/}}
-{{- define "gitlab.gatewayApi.route.gateway.namespace" -}}
-{{ coalesce .Values.gatewayRoute.gatewayNamespace .Values.global.gatewayApi.gateway.namespace .Release.Namespace }}
 {{- end -}}
 
 {{/*

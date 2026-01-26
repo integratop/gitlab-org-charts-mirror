@@ -8,6 +8,8 @@ describe 'Gateway API configuration' do
   let(:template) { HelmTemplate.new(values) }
   let(:gatewayclass) { template["GatewayClass/gitlab-gw"] }
   let(:gateway) { template["Gateway/test-gw"] }
+  let(:envoyproxy) { template["EnvoyProxy/test-envoy-proxy"] }
+  let(:envoypatchpolicy) { template["EnvoyPatchPolicy/test-policy"] }
   let(:clienttrafficpolicy) { template["ClientTrafficPolicy/test-policy"] }
   let(:securitypolicy) { template["SecurityPolicy/test-policy"] }
 
@@ -99,11 +101,10 @@ describe 'Gateway API configuration' do
             enabled: true
           gatewayApi:
             enabled: true
-            gateway:
-              create: false
+            installEnvoy: false
+            gatewayRef:
               name: "external-gateway"
               namespace: "external-gateway-namespace"
-            installEnvoy: false
         gitlab:
           gitlab-pages:
             gatewayRoute:
@@ -117,11 +118,13 @@ describe 'Gateway API configuration' do
       end
 
       it 'configures the manifests for the externally managed Gateway' do
-        expect(template.exit_code).to eq(0), "Unexpected error code #{template.exit_code} -- #{template.stderr}"
-
-        # Creates no GatewayClass and Gateway object
+        # Creates to Gateway, GatewayClass or Envoy extensions
         expect(gatewayclass).to be_nil
         expect(gateway).to be_nil
+        expect(envoyproxy).to be_nil
+        expect(clienttrafficpolicy).to be_nil
+        expect(securitypolicy).to be_nil
+
         # Route objects reference external Gateway
         expect(routes).not_to include(nil)
         routes.each do |route|

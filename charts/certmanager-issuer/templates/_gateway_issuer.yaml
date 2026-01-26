@@ -19,7 +19,5 @@ spec:
       - http01:
           gatewayHTTPRoute:
             parentRefs:
-              - name: {{ include "gitlab.gatewayApi.gateway" . }}
-                namespace: {{ $.Release.Namespace }}
-                kind: Gateway
+              {{- include "gitlab.gatewayApi.gatewayRef" . | nindent 16 }}
 {{- end }}

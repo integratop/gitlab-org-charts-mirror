@@ -222,9 +222,8 @@ Full support is planned to release before March 2026.
 | `enabled`                      | Boolean | false          | Enable deployment of GatewayAPI resources. |
 | `class.name`                   | String  | `gitlab-gw`    | Name of the Gateway class bound to the Gateway. |
 | `class.controllerName`         | String  | `gateway.envoyproxy.io/gitlab-gatewayclass-controller` | Controller name of the GatewayClass. |
-| `gateway.create`               | Boolean | true           | Create a managed Gateway resource |
-| `gateway.name`                 | String  |                | Gateway name rendered to all Routes. Use this to reference an externally managed Gateway. |
-| `gateway.namespace`            | String  |                | Gateway namespace rendered to all Routes. Use this to reference an externally managed Gateway in another namespace. |
+| `gatewayRef.name`              | String  |                | Gateway name rendered to all Gateway API resources. Use this to reference an externally managed Gateway and to disable the in Gateway provided my the chart. |
+| `gatewayRef.namespace`         | String  |                | Gateway namespace rendered to all Gateway API resources. Use this to reference an externally managed Gateway in another namespace and to disable the Gateway provided by the chart. |
 | `protocol`                     | String  | `HTTPS`        | Default protocol for all listeners. |
 | `installEnvoy`                 | Boolean | false          | Install Envoy Gateway subchart and configure a `GatewayClass` and Envoy Gateway API extensions like `EnvoyProxy`, `EnvoyPatchPolicy`, `ClientTrafficPolicy`, and `SecurityPolicy`. |
 | `envoyProxySpec`               | Object  | see values     | Configuration of the default `EnvoyProxy` resource bound to the managed `Gateway`. |
@@ -337,14 +336,11 @@ global:
   gatewayApi:
     enabled: true
     gateway:
-      # Disable managed Gateway.
-      create: false
       # Don't install Envoy Gateway subchart and custom resources.
       installEnvoy: false
-      # Name and namespace of externally managed Gateway to be rendered to all Routes.
-      name: "custom-gateway"
-      namespace: "custom-gateway-namespace"
-    installEnvoy: false
+      gatewayRef:
+        name: "custom-gateway"
+        namespace: "custom-gateway-namespace"
 ```
 
 #### Configure an externally managed GatewayClass
@@ -356,11 +352,11 @@ disable the bundled Envoy Gateway and configure your `GatewayClass`:
 global:
   gatewayApi:
     enabled: true
+    # Don't install Envoy Gateway subchart and custom resources.
+    installEnvoy: false
     class:
       # Name of the GatewayClass backed by your Gateway API controller.
       name: custom-class
-    # Don't install Envoy Gateway subchart and custom resources.
-    installEnvoy: false
 ```
 
 ## GitLab Version

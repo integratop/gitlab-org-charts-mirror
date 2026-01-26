@@ -1,8 +1,9 @@
-{{- $spec := .Values.global.gatewayApi.envoySecurityPolicySpec }}
-{{- if and .Values.global.gatewayApi.enabled .Values.global.gatewayApi.installEnvoy $spec }}
-{{- if not $spec.targetRefs }}
-{{-   $_ := set $spec "targetRefs" (list (include "gitlab.gatewayApi.gatewayRef" . | fromYaml)) -}}
-{{- end }}
+{{- if and .Values.global.gatewayApi.enabled .Values.global.gatewayApi.installEnvoy }}
+{{-   $spec := .Values.global.gatewayApi.envoySecurityPolicySpec }}
+{{-   if $spec }}
+{{-     if not $spec.targetRefs }}
+{{-       $_ := set $spec "targetRefs" (include "gitlab.gatewayApi.gatewayRef" . | fromYamlArray) -}}
+{{-     end }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
@@ -13,4 +14,5 @@ metadata:
     {{- include "gitlab.commonLabels" . | nindent 4 }}
 spec:
   {{- $spec | toYaml | nindent 2 }}
+{{-   end }}
 {{- end }}
