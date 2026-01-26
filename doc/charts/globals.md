@@ -223,8 +223,8 @@ Full support is planned to release before March 2026.
 | `class.name`                   | String  | `gitlab-gw`    | Name of the Gateway class bound to the Gateway. |
 | `class.controllerName`         | String  | `gateway.envoyproxy.io/gitlab-gatewayclass-controller` | Controller name of the GatewayClass. |
 | `gateway.create`               | Boolean | true           | Create a managed Gateway resource |
-| `gateway.name`                 | String  |                | Gateway name rendered to all Routes. Use this to reference a externally managed Gateway. |
-| `gateway.namespace`            | String  |                | Gateway namespace rendered to all Routes. Use this to reference a externally managed Gateway in another namespace. |
+| `gateway.name`                 | String  |                | Gateway name rendered to all Routes. Use this to reference an externally managed Gateway. |
+| `gateway.namespace`            | String  |                | Gateway namespace rendered to all Routes. Use this to reference an externally managed Gateway in another namespace. |
 | `protocol`                     | String  | `HTTPS`        | Default protocol for all listeners. |
 | `installEnvoy`                 | Boolean | false          | Install Envoy Gateway subchart and configure a `GatewayClass` and Envoy Gateway API extensions like `EnvoyProxy`, `EnvoyPatchPolicy`, `ClientTrafficPolicy`, and `SecurityPolicy`. |
 | `envoyProxySpec`               | Object  | see values     | Configuration of the default `EnvoyProxy` resource bound to the managed `Gateway`. |
@@ -327,7 +327,7 @@ configurations with other Gateway API providers.
 
 {{< /tabs >}}
 
-#### Configure a externally managed Gateway
+#### Configure an externally managed Gateway
 
 To configure GitLab chart to use an externally Gateway, disable the chart-managed `Gateway`
 and configure your externally managed Gateway:
@@ -347,7 +347,7 @@ global:
     installEnvoy: false
 ```
 
-#### Configure a externally managed GatewayClass
+#### Configure an externally managed GatewayClass
 
 To configure GitLab chart to use the chart-managed `Gateway` resource, but an external `GatewayClass`,
 disable the bundled Envoy Gateway and configure your `GatewayClass`:
@@ -357,7 +357,7 @@ global:
   gatewayApi:
     enabled: true
     class:
-      # Name of the GatewayClass backed backed by your Gateway API controller.
+      # Name of the GatewayClass backed by your Gateway API controller.
       name: custom-class
     # Don't install Envoy Gateway subchart and custom resources.
     installEnvoy: false
