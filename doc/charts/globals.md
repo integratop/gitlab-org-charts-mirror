@@ -335,12 +335,11 @@ and configure your externally managed Gateway:
 global:
   gatewayApi:
     enabled: true
-    gateway:
-      # Don't install Envoy Gateway subchart and custom resources.
-      installEnvoy: false
-      gatewayRef:
-        name: "custom-gateway"
-        namespace: "custom-gateway-namespace"
+    # Don't install Envoy Gateway subchart and custom resources.
+    installEnvoy: false
+    gatewayRef:
+      name: "custom-gateway"
+      namespace: "custom-gateway-namespace"
 ```
 
 #### Configure an externally managed GatewayClass
