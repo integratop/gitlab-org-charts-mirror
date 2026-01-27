@@ -64,7 +64,7 @@ echo "Vault Token SHA: ${GAR_JSON_KEY}" | sha256sum
 
 # Perform registry login
 log "Logging into helm registry at ${REGISTRY_URL}..."
-if ! echo "${GAR_JSON_KEY}" | helm registry login -u _json_key --password-stdin "https://${REGISTRY_URL}"; then
+if ! echo "${GAR_JSON_KEY}" | helm registry login -u _json_key --password-stdin "${REGISTRY_URL}"; then
     log "ERROR: Failed to login to helm registry"
     exit 1
 fi
