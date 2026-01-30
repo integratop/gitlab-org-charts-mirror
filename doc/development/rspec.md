@@ -370,6 +370,6 @@ To generate such a report on demand:
 
 1. Create a new VM or log into a existing one.
 1. Checkout the charts repository.
-1. Install required dependencies (e.g. using asdf/mise).
+1. Install required dependencies (e.g. using mise).
 1. Run `./scripts/generate_knapsack_report.sh`.
 1. Open a MR with the updated report.

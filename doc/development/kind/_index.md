@@ -87,7 +87,7 @@ Add `--namespace YOUR_NAMESPACE` to all future **kubectl** commands to use the n
 
 ### Installing dependencies
 
-You can use `asdf` ([more info](../environment_setup.md#additional-developer-tools)) to install the following tools:
+You can use `mise` ([more info](../environment_setup.md#additional-developer-tools)) to install the following tools:
 
 - `kubectl`
 - `helm`
