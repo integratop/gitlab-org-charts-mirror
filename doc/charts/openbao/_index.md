@@ -171,14 +171,14 @@ The OpenBao chart defaults to Ingress-terminated TLS encryption.
 
 | Parameter                                                | Default                                                 | Description |
 |----------------------------------------------------------|---------------------------------------------------------|-------------|
-| `global.openbao.host`                                    | openbao.<GitLab Domain>                                 | OpenBao host. Used to configure GitLab webservice and the OpenBao chart. |
+| `global.openbao.host`                                    | `openbao.<GitLab Domain>`                                 | OpenBao host. Used to configure GitLab webservice and the OpenBao chart. |
 | `ingress.enabled`                                        | true                                                    | Enable the OpenBao Ingress to allow Runner to reach OpenBao. |
 | `ingress.hostname`                                       | External OpenBao host based on global hosts config.     | Hostname the Ingress should match. |
 | `ingress.tls.enabled`                                    | true                                                    | Enable Ingress TLS. |
 | `ingress.tls.secretName`                                 |                                                         | Name of the [Kubernetes TLS Secret](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). Managed by certmanager by default. |
 | `ingress.annotations`                                    | true                                                    | Annotations rendered to the Ingress. Use this to configure OpenBao for any non-NGINX Ingress controllers. |
 | `ingress.configureCertmanager`                           | Global certmanager config                               | Use certmanager to manage the TLS certificate. |
-| `ingress.certmanagerIssuer`                              | <release>-issuer                                        | Name of the certmanager issuer. |
+| `ingress.certmanagerIssuer`                              | `<release>-issuer`                                       | Name of the certmanager issuer. |
 | `ingress.sslPassthroughNginx`                            | false                                                   | Annotate the Ingress to pass through incoming TLS connections to OpenBao. If certmanager is configured, new HTTP01 challanges will be through another Ingress. |
 | `config.tlsDisable`                                      | true                                                    | Disable internal TLS. If disabled, Ingress TLS passthrough is also disabled. |
 | `config.metricsListener.tlsDisable`                      | true                                                    | Disable internal TLS of the metrics listener. |
