@@ -97,5 +97,4 @@ spec:
         emptyDir:
           medium: "Memory"
       {{- include "gitlab.certificates.volumes" . | nindent 6 }}
-      {{- include "gitlab.nodeSelector" . | nindent 6 }}
 {{- end }}
