@@ -82,7 +82,7 @@ to the `helm install` command using the `--set` flags:
 | `init.containerSecurityContext.runAsNonRoot`             | `true`                         | initContainer specific: Controls whether the container runs with a non-root user |
 | `init.containerSecurityContext.capabilities.drop`        | `[ "ALL" ]`                    | initContainer specific: Removes [Linux capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) for the container |
 | `defaultBuckets`                                         | `[{"name": "registry"}]`       | MinIO default buckets |
-| `deployment.strategy`                                    | ``{ `type`: `Recreate` }``     | Allows one to configure the update strategy utilized by the deployment |
+| `deployment.strategy`                                    | `{ type: 'Recreate' }`         | Allows one to configure the update strategy utilized by the deployment |
 | `image`                                                  | `minio/minio`                  | MinIO image |
 | `imagePullPolicy`                                        | `Always`                       | MinIO image pull policy |
 | `imageTag`                                               | `RELEASE.2017-12-28T01-21-00Z` | MinIO image tag |

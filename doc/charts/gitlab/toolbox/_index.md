@@ -105,7 +105,7 @@ gitlab:
 | `backups.objectStorage.config.key`                       | `""`                                                         | Key containing credentials in secret |
 | `backups.objectStorage.config.secret`                    | `""`                                                         | Object storage credentials secret |
 | `common.labels`                                          | `{}`                                                         | Supplemental labels that are applied to all objects created by this chart. |
-| `deployment.strategy`                                    | ``{ `type`: `Recreate` }``                                   | Allows one to configure the update strategy utilized by the deployment |
+| `deployment.strategy`                                    | `{ type: 'Recreate' }`                                       | Allows one to configure the update strategy utilized by the deployment |
 | `enabled`                                                | `true`                                                       | Toolbox enablement flag |
 | `extra`                                                  | `{}`                                                         | YAML block for [extra `gitlab.yml` configuration](https://gitlab.com/gitlab-org/gitlab/-/blob/8d2b59dbf232f17159d63f0359fa4793921896d5/config/gitlab.yml.example#L1193-1199) |
 | `image.pullPolicy`                                       | `IfNotPresent`                                               | Toolbox image pull policy |
@@ -114,7 +114,7 @@ gitlab:
 | `image.tag`                                              | `master`                                                     | Toolbox image tag |
 | `init.image.repository`                                  |                                                              | Toolbox init image repository |
 | `init.image.tag`                                         |                                                              | Toolbox init image tag |
-| `init.resources`                                         | ``{ `requests`: { `cpu`: `50m` }}``                          | Toolbox init container resource requirements |
+| `init.resources`                                         | `{ requests: { cpu: '50m' }}`                                | Toolbox init container resource requirements |
 | `init.containerSecurityContext`                          |                                                              | initContainer specific [securityContext](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#securitycontext-v1-core) |
 | `init.containerSecurityContext.allowPrivilegeEscalation` | `false`                                                      | initContainer specific: Controls whether a process can gain more privileges than its parent process |
 | `init.containerSecurityContext.runAsUser`                | `1000`                                                       | initContainer specific: User ID under which the container should be started |
@@ -133,7 +133,7 @@ gitlab:
 | `podLabels`                                              | `{}`                                                         | Labels for running Toolbox Pods |
 | `priorityClassName`                                      |                                                              | [Priority class](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/) assigned to pods. |
 | `replicas`                                               | `1`                                                          | Number of Toolbox Pods to run |
-| `resources.requests`                                     | ``{ `cpu`: `50m`, `memory`: `350M` }``                       | Toolbox minimum requested resources |
+| `resources.requests`                                     | `{ cpu: '50m', memory: '350M' }`                             | Toolbox minimum requested resources |
 | `securityContext.fsGroup`                                | `1000`                                                       | File System Group ID under which the pod should be started |
 | `securityContext.runAsUser`                              | `1000`                                                       | User ID under which the pod should be started |
 | `securityContext.runAsGroup`                             | `1000`                                                       | Group ID under which the pod should be started |
