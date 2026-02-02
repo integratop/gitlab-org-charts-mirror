@@ -24,7 +24,6 @@
 .gitlab
 .gitlab-ci.yml
 .markdownlint.json
-.dockerignore
 .helmignore
 argo_translation.yml
 Dangerfile
@@ -32,17 +31,10 @@ Rakefile
 Gemfile
 Gemfile.lock
 knapsack_rspec_report.json
-gems/
+mise.toml
 ci/
 doc/
 doc-locale/
 examples/
-images/
-certs/
 scripts/
-spec/
-build/
-changelogs/
-# CHANGELOG.md
-bin/
 spec/

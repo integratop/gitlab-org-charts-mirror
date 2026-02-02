@@ -12,7 +12,7 @@ Kubernetes cluster are required.
 
 The minimum tools required for charts development are documented on the [Required tools page](../installation/tools.md).
 
-You should use [`asdf`](https://github.com/asdf-vm/asdf) to install these tools.
+We recommend to use [`mise`](https://mise.jdx.dev) to install these tools.
 This allows us to easily switch between versions, such as different kubectl or Helm versions.
 
 We provide a [`.tool-versions` file](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/.tool-versions)
@@ -25,21 +25,11 @@ that specifies these tools with their recommended versions. To install or update
    cd charts-gitlab/
    ```
 
-1. Add each plugin repository. This only has to be done once:
+1. Trust and install all plugins:
 
    ```shell
-   asdf plugin add minikube
-   asdf plugin add kubectl
-   asdf plugin add helm
-   asdf plugin add stern
-   asdf plugin add vale
-   asdf plugin add gomplate
-   ```
-
-1. Install or update the tools:
-
-   ```shell
-   asdf install
+   mise trust
+   mise install
    ```
 
 ### Additional developer tools
@@ -48,7 +38,7 @@ Developers working on charts also often use the following tools:
 
 | Tool name                                                                  | Benefits                                                                | Example use case |
 |----------------------------------------------------------------------------|-------------------------------------------------------------------------|------------------|
-| [`asdf`](https://github.com/asdf-vm/asdf)                                  | Easily switch between versions of your favorite runtimes and CLI tools. | Switching between Helm 3.7 and Helm 3.9 binaries. |
+| [`mise`](https://mise.jdx.dev)                                             | Easily switch between versions of your favorite runtimes and CLI tools. | Switching between Helm 3.7 and Helm 3.9 binaries. |
 | [`kubectx` & `kubens`](https://github.com/ahmetb/kubectx)                  | Manage and switch between Kubernetes contexts and namespaces.           | Setting default namespace per selected cluster context. |
 | [`k3s`](https://k3s.io)                                                    | Lightweight Kubernetes installation (<40 MB).                           | Quick and reliable local chart testing. |
 | [`k9s`](https://github.com/derailed/k9s)                                   | Greatly reduced typing of `kubectl` commands.                           | Navigate and manage cluster resources quickly in a command line interface. |
@@ -65,10 +55,8 @@ When dealing with networking, storage, or other complex issues, a cloud Kubernet
 
 {{< alert type="warning" >}}
 
-Official GitLab images are built with the x86-64 architecture.
-For local development, Apple silicon users can use an [alternate Docker setup](kind/_index.md#apple-silicon-m1m2)
-to emulate a compatible architecture.
-Kubernetes nodes support x86-64 and ARM64 architectures.
+GitLab images are built for x86-64 amd ARM64 architectures.
+
 FIPS-validated images are only available for x86-64.
 See [issue 2285](https://gitlab.com/gitlab-org/build/CNG/-/issues/2285) for ARM64 FIPS status.
 
