@@ -22,8 +22,8 @@ Returns a target refs to the Gateway resource.
 {{- define "gitlab.gatewayApi.gatewayRef" -}}
 - group: gateway.networking.k8s.io
   kind: Gateway
-  name: {{ coalesce (.Values.gatewayRoute).gatewayName .Values.global.gatewayApi.gatewayRef.name (include "gitlab.gatewayApi.gateway.name.default" .) }}
-  namespace: {{ coalesce (.Values.gatewayRoute).gatewayNamespace .Values.global.gatewayApi.gatewayRef.namespace .Release.Namespace }}
+  name: {{ coalesce (.Values.gatewayRoute).gatewayName .Values.global.gatewayApi.gatewayRef.name (include "gitlab.gatewayApi.gateway.name.default" .) | quote }}
+  namespace: {{ coalesce (.Values.gatewayRoute).gatewayNamespace .Values.global.gatewayApi.gatewayRef.namespace .Release.Namespace | quote }}
 {{- with .Values.gatewayRoute }}
 {{-   with .sectionName }}
   sectionName: {{ . | quote }}
