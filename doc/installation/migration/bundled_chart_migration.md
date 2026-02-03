@@ -132,7 +132,7 @@ Provision your external PostgreSQL service. For example, by using [CloudNativePG
 1. Confirm the PostgreSQL cluster is healthy:
 
    ```script
-   $ kubectl get clusters -n <NAMESPACEE>
+   $ kubectl get clusters -n <NAMESPACE>
    NAME                 AGE   INSTANCES   READY   STATUS                     PRIMARY
    gitlab-rails-db      20m   1           1       Cluster in healthy state   gitlab-rails-db-1
    ```
