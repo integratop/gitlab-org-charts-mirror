@@ -19,5 +19,5 @@ spec:
       - http01:
           gatewayHTTPRoute:
             parentRefs:
-              {{- include "gitlab.gatewayApi.gatewayRef" . | nindent 16 }}
+              {{- include "gitlab.gatewayApi.gatewayRef" . | nindent 14 }}
 {{- end }}
