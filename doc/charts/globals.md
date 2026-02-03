@@ -222,9 +222,11 @@ For more information, see [work item 5](https://gitlab.com/groups/gitlab-com/gl-
 | `enabled`                      | Boolean | false          | Enable deployment of GatewayAPI resources. |
 | `class.name`                   | String  | `gitlab-gw`    | Name of the Gateway class bound to the Gateway. |
 | `class.controllerName`         | String  | `gateway.envoyproxy.io/gitlab-gatewayclass-controller` | Controller name of the GatewayClass. |
+| `gatewayRef.name`              | String  |                | Gateway name rendered to all Gateway API resources. Use this to reference an externally managed Gateway and to disable the in Gateway provided my the chart. |
+| `gatewayRef.namespace`         | String  |                | Gateway namespace rendered to all Gateway API resources. Use this to reference an externally managed Gateway in another namespace and to disable the Gateway provided by the chart. |
 | `protocol`                     | String  | `HTTPS`        | Default protocol for all listeners. |
-| `installEnvoy`                 | Boolean | false          | Install Envoy Gateway and configure with Envoy-specific custom resources. |
-| `envoyProxySpec`               | Object  | see values     | Configuration of the default `EnvoyProxy` resource. |
+| `installEnvoy`                 | Boolean | false          | Install Envoy Gateway subchart and configure a `GatewayClass` and Envoy Gateway API extensions like `EnvoyProxy`, `EnvoyPatchPolicy`, `ClientTrafficPolicy`, and `SecurityPolicy`. |
+| `envoyProxySpec`               | Object  | see values     | Configuration of the default `EnvoyProxy` resource bound to the managed `Gateway`. |
 | `envoyClientTrafficPolicySpec` | Object  | `{}`           | Configuration of a optional `ClientTrafficPolicy` bound to the managed `Gateway`. |
 | `envoySecurityPolicySpec`      | Object  | see values     | Configuration of a optional `SecurityPolicy` bound to the managed `Gateway`. |
 
@@ -273,6 +275,12 @@ listeners:
       mode: Terminate
       certificateRefs:
         - name: minio-tls
+  openbao-web:
+    protocol: ""
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: openbao-tls
 ```
 
 ### Certmanager
@@ -303,16 +311,51 @@ Note that we only test with the bundled Envoy Gateway chart. Support for other p
 offered on a best-effort basis. We welcome any contributions that document working
 configurations with other Gateway API providers.
 
-To configure GitLab chart to use an external GatewayClass, disable the bundled Envoy Gateway
-and configure your custom class:
+#### Setting up external Gateway API providers
+
+{{< tabs >}}
+
+{{< tab title="Envoy Gateway" >}}
+
+- For GitLab to work with Envoy Gateway escaped slashed in traffic have to remain unchanged. This can
+  be configured with a [PatchPolicy](https://gitlab.com/gitlab-org/charts/gitlab/-/blob/0e07dbab91c9ba4df48c9424b769e92a219e7528/templates/envoypatchpolicy.yaml#L21).
+- Note that `EnvoyPatchPolicies` are disabled by default and Envoy Gateway must be
+  [configured to enable them](https://gateway.envoyproxy.io/docs/tasks/extensibility/envoy-patch-policy/#enable-envoypatchpolicy).
+
+{{< /tab >}}
+
+{{< /tabs >}}
+
+#### Configure an externally managed Gateway
+
+To configure GitLab chart to use an externally Gateway, disable the chart-managed `Gateway`
+and configure your externally managed Gateway:
 
 ```yaml
 global:
   gatewayApi:
     enabled: true
-    class:
-      name: custom-class
+    # Don't install Envoy Gateway subchart and custom resources.
     installEnvoy: false
+    gatewayRef:
+      name: "custom-gateway"
+      namespace: "custom-gateway-namespace"
+```
+
+#### Configure an externally managed GatewayClass
+
+To configure GitLab chart to use the chart-managed `Gateway` resource, but an external `GatewayClass`,
+disable the bundled Envoy Gateway and configure your `GatewayClass`:
+
+```yaml
+global:
+  gatewayApi:
+    enabled: true
+    # Don't install Envoy Gateway subchart and custom resources.
+    installEnvoy: false
+    class:
+      # Name of the GatewayClass backed by your Gateway API controller.
+      name: custom-class
 ```
 
 ## GitLab Version

@@ -79,6 +79,7 @@ gatewayRoute:
   sectionName: "kas-web"
   workspacesSectionName: "kas-workspaces-web"
   gatewayName: ""
+  gatewayNamespace: ""
   annotations: {}
 
 ingress:

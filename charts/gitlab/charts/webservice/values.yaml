@@ -112,6 +112,7 @@ gatewayRoute:
   enabled: null
   sectionName: "gitlab-web"
   gatewayName: ""
+  gatewayNamespace: ""
   annotations: {}
 
 ingress:
