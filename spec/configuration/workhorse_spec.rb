@@ -776,5 +776,55 @@ CFG
         end
       end
     end
+
+    context 'with load shedding configuration' do
+      let(:custom_values) do
+        HelmTemplate.with_defaults(%(
+          gitlab:
+            webservice:
+              workhorse:
+                loadShedding:
+                  enabled: true
+                  backlogThreshold: 50
+                  retryAfterSeconds: 0
+                  strategy: max
+        ))
+      end
+
+      it 'renders a valid TOML configuration file with load shedding values' do
+        toml = render_toml(raw_toml)
+
+        load_shedding = toml['load_shedding']
+        expect(load_shedding['enabled']).to eq(true)
+        expect(load_shedding['backlog_threshold']).to eq(50)
+        expect(load_shedding['retry_after_seconds']).to eq(0)
+        expect(load_shedding['strategy']).to eq('max')
+      end
+    end
+
+    context 'with load shedding using sum strategy' do
+      let(:custom_values) do
+        HelmTemplate.with_defaults(%(
+          gitlab:
+            webservice:
+              workhorse:
+                loadShedding:
+                  enabled: true
+                  backlogThreshold: 100
+                  retryAfterSeconds: 5
+                  strategy: sum
+        ))
+      end
+
+      it 'renders a valid TOML configuration file with sum strategy' do
+        toml = render_toml(raw_toml)
+
+        load_shedding = toml['load_shedding']
+        expect(load_shedding['enabled']).to eq(true)
+        expect(load_shedding['backlog_threshold']).to eq(100)
+        expect(load_shedding['retry_after_seconds']).to eq(5)
+        expect(load_shedding['strategy']).to eq('sum')
+      end
+    end
   end
 end

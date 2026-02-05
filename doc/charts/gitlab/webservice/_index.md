@@ -188,6 +188,13 @@ to the `helm install` command using the `--set` flags.
 | `workhorse.healthcheckListener.maxConsecutiveFailures`        | `1`                                                             | Number of failures before marking the workhorse as not ready. |
 | `workhorse.healthcheckListener.minSuccessfullProbes`          | `1`                                                             | Number of successful probes before workhorse is deemed ready. |
 | `workhorse.healthcheckListener.railsSkipInterval`             | `0s`                                                            | Time delay before resuming Puma readiness checks after a request is successfully processed. Disabled by default. |
+| `workhorse.loadShedding.enabled`                              | `false`                                                         | Enable load shedding to return `503` when Puma's request backlog exceeds the threshold. |
+| `workhorse.loadShedding.backlogThreshold`                     | `50`                                                            | Backlog threshold at which to start shedding load. |
+| `workhorse.loadShedding.backlogHysteresis`                    | `0.8`                                                           | Hysteresis factor for deactivation (0.0 to 1.0). Load shedding deactivates when backlog drops below threshold * hysteresis. |
+| `workhorse.loadShedding.retryAfterSeconds`                    | `0`                                                             | Retry-After header value in seconds when shedding load. Use 0 for immediate retry (recommended for Kubernetes). |
+| `workhorse.loadShedding.strategy`                             | `max`                                                           | Strategy for calculating effective backlog: "max" (default) or "sum". |
+| `workhorse.loadShedding.checkInterval`                        | `1s`                                                            | How often to sample Puma's backlog metrics. Independent of health check interval. |
+| `workhorse.loadShedding.timeout`                              | `5s`                                                            | Timeout for control server requests. |
 | `workhorse.monitoring.exporter.enabled`                       | `false`                                                         | Enable workhorse to expose Prometheus metrics, this is overridden by `workhorse.metrics.enabled` |
 | `workhorse.monitoring.exporter.port`                          | `9229`                                                          | Port number to use for workhorse Prometheus metrics |
 | `workhorse.monitoring.exporter.tls.enabled`                   | `false`                                                         | When set to `true`, enables TLS on metrics endpoint. It requires [TLS to be enabled for Workhorse](#gitlab-workhorse). |
@@ -779,6 +786,65 @@ Puma unique options:
 | `puma.workerMaxMemory` | Integer |         | The maximum memory (in megabytes) for the Puma worker killer |
 | `puma.threads.min`     | Integer | `4`     | The minimum amount of Puma threads |
 | `puma.threads.max`     | Integer | `4`     | The maximum amount of Puma threads |
+
+### Workhorse load shedding
+
+{{< history >}}
+
+- [Introduced](https://gitlab.com/gitlab-com/gl-infra/production-engineering/-/work_items/28055) in GitLab 18.9.
+
+{{< /history >}}
+
+Load shedding protects Puma from being overwhelmed by returning `503
+Service Unavailable` responses when the request backlog exceeds a
+configured threshold to allow the reverse proxy to retry requests to
+other instances.
+
+To enable load shedding, configure the `loadShedding` parameters:
+
+```yaml
+gitlab:
+  webservice:
+    workhorse:
+      loadShedding:
+        enabled: true
+        backlogThreshold: 50
+        retryAfterSeconds: 0
+        strategy: max
+```
+
+- `backlogThreshold` specifies the number of backlogged requests that trigger load shedding.
+- `retryAfterSeconds` sets the value for the `Retry-After` header in the `503` response.
+- `strategy` determines how the effective backlog is calculated:
+  - `max`: Use the maximum backlog across all Puma workers (default).
+  - `sum`: Use the sum of all backlogs across Puma workers.
+
+#### Proxy Configuration
+
+For load shedding to work effectively, your reverse proxy must be configured to retry requests when it receives a `503` response. This ensures that requests
+are distributed to healthy instances.
+
+For an NGINX example, configure the following annotations on the Ingress:
+
+```yaml
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-next-upstream: "http_503"
+    nginx.ingress.kubernetes.io/proxy-next-upstream-tries: "3"
+    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: "10s"
+```
+
+These settings tell NGINX to:
+
+- Retry on `503` responses (which load shedding generates).
+- Try up to 3 times before giving up.
+- Wait up to 10 seconds for retries.
+
+You should only retry on `503` responses, which are the specific signal that load shedding generates.
+Avoid retrying on other status codes like `504` (Gateway Timeout) or error conditions because these can amplify load during outages by retrying requests that may fail on all backends.
+
+For other reverse proxies, consult their documentation for equivalent retry configuration. The key is to ensure that `503` responses trigger retries to
+other backend instances.
 
 ## Configuring the `networkpolicy`
 
