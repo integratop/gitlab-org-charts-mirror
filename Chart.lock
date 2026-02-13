@@ -16,7 +16,7 @@ dependencies:
   version: v1.17.4
 - name: prometheus
   repository: https://prometheus-community.github.io/helm-charts
-  version: 27.50.1
+  version: 27.52.0
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 13.4.4
@@ -47,5 +47,5 @@ dependencies:
 - name: gateway-helm
   repository: oci://registry-1.docker.io/envoyproxy
   version: 1.6.3
-digest: sha256:59403efcae735b70b187e804edae9bb36923b552c5b3bffda54f4c4235ccb6b1
-generated: "2026-02-13T13:51:41.150387+01:00"
+digest: sha256:f229d84d0ae611724106baba999c57bc508bfd98200fde63f4a0eb45ee41c0d1
+generated: "2026-02-13T16:15:52.36709334Z"
