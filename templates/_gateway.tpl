@@ -128,3 +128,14 @@ https://cert-manager.io/docs/usage/gateway/
 cert-manager.io/issuer: {{ include "gitlab.gatewayApi.certmanager.issuer" . }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Renders true if Gateway resources should be configured for Geo traffic.
+*/}}
+{{- define "gitlab.gatewayApi.gateway.geo.configure" -}}
+{{ if and .Values.global.geo.enabled .Values.global.geo.gatewayApi.additionalHostname .Values.global.gatewayApi.enabled -}}
+true
+{{- else -}}
+false
+{{- end -}}
+{{- end -}}
