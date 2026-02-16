@@ -1,7 +1,7 @@
 ---
 stage: GitLab Delivery
 group: Operate
-info: To determine the technical writer assigned to the Stage/Group associated with this page, see https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments
+info: To determine the technical writer assigned to the Stage/Group associated with this page, see <https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments>
 title: Upgrade GitLab Helm chart instances
 ---
 
@@ -226,7 +226,7 @@ To upgrade GitLab:
 1. If enabled, [turn off maintenance mode](https://docs.gitlab.com/administration/maintenance_mode/#disable-maintenance-mode).
 1. Run [upgrade health checks](https://docs.gitlab.com/update/plan_your_upgrade/#run-upgrade-health-checks).
 
-## Related topics 
+## Related topics
 
 1. [Zero downtime upgrades for Linux package installations](https://docs.gitlab.com/update/zero_downtime/)
 1. [Upgrade paths](https://docs.gitlab.com/update/upgrade_paths/)
