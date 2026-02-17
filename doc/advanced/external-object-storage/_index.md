@@ -5,6 +5,14 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 title: Configure the GitLab chart with an external object storage
 ---
 
+> [!warning]
+> The bundled Bitnami MinIO chart is not production ready. For a production-ready GitLab chart deployment, use an
+> external object storage solution.
+> 
+> From GitLab 19.0, the GitLab Helm chart will no longer bundle MinIO. For more information, see the
+> [deprecation announcement](https://docs.gitlab.com/update/deprecations/#support-for-bundled-postgresql-redis-and-minio-in-gitlab-helm-chart)
+> and [migrate](../../installation/migration/bundled_chart_migration.md) to an external alternative.
+
 GitLab relies on object storage for highly-available persistent data in Kubernetes.
 GitLab supports two types of authentication methods for major cloud object storage providers: static credentials and temporary credentials through cloud-specific services.
 
@@ -33,6 +41,11 @@ These temporary credential mechanisms improve security by:
 - Integrating with cloud provider IAM policies.
 
 ## Disable MinIO
+
+> [!warning]
+> From GitLab 19.0, the GitLab Helm chart will no longer bundle MinIO. For more information, see the
+> [deprecation announcement](https://docs.gitlab.com/update/deprecations/#support-for-bundled-postgresql-redis-and-minio-in-gitlab-helm-chart)
+> and [migrate](../../installation/migration/bundled_chart_migration.md) to an external alternative.
 
 By default, an S3-compatible storage solution named `minio` is deployed with the
 chart. For production quality deployments, we recommend using a hosted
