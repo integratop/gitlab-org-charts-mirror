@@ -46,6 +46,7 @@ charts/registry/values.yaml
 doc/charts/registry/index.md
 
 ## Localization
-[Localization Team] @gitlab-com/localization/maintainers
-/doc-locale/
-/argo_translation.yml 
+[Localization Team]
+/doc-locale/ @gitlab-com/localization/maintainers/tech-docs
+/argo_translation.yml @gitlab-com/localization/maintainers/tech-docs
+/doc-locale/ja-jp/ @gitlab-com/localization/maintainers/tech-docs @gitlab-com/localization/maintainers/japanese
