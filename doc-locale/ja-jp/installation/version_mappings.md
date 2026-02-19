@@ -1,8 +1,8 @@
 ---
 stage: GitLab Delivery
 group: Operate
-info: To determine the technical writer assigned to the Stage/Group associated with this page, see https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments
-title: GitLab Helmチャートのバージョン
+info: To determine the technical writer assigned to the Stage/Group associated with this page, see <https://handbook.gitlab.com/handbook/product/ux/technical-writing/#assignments>
+title: GitLab Helmチャートバージョン
 ---
 
 {{< details >}}
@@ -12,38 +12,59 @@ title: GitLab Helmチャートのバージョン
 
 {{< /details >}}
 
-GitLab Helmチャートのバージョン番号は、GitLab自体のバージョン番号と同じではありません。これは、チャートに破壊的な変更が、GitLabとは独立して導入される可能性があることを意味します。
+GitLab Helmチャートのバージョン番号は、GitLab自体のバージョン番号と同じではありません。つまり、破壊的な変更が、GitLabとは関係なくチャートに導入される可能性があります。
 
-`gitlab`チャートのバージョンの完全なリストと、対応するGitLabのバージョンをすばやく確認するには、[Helm](tools.md)で次のコマンドを実行します。
+`gitlab`チャートのバージョンの完全なリストと、[Helm](tools.md)で次のコマンドを実行してマップ先のGitLabバージョンを確認します:
 
 ```shell
 helm repo add gitlab https://charts.gitlab.io/
 helm search repo -l gitlab/gitlab
 ```
 
-## サポートされている各バージョンのアップグレード {#upgrade-notes-for-each-supported-version}
+## GitLabチャートバージョンのマッピング {#gitlab-chart-version-mappings}
 
-GitLab Helmチャートのサポートされている各バージョンのアップグレードノートが利用可能です。
+以下の表は、サポートされているGitLab Helmチャートのバージョンと、サポートされているGitLabバージョンをマップしています。
 
-- [9.0](../releases/9_0.md)
-- [8.0](../releases/8_0.md)
-- [7.0](../releases/7_0.md)
-- [6.0](../releases/6_0.md)
-
-プロジェクトの[CHANGELOG](https://gitlab.com/gitlab-org/charts/gitlab/blob/master/CHANGELOG.md)も参照してください。
-
-## 以前のチャートのバージョン {#previous-chart-versions}
-
-以下のテーブルは、以前にサポートされていた主要なチャートのバージョンと、サポートされているGitLabのバージョンをマップしたものです。
-
-| チャートのバージョン | GitLabバージョン |
+| チャートバージョン | GitLabバージョン |
 |---------------|----------------|
+| 9.8.4 | 18.8.4 |
+| 9.8.3 | 18.8.3 |
+| 9.8.2 | 18.8.2 |
+| 9.8.1 | 18.8.1 |
+| 9.8.0 | 18.8.0 |
+| 9.7.4 | 18.7.4 |
+| 9.7.3 | 18.7.3 |
+| 9.7.2 | 18.7.2 |
+| 9.7.1 | 18.7.1 |
+| 9.7.0 | 18.7.0 |
+| 9.6.6 | 18.6.6 |
+| 9.6.5 | 18.6.5 |
+| 9.6.4 | 18.6.4 |
+| 9.6.3 | 18.6.3 |
+| 9.6.2 | 18.6.2 |
+| 9.6.1 | 18.6.1 |
+| 9.6.0 | 18.6.0 |
+| 9.5.5 | 18.5.5 |
+| 9.5.4 | 18.5.4 |
+| 9.5.3 | 18.5.3 |
+| 9.5.2 | 18.5.2 |
+| 9.5.1 | 18.5.1 |
+| 9.5.0 | 18.5.0 |
+| 9.4.6 | 18.4.6 |
+| 9.4.5 | 18.4.5 |
+| 9.4.4 | 18.4.4 |
+| 9.4.3 | 18.4.3 |
+| 9.4.2 | 18.4.2 |
 | 9.4.1 | 18.4.1 |
 | 9.4.0 | 18.4.0 |
+| 9.3.6 | 18.3.6 |
+| 9.3.5 | 18.3.5 |
+| 9.3.4 | 18.3.4 |
 | 9.3.3 | 18.3.3 |
 | 9.3.2 | 18.3.2 |
 | 9.3.1 | 18.3.1 |
 | 9.3.0 | 18.3.0 |
+| 9.2.8 | 18.2.8 |
 | 9.2.7 | 18.2.7 |
 | 9.2.6 | 18.2.6 |
 | 9.2.5 | 18.2.5 |
@@ -391,10 +412,3 @@ GitLab Helmチャートのサポートされている各バージョンのアッ
 | 6.0.2 | 15.0.2 |
 | 6.0.1 | 15.0.1 |
 | 6.0.0 | 15.0.0 |
-
-完全なリストを表示するには、Helmで次のコマンドを実行します。
-
-```shell
-helm repo add gitlab https://charts.gitlab.io/
-helm search repo -l gitlab/gitlab
-```
