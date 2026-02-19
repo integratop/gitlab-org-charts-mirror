@@ -67,7 +67,7 @@ documentation.
   - [GitLab Pages secret](#gitlab-pages-secret)
   - [GitLab incoming email auth token](#gitlab-incoming-email-auth-token)
   - [GitLab Service Desk email auth token](#gitlab-service-desk-email-auth-token)
-  - [Zoekt basic auth password](#zoekt-basic-auth-password)
+  - [Zoekt indexer internal API secret](#zoekt-indexer-internal-api-secret)
 - [External Services](#external-services)
   - [OmniAuth](#omniauth)
   - [LDAP Password](#ldap-password)
@@ -530,16 +530,24 @@ kubectl create secret generic <name>-service-desk-email-auth-token --from-litera
 
 This secret is referenced by the `global.serviceDeskEmail.authToken` setting.
 
-### Zoekt basic auth password
+### Zoekt indexer internal API secret
 
-You can leave it to the chart to auto-generate the secret, or you can create this secret manually (replace `<name>` with the name of the release):
+When the [GitLab-zoekt subchart](../charts/gitlab/gitlab-zoekt/_index.md) is installed, the Zoekt indexer authenticates to the GitLab internal API using JWT. By default, this secret reuses the [GitLab Shell secret](#gitlab-shell-secret), which is auto-generated.
+
+If you want to use a separate secret for Zoekt, you can create one manually (replace `<name>` with the name of the release):
 
 ```shell
-password=$(head -c 512 /dev/urandom | LC_CTYPE=C tr -cd 'a-zA-Z0-9' | head -c 32 | base64)
-kubectl create secret generic <name>-zoekt-basicauth --from-literal=gitlab_username=gitlab --from-literal=gitlab_password="$password"
+kubectl create secret generic <name>-zoekt-internal-api --from-literal=secret=$(head -c 512 /dev/urandom | LC_CTYPE=C tr -cd 'a-zA-Z0-9' | head -c 64)
 ```
 
-This secret is referenced by the `gitlab.zoekt.gateway.basicAuth.secretName` setting.
+Then configure the chart to use it:
+
+```shell
+--set global.zoekt.indexer.internalApi.secretName=<name>-zoekt-internal-api \
+--set global.zoekt.indexer.internalApi.secretKey=secret
+```
+
+If not specified, `global.zoekt.indexer.internalApi.secretName` defaults to the GitLab Shell auth token secret (`global.shell.authToken.secret`).
 
 ### Microsoft Graph client secret for incoming emails
 
