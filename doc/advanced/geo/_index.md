@@ -309,7 +309,7 @@ To deploy this chart as a Geo Primary, start [from this example configuration](h
    {{< /tab >}}
 
    {{< tab title="Envoy Gateway" >}}
-   
+
    > [!note]
    > GitLab Geo with Envoy Gateway and Gateway API is not fully validated yet.
 
