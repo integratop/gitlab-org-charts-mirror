@@ -76,7 +76,7 @@ Port assignment is automatically determined based on the selected protocol.
 */}}
 {{- define "gitlab.gatewayApi.gateway.listener" -}}
 {{- $name := .local.name }}
-{{- $protocol := .local.protocol | default .root.protocol }}
+{{- $protocol := .local.protocol | default .root.protocol | upper }}
 {{- $port := 443 }}
 {{- if eq "HTTP" $protocol }}
 {{-   $port = 80 }}
@@ -85,7 +85,7 @@ Port assignment is automatically determined based on the selected protocol.
 {{-   $port = 22 }}
 {{- end }}
 - name: {{ $name }}
-  protocol: {{ $protocol | upper }}
+  protocol: {{ $protocol }}
   port: {{ $port }}
   allowedRoutes:
     namespaces:
@@ -93,9 +93,11 @@ Port assignment is automatically determined based on the selected protocol.
 {{- with .local.hostname }}
   hostname: {{ . | quote }}
 {{- end }}
-{{- with .local.tls }} 
+{{- if or (eq "HTTPS" $protocol) (eq "TLS" $protocol) }}
+{{-   with .local.tls }}
   tls:
-{{- toYaml . | nindent 4 }}
+{{-     toYaml . | nindent 4 }}
+{{-   end }}
 {{- end }}
 {{- end -}}
 

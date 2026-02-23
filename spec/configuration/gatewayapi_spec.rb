@@ -140,5 +140,33 @@ describe 'Gateway API configuration' do
         expect(pages_route["spec"]["parentRefs"][0]["namespace"]).to eq("pages-gateway-namespace")
       end
     end
+
+    context 'HTTP listener' do
+      let(:values) do
+        HelmTemplate.with_defaults(%(
+        nginx-ingress:
+          enabled: false
+
+        global:
+          gatewayApi:
+            enabled: true
+            installEnvoy: false
+            protocol: HTTP
+            listeners:
+              gitlab-web:
+                protocol: HTTPS
+              registry-web:
+                protocol: HTTP
+        ))
+      end
+
+      it 'omits the TLS block conditionally' do
+        expect(template.exit_code).to eq(0), "Unexpected error code #{template.exit_code} -- #{template.stderr}"
+
+        gateway['spec']['listeners'].each do |listener|
+          expect(listener.keys).not_to include('tls') unless listener['name'] == "gitlab-web"
+        end
+      end
+    end
   end
 end
