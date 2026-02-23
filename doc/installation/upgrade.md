@@ -159,7 +159,7 @@ To upgrade GitLab:
    ```
 
 1. Begin the upgrade to the new version:
-   
+
    ```shell
    helm upgrade gitlab gitlab/gitlab \
    --version <GitLab Helm chart version> \
