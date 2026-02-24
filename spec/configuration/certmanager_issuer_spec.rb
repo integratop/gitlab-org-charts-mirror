@@ -86,11 +86,10 @@ describe 'certmanager_issuer configuration' do
   context 'when configureCertmanager is disabled' do
     it 'does not create any certmanager_issuer related resource' do
       template = HelmTemplate.new(default_values.deep_merge!(
-                                    { 'global' => {
-                                      'ingress' => { 'configureCertmanager' => false },
-                                      'gatewayApi' => { 'configureCertmanager' => false }
-                                    } })
-                                 )
+        { 'global' => {
+          'ingress' => { 'configureCertmanager' => false },
+          'gatewayApi' => { 'configureCertmanager' => false }
+        } }))
 
       required_resources.each do |resource|
         resource_name = "#{resource}/test-certmanager-issuer"
