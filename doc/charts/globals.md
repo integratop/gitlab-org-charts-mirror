@@ -302,9 +302,6 @@ Gateway manifest, and enables the creation of a HTTP01 Issuer configured for Gat
 
 ### GitLab Geo
 
-> [!note]
-> GitLab Geo with Envoy Gateway and Gateway API is not fully validated yet.
-
 To configure [GitLab Geo](https://docs.gitlab.com/administration/geo/) using the Gateway API, an
 additional hostname can be configured by setting `global.geo.gatewayApi.additionalHostname`.
 
@@ -317,8 +314,10 @@ information.
 The chart can be configured to use a external Gateway API provider, yet not every provider
 meets the requirements to expose GitLab.
 
-Make sure your Gateway API provider does support `HTTPRoutes`, `TCPRoute` (for SSH),
-and `GRPCRoutes` (for future KAS features).
+Make sure your Gateway API provider does support:
+
+1. `HTTPRoutes`, `TCPRoute` (for SSH), and `GRPCRoutes` (for future KAS features)
+1. `RegularExpression` matches in `HTTPRoutes`
 
 Note that we only test with the bundled Envoy Gateway chart. Support for other providers is
 offered on a best-effort basis. We welcome any contributions that document working
