@@ -38,15 +38,15 @@ describe 'Sidekiq configuration' do
 
         expect(global_template.env(container_name('pod-1'), 'sidekiq'))
           .to include(
-                { 'name' => 'EXTRA_ENV_VAR_A', 'value' => 'global-a' },
-                { 'name' => 'EXTRA_ENV_VAR_B', 'value' => 'global-b' }
-              )
+            { 'name' => 'EXTRA_ENV_VAR_A', 'value' => 'global-a' },
+            { 'name' => 'EXTRA_ENV_VAR_B', 'value' => 'global-b' }
+          )
 
         expect(global_template.env(container_name('pod-2'), 'sidekiq'))
           .to include(
-                { 'name' => 'EXTRA_ENV_VAR_A', 'value' => 'global-a' },
-                { 'name' => 'EXTRA_ENV_VAR_B', 'value' => 'global-b' }
-              )
+            { 'name' => 'EXTRA_ENV_VAR_A', 'value' => 'global-a' },
+            { 'name' => 'EXTRA_ENV_VAR_B', 'value' => 'global-b' }
+          )
       end
 
       context 'when the chart-level value is set' do
@@ -68,15 +68,15 @@ describe 'Sidekiq configuration' do
 
           expect(chart_template.env(container_name('pod-1'), 'sidekiq'))
             .to include(
-                  { 'name' => 'EXTRA_ENV_VAR_C', 'value' => 'chart-c' },
-                  { 'name' => 'EXTRA_ENV_VAR_D', 'value' => 'chart-d' }
-                )
+              { 'name' => 'EXTRA_ENV_VAR_C', 'value' => 'chart-c' },
+              { 'name' => 'EXTRA_ENV_VAR_D', 'value' => 'chart-d' }
+            )
 
           expect(chart_template.env(container_name('pod-2'), 'sidekiq'))
             .to include(
-                  { 'name' => 'EXTRA_ENV_VAR_C', 'value' => 'chart-c' },
-                  { 'name' => 'EXTRA_ENV_VAR_D', 'value' => 'chart-d' }
-                )
+              { 'name' => 'EXTRA_ENV_VAR_C', 'value' => 'chart-c' },
+              { 'name' => 'EXTRA_ENV_VAR_D', 'value' => 'chart-d' }
+            )
         end
 
         it 'overrides global values' do
@@ -177,17 +177,17 @@ describe 'Sidekiq configuration' do
 
         expect(global_template.env(deployment_name('pod-1'), 'sidekiq'))
           .to include(
-                { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
-                { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC", "key" => "keyC" } } },
-                { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD", "key" => "keyD" } } }
-              )
+            { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
+            { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC", "key" => "keyC" } } },
+            { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD", "key" => "keyD" } } }
+          )
 
         expect(global_template.env(deployment_name('pod-2'), 'sidekiq'))
           .to include(
-                { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
-                { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC", "key" => "keyC" } } },
-                { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD", "key" => "keyD" } } }
-              )
+            { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
+            { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC", "key" => "keyC" } } },
+            { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD", "key" => "keyD" } } }
+          )
       end
 
       context 'when the chart-level value is set' do
@@ -218,33 +218,33 @@ describe 'Sidekiq configuration' do
 
           expect(chart_template.env(deployment_name('pod-1'), 'sidekiq'))
             .to include(
-                  { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-chart", "key" => "keyA-chart" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
-                )
+              { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-chart", "key" => "keyA-chart" } } },
+              { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
+              { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
+              { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
+            )
 
           expect(chart_template.env(deployment_name('pod-2'), 'sidekiq'))
             .to include(
-                  { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-chart", "key" => "keyA-chart" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
-                )
+              { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-chart", "key" => "keyA-chart" } } },
+              { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
+              { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
+              { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
+            )
         end
 
         it 'overrides global values' do
           expect(chart_template.env(deployment_name('pod-1'), 'sidekiq'))
             .to include(
-                  { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
-                )
+              { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
+              { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
+            )
 
           expect(chart_template.env(deployment_name('pod-2'), 'sidekiq'))
             .to include(
-                  { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
-                  { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
-                )
+              { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
+              { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } }
+            )
         end
 
         context 'when the pod-level value is set' do
@@ -294,12 +294,12 @@ describe 'Sidekiq configuration' do
 
             expect(pod_template.env(deployment_name('pod-1'), 'sidekiq'))
               .to include(
-                    { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod1", "key" => "keyA-pod1" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-pod", "key" => "keyD-pod" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_E', 'valueFrom' => { "secretKeyRef" => { "name" => "nameE-pod", "key" => "keyE-pod" } } }
-                  )
+                { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod1", "key" => "keyA-pod1" } } },
+                { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
+                { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-chart", "key" => "keyC-chart" } } },
+                { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-pod", "key" => "keyD-pod" } } },
+                { 'name' => 'EXTRA_ENV_VAR_E', 'valueFrom' => { "secretKeyRef" => { "name" => "nameE-pod", "key" => "keyE-pod" } } }
+              )
             expect(pod_template.env(deployment_name('pod-1'), 'sidekiq'))
               .not_to include('name' => 'EXTRA_ENV_VAR_F', 'valueFrom' => { "secretKeyRef" => { "name" => "nameF-pod", "key" => "keyF-pod" } })
 
@@ -307,12 +307,12 @@ describe 'Sidekiq configuration' do
               .not_to include('name' => 'EXTRA_ENV_VAR_E', 'valueFrom' => { "secretKeyRef" => { "name" => "nameE-pod", "key" => "keyE-pod" } })
             expect(pod_template.env(deployment_name('pod-2'), 'sidekiq'))
               .to include(
-                    { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod2", "key" => "keyA-pod2" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-pod", "key" => "keyC-pod" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_F', 'valueFrom' => { "secretKeyRef" => { "name" => "nameF-pod", "key" => "keyF-pod" } } }
-                  )
+                { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod2", "key" => "keyA-pod2" } } },
+                { 'name' => 'EXTRA_ENV_VAR_B', 'valueFrom' => { "secretKeyRef" => { "name" => "nameB", "key" => "keyB" } } },
+                { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-pod", "key" => "keyC-pod" } } },
+                { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-chart", "key" => "keyD-chart" } } },
+                { 'name' => 'EXTRA_ENV_VAR_F', 'valueFrom' => { "secretKeyRef" => { "name" => "nameF-pod", "key" => "keyF-pod" } } }
+              )
           end
 
           it 'overrides global values' do
@@ -326,15 +326,15 @@ describe 'Sidekiq configuration' do
           it 'overrides chart-level values' do
             expect(pod_template.env(deployment_name('pod-1'), 'sidekiq'))
               .to include(
-                    { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod1", "key" => "keyA-pod1" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-pod", "key" => "keyD-pod" } } }
-                  )
+                { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod1", "key" => "keyA-pod1" } } },
+                { 'name' => 'EXTRA_ENV_VAR_D', 'valueFrom' => { "secretKeyRef" => { "name" => "nameD-pod", "key" => "keyD-pod" } } }
+              )
 
             expect(pod_template.env(deployment_name('pod-2'), 'sidekiq'))
               .to include(
-                    { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod2", "key" => "keyA-pod2" } } },
-                    { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-pod", "key" => "keyC-pod" } } }
-                  )
+                { 'name' => 'EXTRA_ENV_VAR_A', 'valueFrom' => { "secretKeyRef" => { "name" => "nameA-pod2", "key" => "keyA-pod2" } } },
+                { 'name' => 'EXTRA_ENV_VAR_C', 'valueFrom' => { "secretKeyRef" => { "name" => "nameC-pod", "key" => "keyC-pod" } } }
+              )
           end
         end
       end
