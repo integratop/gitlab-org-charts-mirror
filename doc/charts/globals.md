@@ -236,7 +236,7 @@ The Gateway listener configuration uses the following values. Each listener is o
 enabled if the underlying component is.
 
 You can configure a default protocol for all web listeners by setting
-`global.gatewayApi.protocol=HTTP|HTTPS`. The listener tls configuration will be
+`global.gatewayApi.protocol`. The listener tls configuration will be
 omited if the effective protocol does not support that configuration.
 
 ```yaml
