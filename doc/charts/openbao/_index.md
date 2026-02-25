@@ -241,7 +241,7 @@ declarative [self initialization](https://openbao.org/docs/configuration/self-in
 | `config.unseal.static.enabled`                           | true                                                    | Enable static auto unsealing. |
 | `config.unseal.static.currentKeyId`                      | `static-unseal-0`                                       | ID of the current static unsealing key. |
 | `config.unseal.static.currentKey`                        | `/srv/openbao/keys/static-unseal-0`                     | Path of the current static unsealing key. |
-| `config.unseal.static.oreviousKeyId`                     |                                                         | ID of the previous static unsealing key. |
+| `config.unseal.static.previousKeyId`                     |                                                         | ID of the previous static unsealing key. |
 | `config.unseal.static.previousKey`                       | `/srv/openbao/keys/static-unseal-1`                     | Path of the previous static unsealing key. Only rendered if previous key ID is also set. |
 | `config.initialize.enabled`                              | true                                                    | Enable OpenBao self initialization. |
 | `config.initialize.oidcDiscoveryUrl`                     | External GitLab host                                    | OIDC discovery URL. Defaults to the external GitLab hostname. |
@@ -306,7 +306,7 @@ To configure an external database:
              # tcpUserTimeout:
              # sslMode: "disable"
              password:
-               secret: openbao-db-passowrd
+               secret: openbao-db-password
                key: password
    ```
 
