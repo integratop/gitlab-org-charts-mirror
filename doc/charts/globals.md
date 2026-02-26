@@ -230,8 +230,14 @@ For more information, see [work item 5](https://gitlab.com/groups/gitlab-com/gl-
 | `envoyClientTrafficPolicySpec` | Object  | `{}`           | Configuration of a optional `ClientTrafficPolicy` bound to the managed `Gateway`. |
 | `envoySecurityPolicySpec`      | Object  | see values     | Configuration of a optional `SecurityPolicy` bound to the managed `Gateway`. |
 
+### Listener configuration
+
 The Gateway listener configuration uses the following values. Each listener is only
 enabled if the underlying component is.
+
+You can configure a default protocol for all web listeners by setting
+`global.gatewayApi.protocol`. The listener tls configuration will be
+omited if the effective protocol does not support that configuration.
 
 ```yaml
 listeners:
@@ -243,7 +249,6 @@ listeners:
       certificateRefs:
         - name: gitlab-tls
   gitlab-web-geo:
-    protocol: ""
     tls:
       mode: Terminate
       certificateRefs:
@@ -271,13 +276,11 @@ listeners:
       certificateRefs:
         - name: kas-workspaces-tls
   minio-web:
-    protocol: ""
     tls:
       mode: Terminate
       certificateRefs:
         - name: minio-tls
   openbao-web:
-    protocol: ""
     tls:
       mode: Terminate
       certificateRefs:
