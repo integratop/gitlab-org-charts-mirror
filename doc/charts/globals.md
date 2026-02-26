@@ -412,12 +412,6 @@ If you wish to set a custom time zone for all the GitLab containers, you can use
 ## Configure PostgreSQL settings
 
 The GitLab global PostgreSQL settings are located under the `global.psql` key.
-GitLab is using two database connections: one for `main` database and one for
-`ci`. By default, they point to the same PostgreSQL database.
-
-The values under `global.psql` are defaults and are applied to both database
-configurations. If you want to use [two databases](https://docs.gitlab.com/administration/postgresql/multiple_databases/),
-you can specify the connection details in `global.psql.main` and `global.psql.ci`.
 
 ```yaml
 global:
@@ -441,12 +435,6 @@ global:
       secret: gitlab-postgres
       key: psql-password
       file:
-    main: {}
-      # host: postgresql-main.hostedsomewhere.else
-      # ...
-    ci: {}
-      # host: postgresql-ci.hostedsomewhere.else
-      # ...
 ```
 
 | Name                 |  Type   | Default               | Description |
@@ -469,7 +457,6 @@ global:
 | `keepalivesCount`    | Integer |                       | The number of TCP `keepalives` that can be lost before the client's connection to the server is considered dead. A value of zero uses the system default. |
 | `tcpUserTimeout`     | Integer |                       | The number of milliseconds that transmitted data may remain unacknowledged before a connection is forcibly closed. A value of zero uses the system default. |
 | `applicationName`    | String  |                       | The name of the application connecting to the database. Set to a blank string (`""`) to disable. By default, this will be set to the name of the running process (e.g. `sidekiq`, `puma`). |
-| `ci.enabled`         | Boolean | `true`                | Enables [two database connections](#configure-multiple-database-connections). |
 
 ### PostgreSQL per chart
 
@@ -584,17 +571,6 @@ global:
       max_replication_lag_time:   # See documentation
       replica_check_interval:     # See documentation
 ```
-
-### Configure multiple database connections
-
-{{< history >}}
-
-- The `gitlab:db:decomposition:connection_status` Rake task was [introduced](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/111927) in GitLab 15.11.
-
-{{< /history >}}
-
-In GitLab 16.0, GitLab defaults to using two database connections
-that point to the same PostgreSQL database.
 
 ## Configure Redis settings
 
@@ -1311,8 +1287,8 @@ application are described below:
 | `relativeUrlRoot`                   | String  | (empty) | Sets a [relative URL root](#configure-a-relative-url-root) for GitLab (for example, `/gitlab`). When configured, GitLab will be accessible at the specified path instead of the root path. |
 | `contentSecurityPolicy`             | Struct  |         | [See below](#content-security-policy). |
 | `enableUsagePing`                   | Boolean | `true`  | A flag to disable the [usage ping support](https://docs.gitlab.com/administration/settings/usage_statistics/). |
-| `enableSeatLink`                    | Boolean | `true`  | A flag to disable the [seat link support](https://docs.gitlab.com/subscriptions/#seat-link). |
-| `enableImpersonation`               |         | `nil`   | A flag to disable [user impersonation by Administrators](https://docs.gitlab.com/api/#disable-impersonation). |
+| `enableSeatLink`                    | Boolean | `true`  | A flag to disable the seat link support. |
+| `enableImpersonation`               |         | `nil`   | A flag to disable [user impersonation by Administrators](https://docs.gitlab.com/api/rest/authentication/#disable-impersonation). |
 | `applicationSettingsCacheSeconds`   | Integer | `60`    | An interval value (in seconds) to invalidate the [application settings cache](https://docs.gitlab.com/administration/application_settings_cache/). |
 | `usernameChangingEnabled`           | Boolean | `true`  | A flag to decide if users are allowed to change their username. |
 | `issueClosingPattern`               | String  | (empty) | [Pattern to close issues automatically](https://docs.gitlab.com/administration/issue_closing_pattern/). |
@@ -1320,7 +1296,7 @@ application are described below:
 | `defaultColorMode`                  | Integer |         | [Default color mode for the GitLab instance](https://gitlab.com/gitlab-org/gitlab/-/blob/66788a1de8c3dd3c5566d0f30fe1c2a1bae64bf9/lib/gitlab/color_modes.rb#L17-19). It takes a number, denoting the ID of the color mode. |
 | `defaultSyntaxHighlightingTheme`    | Integer |         | [Default syntax highlighting theme for the GitLab instance](https://gitlab.com/gitlab-org/gitlab/-/blob/66788a1de8c3dd3c5566d0f30fe1c2a1bae64bf9/lib/gitlab/color_schemes.rb#L12-17). It takes a number, denoting the ID of the syntax highlighting theme. |
 | `defaultProjectsFeatures.*feature*` | Boolean | `true`  | [See below](#defaultprojectsfeatures). |
-| `webhookTimeout`                    | Integer | (empty) | Waiting time in seconds before a [hook is deemed to have failed](https://docs.gitlab.com/user/project/integrations/webhooks/#webhook-fails-or-multiple-webhook-requests-are-triggered). |
+| `webhookTimeout`                    | Integer | (empty) | Waiting time in seconds before a [hook is deemed to have failed](https://docs.gitlab.com/user/project/integrations/webhooks/#auto-disabled-webhooks). |
 | `graphQlTimeout`                    | Integer | (empty) | Time in seconds the Rails has to [complete a GraphQL request](https://docs.gitlab.com/api/graphql/#limits). |
 
 #### Content Security Policy
@@ -1754,7 +1730,8 @@ within Helm `--set` items. Be sure to escape commas in values such as `bind_dn`:
 
 It can be useful to prevent using LDAP credentials through the web UI when an alternative such as SAML is preferred. This allows LDAP to be used for group sync, while also allowing your SAML identity provider to handle additional checks like custom 2FA.
 
-When LDAP web sign in is disabled, users will not see a LDAP tab on the sign in page. This does not disable [using LDAP credentials for Git access.](https://docs.gitlab.com/administration/auth/ldap/#git-password-authentication)
+When LDAP web sign in is disabled, users will not see a LDAP tab on the sign in page. This does not disable
+[using LDAP credentials for Git access](https://docs.gitlab.com/administration/settings/sign_in_restrictions/#allow-password-authentication-for-git-over-https).
 
 To disable the use of LDAP for web sign-in, set `global.appConfig.ldap.preventSignin: true`.
 
@@ -1799,7 +1776,8 @@ See [Custom Certificate Authorities](#custom-certificate-authorities) for more i
 
 ### `duoAuth`
 
-Use these settings to enable [two-factor authentication (2FA) with Cisco Duo](https://docs.gitlab.com/user/profile/account/two_factor_authentication/#enable-one-time-password).
+Use these settings to enable
+[two-factor authentication (2FA) with Cisco Duo](https://docs.gitlab.com/user/profile/account/two_factor_authentication/#enable-two-factor-authentication).
 
 ```yaml
 global:
@@ -1887,8 +1865,8 @@ Alternatively, if the provider has no other configuration than its name, you may
 use a second form with only a `name` attribute, and optionally a `label` or
 `icon` attribute. The eligible providers are:
 
-- [`group_saml`](https://docs.gitlab.com/integration/saml/#configure-group-saml-sso-on-a-self-managed-instance)
-- [`kerberos`](https://docs.gitlab.com/integration/saml/#configure-group-saml-sso-on-a-self-managed-instance)
+- [`group_saml`](https://docs.gitlab.com/integration/saml/#configure-group-saml-sso-on-gitlab-self-managed)
+- [`kerberos`](https://docs.gitlab.com/integration/saml/#configure-group-saml-sso-on-gitlab-self-managed)
 
 The `Secret` for these entries contains YAML or JSON formatted blocks, as described
 in [OmniAuth Providers](https://docs.gitlab.com/integration/omniauth/). To
