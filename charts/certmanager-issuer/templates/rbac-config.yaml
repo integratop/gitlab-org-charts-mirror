@@ -1,4 +1,6 @@
-{{ if and .Values.rbac.create (pluck "configureCertmanager" .Values.global.ingress (dict "configureCertmanager" false) | first) }}
+{{- $ingressConfigureCertmanager := pluck "configureCertmanager" .Values.global.ingress (dict "configureCertmanager" false) | first -}}
+{{- $configureGatewayCertmanager := .Values.global.gatewayApi.configureCertmanager }}
+{{ if and .Values.rbac.create (or $ingressConfigureCertmanager $configureGatewayCertmanager) }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
