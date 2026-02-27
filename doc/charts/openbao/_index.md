@@ -32,8 +32,9 @@ OpenBao, which is required to enable the [GitLab secrets manager](https://docs.g
 
 - You can't upgrade OpenBao without downtime. Zero downtime upgrades are proposed in
   [OpenBao chart issue 13](https://gitlab.com/gitlab-org/cloud-native/charts/openbao/-/issues/13).
-- GitLab Geo is unsupported. Basic validation passed, but failover and recommended setups are not tested and documented yet.
+- GitLab Geo is untested. Basic validation passed, but failover and recommended setups are not tested and documented yet.
   Full validation is discussed in [GitLab issue 568357](https://gitlab.com/gitlab-org/gitlab/-/issues/568357).
+  For Geo deployments where secondary sites use different OpenBao URLs, see [Geo configuration](#geo-configuration).
 - You can't deploy OpenBao with [GitLab Operator](https://gitlab.com/gitlab-org/cloud-native/gitlab-operator).
 - A FIPS variant of the OpenBao image is already being build, but OpenBao is not FIPS validated.
   FIPS validation is tracked in [GitLab issue 574875](https://gitlab.com/gitlab-org/gitlab/-/issues/574875).
@@ -58,6 +59,32 @@ OpenBao, which is required to enable the [GitLab secrets manager](https://docs.g
 1. Select **Settings > General**.
 1. Expand **Visibility, project features, permissions**.
 1. Turn on the **Secrets Manager** toggle, and wait for the Secrets Manager to be provisioned.
+
+## Geo configuration
+
+{{< history >}}
+
+- `jwt_audience` was [introduced](https://gitlab.com/gitlab-org/charts/gitlab/-/merge_requests/4837) in GitLab 18.10.
+
+{{< /history >}}
+
+In [GitLab Geo](https://docs.gitlab.com/ee/administration/geo/) deployments, secondary sites may use different URLs to reach OpenBao than the primary site. The JWT audience claim in the GitLab OpenBao authentication must match the `bound_audiences` configured in OpenBao. When each site has a different OpenBao URL, set `jwt_audience` to the shared value (typically the primary site's OpenBao URL) so that JWTs are accepted by OpenBao regardless of which site generated them.
+
+Configure the secondary site:
+
+```yaml
+global:
+  openbao:
+    enabled: true
+    # Site-specific URL for this Geo secondary
+    url: https://openbao.secondary.example.com:8200
+    # Shared audience - must match OpenBao bound_audiences (e.g. primary site URL)
+    jwt_audience: https://openbao.shared.example.com:8200
+```
+
+Ensure OpenBao `config.initialize.boundAudiences` includes the `jwt_audience` value. When using the bundled OpenBao chart, `boundAudiences` defaults to the external OpenBao hostname; for Geo you may need to override it to include the shared URL used as `jwt_audience`.
+
+In failover scenarios, when a secondary site is promoted to primary, omit `jwt_audience` from the configuration. The promoted primary uses its own URL, and the audience defaults to that URL.
 
 ## Rolling back OpenBao upgrades
 
@@ -169,6 +196,8 @@ The OpenBao chart defaults to Ingress-terminated TLS encryption.
 | Parameter                                                | Default                                                 | Description |
 |----------------------------------------------------------|---------------------------------------------------------|-------------|
 | `global.openbao.host`                                    | `openbao.<GitLab Domain>`                                 | OpenBao host. Used to configure GitLab webservice and the OpenBao chart. |
+| `global.openbao.url`                                     | Derived from host                                       | OpenBao URL for GitLab. If present, must be a complete URI. |
+| `global.openbao.jwt_audience`                            | Same as `url`                                           | JWT audience claim for OpenBao authentication. Set for [Geo deployments](#geo-configuration) when sites use different URLs. Must match OpenBao `bound_audiences`. |
 | `ingress.enabled`                                        | true                                                    | Enable the OpenBao Ingress to allow Runner to reach OpenBao. |
 | `ingress.hostname`                                       | External OpenBao host based on global hosts config.     | Hostname the Ingress should match. |
 | `ingress.tls.enabled`                                    | true                                                    | Enable Ingress TLS. |
