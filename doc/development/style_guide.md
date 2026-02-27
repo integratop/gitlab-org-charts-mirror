@@ -10,7 +10,7 @@ This document describes various guidelines and best practices for GitLab Helm ch
 ## Naming Conventions
 
 We are using [camelCase](https://en.wikipedia.org/wiki/Camel_case) for our function names, and properties where they are used in `values.yaml`.
-Helm's own [best practices](https://helm.sh/docs/chart_best_practices/values#naming-conventions) clearly defines this.
+Helm's own [best practices](https://helm.sh/docs/chart_best_practices/values#naming-conventions) clearly define this.
 
 Example: `gitlab.assembleHost`
 
@@ -21,7 +21,10 @@ Examples:
 - `gitlab.redis.host`: provides the host name of the Redis server, as a part of the `gitlab` chart.
 - `registry.minio.url`: provides the URL to the MinIO host as part of the `registry` chart.
 
-Not acceptable: kebab-case, initial capitals.
+Not acceptable:
+
+- `gitlab.redis-server.host`: kebab-case
+- `registry.Minio.Url`: initial capitals
 
 ## Common structure for `values.yaml`
 
