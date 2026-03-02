@@ -218,4 +218,4 @@ You can also do it manually, without using the ChatOps command as follows:
    - When you want to release and change both the chart version and the app version (such as `0.2.1` with GitLab `11.0.1`)
      - `bundle exec rake release:helm:tag[0.2.1,11.0.1]`
 
-    > You can run the script in dry-run mode which prevents pushes by setting `TEST=true` in your environment
+   You can run the script in dry-run mode which prevents pushes by setting `TEST=true` in your environment

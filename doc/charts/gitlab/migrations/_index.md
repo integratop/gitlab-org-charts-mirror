@@ -147,7 +147,7 @@ can be found in [the Kubernetes documentation](https://kubernetes.io/docs/concep
 
 Below is an example use of `pullSecrets`:
 
-```YAML
+```yaml
 image:
   repository: my.migrations.repository
   pullPolicy: Always
@@ -182,7 +182,7 @@ In order to use the Community Edition, set `image.repository` to `registry.gitla
 
 ### Redis
 
-```YAML
+```yaml
 redis:
   host: redis.example.com
   serviceName: redis
