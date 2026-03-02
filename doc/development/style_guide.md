@@ -10,7 +10,7 @@ This document describes various guidelines and best practices for GitLab Helm ch
 ## Naming Conventions
 
 We are using [camelCase](https://en.wikipedia.org/wiki/Camel_case) for our function names, and properties where they are used in `values.yaml`.
-Helm's own [best practices](https://helm.sh/docs/chart_best_practices/values#naming-conventions) clearly define this.
+Helm [best practices](https://helm.sh/docs/chart_best_practices/values#naming-conventions) define camelCase as preferred.
 
 Example: `gitlab.assembleHost`
 
@@ -23,8 +23,8 @@ Examples:
 
 Not acceptable:
 
-- `gitlab.redis-server.host`: kebab-case
-- `registry.Minio.Url`: initial capitals
+- `gitlab.redis-server.host`: kebab-case.
+- `registry.Minio.Url`: initial capitals.
 
 ## Common structure for `values.yaml`
 
@@ -345,8 +345,8 @@ minimize their own configuration files without it being cumbersome.
 
 A charts template helpers are located in `templates/_helpers.tpl`. These contain the [named templates](https://helm.sh/docs/chart_template_guide/named_templates/)
 used within the chart.
-Often, these template files can grow quite large.
-When they do, they should be broken down into multiple files under `templates/_xyz.tpl` to facilitate clarity and maintainability.
+When these template files grow large, which they often do, they should be broken down into multiple files under `templates/_xyz.tpl`. This convention
+facilitates clarity and maintainability.
 
 When using these templates, there a few things to keep in mind regarding the [Go templating syntax](https://pkg.go.dev/text/template).
 
