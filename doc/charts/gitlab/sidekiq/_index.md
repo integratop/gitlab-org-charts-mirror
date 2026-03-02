@@ -414,7 +414,7 @@ supported:
 
 ### Gitaly
 
-```YAML
+```yaml
 gitaly:
   internal:
     names:
@@ -557,7 +557,7 @@ In addition to configuring `gitlab.sidekiq.pods[].queues`, you must also configu
 
 ### Example `pod` entry
 
-```YAML
+```yaml
 pods:
   - name: immediate
     concurrency: 10

@@ -152,7 +152,7 @@ found in [the Kubernetes documentation](https://kubernetes.io/docs/concepts/cont
 
 Below is an example use of `pullSecrets`:
 
-```YAML
+```yaml
 image:
   repository: my.image.repository
   pullPolicy: Always
@@ -181,7 +181,7 @@ For more information, see [`affinity`](../_index.md#affinity).
 
 `annotations` allows you to add annotations to the GitLab Exporter pods. For example:
 
-```YAML
+```yaml
 annotations:
   kubernetes.io/example-annotation: annotation-value
 ```

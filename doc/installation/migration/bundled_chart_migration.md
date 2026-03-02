@@ -112,11 +112,11 @@ Provision your external PostgreSQL service. For example, by using [CloudNativePG
 
 1. Provision a PostgreSQL cluster for GitLab (the [Registry Metadata Database](https://docs.gitlab.com/administration/packages/container_registry_metadata_database/) is not covered):
 
-  {{< alert type="note" >}}
+   {{< alert type="note" >}}
 
-  Check the [Cluster API](https://cloudnative-pg.io/docs/1.28/cloudnative-pg.v1/#postgresqlcnpgiov1) to customize your cluster.
+   Check the [Cluster API](https://cloudnative-pg.io/docs/1.28/cloudnative-pg.v1/#postgresqlcnpgiov1) to customize your cluster.
 
-  {{< /alert >}}
+   {{< /alert >}}
 
    ```yaml
    apiVersion: postgresql.cnpg.io/v1
@@ -177,13 +177,13 @@ One option is [Garage](https://garagehq.deuxfleurs.fr/). Before installing it, r
 
 1. Initialize the cluster layout.
 
-  {{< alert type="note" >}}
+   {{< alert type="note" >}}
 
-  This example provisions a Garage layout with three zones, one node per zone, and uses the default replication
-  factor of three. Review the [Garage production recommendations](https://garagehq.deuxfleurs.fr/documentation/cookbook/real-world/)
-  and adjust these settings to suit your requirements.
+   This example provisions a Garage layout with three zones, one node per zone, and uses the default replication
+   factor of three. Review the [Garage production recommendations](https://garagehq.deuxfleurs.fr/documentation/cookbook/real-world/)
+   and adjust these settings to suit your requirements.
 
-  {{< /alert >}}
+   {{< /alert >}}
 
    Since GitLab stores both primary object data and backups in the same storage backend (Garage in this case), any
    failures at the object storage or persistence layer could affect both datasets. Therefore, in addition to
@@ -205,12 +205,12 @@ One option is [Garage](https://garagehq.deuxfleurs.fr/). Before installing it, r
 
 1. Create the GitLab buckets:
 
-  {{< alert type="note" >}}
+   {{< alert type="note" >}}
 
-  The following command uses the default bucket names from the GitLab chart. If you've customized your bucket names
-  previously, adjust them accordingly here and in the steps below.
+   The following command uses the default bucket names from the GitLab chart. If you've customized your bucket names
+   previously, adjust them accordingly here and in the steps below.
 
-  {{< /alert >}}
+   {{< /alert >}}
 
    ```shell
    buckets=("git-lfs" "gitlab-artifacts" "gitlab-backups" "gitlab-ci-secure-files" \
@@ -279,14 +279,14 @@ PostgreSQL.
    kubectl annotate pvc <RELEASE>-minio --list
    ```
 
-  {{< alert type="note" >}}
+   {{< alert type="note" >}}
 
-  The Redis and PostgreSQL persistent volumes are managed by their StatefulSet
-  instead of Helm. The default retention policy is [`Retain`](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention).
-  Unless you modified this policy, these two volumes will not be deleted when you remove
-  their StatefulSet.
+   The Redis and PostgreSQL persistent volumes are managed by their StatefulSet
+   instead of Helm. The default retention policy is [`Retain`](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention).
+   Unless you modified this policy, these two volumes will not be deleted when you remove
+   their StatefulSet.
 
-  {{< /alert >}}
+   {{< /alert >}}
 
 1. Update your values to point to the newly provisioned services:
 
